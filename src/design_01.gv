@@ -1,0 +1,35 @@
+
+digraph G {
+
+hipat_node -> d2var;
+d2var -> d2var_type [style=dotted]
+d2var_type [shape=box];
+
+hipat_node -> pckind;
+pckind [shape=box];
+hipat_node -> d2con;
+d2con -> d2con_type [style=dotted];
+d2con_type [shape=box];
+hipat_node -> hisexp;
+hisexp [shape=box];
+hipat_node -> labhipatlst;
+hipat_node -> hipatlst;
+hipatlst -> hipat;
+labhipatlst -> labhipat;
+labhipat -> label;
+labhipat -> hipat;
+hipat -> location;
+location -> location_type [style=dotted];
+location_type [shape=box];
+hipat -> hisexp;
+hisexp -> dynexp2_hisexp_type [style=dotted];
+dynexp2_hisexp_type [shape=box];
+hipat -> hipat_node;
+hipat -> d2varopt;
+d2varopt -> d2var_type;
+
+
+
+
+}
+
