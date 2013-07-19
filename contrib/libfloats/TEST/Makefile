@@ -19,6 +19,15 @@ cleanall:: ; $(RMF) test_LUPdec
 
 ######
 
+test_LAgvec: test_LAgvec.dats ; \
+  $(PATSCC) -atsccomp $(ATSCCOMP) -IATS ${PATSHOME}/contrib -o $@ $<
+cleanall:: ; $(RMF) test_LAgvec
+test_LAgmat: test_LAgmat.dats ; \
+  $(PATSCC) -atsccomp $(ATSCCOMP) -IATS ${PATSHOME}/contrib -o $@ $<
+cleanall:: ; $(RMF) test_LAgmat
+
+######
+
 RMF=rm -f
 
 ######

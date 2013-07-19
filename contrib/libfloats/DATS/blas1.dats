@@ -124,24 +124,6 @@ end // end of [blas_inner]
 
 (* ****** ****** *)
 
-implement{a}
-blas_copy = gvector_copyto<a>
-
-(* ****** ****** *)
-
-implement{a}
-blas_copy2_row = gmatrow_copyto<a>
-implement{a}
-blas_copy2_col = gmatcol_copyto<a>
-
-(* ****** ****** *)
-
-implement
-{a}(*tmp*)
-blas_swap = gvector_exchange<a>
-
-(* ****** ****** *)
-
 implement
 {a}(*tmp*)
 blas_scal
@@ -201,13 +183,30 @@ end // end of [blas_scal2_col]
 
 (* ****** ****** *)
 
+implement{a}
+blas_copy = gvector_copyto<a>
+
+(* ****** ****** *)
+
+implement{a}
+blas_copy2_row = gmatrow_copyto<a>
+implement{a}
+blas_copy2_col = gmatcol_copyto<a>
+
+(* ****** ****** *)
+
+implement
+{a}(*tmp*)
+blas_swap = gvector_exchange<a>
+
+(* ****** ****** *)
+
 implement
 {a}(*tmp*)
 blas_ax1y
   (alpha, X, Y, n, dx, dy) = let
 //
 val beta = gnumber_int<a> (1)
-//
 implement
 blas$_alpha_beta<a>
   (alpha, x, beta, y) = blas$_alpha_1<a> (alpha, x, y)
