@@ -110,6 +110,9 @@ staload CCOMP = "./pats_ccomp.sats"
 
 staload "./pats_comarg.sats"
 
+// for jats
+staload "./jats_hidynexp.sats"
+
 (* ****** ****** *)
 //
 dynload "pats_error.dats"
@@ -298,6 +301,10 @@ dynload "pats_hidynexp.dats"
 dynload "pats_hidynexp_print.dats"
 dynload "pats_hidynexp_util.dats"
 //
+
+// for jats
+dynload "jats_hidynexp_print.dats"
+//
 dynload "pats_typerase_error.dats"
 dynload "pats_typerase_staexp.dats"
 dynload "pats_typerase_dynexp.dats"
@@ -368,6 +375,7 @@ fn patsopt_version
 , @(PATS_MAJOR_VERSION, PATS_MINOR_VERSION, PATS_MICRO_VERSION)
   ) // end of [fprintf]
 } // end of [patsopt_version]
+
 
 (* ****** ****** *)
 
@@ -448,6 +456,7 @@ cmdstate = @{
 , typecheckonly= bool
 // number of accumulated errors
 , nerror= int
+, model_gen= bool
 } // end of [cmdstate]
 
 (* ****** ****** *)
@@ -818,9 +827,14 @@ case+ 0 of
     val hids = do_trans1234 (basename, d0cs)
     val out = outchan_get_filr (state.outchan)
     val flag = waitkind_get_stadyn (state.waitkind)
-    val () = $CCOMP.ccomp_main (out, flag, state.infil, hids)
   in
-    // nothing
+    // for jats
+    if state.model_gen then (
+      println! ("ererere jats ================begin");
+      fprint_hideclist (out, hids);
+      println! ("ererere jats ================end");
+    )
+    else $CCOMP.ccomp_main (out, flag, state.infil, hids)
   end // end of [_]
 //
 end // end of [do_transfinal]
@@ -1058,6 +1072,7 @@ case+ key of
   end
 //
 | "-v" => patsopt_version (stdout_ref)
+| "-m" => state.model_gen := true
 //
 | _ => comarg_warning (key) // unrecognized key
 //
@@ -1168,9 +1183,12 @@ state = @{
 //
 , typecheckonly= false
 , nerror= 0 // number of accumulated errors
+, model_gen= false
 } : cmdstate // end of [var]
 //
 val () = process_cmdline (state, arglst)
+// for jats
+val () = println! ("Hello from JATS.")
 //
 } // end of [main]
 

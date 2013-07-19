@@ -1,0 +1,15 @@
+HIDfundecs(
+foo$45(-1) = 
+  HDElam(
+    HIPvar(x$46(-1)), HIPvar(y$47(-1)); 
+    HDEapp(
+      HDEtmpcst(g0int_add<S2Eextkind(atstype_int)>)
+      (HSEfun(HSEapp(HSEcst(atstkind_t0ype); HSEs2exp(S2Eextkind(atstype_int))), 
+              HSEapp(HSEcst(atstkind_t0ype); HSEs2exp(S2Eextkind(atstype_int))); 
+              HSEapp(HSEcst(atstkind_t0ype); HSEs2exp(S2Eextkind(atstype_int)))
+             ); 
+      HDEvar(x$46(-1)); HDEvar(y$47(-1))
+      )
+)
+)
+)

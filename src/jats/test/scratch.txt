@@ -1,0 +1,1 @@
+ATStmpdec_void(tmp92, atsvoid_t0ype) ;ATSINSmove_void(tmp92, atspre_print_string(ATSPMVstring("atof(\""))) ;

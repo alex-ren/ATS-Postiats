@@ -277,4 +277,18 @@ doc/BOOK/ATS2TUTORIAL/HTML
 doc/BOOK/ATS2TUTORIAL/CODE/*.html
 doc/BOOK/ATS2TUTORIAL/*/*_extracted.dats
 
+#
+# JATS DEVELOPMENT
+#
+doc/EXAMPLE/INTRO/*.exe
+*.swp
+/.cproject
+/.project
+bin
+/doc/EXAMPLE/ATSLIB/libats_sllist.exe
+prelude/DATS/dlist_vt.dats
+prelude/SATS/dlist_vt.sats
+
+
+
 ###### end of [.gitignore] ######
