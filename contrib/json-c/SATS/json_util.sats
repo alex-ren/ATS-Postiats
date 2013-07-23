@@ -13,8 +13,19 @@
 struct json_object*
 json_object_from_file (const char *filename)
 *)
+fun json_object_from_file
+  (filename: string): json_object0 = "mac#%"
+// end of [json_object_from_file]
 
-fun json_object_from_file (filename: string): json_object0 = "mac#%"
+(* ****** ****** *)
+
+(*
+** HX-2013-07: this is extension
+*)
+fun{
+} json_objectlst_from_file
+  (filename: string): List0_vt (json_object0)
+// end of [json_objectlst_from_file]
 
 (* ****** ****** *)
 
@@ -31,6 +42,8 @@ int json_object_to_file_ext
 *)
 fun json_object_to_file_ext
   (filename: string, !json_object0, flags: int): int(*err*) = "mac#%"
+
+(* ****** ****** *)
 
 (*
 int json_parse_int64 (const char *buf, int64_t *retval)

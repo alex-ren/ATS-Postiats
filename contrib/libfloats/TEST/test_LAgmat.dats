@@ -4,6 +4,18 @@
 //
 (* ****** ****** ****** ****** ****** ****** ****** ****** *)
 
+(* Author: Hongwei Xi *)
+(* Authoremail: hwxi AT cs DOT bu DOT edu *)
+(* Start time: July, 2013 *)
+
+(* ****** ****** *)
+
+(* Author: Brandon Barker *)
+(* Authoremail: brandon.barker AT gmail DOT com *)
+(* Start time: July, 2013 *)
+
+(* ****** ****** *)
+
 #include
 "share/atspre_staload_tmpdef.hats"
 //
@@ -31,18 +43,19 @@ staload "libfloats/SATS/lamatrix.sats"
 
 staload _ = "libfloats/DATS/blas0.dats"
 staload _ = "libfloats/DATS/blas1.dats"
+staload _ = "libfloats/DATS/blas_gemv.dats"
+staload _ = "libfloats/DATS/blas_gemm.dats"
 staload _ = "libfloats/DATS/lavector.dats"
 staload _ = "libfloats/DATS/lamatrix.dats"
 
 (* ****** ****** *)
-
+//
+// HX: a hackery of a little fun
+//
 #define t 't'
-
-(* ****** ****** *)
-
 infixr ^
-macdef ^ (M, t) = LAgmat_transp (,(M))
-
+macdef ^ (M, t) = transp_LAgmat (,(M))
+//
 (* ****** ****** *)
 
 val () =
@@ -55,6 +68,13 @@ val out = stdout_ref
 macdef
 gint = gnumber_int<T>
 //
+implement
+fprint_val<T> (out, x) = ignoret
+(
+  $extfcall (int, "fprintf", out, "%.2f", x)
+)
+//
+val ord = MORDcol
 val M = 3 and N = 5
 //
 //
@@ -62,14 +82,14 @@ local
 implement
 LAgmat_tabulate$fopr<T> (i, j) = $UN.cast{T}(i+j)
 in
-val A = LAgmat_tabulate<T> (MORDcol, M, N)
+val A = LAgmat_tabulate<T> (ord, M, N)
 end // end of [local]
 //
 local
 implement
-LAgmat_tabulate$fopr<T> (i, j) = $UN.cast{T}(i-j)
+LAgmat_tabulate$fopr<T> (i, j) = $UN.cast{T}(i+j)
 in
-val B = LAgmat_tabulate<T> (MORDcol, M, N)
+val B = LAgmat_tabulate<T> (ord, M, N)
 end // end of [local]
 //
 val () = fprint (out, "A =\n")
@@ -84,41 +104,40 @@ val AB_sum = A + B
 val () = fprint (out, "A + B =\n")
 val () = fprint_LAgmat_sep (out, AB_sum, ", ", "\n")
 val () = fprint_newline (out)
-//
+val () = LAgmat_decref (B)
 val () = LAgmat_decref (AB_sum)
 //
-val () = LAgmat_decref2 (A, B)
-//
-} (* end of [val] *)
-
-(* ****** ****** *)
-
-(*
-val () = 
-{
-val At = A^t
-val AAt = A * At
-val () = fprintln! (out, "A' = ", At)
-val () = fprintln! (out, "A * A' = ", AAt)
-val () = LAgmat_decref (At)
+val A_t = A^t
+val () = fprint (out, "A' =\n")
+val () = fprint_LAgmat_sep (out, A_t, ", ", "\n")
+val () = fprint_newline (out)
+val AAt = A * A_t
+val () = fprint (out, "A * A' =\n")
+val () = fprint_LAgmat_sep (out, AAt, ", ", "\n")
+val () = fprint_newline (out)
 val () = LAgmat_decref (AAt)
+val AtA = A_t * A
+val () = fprint (out, "A' * A =\n")
+val () = fprint_LAgmat_sep (out, AtA, ", ", "\n")
+val () = fprint_newline (out)
+val () = LAgmat_decref (AtA)
 //
-val (Af2, Al3) = LAgmat_split_1x2(A, 1)
+val () = LAgmat_decref (A_t)
+//
+val (Af2, Al3) = LAgmat_split_1x2(A, 2)
 //
 val () = fprintln! (out, "First two columns of A: ")
-val () = fprint (out, Af2)
+val () = fprint_LAgmat_sep (out, Af2, ", ", "\n")
 val () = fprint_newline (out)
 //
 val () = fprintln! (out, "Last three columns of A: ")
-val () = fprint (out, Al3)
+val () = fprint_LAgmat_sep (out, Al3, ", ", "\n")
 val () = fprint_newline (out)
 //
-val () = LAgmat_decref (B)
 val () = LAgmat_decref (Af2)
 val () = LAgmat_decref (Al3)
 //
 } (* end of [val] *)
-*)
 
 (* ****** ****** *)
 
