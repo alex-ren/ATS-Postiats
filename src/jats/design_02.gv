@@ -1,0 +1,52 @@
+
+digraph G {
+
+hidexp_node -> HDEcst
+hidexp_node -> HDEvar
+hidexp_node -> HDEint
+hidexp_node -> HDEintrep
+hidexp_node -> HDEbool
+hidexp_node -> HDEchar
+hidexp_node -> HDEfloat
+hidexp_node -> HDEstring
+hidexp_node -> HDEi0nt
+hidexp_node -> HDEf0loat
+hidexp_node -> HDEcstsp
+hidexp_node -> HDEtop
+hidexp_node -> HDEempty
+hidexp_node -> HDEextval
+hidexp_node -> HDEcastfn
+hidexp_node -> HDEextfcall
+hidexp_node -> HDEcon
+hidexp_node -> HDEtmpcst
+hidexp_node -> HDEtmpvar
+hidexp_node -> HDEfoldat
+hidexp_node -> HDEfreeat
+hidexp_node -> HDElet
+hidexp_node -> HDEapp
+hidexp_node -> HDEif
+hidexp_node -> HDEsif
+hidexp_node -> HDEcase
+hidexp_node -> HDElst
+hidexp_node -> HDErec
+hidexp_node -> HDEseq
+hidexp_node -> HDEselab
+hidexp_node -> HDEptrofvar
+hidexp_node -> HDEptrofsel
+hidexp_node -> HDErefarg
+hidexp_node -> HDEselvar
+hidexp_node -> HDEselptr
+hidexp_node -> HDEassgn_var
+hidexp_node -> HDEassgn_ptr
+hidexp_node -> HDExchng_var
+hidexp_node -> HDExchng_ptr
+hidexp_node -> HDEarrpsz
+hidexp_node -> HDEarrinit
+hidexp_node -> HDEraise
+hidexp_node -> HDElam
+hidexp_node -> HDEloop
+hidexp_node -> HDEloopexn
+hidexp_node -> HDEtrywith
+hidexp_node -> HDEerr
+
+}

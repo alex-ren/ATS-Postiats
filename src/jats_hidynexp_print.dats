@@ -58,6 +58,12 @@ staload  "./jats_hidynexp.sats"
 
 staload "./pats_hidynexp.sats"
 
+(* ****** ****** *)
+
+staload "./pats_location.sats"
+staload "./pats_filename.sats"
+staload "./pats_symbol.sats"
+
 
 (* ****** ****** *)
 
@@ -692,6 +698,109 @@ jats_fprint_hiclau (out, x) = {
 (* ****** ****** *)
 
 implement
+jats_fprint_ctags_hidecl
+  (out, hid) = let
+  macdef prstr (s) = fprint_string (out, ,(s))
+in
+//
+case+ hid.hidecl_node of
+//
+| HIDnone () => ()  // prstr "HIDnone()"
+| HIDlist (hids) => () //
+// {
+//     val () = prstr "HIDlist(\n"
+//     val () = $UT.fprintlst (out, hids, "\n", fprint_hidecl)
+//     val () = prstr "\n)"
+//   }
+//
+| HIDextcode
+    (knd, pos, code) => () 
+// {
+//     val () = prstr "HIDextcode("
+//     val () = fprintf (out, "knd=%i, pos=%i, code=...", @(knd, pos))
+//     val () = prstr ")"
+//   }
+//
+| HIDdatdecs
+    (knd, s2cs) => ()
+// {
+//     val () = prstr "HIDdatdecs("
+//     val () = fprint_int (out, knd)
+//     val () = prstr "; "
+//     val () = fprint_s2cstlst (out, s2cs)
+//     val () = prstr ")"
+//   }
+| HIDexndecs (d2cs) => ()
+// {
+//     val () = prstr "HIDexndecs("
+//     val () = fprint_d2conlst (out, d2cs)
+//     val () = prstr ")"
+//   }
+//
+| HIDdcstdecs
+    (knd, d2cs) => () 
+// {
+//     val () = prstr "HIDdcstdecs("
+//     val () = fprint_dcstkind (out, knd)
+//     val () = prstr "; "
+//     val () = fprint_d2cstlst (out, d2cs)
+//     val () = prstr ")"
+//   }
+//
+| HIDfundecs (
+    knd, decarg, hfds
+  ) => {
+    val () = $UT.fprintlst (out, hfds, "\n", jats_fprint_ctags_hifundec)
+  } // end of [HIDfundec]
+| HIDvaldecs (knd, hvds) => () 
+// {
+//     val () = prstr "HIDvaldecs(\n"
+//     val () = $UT.fprintlst (out, hvds, "\n", fprint_hivaldec)
+//     val () = prstr "\n)"
+//   } // end of [HIDvaldec]
+| HIDvaldecs_rec (knd, hvds) => ()
+// {
+//     val () = prstr "HIDvaldecs_rec(\n"
+//     val () = $UT.fprintlst (out, hvds, "\n", fprint_hivaldec)
+//     val () = prstr "\n)"
+//   } // end of [HIDvaldec_rec]
+| HIDvardecs (hvds) => ()
+// {
+//     val () = prstr "HIDvardecs(\n"
+//     val () = $UT.fprintlst (out, hvds, "\n", fprint_hivardec)
+//     val () = prstr "\n)"
+//   } // end of [HIDvardec]
+//
+| HIDimpdec (knd, himpdec) => ()
+// {
+//     val () = prstr "HIDimpdec(\n"
+//     val () = fprint_hiimpdec (out, himpdec)
+//     val () = prstr "\n)"
+//   }
+//
+| HIDinclude (hids) => ()
+// {
+//     val () = prstr "HIDinclude(\n"
+//     val () = $UT.fprintlst (out, hids, "\n", fprint_hidecl)
+//     val () = prstr "\n)"
+//   }
+//
+| HIDstaload
+    (fname, _, _, _) => ()
+// {
+//     val () = prstr "HIDstaload("
+//     val () = $FIL.fprint_filename (out, fname)
+//     val () = prstr ")"
+//   }
+//
+| _ => ()
+// {
+//     val () = prstr "HID...(...)"
+//   } // end of [_]
+//
+end // end of [fprint_hidecl]
+
+implement
 jats_fprint_hidecl
   (out, hid) = let
   macdef prstr (s) = fprint_string (out, ,(s))
@@ -740,7 +849,7 @@ case+ hid.hidecl_node of
     knd, decarg, hfds
   ) => {
     val () = prstr "HIDfundecs(\n"
-    val () = $UT.fprintlst (out, hfds, "\n", fprint_hifundec)
+    val () = $UT.fprintlst (out, hfds, "\n", jats_fprint_hifundec)
     val () = prstr "\n)"
   } // end of [HIDfundec]
 | HIDvaldecs (knd, hvds) => {
@@ -791,6 +900,23 @@ jats_prerr_hidecl (hid) = fprint_hidecl (stderr_ref, hid)
 
 (* ****** ****** *)
 
+implement jats_fprint_ctags_hideclist
+  (out, hids) = let
+in
+//
+case+ hids of
+| list_cons
+    (hid, hids) => let
+    val () =
+      jats_fprint_ctags_hidecl (out, hid)
+    val () = fprint_newline (out)
+  in
+    jats_fprint_ctags_hideclist (out, hids)
+  end // end of [list_cons]
+| list_nil () => ()
+//
+end // end of [jats_fprint_ctags_hideclist]
+
 implement
 jats_fprint_hideclist
   (out, hids) = let
@@ -800,10 +926,10 @@ case+ hids of
 | list_cons
     (hid, hids) => let
     val () =
-      fprint_hidecl (out, hid)
+      jats_fprint_hidecl (out, hid)
     val () = fprint_newline (out)
   in
-    fprint_hideclist (out, hids)
+    jats_fprint_hideclist (out, hids)
   end // end of [list_cons]
 | list_nil () => ()
 //
@@ -824,9 +950,30 @@ jats_fprint_hiimpdec
 implement
 jats_fprint_hifundec
   (out, hvd) = {
+  // val () = print_location (hvd.hifundec_loc)
   val () = fprint_d2var (out, hvd.hifundec_var)
   val () = fprint_string (out, " = ")
   val () = fprint_hidexp (out, hvd.hifundec_def)
+} // end of [fprint_hifundec]
+
+implement
+jats_fprint_ctags_hifundec
+  (out, hvd) = {
+  val loc = hvd.hifundec_loc
+  // val () = print_location (loc)
+  val fname = symbol_get_name (d2var_get_sym hvd.hifundec_var)
+  val () = fprint_string (out, fname)
+  val () = fprint_string (out, "\t")
+  val () = fprint_string (out, filename_get_part(location_get_filename (loc)))
+  val () = fprint_string (out, "\t")
+  val () = fprint_int (out, location_get_beg_nrow (loc))
+  val () = fprint_string (out, ";\"\tkind:fun_def")
+
+
+  // val () = fprint_d2var (out, hvd.hifundec_var)
+
+  // val () = fprint_string (out, " = ")
+  // val () = fprint_hidexp (out, hvd.hifundec_def)
 } // end of [fprint_hifundec]
 
 implement

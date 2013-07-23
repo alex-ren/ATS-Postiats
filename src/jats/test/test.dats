@@ -1,7 +1,11 @@
 
-extern fun foo (x: int, y: int): int
+extern fun foo1 (x: int, y: int): int
 
-fun foo (x: int, y: int): int = x + y
+fun foo (x: int, y: int): int = x + 
+y 
+
+fun foo2 (x: int, y: int): int = x + y
+
 
 // implement main0 () = let
 //   val a = 3

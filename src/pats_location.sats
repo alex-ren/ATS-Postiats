@@ -144,5 +144,9 @@ fun location_combine
 fun fprint_line_pragma (out: FILEref, loc: location): void
 
 (* ****** ****** *)
+// added by jats
+fun location_get_beg_nrow (loc: location): int
+
+(* ****** ****** *)
 
 (* end of [pats_location.sats] *)

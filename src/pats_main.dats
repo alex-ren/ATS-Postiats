@@ -830,9 +830,10 @@ case+ 0 of
   in
     // for jats
     if state.model_gen then (
-      println! ("ererere jats ================begin");
-      fprint_hideclist (out, hids);
-      println! ("ererere jats ================end");
+      println! ("jats ================begin");
+      jats_fprint_hideclist (out, hids);
+      // jats_fprint_ctags_hideclist (out, hids);
+      println! ("jats ================end");
     )
     else $CCOMP.ccomp_main (out, flag, state.infil, hids)
   end // end of [_]

@@ -359,4 +359,9 @@ end // end of [fprint_line_pragma]
 
 (* ****** ****** *)
 
+// added my jats
+implement location_get_beg_nrow (loc) = loc.beg_nrow+1
+
+(* ****** ****** *)
+
 (* end of [pats_location.dats] *)

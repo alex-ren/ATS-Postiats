@@ -1,0 +1,11 @@
+
+
+digraph G {
+
+d2var -> symbol
+d2var -> location
+
+location -> filename [style=dotted]
+
+
+}

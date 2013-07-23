@@ -104,6 +104,11 @@ fun jats_fprint_hiimpdec : fprint_type (hiimpdec)
 
 (* ****** ****** *)
 
+fun jats_fprint_ctags_hideclist : fprint_type (hideclist)
+fun jats_fprint_ctags_hidecl : fprint_type (hidecl)
+fun jats_fprint_ctags_hifundec : fprint_type (hifundec)
+
+
 (* ****** ****** *)
 
 (* end of [pats_hidynexp.sats] *)
