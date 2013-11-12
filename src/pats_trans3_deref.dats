@@ -6,7 +6,7 @@
 
 (*
 ** ATS/Postiats - Unleashing the Potential of Types!
-** Copyright (C) 2011-20?? Hongwei Xi, ATS Trustful Software, Inc.
+** Copyright (C) 2011-2013 Hongwei Xi, ATS Trustful Software, Inc.
 ** All rights reserved
 **
 ** ATS is free software;  you can  redistribute it and/or modify it under
@@ -27,14 +27,15 @@
 
 (* ****** ****** *)
 //
-// Author: Hongwei Xi (hwxi AT cs DOT bu DOT edu)
+// Author: Hongwei Xi
+// Authoremail: gmhwxi AT gmail DOT com
 // Start Time: April, 2012
 //
 (* ****** ****** *)
-
-staload _(*anon*) = "prelude/DATS/list.dats"
-staload _(*anon*) = "prelude/DATS/list_vt.dats"
-
+//
+staload
+ATSPRE = "./pats_atspre.dats"
+//
 (* ****** ****** *)
 
 staload
@@ -162,7 +163,9 @@ end // end of [local]
 
 local
 
-fun auxerr_nonderef (
+fun
+auxerr_nonderef
+(
   loc0: location, d3e: d3exp
 ) : void = let
   val () = prerr_error3_loc (loc0)
@@ -172,7 +175,9 @@ in
   the_trans3errlst_add (T3E_d3exp_nonderef (d3e))
 end // end of [auxerr_nonderef]
 
-fun auxerr_reflinsel (
+fun
+auxerr_reflinsel
+(
   loc0: location
 , d3e: d3exp, d3ls: d3lablst, s2e_sel: s2exp
 ) : void = let
@@ -182,12 +187,14 @@ in
   the_trans3errlst_add (T3E_d3exp_deref_reflinsel (d3e, d3ls))
 end // end of [auxerr_reflinsel]
 
-fun aux1 (
+fun aux1
+(
   loc0: location
-, s2f0: s2hnf
-, d3e: d3exp, d3ls: d3lablst
+, s2f0: s2hnf, d3e: d3exp, d3ls: d3lablst
 ) : d3exp = let
+//
   val opt = un_s2exp_ptr_addr_type (s2f0)
+//
 in
 //
 case+ opt of
@@ -203,12 +210,14 @@ case+ opt of
 //
 end // end of [aux1]
 
-and aux2 (
+and aux2
+(
   loc0: location
-, s2f0: s2hnf
-, d3e: d3exp, d3ls: d3lablst
+, s2f0: s2hnf, d3e: d3exp, d3ls: d3lablst
 ) : d3exp = let
+//
   val opt = un_s2exp_ref_vt0ype_type (s2f0)
+//
 in
 //
 case+ opt of
@@ -242,14 +251,14 @@ in
 //
 case+ opt of
 | ~Some_vt (s2e) =>
-    d3exp_lazy_force (loc0, s2e, 0(*lin*), d3e)
+    d3exp_lazyeval (loc0, s2e, 0(*lin*), d3e)
 | ~None_vt () => let
     val opt = un_s2exp_lazy_vt0ype_vtype (s2f0)
   in
   //
   case+ opt of
   | ~Some_vt (s2e) =>
-      d3exp_lazy_force (loc0, s2e, 1(*lin*), d3e)
+      d3exp_lazyeval (loc0, s2e, 1(*lin*), d3e)
   | ~None_vt () => let
       val () = auxerr_nonderef (loc0, d3e) in d3exp_err (loc0)
     end // end of [None_vt]

@@ -6,7 +6,7 @@
 
 (*
 ** ATS/Postiats - Unleashing the Potential of Types!
-** Copyright (C) 2011-20?? Hongwei Xi, ATS Trustful Software, Inc.
+** Copyright (C) 2011-2013 Hongwei Xi, ATS Trustful Software, Inc.
 ** All rights reserved
 **
 ** ATS is free software;  you can  redistribute it and/or modify it under
@@ -27,12 +27,19 @@
 
 (* ****** ****** *)
 //
-// Author: Hongwei Xi (hwxi AT cs DOT bu DOT edu)
+// Author: Hongwei Xi
+// Authoremail: gmhwxi AT gmail DOT com
 // Start Time: May, 2011
 //
 (* ****** ****** *)
+//
+staload
+ATSPRE = "./pats_atspre.dats"
+//
+(* ****** ****** *)
 
-staload _(*anon*) = "prelude/DATS/pointer.dats"
+staload
+INTINF = "./pats_intinf.sats"
 
 (* ****** ****** *)
 
@@ -302,6 +309,17 @@ the_sub_addr_addr = s2cstref_make "sub_addr_addr"
 (* ****** ****** *)
 
 implement
+the_lte_cls_cls = s2cstref_make "lte_cls_cls"
+implement
+the_gte_cls_cls = s2cstref_make "gte_cls_cls"
+implement
+the_lterel_cls_cls = s2cstref_make "lterel_cls_cls"
+implement
+the_gterel_cls_cls = s2cstref_make "gterel_cls_cls"
+
+(* ****** ****** *)
+
+implement
 s2exp_agtz (s2l) = let
   val s2c =
     s2cstref_get_cst (the_gt_addr_addr)
@@ -387,11 +405,32 @@ end // end of [s2exp_igtez]
 (* ****** ****** *)
 
 implement
+un_s2exp_intconst (s2i) = let
+in
+//
+case+ s2i.s2exp_node of
+//
+| S2Eint (x) => Some_vt (x)
+//
+| S2Eintinf (x) => Some_vt ($INTINF.intinf_get_int(x))
+//
+| _(*noninteger*) => None_vt((*void*))
+//
+end // end of [un_s2exp_intconst]
+
+(* ****** ****** *)
+
+implement
 the_atstkind_type = s2cstref_make "atstkind_type"
 implement
 the_atstkind_t0ype = s2cstref_make "atstkind_t0ype"
 
 (* ****** ****** *)
+
+(*
+implement
+the_bool_kind = s2cstref_make "bool_kind"
+*)
 
 implement
 s2exp_bool (b) = let
@@ -1318,6 +1357,21 @@ in
   s2cst_set_def (s2c, Some s2e_def)
 end // end of [invar_vt0ype_vt0ype_assume]
 
+(* ****** ****** *)
+//
+// HX-2013-09: for internal use
+//
+implement
+the_atstype_int = s2cstref_make "atstype_int"
+implement
+the_atstype_bool = s2cstref_make "atstype_bool"
+implement
+the_atstype_uint = s2cstref_make "atstype_uint"
+implement
+the_atstype_size = s2cstref_make "atstype_size"
+implement
+the_atstype_ssize = s2cstref_make "atstype_ssize"
+//
 (* ****** ****** *)
 
 (* end of [pats_stacst2.dats] *)

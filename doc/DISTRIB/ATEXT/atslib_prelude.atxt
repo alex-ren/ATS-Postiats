@@ -112,28 +112,39 @@ The ATSLIB/prelude library\
 
 (* ****** ****** *)
 
+#packfilename("SATS/arith_prf.sats")
+
+(* ****** ****** *)
+
+#packfilename("SATS/integer.sats")
+#packfilename("SATS/pointer.sats")
+
+(* ****** ****** *)
+
 #packfilename("SATS/bool.sats")
 #packfilename("SATS/char.sats")
-#packfilename("SATS/integer.sats")
+#packfilename("SATS/integer_ptr.sats")
 #packfilename("SATS/integer_fixed.sats")
-#packfilename("SATS/arith_prf.sats")
 #packfilename("SATS/float.sats")
+
+#packfilename("SATS/memory.sats")
+
 #packfilename("SATS/string.sats")
 #packfilename("SATS/strptr.sats")
 
 #packfilename("SATS/tuple.sats")
 
-#packfilename("SATS/memory.sats")
-#packfilename("SATS/pointer.sats")
 #packfilename("SATS/reference.sats")
 
 #packfilename("SATS/filebas.sats")
 #packfilename("SATS/intrange.sats")
 
-#packfilename("SATS/lazy.sats")
-#packfilename("SATS/lazy_vt.sats")
+(* ****** ****** *)
 
 #packfilename("SATS/gorder.sats")
+
+(* ****** ****** *)
+
 #packfilename("SATS/gnumber.sats")
 
 (* ****** ****** *)
@@ -153,6 +164,8 @@ The ATSLIB/prelude library\
 #packfilename("SATS/matrix.sats")
 #packfilename("SATS/matrixptr.sats")
 #packfilename("SATS/matrixref.sats")
+#packfilename("SATS/stream.sats")
+#packfilename("SATS/stream_vt.sats")
 
 #packfilename("SATS/gprint.sats")
 
@@ -167,16 +180,19 @@ The ATSLIB/prelude library\
 
 #packfilename("CATS/basics.cats")
 
+#packfilename("CATS/integer.cats")
+#packfilename("CATS/pointer.cats")
+
 #packfilename("CATS/bool.cats")
 #packfilename("CATS/char.cats")
-#packfilename("CATS/integer.cats")
+#packfilename("CATS/integer_ptr.cats")
 #packfilename("CATS/integer_fixed.cats")
 #packfilename("CATS/float.cats")
-#packfilename("CATS/string.cats")
-#packfilename("CATS/strptr.cats")
 
 #packfilename("CATS/memory.cats")
-#packfilename("CATS/pointer.cats")
+
+#packfilename("CATS/string.cats")
+#packfilename("CATS/strptr.cats")
 
 #packfilename("CATS/filebas.cats")
 
@@ -214,11 +230,22 @@ The ATSLIB/prelude library\
 #packfilename("DATS/filebas.dats")
 #packfilename("DATS/intrange.dats")
 
-#packfilename("DATS/lazy.dats")
-#packfilename("DATS/lazy_vt.dats")
+(* ****** ****** *)
 
 #packfilename("DATS/gorder.dats")
+#packfilename("DATS/gorder_int.dats")
+#packfilename("DATS/gorder_uint.dats")
+#packfilename("DATS/gorder_bool.dats")
+#packfilename("DATS/gorder_char.dats")
+#packfilename("DATS/gorder_float.dats")
+#packfilename("DATS/gorder_string.dats")
+
+(* ****** ****** *)
+
 #packfilename("DATS/gnumber.dats")
+#packfilename("DATS/gnumber_int.dats")
+#packfilename("DATS/gnumber_uint.dats")
+#packfilename("DATS/gnumber_float.dats")
 
 (* ****** ****** *)
 
@@ -246,6 +273,9 @@ The ATSLIB/prelude library\
 #packfilename("DATS/matrix.dats")
 #packfilename("DATS/matrixptr.dats")
 #packfilename("DATS/matrixref.dats")
+
+#packfilename("DATS/stream.dats")
+#packfilename("DATS/stream_vt.dats")
 
 #packfilename("DATS/gprint.dats")
 

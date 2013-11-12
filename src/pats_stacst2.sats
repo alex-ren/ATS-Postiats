@@ -6,7 +6,7 @@
 
 (*
 ** ATS/Postiats - Unleashing the Potential of Types!
-** Copyright (C) 2011-20?? Hongwei Xi, ATS Trustful Software, Inc.
+** Copyright (C) 2011-2013 Hongwei Xi, ATS Trustful Software, Inc.
 ** All rights reserved
 **
 ** ATS is free software;  you can  redistribute it and/or modify it under
@@ -27,7 +27,8 @@
 
 (* ****** ****** *)
 //
-// Author: Hongwei Xi (hwxi AT cs DOT bu DOT edu)
+// Author: Hongwei Xi
+// Authoremail: gmhwxi AT gmail DOT com
 // Start Time: May, 2011
 //
 (* ****** ****** *)
@@ -124,6 +125,13 @@ val the_sub_addr_addr : s2cstref // (addr, addr) -> int
 //
 (* ****** ****** *)
 
+val the_lte_cls_cls : s2cstref // : (cls, cls) -> bool
+val the_gte_cls_cls : s2cstref // : (cls, cls) -> bool
+val the_lterel_cls_cls : s2cstref // : (cls, cls, bool) -> bool
+val the_gterel_cls_cls : s2cstref // : (cls, cls, bool) -> bool
+
+(* ****** ****** *)
+
 val the_atstkind_type : s2cstref
 val the_atstkind_t0ype : s2cstref
 
@@ -131,6 +139,8 @@ val the_atstkind_t0ype : s2cstref
 //
 val the_bool_t0ype : s2cstref
 val the_bool_bool_t0ype : s2cstref
+//
+(* ****** ****** *)
 //
 val the_int_kind : s2cstref
 val the_uint_kind : s2cstref
@@ -236,6 +246,10 @@ fun s2exp_intneq (s2i1: s2exp, s2i2: s2exp): s2exp
 (* ****** ****** *)
 
 fun s2exp_igtez (s2i: s2exp): s2exp // s2i >= 0
+
+(* ****** ****** *)
+
+fun un_s2exp_intconst (s2i: s2exp): Option_vt (int)
 
 (* ****** ****** *)
 //
@@ -358,6 +372,17 @@ fun s2exp_bottom_vt0ype_exi (): s2exp // = [a:vt@ype | false] (a)
 fun s2exp_vcopyenv_v (s2e: s2exp): s2exp
 fun s2exp_vcopyenv_vt (s2e: s2exp): s2exp
 
+(* ****** ****** *)
+//
+// HX-2013-09:
+// only for internal use!
+//
+val the_atstype_int : s2cstref
+val the_atstype_bool : s2cstref
+val the_atstype_uint : s2cstref
+val the_atstype_size : s2cstref
+val the_atstype_ssize : s2cstref
+//
 (* ****** ****** *)
 
 val the_effnil : s2cstref

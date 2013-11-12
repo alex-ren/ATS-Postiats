@@ -8,7 +8,7 @@ val () = theAtextMap_insert_str ("thisfilename", _thisfilename)
 %}\
 \
 #atscode_banner()
-#atscode_copyright_LGPL()
+#atscode_copyright_GPL()
 
 #atscode_separator()
 
@@ -52,7 +52,7 @@ lemma_ptr_param {l:addr} (p: ptr l): [l >= null] void
 #atscode_separator()
 
 prfun ptr_get_index
-  {l1:addr} (p: ptr l1): [l2:addr] ADDREQ (l1, l2)
+  {l1:addr} (p: ptr l1): [l2:addr] EQADDR (l1, l2)
 // end of [ptr_get_index]
 
 #atscode_separator()
@@ -100,7 +100,6 @@ fun sub_ptr0_bsz
 overload add_ptr_bsz with add_ptr0_bsz of 0
 overload sub_ptr_bsz with sub_ptr0_bsz of 0
 //
-
 #atscode_separator()
 
 fun sub_ptr0_ptr0

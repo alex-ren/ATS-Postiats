@@ -6,7 +6,7 @@
 
 (*
 ** ATS/Postiats - Unleashing the Potential of Types!
-** Copyright (C) 2011-20?? Hongwei Xi, ATS Trustful Software, Inc.
+** Copyright (C) 2011-2013 Hongwei Xi, ATS Trustful Software, Inc.
 ** All rights reserved
 **
 ** ATS is free software;  you can  redistribute it and/or modify it under
@@ -27,7 +27,8 @@
 
 (* ****** ****** *)
 //
-// Author: Hongwei Xi (hwxi AT cs DOT bu DOT edu)
+// Author: Hongwei Xi
+// Authoremail: gmhwxi AT gmail DOT com
 // Start Time: May, 2011
 //
 (* ****** ****** *)
@@ -91,6 +92,8 @@ datatype trans2err =
 //
   | T2E_d1ecl_tr_impdec of (d1ecl)
   | T2E_d1ecl_tr_overload of (d1ecl)
+  | T2E_d1ecl_tr_overload_def of (location)
+//
 // end of [trans2err]
 
 fun the_trans2errlst_add (x: trans2err): void
@@ -164,6 +167,7 @@ fun s1explst_trdn_int (s1es: s1explst): s2explst
 fun s1explst_trdn_addr (s1es: s1explst): s2explst
 fun s1explst_trdn_bool (s1es: s1explst): s2explst
 fun s1explst_trdn_vt0ype (s1es: s1explst): s2explst
+fun s1explst_trdn_impred (s1es: s1explst): s2explst
 
 fun s1explst_trdn_err
   (s1es: s1explst, s2ts: s2rtlst, err: &int): s2explst

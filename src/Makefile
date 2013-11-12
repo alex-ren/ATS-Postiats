@@ -9,6 +9,10 @@
 
 ######
 
+CCOMP=gcc
+
+######
+
 ATSCC=$(ATSHOME)/bin/atscc
 ATSOPT=$(ATSHOME)/bin/atsopt
 
@@ -44,6 +48,7 @@ SOURCES := \
   pats_symbol.dats \
   pats_filename.sats \
   pats_filename.dats \
+  pats_filename_reloc.dats \
   pats_location.sats \
   pats_location.dats \
   pats_location.cats \
@@ -73,6 +78,8 @@ SOURCES := \
   pats_syntax_print.dats \
   pats_depgen.sats \
   pats_depgen.dats \
+  pats_taggen.sats \
+  pats_taggen.dats \
   pats_tokbuf.sats \
   pats_tokbuf.dats \
   pats_tokbuf.cats \
@@ -246,8 +253,9 @@ SOURCES := \
   pats_ccomp_hipat.dats \
   pats_ccomp_dynexp.dats \
   pats_ccomp_caseof.dats \
-  pats_ccomp_trywith.dats \
   pats_ccomp_claulst.dats \
+  pats_ccomp_lazyeval.dats \
+  pats_ccomp_trywith.dats \
   pats_ccomp_looping.dats \
   pats_ccomp_decl.dats \
   pats_ccomp_subst.dats \
@@ -285,6 +293,7 @@ OBJECTS := \
   pats_symbol_dats.o \
   pats_filename_sats.o \
   pats_filename_dats.o \
+  pats_filename_reloc_dats.o \
   pats_location_sats.o \
   pats_location_dats.o \
   pats_errmsg_sats.o \
@@ -310,6 +319,8 @@ OBJECTS := \
   pats_syntax_print_dats.o \
   pats_depgen_sats.o \
   pats_depgen_dats.o \
+  pats_taggen_sats.o \
+  pats_taggen_dats.o \
   pats_tokbuf_sats.o \
   pats_tokbuf_dats.o \
   pats_parsing_sats.o \
@@ -479,8 +490,9 @@ OBJECTS := \
   pats_ccomp_hipat_dats.o \
   pats_ccomp_dynexp_dats.o \
   pats_ccomp_caseof_dats.o \
-  pats_ccomp_trywith_dats.o \
   pats_ccomp_claulst_dats.o \
+  pats_ccomp_lazyeval_dats.o \
+  pats_ccomp_trywith_dats.o \
   pats_ccomp_looping_dats.o \
   pats_ccomp_decl_dats.o \
   pats_ccomp_subst_dats.o \
@@ -503,10 +515,11 @@ all:: patsopt
 # AS-20130407: libats depends on libgmp (hence specified earlier);
 # link order matters to GNU ld
 #
-patsopt: pats_main_dats.o $(OBJECTS) ; \
+patsopt: \
+  pats_main_dats.o $(OBJECTS) ; \
   $(ATSCC) $(ATSGCFLAG) $(ATSCCFLAGS) -o $@ pats_main_dats.o $(OBJECTS) -lats -lgmp
 cleanall:: ; $(RMF) patsopt
-
+#
 ######
 #
 # for building patsopt through CMake
@@ -514,6 +527,18 @@ cleanall:: ; $(RMF) patsopt
 BUILD/init: ; cd BUILD; cmake ..; cd ..
 BUILD/clean: ; make -C BUILD -f Makefile clean
 BUILD/patsopt: ; make -C BUILD -j8 -f Makefile patsopt
+#
+######
+
+CBOOT:: ; $(CPF) pats_*.hats CBOOT
+CBOOT:: ; $(CPF) pats_*.cats CBOOT
+CBOOT:: ; $(CPF) pats_*_sats.c CBOOT
+CBOOT:: ; $(CPF) pats_*_dats.c CBOOT
+
+######
+
+TAGATS:: ; $(RMF) $@
+TAGATS:: ; $(ATSOPT) -o $@ --taggen -s $(SOURCESsta) -d $(SOURCESdyn)
 
 ######
 
@@ -570,6 +595,9 @@ pats_filename_sats.o: pats_filename_sats.c; $(ATSCC) $(ATSCCFLAGS) -c $<
 
 pats_filename_dats.c: pats_filename.dats; $(ATSCC) -cc $<
 pats_filename_dats.o: pats_filename_dats.c; $(ATSCC) $(ATSCCFLAGS) -c $<
+
+pats_filename_reloc_dats.c: pats_filename_reloc.dats; $(ATSCC) -cc $<
+pats_filename_reloc_dats.o: pats_filename_reloc_dats.c; $(ATSCC) $(ATSCCFLAGS) -c $<
 
 pats_location_sats.c: pats_location.sats; $(ATSCC) -cc $<
 pats_location_sats.o: pats_location_sats.c; $(ATSCC) $(ATSCCFLAGS) -c $<
@@ -645,6 +673,12 @@ pats_depgen_sats.o: pats_depgen_sats.c; $(ATSCC) $(ATSCCFLAGS) -c $<
 
 pats_depgen_dats.c: pats_depgen.dats; $(ATSCC) -cc $<
 pats_depgen_dats.o: pats_depgen_dats.c; $(ATSCC) $(ATSCCFLAGS) -c $<
+
+pats_taggen_sats.c: pats_taggen.sats; $(ATSCC) -cc $<
+pats_taggen_sats.o: pats_taggen_sats.c; $(ATSCC) $(ATSCCFLAGS) -c $<
+
+pats_taggen_dats.c: pats_taggen.dats; $(ATSCC) -cc $<
+pats_taggen_dats.o: pats_taggen_dats.c; $(ATSCC) $(ATSCCFLAGS) -c $<
 
 pats_tokbuf_sats.c: pats_tokbuf.sats; $(ATSCC) -cc $<
 pats_tokbuf_sats.o: pats_tokbuf_sats.c; $(ATSCC) $(ATSCCFLAGS) -c $<
@@ -1153,11 +1187,14 @@ pats_ccomp_dynexp_dats.o: pats_ccomp_dynexp_dats.c; $(ATSCC) $(ATSCCFLAGS) -c $<
 pats_ccomp_caseof_dats.c: pats_ccomp_caseof.dats; $(ATSCC) -cc $<
 pats_ccomp_caseof_dats.o: pats_ccomp_caseof_dats.c; $(ATSCC) $(ATSCCFLAGS) -c $<
 
-pats_ccomp_trywith_dats.c: pats_ccomp_trywith.dats; $(ATSCC) -cc $<
-pats_ccomp_trywith_dats.o: pats_ccomp_trywith_dats.c; $(ATSCC) $(ATSCCFLAGS) -c $<
-
 pats_ccomp_claulst_dats.c: pats_ccomp_claulst.dats; $(ATSCC) -cc $<
 pats_ccomp_claulst_dats.o: pats_ccomp_claulst_dats.c; $(ATSCC) $(ATSCCFLAGS) -c $<
+
+pats_ccomp_lazyeval_dats.c: pats_ccomp_lazyeval.dats; $(ATSCC) -cc $<
+pats_ccomp_lazyeval_dats.o: pats_ccomp_lazyeval_dats.c; $(ATSCC) $(ATSCCFLAGS) -c $<
+
+pats_ccomp_trywith_dats.c: pats_ccomp_trywith.dats; $(ATSCC) -cc $<
+pats_ccomp_trywith_dats.o: pats_ccomp_trywith_dats.c; $(ATSCC) $(ATSCCFLAGS) -c $<
 
 pats_ccomp_looping_dats.c: pats_ccomp_looping.dats; $(ATSCC) -cc $<
 pats_ccomp_looping_dats.o: pats_ccomp_looping_dats.c; $(ATSCC) $(ATSCCFLAGS) -c $<
@@ -1211,6 +1248,7 @@ include .depend
 ######
 
 DIR=.
+CPF=cp -f
 RMF=rm -f
 WCL=wc -l
 
@@ -1226,5 +1264,6 @@ clean:: ; $(RMF) $(DIR)/*_?ats.o
 clean:: ; $(RMF) $(DIR)/*_?ats.c
 
 cleanall:: clean
+cleanall:: ; $(RMF) TAGATS
 
 ###### end of [Makefile] ######

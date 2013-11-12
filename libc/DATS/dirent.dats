@@ -6,12 +6,12 @@
 
 (*
 ** ATS/Postiats - Unleashing the Potential of Types!
-** Copyright (C) 2011-20?? Hongwei Xi, ATS Trustful Software, Inc.
+** Copyright (C) 2011-2013 Hongwei Xi, ATS Trustful Software, Inc.
 ** All rights reserved
 **
 ** ATS is free software;  you can  redistribute it and/or modify it under
-** the terms of the GNU LESSER GENERAL PUBLIC LICENSE as published by the
-** Free Software Foundation; either version 2.1, or (at your option)  any
+** the terms of  the GNU GENERAL PUBLIC LICENSE (GPL) as published by the
+** Free Software Foundation; either version 3, or (at  your  option)  any
 ** later version.
 ** 
 ** ATS is distributed in the hope that it will be useful, but WITHOUT ANY
@@ -146,15 +146,14 @@ val [l:addr] (pf, pfgc | p) = malloc_gc (bsz)
 prval pf = $UN.castview0{(dirent?)@l}(pf)
 var res: ptr
 val err = readdir_r (dirp, !p, res)
-val () = assert_errmsg (err = 0, "[readdir_r] failed.")
-prval () = opt_unsome {dirent} (!p)
 //
 in
 //
 if res > 0 then
   $UN.castvwtp0{Direntp1}@(pf, pfgc | p)
 else let
-  val () = ptr_free{dirent}(pfgc, pf | p)
+  prval () = opt_clear{dirent}(!p)
+  val () = ptr_free{dirent?}(pfgc, pf | p)
 in
   $UN.castvwtp0{Direntp0}(the_null_ptr)
 end (* end of [if] *)

@@ -6,12 +6,12 @@
 
 (*
 ** ATS/Postiats - Unleashing the Potential of Types!
-** Copyright (C) 2011-20?? Hongwei Xi, ATS Trustful Software, Inc.
+** Copyright (C) 2011-2013 Hongwei Xi, ATS Trustful Software, Inc.
 ** All rights reserved
 **
 ** ATS is free software;  you can  redistribute it and/or modify it under
-** the terms of the GNU LESSER GENERAL PUBLIC LICENSE as published by the
-** Free Software Foundation; either version 2.1, or (at your option)  any
+** the terms of  the GNU GENERAL PUBLIC LICENSE (GPL) as published by the
+** Free Software Foundation; either version 3, or (at  your  option)  any
 ** later version.
 ** 
 ** ATS is distributed in the hope that it will be useful, but WITHOUT ANY
@@ -27,7 +27,8 @@
 
 (* ****** ****** *)
 //
-// Author: Hongwei Xi (gmhwxi AT gmail DOT com)
+// Author: Hongwei Xi
+// Authoremail: gmhwxi AT gmail DOT com
 // Start Time: March, 2013
 //
 (* ****** ****** *)
@@ -145,6 +146,21 @@ fun asctime
 (
   tm: &RD(tm_struct)
 ) :<!ref> [l:addr] vttakeout0 (strptr l) = "mac#%"
+
+(* ****** ****** *)
+
+/*
+size_t
+strftime
+(
+  char *s, size_t max, const char *format, const struct tm *tm
+) ; // end of [strftime]
+*/
+fun strftime
+  {l:addr}{m:pos} (
+  pf: !b0ytes(m) @ l >> strbuf(m, n) @ l
+| p: ptr l, m: size_t m, fmt: string, tm: &RD(tm_struct)
+) :<> #[n:nat | n < m] size_t n = "mac#%" // endfun
 
 (* ****** ****** *)
 

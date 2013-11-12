@@ -61,6 +61,15 @@ integer_atxt.dats: integer.atxt
 clean:: ; $(RMF) integer_atxt.exe
 cleanall:: ; $(RMF) integer.sats
 
+all:: integer_ptr.sats
+integer_ptr.sats: integer_ptr_atxt.exe ; ./$< > $@
+integer_ptr_atxt.exe: integer_ptr_atxt.dats
+	$(ATSCC) $(ATSGCFLAG) -o $@ integer_ptr_atxt.dats -latsdoc
+integer_ptr_atxt.dats: integer_ptr.atxt
+	$(ATSDOC) --outcode $@ -i integer_ptr.atxt > integer_ptr_atxt.txt
+clean:: ; $(RMF) integer_ptr_atxt.exe
+cleanall:: ; $(RMF) integer_ptr.sats
+
 all:: integer_fixed.sats
 integer_fixed.sats: integer_fixed_atxt.exe ; ./$< > $@
 integer_fixed_atxt.exe: integer_fixed_atxt.dats
@@ -135,25 +144,6 @@ strptr_atxt.dats: strptr.atxt
 	$(ATSDOC) --outcode $@ -i strptr.atxt > strptr_atxt.txt
 clean:: ; $(RMF) strptr_atxt.exe
 cleanall:: ; $(RMF) strptr.sats
-
-
-all:: lazy.sats
-lazy.sats: lazy_atxt.exe ; ./$< > $@
-lazy_atxt.exe: lazy_atxt.dats
-	$(ATSCC) $(ATSGCFLAG) -o $@ lazy_atxt.dats -latsdoc
-lazy_atxt.dats: lazy.atxt
-	$(ATSDOC) --outcode $@ -i lazy.atxt > lazy_atxt.txt
-clean:: ; $(RMF) lazy_atxt.exe
-cleanall:: ; $(RMF) lazy.sats
-
-all:: lazy_vt.sats
-lazy_vt.sats: lazy_vt_atxt.exe ; ./$< > $@
-lazy_vt_atxt.exe: lazy_vt_atxt.dats
-	$(ATSCC) $(ATSGCFLAG) -o $@ lazy_vt_atxt.dats -latsdoc
-lazy_vt_atxt.dats: lazy_vt.atxt
-	$(ATSDOC) --outcode $@ -i lazy_vt.atxt > lazy_vt_atxt.txt
-clean:: ; $(RMF) lazy_vt_atxt.exe
-cleanall:: ; $(RMF) lazy_vt.sats
 
 
 all:: filebas.sats
@@ -305,6 +295,25 @@ matrixref_atxt.dats: matrixref.atxt
 	$(ATSDOC) --outcode $@ -i matrixref.atxt > matrixref_atxt.txt
 clean:: ; $(RMF) matrixref_atxt.exe
 cleanall:: ; $(RMF) matrixref.sats
+
+
+all:: stream.sats
+stream.sats: stream_atxt.exe ; ./$< > $@
+stream_atxt.exe: stream_atxt.dats
+	$(ATSCC) $(ATSGCFLAG) -o $@ stream_atxt.dats -latsdoc
+stream_atxt.dats: stream.atxt
+	$(ATSDOC) --outcode $@ -i stream.atxt > stream_atxt.txt
+clean:: ; $(RMF) stream_atxt.exe
+cleanall:: ; $(RMF) stream.sats
+
+all:: stream_vt.sats
+stream_vt.sats: stream_vt_atxt.exe ; ./$< > $@
+stream_vt_atxt.exe: stream_vt_atxt.dats
+	$(ATSCC) $(ATSGCFLAG) -o $@ stream_vt_atxt.dats -latsdoc
+stream_vt_atxt.dats: stream_vt.atxt
+	$(ATSDOC) --outcode $@ -i stream_vt.atxt > stream_vt_atxt.txt
+clean:: ; $(RMF) stream_vt_atxt.exe
+cleanall:: ; $(RMF) stream_vt.sats
 
 
 all:: gprint.sats

@@ -6,7 +6,7 @@
 
 (*
 ** ATS/Postiats - Unleashing the Potential of Types!
-** Copyright (C) 2011-20?? Hongwei Xi, ATS Trustful Software, Inc.
+** Copyright (C) 2011-2013 Hongwei Xi, ATS Trustful Software, Inc.
 ** All rights reserved
 **
 ** ATS is free software;  you can  redistribute it and/or modify it under
@@ -27,7 +27,8 @@
 
 (* ****** ****** *)
 //
-// Author: Hongwei Xi (hwxi AT cs DOT bu DOT edu)
+// Author: Hongwei Xi
+// Authoremail: gmhwxi AT gmail DOT com
 // Start Time: April, 2011
 //
 (* ****** ****** *)
@@ -67,7 +68,7 @@ symmap_insert
 (* ****** ****** *)
 
 fun symmap_joinwth
-  {itm:type} (m1: &symmap itm, m2: symmap itm):<> void
+  {itm:type} (m1: &symmap itm, m2: !symmap itm):<> void
 // end of [symmap_joinwth]
 
 (* ****** ****** *)

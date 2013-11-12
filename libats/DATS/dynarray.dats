@@ -6,19 +6,19 @@
 
 (*
 ** ATS/Postiats - Unleashing the Potential of Types!
-** Copyright (C) 2011-20?? Hongwei Xi, ATS Trustful Software, Inc.
+** Copyright (C) 2011-2013 Hongwei Xi, ATS Trustful Software, Inc.
 ** All rights reserved
 **
 ** ATS is free software;  you can  redistribute it and/or modify it under
-** the terms of the GNU LESSER GENERAL PUBLIC LICENSE as published by the
-** Free Software Foundation; either version 2.1, or (at your option)  any
+** the terms of  the GNU GENERAL PUBLIC LICENSE (GPL) as published by the
+** Free Software Foundation; either version 3, or (at  your  option)  any
 ** later version.
-**
+** 
 ** ATS is distributed in the hope that it will be useful, but WITHOUT ANY
 ** WARRANTY; without  even  the  implied  warranty  of MERCHANTABILITY or
 ** FITNESS FOR A PARTICULAR PURPOSE.  See the  GNU General Public License
 ** for more details.
-**
+** 
 ** You  should  have  received  a  copy of the GNU General Public License
 ** along  with  ATS;  see the  file COPYING.  If not, please write to the
 ** Free Software Foundation,  51 Franklin Street, Fifth Floor, Boston, MA
@@ -47,11 +47,9 @@ staload "libats/SATS/dynarray.sats"
 // 0: manual
 // 1: automatic doubling
 //
-(* ****** ****** *)
-
 implement{}
 dynarray$recapacitize () = 1 // default policy
-
+//
 (* ****** ****** *)
 
 local
@@ -106,12 +104,12 @@ dynarray_get_array
 val+DYNARRAY{a}{m,n}(A, _, n0) = DA
 //
 val () = n := n0
-val ptr = arrayptr2ptr (A)
+val p0 = arrayptr2ptr (A)
 //
-prval (pf, fpf) = $UN.ptr_vtake{array(a,n)}(ptr)
+val (pf, fpf | p0) = $UN.ptr_vtake{array(a,n)}(p0)
 //
 in
-  (pf, fpf | ptr)
+  (pf, fpf | p0)
 end (* end of [dynarray_get_array] *)
 
 (* ****** ****** *)
@@ -156,7 +154,7 @@ in
 //
 if i <= n then let
   extern fun memmove
-    : (ptr, ptr, size_t) -<0,!wrt> ptr = "mac#atslib_memmove"
+    : (ptr, ptr, size_t) -<0,!wrt> ptr = "mac#atslib_dynarray_memmove"
   // end of [extern]
 in
 //
@@ -247,7 +245,7 @@ fun pow2min
 ) : sizeGte(1) =
 (
   if s1 >= s2 then s1 else pow2min (s1+s1, s2)
-) (* end of [recap] *)
+) (* end of [pow2min] *)
 //
 val i = g1ofg0_uint (i)
 val+@DYNARRAY (A, m, n) = DA
@@ -257,9 +255,9 @@ in
 if i <= n then let
 //
 extern fun memcpy
-  : (ptr, ptr, size_t) -<0,!wrt> ptr = "mac#atslib_memcpy"
+  : (ptr, ptr, size_t) -<0,!wrt> ptr = "mac#atslib_dynarray_memcpy"
 extern fun memmove
-  : (ptr, ptr, size_t) -<0,!wrt> ptr = "mac#atslib_memmove"
+  : (ptr, ptr, size_t) -<0,!wrt> ptr = "mac#atslib_dynarray_memmove"
 //
 in
 //
@@ -395,12 +393,13 @@ in
 if m2 >= n then let
 //
 val A2 = arrayptr_make_uninitized<a> (m2)
+//
 val ptr = memcpy
 (
   arrayptr2ptr(A2), arrayptr2ptr(A), n*sizeof<a>
 ) where {
   extern fun memcpy
-    : (ptr, ptr, size_t) -<0,!wrt> ptr = "mac#atslib_memcpy"
+    : (ptr, ptr, size_t) -<0,!wrt> ptr = "mac#atslib_dynarray_memcpy"
 } (* end of [val] *)
 //
 extern castfn __cast {n:int} (arrayptr (a, n)):<> arrayptr (a?, n)

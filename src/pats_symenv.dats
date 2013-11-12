@@ -6,7 +6,7 @@
 
 (*
 ** ATS/Postiats - Unleashing the Potential of Types!
-** Copyright (C) 2011-20?? Hongwei Xi, ATS Trustful Software, Inc.
+** Copyright (C) 2011-2013 Hongwei Xi, ATS Trustful Software, Inc.
 ** All rights reserved
 **
 ** ATS is free software;  you can  redistribute it and/or modify it under
@@ -27,13 +27,15 @@
 
 (* ****** ****** *)
 //
-// Author: Hongwei Xi (hwxi AT cs DOT bu DOT edu)
+// Author: Hongwei Xi
+// Authoremail: gmhwxi AT gmail DOT com
 // Start Time: April, 2011
 //
 (* ****** ****** *)
-
-staload _(*anon*) = "prelude/DATS/pointer.dats"
-
+//
+staload
+ATSPRE = "./pats_atspre.dats"
+//
 (* ****** ****** *)
 
 staload "./pats_symmap.sats"
@@ -204,9 +206,11 @@ val () = env.maplst := ms
 //
 val m0 = env.map
 val () = env.map := m2
+val res = symmap_joinwth {itm} (env.map, m0)
+val () = symmap_free (m0)
 //
 in
-  symmap_joinwth {itm} (env.map, m0)
+  res
 end // end of [symenv_localjoin]
 
 (* ****** ****** *)
@@ -221,10 +225,22 @@ symenv_pervasive_insert {itm}
   (env, k, i) = symmap_insert {itm} (env.pervasive, k, i)
 // end of [symenv_insert]
 
+(* ****** ****** *)
+
 implement
-symenv_pervasive_joinwth
+symenv_pervasive_joinwth0
+  {itm} (env, map) = let
+//
+val () = symmap_joinwth (env.pervasive, map)
+//
+in
+  symmap_free (map)
+end // end of [symenv_pervasive_joinwth0]
+
+implement
+symenv_pervasive_joinwth1
   {itm} (env, map) = symmap_joinwth (env.pervasive, map)
-// end of [symenv_pervasive_search]
+// end of [symenv_pervasive_joinwth1]
 
 (* ****** ****** *)
 

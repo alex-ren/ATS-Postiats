@@ -2,18 +2,16 @@
 (*                                                                     *)
 (*                         Applied Type System                         *)
 (*                                                                     *)
-(*                              Hongwei Xi                             *)
-(*                                                                     *)
 (***********************************************************************)
 
 (*
-** ATS - Unleashing the Potential of Types!
-** Copyright (C) 2002-2011 Hongwei Xi, Boston University
+** ATS/Postiats - Unleashing the Potential of Types!
+** Copyright (C) 2011-2013 Hongwei Xi, ATS Trustful Software, Inc.
 ** All rights reserved
 **
 ** ATS is free software;  you can  redistribute it and/or modify it under
-** the terms of the GNU LESSER GENERAL PUBLIC LICENSE as published by the
-** Free Software Foundation; either version 2.1, or (at your option)  any
+** the terms of  the GNU GENERAL PUBLIC LICENSE (GPL) as published by the
+** Free Software Foundation; either version 3, or (at  your  option)  any
 ** later version.
 ** 
 ** ATS is distributed in the hope that it will be useful, but WITHOUT ANY
@@ -53,7 +51,6 @@
 
 #define ATS_PACKNAME "ATSLIB.libats.linheap_binomial"
 #define ATS_DYNLOADFLAG 0 // no need for dynloading at run-time
-#define ATS_EXTERN_PREFIX "atslib_" // prefix for external names
 
 (* ****** ****** *)
 
@@ -81,10 +78,9 @@ staload "libats/SATS/linheap_binomial.sats"
 // btree(a, n) is for a binomial tree of rank(n)
 //
 datavtype
-btree
-(
-  a:vt@ype+, int(*rank*)
-) =
+btree (
+a:vt@ype+, int(*rank*)
+) = // btree
   | {n:nat}
     btnode (a, n) of (int (n), a, btreelst (a, n))
 // end of [btree]
@@ -101,10 +97,9 @@ and btreelst
 (* ****** ****** *)
 
 datavtype
-bheap
-(
+bheap (
   a:vt@ype+, int(*rank*), int(*size*)
-) =
+) = // bheap
   | {n:nat}
     bheap_nil (a, n, 0) of ()
   | {n:nat}{p:int}{sz:nat}{n1:int | n1 > n}

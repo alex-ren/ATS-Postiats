@@ -1,5 +1,5 @@
 (*
-** API for json-c in ATS
+** API in ATS for json-c
 *)
 
 (* ****** ****** *)
@@ -22,7 +22,7 @@
 
 (*
 **
-** Author Hongwei Xi
+** Author: Hongwei Xi
 ** Authoremail: gmhwxi AT gmail DOT com
 ** Start Time: May, 2013
 **
@@ -36,9 +36,12 @@
 
 (* ****** ****** *)
 
-#define ATS_PACKNAME "ATSCNTRB.json"
-#define ATS_STALOADFLAG 0 // no need for staloading at run-time
-#define ATS_EXTERN_PREFIX "atscntrb_" // prefix for external names
+#define
+ATS_PACKNAME "ATSCNTRB.jsonc"
+#define
+ATS_STALOADFLAG 0 // no need for staloading at run-time
+#define
+ATS_EXTERN_PREFIX "atscntrb_jsonc_" // prefix for external names
 
 (* ****** ****** *)
 

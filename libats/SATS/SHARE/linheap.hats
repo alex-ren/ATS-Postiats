@@ -2,18 +2,16 @@
 (*                                                                     *)
 (*                         Applied Type System                         *)
 (*                                                                     *)
-(*                              Hongwei Xi                             *)
-(*                                                                     *)
 (***********************************************************************)
 
 (*
-** ATS - Unleashing the Potential of Types!
-** Copyright (C) 2002-2011 Hongwei Xi, Boston University
+** ATS/Postiats - Unleashing the Potential of Types!
+** Copyright (C) 2011-2013 Hongwei Xi, ATS Trustful Software, Inc.
 ** All rights reserved
 **
 ** ATS is free software;  you can  redistribute it and/or modify it under
-** the terms of the GNU LESSER GENERAL PUBLIC LICENSE as published by the
-** Free Software Foundation; either version 2.1, or (at your option)  any
+** the terms of  the GNU GENERAL PUBLIC LICENSE (GPL) as published by the
+** Free Software Foundation; either version 3, or (at  your  option)  any
 ** later version.
 ** 
 ** ATS is distributed in the hope that it will be useful, but WITHOUT ANY
@@ -71,7 +69,7 @@ fun{a:t0p}
 linheap_getmin
 (
   hp: !heap (INV(a)), res: &a? >> opt (a, b)
-) : #[b:bool] bool b // endfun
+) : #[b:bool] bool (b) // endfun
 
 fun{a:vt0p}
 linheap_getmin_ref (hp: !heap (INV(a))): cPtr0 (a)
@@ -105,7 +103,7 @@ linheap_free (hp: heap (INV(a))):<!wrt> void
 (* ****** ****** *)
 
 fun{x:vt0p}
-linmap_freelin$clear
+linheap_freelin$clear
   (x: &x >> x?):<!wrt> void
 fun{a:vt0p}
 linheap_freelin (hp: heap (INV(a))):<!wrt> void

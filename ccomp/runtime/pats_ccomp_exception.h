@@ -1,29 +1,29 @@
-/***********************************************************************/
+/* ******************************************************************* */
 /*                                                                     */
 /*                         Applied Type System                         */
 /*                                                                     */
-/***********************************************************************/
+/* ******************************************************************* */
 
-/* (*
+/*
 ** ATS/Postiats - Unleashing the Potential of Types!
-** Copyright (C) 2011-2012 Hongwei Xi, ATS Trustful Software, Inc.
+** Copyright (C) 2011-20?? Hongwei Xi, ATS Trustful Software, Inc.
 ** All rights reserved
 **
 ** ATS is free software;  you can  redistribute it and/or modify it under
-** the terms of the GNU LESSER GENERAL PUBLIC LICENSE as published by the
-** Free Software Foundation; either version 2.1, or (at your option)  any
+** the terms of  the GNU GENERAL PUBLIC LICENSE (GPL) as published by the
+** Free Software Foundation; either version 3, or (at  your  option)  any
 ** later version.
-**
+** 
 ** ATS is distributed in the hope that it will be useful, but WITHOUT ANY
 ** WARRANTY; without  even  the  implied  warranty  of MERCHANTABILITY or
 ** FITNESS FOR A PARTICULAR PURPOSE.  See the  GNU General Public License
 ** for more details.
-**
+** 
 ** You  should  have  received  a  copy of the GNU General Public License
 ** along  with  ATS;  see the  file COPYING.  If not, please write to the
 ** Free Software Foundation,  51 Franklin Street, Fifth Floor, Boston, MA
 ** 02110-1301, USA.
-*) */
+*/
 
 /* ****** ****** */
 
@@ -47,6 +47,12 @@ use -D_XOPEN_SOURCE
 
 /* ****** ****** */
 
+#define atstype_jmp_buf jmp_buf
+#define atspre_setjmp(env, mask) setjmp(env)
+#define atspre_longjmp(env, ret) longjmp(env, ret)
+
+/* ****** ****** */
+
 /*
 #include <alloca.h>
 */
@@ -54,13 +60,13 @@ extern void *alloca (size_t bsz) ;
 
 /* ****** ****** */
 
+/*
 extern
 atstype_exncon *atspre_AssertExn_make() ;
 extern
 atstype_exncon *atspre_NotFoundExn_make() ;
 extern
 atstype_exncon *atspre_IllegalArgExn_make(const char*) ;
-
 extern
 atstype_exncon *atspre_ListSubscriptExn_make() ;
 extern
@@ -69,16 +75,22 @@ extern
 atstype_exncon *atspre_ArraySubscriptExn_make() ;
 extern
 atstype_bool atspre_isArraySubscriptExn (const atstype_exncon*) ;
-
+//
 extern atstype_exncon *atspre_NotSomeExn_make() ;
 extern atstype_bool atspre_isNotSomeExn (const atstype_exncon*) ; 
+//
+extern
+atstype_exncon *atspre_StreamSubscriptExn_make() ;
+extern
+atstype_bool atspre_isStreamSubscriptExn (const atstype_exncon*) ;
+*/
 
 /* ****** ****** */
 
 typedef
 struct atsexnframe
 {
-  sigjmp_buf env ;
+  atstype_jmp_buf env ;
   atstype_exnconptr exn ;
   struct atsexnframe *prev ;
 } atsexnframe_t ;
@@ -136,15 +148,15 @@ do { \
   frame = atsexnframe_alloc() ; \
   framep = my_atsexnframe_getref() ; \
   my_atsexnframe_enter(frame, framep) ; \
-  flag = sigsetjmp(frame->env, 1) ; \
-  if (!flag) { /* normal */
+  flag = atspre_setjmp(frame->env, 1) ; \
+  if (flag==0) { /* normal */
 
 #define \
 ATStrywith_with(tmpexn) \
     my_atsexnframe_leave(framep) ; \
-  } else { \
-    tmpexn = (*(atsexnframe_ptr*)framep)->exn ; \
-    my_atsexnframe_leave(framep) ; /* exceptional */
+  } else { /* flag<>0 : exceptional */ \
+    tmpexn = (*framep)->exn ; \
+    my_atsexnframe_leave(framep) ;
 
 #define \
 ATStrywith_end(tmpexn) \

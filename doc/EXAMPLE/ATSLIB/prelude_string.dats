@@ -4,8 +4,7 @@
 
 (* ****** ****** *)
 //
-#include
-"share/atspre_staload_tmpdef.hats"
+#include "share/atspre_staload.hats"
 //
 (* ****** ****** *)
 
@@ -102,7 +101,9 @@ in
   $UN.cast{charNZ}(c) // HX: [c] cannot be NUL
 end // end of [string_tabulate$fwork]
 //
-val () = assertloc (ab = strnptr2string (string_tabulate (i2sz(26))))
+val ab2 = string_tabulate (i2sz(26))
+val ((*void*)) = assertloc (ab = $UN.castvwtp1{string}(ab2))
+val ((*void*)) = strnptr_free (ab2)
 //
 } // end of [val]
 
@@ -134,6 +135,18 @@ val () = strptr_free (str)
 
 val () =
 {
+val out = stdout_ref
+val cs = string_explode ("abcde")
+val abcde = string_make_list ($UN.list_vt2t{charNZ}(cs))
+val () = list_vt_free (cs)
+val () = assertloc ("abcde" = $UN.strnptr2string(abcde))
+val () = strnptr_free (abcde)
+} (* end of [val] *)
+
+(* ****** ****** *)
+
+val () =
+{
 //
 val ab = alphabet
 //
@@ -159,6 +172,19 @@ val () =
 {
 //
 val () = assertloc (stropt_length (stropt_none ()) = ~1)
+//
+} // end of [val]
+
+(* ****** ****** *)
+
+val () =
+{
+//
+val res =
+$extfcall (Strptr0, "atspre_string_make_snprintf", "%i:%s", 1234567890, "abcdefghijklmnopqrstuvwxyz")
+//
+val () = println! (res)
+val () = strptr_free (res)
 //
 } // end of [val]
 

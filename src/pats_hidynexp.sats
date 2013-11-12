@@ -6,7 +6,7 @@
 
 (*
 ** ATS/Postiats - Unleashing the Potential of Types!
-** Copyright (C) 2011-20?? Hongwei Xi, ATS Trustful Software, Inc.
+** Copyright (C) 2011-2013 Hongwei Xi, ATS Trustful Software, Inc.
 ** All rights reserved
 **
 ** ATS is free software;  you can  redistribute it and/or modify it under
@@ -27,7 +27,8 @@
 
 (* ****** ****** *)
 //
-// Author: Hongwei Xi (hwxi AT cs DOT bu DOT edu)
+// Author: Hongwei Xi
+// Authoremail: gmhwxi AT gmail DOT com
 // Start Time: July, 2012
 //
 (* ****** ****** *)
@@ -69,7 +70,7 @@ fun d2var_get2_funclo (d2v: d2var): fcopt_vt
 
 datatype
 hipat_node =
-  | HIPany of () // wildcard
+  | HIPany of (d2var) // wildcard
   | HIPvar of (d2var) // mutability from the context
 //
   | HIPint of int
@@ -148,7 +149,7 @@ fun labhipatlst_is_unused (lhips: labhipatlst): bool
 fun hipat_make_node
   (loc: location, hse: hisexp, node: hipat_node): hipat
 
-fun hipat_any (loc: location, hse: hisexp): hipat
+fun hipat_any (loc: location, hse: hisexp, d2v: d2var): hipat
 fun hipat_var (loc: location, hse: hisexp, d2v: d2var): hipat
 
 fun hipat_con
@@ -275,6 +276,7 @@ and hidexp_node =
 //
   | HDEtop of () // for uninitialized
   | HDEempty of () // for the void value
+  | HDEignore of (hidexp) // ignoring the value of hidexp
 //
   | HDEextval of (string(*name*)) // externally named values
   | HDEcastfn of (d2cst, hidexp(*arg*)) // castfn application
@@ -339,11 +341,17 @@ and hidexp_node =
   | HDEarrpsz of (* arrsize construction *)
       (hisexp(*elt*), hidexplst(*elt*), int(*asz*))
   | HDEarrinit of (* array initialization *)
-      (hisexp(*elt*), hidexp(*asz*), hidexplst(*elt*))
+      (hisexp(*elt*), hidexp(*asz*), hidexplst(*elt*), int(*asz*))
 //
   | HDEraise of (hidexp(*exn*))
 //
-  | HDElam of (hipatlst, hidexp) // HX: lam_dyn
+  | HDElam of (int(*knd=0/1:flat/boxed*), hipatlst, hidexp) // HX: lam_dyn
+//
+  | HDEfix of (int(*knd=0/1:flat/boxed*), d2var(*fixvar*), hidexp) // fixed-point
+//
+  | HDEdelay of hidexp(*eval*) // delayed evaluation
+  | HDEldelay of (hidexp(*eval*), hidexp(*free*)) // delayed evaluation
+  | HDElazyeval of (int(*lin*), hidexp) // lazy-value evaluation
 //
   | HDEloop of (* for/while-loops *)
     (
@@ -444,7 +452,7 @@ and hivardec = '{
 , hivardec_dvar_ptr= d2var
 , hivardec_dvar_view= d2var
 , hivardec_type= hisexp
-, hivardec_ini= hidexpopt
+, hivardec_init= hidexpopt
 } // end of [hivardec]
 
 and hivardeclst = List (hivardec)
@@ -472,6 +480,7 @@ fun prerr_hidexp (x: hidexp): void
 overload prerr with prerr_hidexp
 
 fun fprint_hidexplst : fprint_type (hidexplst)
+fun fprint_hidexpopt : fprint_type (hidexpopt)
 fun fprint_labhidexplst : fprint_type (labhidexplst)
 
 (* ****** ****** *)
@@ -554,6 +563,8 @@ fun hidexp_top
   (loc: location, hse: hisexp): hidexp
 fun hidexp_empty
   (loc: location, hse: hisexp): hidexp
+fun hidexp_ignore
+  (loc: location, hse: hisexp, hde: hidexp): hidexp
 
 (* ****** ****** *)
 
@@ -698,26 +709,30 @@ fun hidexp_assgn_ptr (
 
 (* ****** ****** *)
 
-fun hidexp_xchng_var (
-  loc: location
-, hse: hisexp, d2v_l: d2var, hse_rt: hisexp, hils: hilablst, hde_r: hidexp
+fun hidexp_xchng_var
+(
+  loc: location, hse: hisexp
+, d2v_l: d2var, hse_rt: hisexp, hils: hilablst, hde_r: hidexp
 ) : hidexp // end of [hidexp_xchng_var]
 
-fun hidexp_xchng_ptr (
-  loc: location
-, hse: hisexp, hde_l: hidexp, hse_rt: hisexp, hils: hilablst, hde_r: hidexp
+fun hidexp_xchng_ptr
+(
+  loc: location, hse: hisexp
+, hde_l: hidexp, hse_rt: hisexp, hils: hilablst, hde_r: hidexp
 ) : hidexp // end of [hidexp_xchng_ptr]
 
 (* ****** ****** *)
 
-fun hidexp_arrpsz (
-  loc: location
-, hse: hisexp, hse_elt: hisexp, hdes_elt: hidexplst, asz: int
+fun hidexp_arrpsz
+(
+  loc: location, hse: hisexp
+, hse_elt: hisexp, hdes_elt: hidexplst, asz: int
 ) : hidexp // end of [hidexp_arrpsz]
 
-fun hidexp_arrinit (
-  loc: location
-, hse: hisexp, hse_elt: hisexp, hde_asz: hidexp, hdes_elt: hidexplst
+fun hidexp_arrinit
+(
+  loc: location, hse: hisexp
+, hse_elt: hisexp, hde_asz: hidexp, hdes_elt: hidexplst, asz: int
 ) : hidexp // end of [hidexp_arrinit]
 
 (* ****** ****** *)
@@ -730,9 +745,26 @@ fun hidexp_raise
 
 fun hidexp_lam
 (
-  loc: location, hse: hisexp, hips: hipatlst, hde: hidexp
+  loc: location, hse: hisexp, knd: int, hips: hipatlst, hde: hidexp
 ) : hidexp // end of [hidexp_lam]
 
+(* ****** ****** *)
+
+fun hidexp_fix
+(
+  loc: location, hse: hisexp, knd: int, f_d2v: d2var, hde_def: hidexp
+) : hidexp // end of [hidexp_fix]
+
+(* ****** ****** *)
+//
+fun hidexp_delay
+  (loc: location, hse: hisexp, hde: hidexp): hidexp
+fun hidexp_ldelay
+  (loc: location, hse: hisexp, _eval: hidexp, _free: hidexp): hidexp
+//
+fun hidexp_lazyeval
+  (loc: location, hse: hisexp, lin: int, hde: hidexp): hidexp
+//
 (* ****** ****** *)
 
 fun hidexp_loop
@@ -758,6 +790,12 @@ fun hidexp_err (loc: location, hse: hisexp): hidexp
 
 (* ****** ****** *)
 
+(*
+fun un_hidexp_int (hde_int: hidexp): Option_vt (int)
+*)
+
+(* ****** ****** *)
+
 fun hilab_lab (loc: location, lab: label): hilab
 fun hilab_ind (loc: location, ind: hidexplst): hilab
 
@@ -765,7 +803,8 @@ fun hilab_ind (loc: location, ind: hidexplst): hilab
 
 fun higmat_make
   (loc: location, hde: hidexp, opt: hipatopt): higmat
-fun hiclau_make (
+fun hiclau_make
+(
   loc: location
 , hips: hipatlst, gua: higmatlst, seq: int, neg: int, body: hidexp
 ) : hiclau // end of [hiclau_make]
@@ -792,14 +831,16 @@ fun hivaldec_make
   (loc: location, pat: hipat, def: hidexp): hivaldec
 // end of [hivaldec_make]
 
-fun hivardec_make (
+fun hivardec_make
+(
   loc: location, knd: int
-, d2v: d2var, d2vw: d2var, type: hisexp, ini: hidexpopt
+, d2v: d2var, d2vw: d2var, type: hisexp, init: hidexpopt
 ) : hivardec // end of [hivardec_make]
 
 (* ****** ****** *)
 
-fun hiimpdec_make (
+fun hiimpdec_make
+(
   loc: location
 , d2c: d2cst, imparg: s2varlst, tmparg: s2explstlst, def: hidexp
 ) : hiimpdec // end of [hiimpdec_make]
@@ -817,6 +858,10 @@ fun hiimpdec_getref_instrlstopt
 fun hidecl_make_node
   (loc: location, node: hidecl_node): hidecl
 // end of [hidecl_make_node]
+
+(* ****** ****** *)
+
+fun hidecl_is_empty (hid: hidecl): bool
 
 (* ****** ****** *)
 
@@ -843,7 +888,8 @@ fun hidecl_impdec
   (loc: location, knd: int, himp: hiimpdec): hidecl
 // end of [hidecl_impdec]
 
-fun hidecl_fundecs (
+fun hidecl_fundecs
+(
   loc: location, knd: funkind, decarg: s2qualst, hfds: hifundeclst
 ) : hidecl // end of [hidecl_fundecs]
 

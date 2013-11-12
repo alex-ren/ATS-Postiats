@@ -10,15 +10,15 @@
 ** All rights reserved
 **
 ** ATS is free software;  you can  redistribute it and/or modify it under
-** the terms of the GNU LESSER GENERAL PUBLIC LICENSE as published by the
-** Free Software Foundation; either version 2.1, or (at your option)  any
+** the terms of  the GNU GENERAL PUBLIC LICENSE (GPL) as published by the
+** Free Software Foundation; either version 3, or (at  your  option)  any
 ** later version.
-**
+** 
 ** ATS is distributed in the hope that it will be useful, but WITHOUT ANY
 ** WARRANTY; without  even  the  implied  warranty  of MERCHANTABILITY or
 ** FITNESS FOR A PARTICULAR PURPOSE.  See the  GNU General Public License
 ** for more details.
-**
+** 
 ** You  should  have  received  a  copy of the GNU General Public License
 ** along  with  ATS;  see the  file COPYING.  If not, please write to the
 ** Free Software Foundation,  51 Franklin Street, Fifth Floor, Boston, MA
@@ -33,15 +33,11 @@
 
 (* ****** ****** *)
 
-staload "libats/SATS/funmap_list.sats"
+staload UN = "prelude/SATS/unsafe.sats"
 
 (* ****** ****** *)
 
-implement
-{key}(*tmp*)
-equal_key_key
-  (k1, k2) = gequal_val<key> (k1, k2)
-// end of [equal_key_key]
+staload "libats/SATS/funmap_list.sats"
 
 (* ****** ****** *)
 //
@@ -57,9 +53,6 @@ map_type
 (* ****** ****** *)
 
 implement{} funmap_nil () = list_nil ()
-
-(* ****** ****** *)
-
 implement{} funmap_make_nil () = list_nil ()
 
 (* ****** ****** *)
@@ -205,9 +198,8 @@ funmap_foreach_env
 //
 vtypedef ki = @(key, itm)
 //
-implement
-list_foreach$cont<ki><env> (kx, env) =
-  funmap_foreach$cont<key,itm><env> (kx.0, kx.1, env)
+implement{ki}{env}
+list_foreach$cont (kx, env) = true
 implement
 list_foreach$fwork<ki><env> (kx, env) =
   funmap_foreach$fwork<key,itm><env> (kx.0, kx.1, env)

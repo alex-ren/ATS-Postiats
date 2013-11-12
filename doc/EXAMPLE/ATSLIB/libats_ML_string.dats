@@ -4,13 +4,11 @@
 
 (* ****** ****** *)
 //
-#include
-"share/atspre_staload_tmpdef.hats"
+#include "share/atspre_staload.hats"
 //
 (* ****** ****** *)
 
-staload
-UN = "prelude/SATS/unsafe.sats"
+staload UN = "prelude/SATS/unsafe.sats"
 
 (* ****** ****** *)
 
@@ -24,6 +22,13 @@ staload _(*anon*) = "libats/ML/DATS/string.dats"
 (* ****** ****** *)
 
 val alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+(* ****** ****** *)
+
+val () =
+{
+val () = assertloc (itoa (12345) = "12345")
+}
 
 (* ****** ****** *)
 
@@ -55,6 +60,21 @@ val () =
 string_foreach (ds+ds, lam c => fprint(out, c))
 //
 val () = fprint_newline (out)
+//
+} (* end of [val] *)
+
+(* ****** ****** *)
+
+val () =
+{
+//
+val str = ""
+val cs = string_explode (str)
+val () = assertloc (str = string_implode(cs))
+//
+val str = "abcde"
+val cs = string_explode (str)
+val () = assertloc (str = string_implode(cs))
 //
 } (* end of [val] *)
 

@@ -45,6 +45,7 @@ pats_symbol.sats
 pats_symbol.dats
 pats_filename.sats
 pats_filename.dats
+pats_filename_reloc.dats
 pats_location.sats
 pats_location.dats
 pats_location.cats
@@ -74,6 +75,8 @@ pats_syntax.dats
 pats_syntax_print.dats
 pats_depgen.sats
 pats_depgen.dats
+pats_taggen.sats
+pats_taggen.dats
 pats_tokbuf.sats
 pats_tokbuf.dats
 pats_tokbuf.cats
@@ -245,8 +248,9 @@ pats_ccomp_instrseq.dats
 pats_ccomp_hipat.dats
 pats_ccomp_dynexp.dats
 pats_ccomp_caseof.dats
-pats_ccomp_trywith.dats
 pats_ccomp_claulst.dats
+pats_ccomp_lazyeval.dats
+pats_ccomp_trywith.dats
 pats_ccomp_looping.dats
 pats_ccomp_decl.dats
 pats_ccomp_subst.dats

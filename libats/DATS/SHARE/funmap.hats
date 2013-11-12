@@ -6,19 +6,19 @@
 
 (*
 ** ATS/Postiats - Unleashing the Potential of Types!
-** Copyright (C) 2011-2012 Hongwei Xi, ATS Trustful Software, Inc.
+** Copyright (C) 2011-2013 Hongwei Xi, ATS Trustful Software, Inc.
 ** All rights reserved
 **
 ** ATS is free software;  you can  redistribute it and/or modify it under
-** the terms of the GNU LESSER GENERAL PUBLIC LICENSE as published by the
-** Free Software Foundation; either version 2.1, or (at your option)  any
+** the terms of  the GNU GENERAL PUBLIC LICENSE (GPL) as published by the
+** Free Software Foundation; either version 3, or (at  your  option)  any
 ** later version.
-**
+** 
 ** ATS is distributed in the hope that it will be useful, but WITHOUT ANY
 ** WARRANTY; without  even  the  implied  warranty  of MERCHANTABILITY or
 ** FITNESS FOR A PARTICULAR PURPOSE.  See the  GNU General Public License
 ** for more details.
-**
+** 
 ** You  should  have  received  a  copy of the GNU General Public License
 ** along  with  ATS;  see the  file COPYING.  If not, please write to the
 ** Free Software Foundation,  51 Franklin Street, Fifth Floor, Boston, MA
@@ -30,6 +30,13 @@
 (* Author: Hongwei Xi *)
 (* Authoremail: hwxi AT cs DOT bu DOT edu *)
 (* Start time: December, 2012 *)
+
+(* ****** ****** *)
+
+implement{key}
+equal_key_key = gequal_val<key>
+implement{key}
+compare_key_key = gcompare_val<key>
 
 (* ****** ****** *)
 
@@ -118,12 +125,6 @@ end // end of [funmap_remove]
 (* ****** ****** *)
 
 implement
-{key,itm}{env}
-funmap_foreach$cont (k, x, env) = true
-
-(* ****** ****** *)
-
-implement
 {key,itm}
 funmap_foreach
   (map) = let
@@ -131,40 +132,6 @@ funmap_foreach
 var env: void = () in funmap_foreach_env<key,itm><void> (map, env)
 //
 end // end of [funmap_foreach]
-
-(* ****** ****** *)
-
-local
-
-staload Q = "libats/SATS/qlist.sats"
-
-in (* in of [local] *)
-
-implement
-{key,itm}
-funmap_listize
-  (map) = let
-//
-typedef tki = @(key, itm)
-//
-vtypedef tenv = $Q.qstruct (tki)
-//
-implement
-funmap_foreach$fwork<key,itm><tenv>
-  (k, x, env) = $Q.qstruct_insert<tki> (env, @(k, x))
-// end of [funmap_foreach$fwork]
-//
-var env: $Q.qstruct
-val () = $Q.qstruct_initize {tki} (env)
-val () = $effmask_all (funmap_foreach_env (map, env))
-val res = $Q.qstruct_takeout_list (env)
-prval () = $Q.qstruct_uninitize {tki} (env)
-//
-in
-  res
-end // end of [funmap_listize]
-
-end // end of [local]
 
 (* ****** ****** *)
 
@@ -193,6 +160,70 @@ var env: int = 0
 in
   funmap_foreach_env<key,itm><int> (map, env)
 end // end of [fprint_funmap]
+
+(* ****** ****** *)
+
+implement
+{key,itm}
+funmap_listize
+  (xs) = let
+//
+typedef ki = @(key, itm)
+//
+implement
+funmap_flistize$fopr<key,itm><ki> (k, x) = @(k, x)
+//
+in
+  $effmask_all (funmap_flistize<key,itm><ki> (xs))
+end // end of [funmap_listize]
+
+(* ****** ****** *)
+
+local
+
+staload Q = "libats/SATS/qlist.sats"
+
+in (* in of [local] *)
+
+implement
+{key,itm}{ki2}
+funmap_flistize
+  (map) = let
+//
+typedef ki = @(key, itm)
+//
+vtypedef tenv = $Q.qstruct (ki2)
+//
+implement(env)
+funmap_foreach$fwork<key,itm><env>
+  (k, x, env) = let
+//
+val (
+  pf, fpf | p
+) = $UN.ptr_vtake{tenv}(addr@(env))
+//
+val ki2 =
+  funmap_flistize$fopr<key,itm><ki2> (k, x)
+//
+val () = $Q.qstruct_insert<ki2> (!p, ki2)
+//
+prval () = fpf (pf)
+//
+in
+  // nothing
+end // end of [funmap_foreach$fwork]
+//
+var env: $Q.qstruct
+val () = $Q.qstruct_initize{ki2}(env)
+val () = funmap_foreach_env<key,itm><tenv> (map, env)
+val res = $Q.qstruct_takeout_list (env)
+prval () = $Q.qstruct_uninitize{ki2}(env)
+//
+in
+  res
+end // end of [funmap_flistize]
+
+end // end of [local]
 
 (* ****** ****** *)
 

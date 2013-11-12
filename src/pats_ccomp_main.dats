@@ -6,7 +6,7 @@
 
 (*
 ** ATS/Postiats - Unleashing the Potential of Types!
-** Copyright (C) 2011-20?? Hongwei Xi, ATS Trustful Software, Inc.
+** Copyright (C) 2011-2013 Hongwei Xi, ATS Trustful Software, Inc.
 ** All rights reserved
 **
 ** ATS is free software;  you can  redistribute it and/or modify it under
@@ -27,17 +27,19 @@
 
 (* ****** ****** *)
 //
-// Author: Hongwei Xi (gmhwxi AT gmail DOT com)
+// Author: Hongwei Xi
+// Authoremail: gmhwxi AT gmail DOT com
 // Start Time: October, 2012
+//
+(* ****** ****** *)
+//
+staload
+ATSPRE = "./pats_atspre.dats"
 //
 (* ****** ****** *)
 
 staload UN = "prelude/SATS/unsafe.sats"
 staload _(*anon*) = "prelude/DATS/unsafe.dats"
-
-(* ****** ****** *)
-
-staload _(*anon*) = "prelude/DATS/reference.dats"
 
 (* ****** ****** *)
 
@@ -78,14 +80,20 @@ emit_ats_ccomp_header (out) = let
   val () = emit_text (out, "/*\n")
   val () = emit_text (out, "** include runtime header files\n")
   val () = emit_text (out, "*/\n")
+//
   val () = emit_text (out, "#ifndef _ATS_CCOMP_HEADER_NONE\n")
+//
   val () = emit_text (out, "#include \"pats_ccomp_config.h\"\n")
   val () = emit_text (out, "#include \"pats_ccomp_basics.h\"\n")
   val () = emit_text (out, "#include \"pats_ccomp_typedefs.h\"\n")
   val () = emit_text (out, "#include \"pats_ccomp_instrset.h\"\n")
   val () = emit_text (out, "#include \"pats_ccomp_memalloc.h\"\n")
+//
+  val () = emit_text (out, "#ifndef _ATS_EXCEPTION_NONE\n")
   val () = emit_text (out, "#include \"pats_ccomp_memalloca.h\"\n")
   val () = emit_text (out, "#include \"pats_ccomp_exception.h\"\n")
+  val () = emit_text (out, "#endif // end of [_ATS_EXCEPTION_NONE]\n")
+//
   val () = emit_text (out, "#endif /* _ATS_CCOMP_HEADER_NONE */\n")
   val () = emit_newline (out)
 in
@@ -107,12 +115,19 @@ val () = emit_text (out, "#ifndef _ATS_CCOMP_PRELUDE_NONE\n")
 //
 val () = emit_text (out, "//\n")
 val () = emit_text (out, "#include \"prelude/CATS/basics.cats\"\n")
+//
 val () = emit_text (out, "#include \"prelude/CATS/integer.cats\"\n")
-val () = emit_text (out, "#include \"prelude/CATS/memory.cats\"\n")
+//
 val () = emit_text (out, "#include \"prelude/CATS/pointer.cats\"\n")
+//
 val () = emit_text (out, "#include \"prelude/CATS/bool.cats\"\n")
 val () = emit_text (out, "#include \"prelude/CATS/char.cats\"\n")
+val () = emit_text (out, "#include \"prelude/CATS/integer_ptr.cats\"\n")
+val () = emit_text (out, "#include \"prelude/CATS/integer_fixed.cats\"\n")
 val () = emit_text (out, "#include \"prelude/CATS/float.cats\"\n")
+//
+val () = emit_text (out, "#include \"prelude/CATS/memory.cats\"\n")
+//
 val () = emit_text (out, "#include \"prelude/CATS/string.cats\"\n")
 val () = emit_text (out, "#include \"prelude/CATS/strptr.cats\"\n")
 //
@@ -516,6 +531,7 @@ case+
     val opt = hiimpdec_get_instrlstopt (imp)
   in
     case+ opt of
+    | None _ => ((*void*))
     | Some _ => let
         val d2c = imp.hiimpdec_cst
         val-Some(hse) = d2cst_get2_hisexp (d2c)
@@ -527,7 +543,6 @@ case+
       in
         // nothing
       end // end of [Some]
-    | None _ => ()
   end (* end of [PMDimpdec] *)
 //
 | PMDlocal (xs_head, xs_body) => auxlst (out, xs_body)
@@ -647,14 +662,17 @@ val the_mainatsflag = $GLOB.the_MAINATSFLAG_get ()
 //
 in
 //
-if the_mainatsflag = 0 then let
-  val opt = the_mainats_d2copt_get ()
-in
+if the_mainatsflag = 0
+  then let
+    val opt = the_mainats_d2copt_get ()
+  in
 //
-case+ opt of
-| Some _ => 0 | None () => $GLOB.the_DYNLOADFLAG_get ()
+  case+ opt of
+  | Some _ => (~1)
+  | None () => $GLOB.the_DYNLOADFLAG_get ()
 //
-end else 0 // HX: mainatsflag overrules dynloadflag
+  end // end of [then]
+  else (~1) // HX: mainatsflag overrules dynloadflag
 //
 end // end of [the_dynloadflag_get]
 
@@ -681,7 +699,8 @@ end // end of [emit_main_arglst_err]
 (* ****** ****** *)
 
 extern
-fun emit_dynload
+fun
+emit_dynload
   (out: FILEref, infil: $FIL.filename): void
 implement
 emit_dynload
@@ -692,7 +711,8 @@ emit_dynload
 }
 
 extern
-fun emit_dynloadflag
+fun
+emit_dynloadflag
   (out: FILEref, infil: $FIL.filename): void
 implement
 emit_dynloadflag
@@ -813,15 +833,17 @@ aux_dynload_def
 //
 val flag = the_dynloadflag_get ()
 //
-val () = emit_text (out, "\n/*\n")
+val () = if flag = 0 then emit_text (out, "#if(0)\n")
+//
+val () = emit_text (out, "/*\n")
 val () = emit_text (out, "** for initialization(dynloading)")
 val () = emit_text (out, "\n*/\n")
 //
 val () = emit_text (out, "atsvoid_t0ype\n")
 val () = emit_dynload (out, infil)
 val () = emit_text (out, "()\n{\n")
-val () = if flag = 0 then emit_text (out, "ATSdynload0(\n")
-val () = if flag > 0 then emit_text (out, "ATSdynload1(\n")
+val () = if flag <= 0 then emit_text (out, "ATSdynload0(\n")
+val () = if flag >= 1 then emit_text (out, "ATSdynload1(\n")
 val () = emit_dynloadflag (out, infil)
 val () = emit_text (out, "\n) ;\n")
 val () = emit_text (out, "ATSif(\n")
@@ -850,6 +872,8 @@ val () = emit_text (out, "} /* ATSendif */\n")
 val () = emit_text (out, "ATSreturn_void() ;\n")
 val () = emit_text (out, "} /* end of [*_dynload] */\n")
 //
+val () = if flag = 0 then emit_text (out, "#endif // end of [#if(0)]\n")
+//
 in
   // nothing
 end // end of [aux_dynload_def]
@@ -867,8 +891,13 @@ val () = emit_text (out, "** the ATS runtime")
 val () = emit_text (out, "\n*/\n")
 val () = emit_text (out, "#ifndef _ATS_CCOMP_RUNTIME_NONE\n")
 val () = emit_text (out, "#include \"pats_ccomp_runtime.c\"\n")
+val () = emit_text (out, "#include \"pats_ccomp_runtime_memalloc.c\"\n")
+val () = emit_text (out, "#ifndef _ATS_EXCEPTION_NONE\n")
 val () = emit_text (out, "#include \"pats_ccomp_runtime2_dats.c\"\n")
+val () = emit_text (out, "#ifndef _ATS_CCOMP_RUNTIME_TRYWITH_NONE\n")
 val () = emit_text (out, "#include \"pats_ccomp_runtime_trywith.c\"\n")
+val () = emit_text (out, "#endif /* _ATS_CCOMP_RUNTIME_TRYWITH_NONE */\n")
+val () = emit_text (out, "#endif // end of [_ATS_EXCEPTION_NONE]\n")
 val () = emit_text (out, "#endif /* _ATS_CCOMP_RUNTIME_NONE */\n")
 //
 val () = emit_text (out, "\n/*\n")
@@ -981,10 +1010,11 @@ val () = emit_text (out, "/*\n")
 val () = emit_text (out, "exnconlst-declaration(beg)\n")
 val () = emit_text (out, "*/\n")
 //
-val () =
-emit_text (out, "\
+val () = emit_text (out, "#ifndef _ATS_EXCEPTION_NONE\n")
+val () = emit_text (out, "\
 extern void the_atsexncon_initize (atstype_exncon *d2c, char *exnmsg) ;\n\
 ") // end of [val]
+val () = emit_text (out, "#endif // end of [_ATS_EXCEPTION_NONE]\n")
 //
 val hids = the_exndeclst_get ()
 val ((*void*)) = loop (out, hids)

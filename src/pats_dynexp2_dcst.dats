@@ -6,7 +6,7 @@
 
 (*
 ** ATS/Postiats - Unleashing the Potential of Types!
-** Copyright (C) 2011-20?? Hongwei Xi, ATS Trustful Software, Inc.
+** Copyright (C) 2011-2013 Hongwei Xi, ATS Trustful Software, Inc.
 ** All rights reserved
 **
 ** ATS is free software;  you can  redistribute it and/or modify it under
@@ -27,17 +27,19 @@
 
 (* ****** ****** *)
 //
-// Author: Hongwei Xi (hwxi AT cs DOT bu DOT edu)
+// Author: Hongwei Xi
+// Authoremail: gmhwxi AT gmail DOT com
 // Start Time: May, 2011
 //
 (* ****** ****** *)
-
-staload UN = "prelude/SATS/unsafe.sats"
-
+//
+staload
+ATSPRE = "./pats_atspre.dats"
+//
 (* ****** ****** *)
 
-staload _(*anon*) = "prelude/DATS/pointer.dats"
-staload _(*anon*) = "prelude/DATS/reference.dats"
+staload
+UN = "prelude/SATS/unsafe.sats"
 
 (* ****** ****** *)
 
@@ -279,6 +281,14 @@ d2cst_is_static (d2c) =
 
 (* ****** ****** *)
 
+implement
+d2cst_is_fundec (d2c) =
+  dcstkind_is_fun (d2cst_get_kind (d2c))
+// end of [d2cst_is_fundec]
+implement
+d2cst_is_valdec (d2c) =
+  dcstkind_is_val (d2cst_get_kind (d2c))
+// end of [d2cst_is_valdec]
 implement
 d2cst_is_castfn (d2c) =
   dcstkind_is_castfn (d2cst_get_kind (d2c))

@@ -10,15 +10,15 @@
 ** All rights reserved
 **
 ** ATS is free software;  you can  redistribute it and/or modify it under
-** the terms of the GNU LESSER GENERAL PUBLIC LICENSE as published by the
-** Free Software Foundation; either version 2.1, or (at your option)  any
+** the terms of  the GNU GENERAL PUBLIC LICENSE (GPL) as published by the
+** Free Software Foundation; either version 3, or (at  your  option)  any
 ** later version.
-**
+** 
 ** ATS is distributed in the hope that it will be useful, but WITHOUT ANY
 ** WARRANTY; without  even  the  implied  warranty  of MERCHANTABILITY or
 ** FITNESS FOR A PARTICULAR PURPOSE.  See the  GNU General Public License
 ** for more details.
-**
+** 
 ** You  should  have  received  a  copy of the GNU General Public License
 ** along  with  ATS;  see the  file COPYING.  If not, please write to the
 ** Free Software Foundation,  51 Franklin Street, Fifth Floor, Boston, MA
@@ -33,12 +33,13 @@
 
 (* ****** ****** *)
 
-typedef SHR(a:type) = a // for commenting purpose
-typedef NSH(a:type) = a // for commenting purpose
+#define ATS_PACKNAME "ATSLIB.libats.sllist"
+#define ATS_STALOADFLAG 0 // no static loading at run-time
 
 (* ****** ****** *)
 
-sortdef t0p = t@ype and vt0p = viewt@ype
+typedef SHR(a:type) = a // for commenting purpose
+typedef NSH(a:type) = a // for commenting purpose
 
 (* ****** ****** *)
 
@@ -97,6 +98,18 @@ fun{a:vt0p}
 sllist_uncons {n:int | n > 0}
   (xs: &sllist (INV(a), n) >> sllist (a, n-1)):<!wrt> (a)
 // end of [sllist_uncons]
+
+(* ****** ****** *)
+
+fun{a:vt0p}
+sllist_snoc {n:int}
+  (xs: sllist (INV(a), n), x: a):<!wrt> sllist (a, n+1)
+// end of [sllist_snoc]
+
+fun{a:vt0p}
+sllist_unsnoc {n:int | n > 0}
+  (xs: &sllist (INV(a), n) >> sllist (a, n-1)):<!wrt> (a)
+// end of [sllist_unsnoc]
 
 (* ****** ****** *)
 
@@ -265,14 +278,26 @@ typedef g2node1 (a:vt0p) = gnode1 (mytkind, a)
 (* ****** ****** *)
 
 fun{a:vt0p}
-sllist_cons_ngc {n:int}
-  (nx: g2node1 (a), xs: sllist (INV(a), n)):<!wrt> sllist (a, n+1)
+sllist_cons_ngc{n:int}
+  (nx: g2node1(a), xs: sllist(INV(a), n)):<!wrt> sllist (a, n+1)
 // end of [sllist_cons_ngc]
 
 fun{a:vt0p}
-sllist_uncons_ngc {n:int | n > 0}
+sllist_uncons_ngc{n:pos}
   (xs: &sllist (INV(a), n) >> sllist (a, n-1)):<!wrt> g2node1 (a)
 // end of [sllist_uncons_ngc]
+
+(* ****** ****** *)
+
+fun{a:vt0p}
+sllist_snoc_ngc{n:int}
+  (xs: sllist(INV(a), n), nx: g2node1(a)):<!wrt> sllist (a, n+1)
+// end of [sllist_snoc_ngc]
+
+fun{a:vt0p}
+sllist_unsnoc_ngc{n:pos}
+  (xs: &sllist (INV(a), n) >> sllist (a, n-1)):<!wrt> g2node1 (a)
+// end of [sllist_unsnoc_ngc]
 
 (* ****** ****** *)
 

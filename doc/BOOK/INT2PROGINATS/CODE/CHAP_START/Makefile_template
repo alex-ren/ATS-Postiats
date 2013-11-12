@@ -5,13 +5,22 @@
 ##
 
 ######
+#
+# Note that
+# certain installations require the following changes:
+#
+# atscc -> patscc
+# atsopt -> patsopt
+# ATSHOME -> PATSHOME
+#
+######
 
 ATSHOMEQ="$(ATSHOME)"
 
 ######
 
-ATSCC=$(ATSUSRQ)/bin/atscc
-ATSOPT=$(ATSUSRQ)/bin/atsopt
+ATSCC=$(ATSHOMEQ)/bin/atscc
+ATSOPT=$(ATSHOMEQ)/bin/atsopt
 
 ######
 
@@ -24,10 +33,11 @@ ATSCCFLAGS=
 # '-flto' enables link-time optimization such as inlining lib functions
 #
 #ATSCCFLAGS=-O2 -flto
+#
 
 ######
 
-distclean::
+cleanall::
 
 ######
 
@@ -38,7 +48,7 @@ distclean::
 
 # foo: foo.dats ; \
 #   $(ATSCC) $(ATSCCFLAGS) -o $@ $< || echo $@ ": ERROR!!!"
-# distclean:: ; $(RMF) foo
+# cleanall:: ; $(RMF) foo
 
 ######
 
@@ -59,6 +69,6 @@ clean:: ; $(RMF) *~
 clean:: ; $(RMF) *_?ats.o
 clean:: ; $(RMF) *_?ats.c
 
-distclean:: clean
+cleanall:: clean
 
 ###### end of [Makefile] ######

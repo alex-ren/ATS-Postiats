@@ -1,29 +1,29 @@
-/***********************************************************************/
+/* ******************************************************************* */
 /*                                                                     */
 /*                         Applied Type System                         */
 /*                                                                     */
-/***********************************************************************/
+/* ******************************************************************* */
 
-/* (*
+/*
 ** ATS/Postiats - Unleashing the Potential of Types!
-** Copyright (C) 2011-2012 Hongwei Xi, ATS Trustful Software, Inc.
+** Copyright (C) 2011-20?? Hongwei Xi, ATS Trustful Software, Inc.
 ** All rights reserved
 **
 ** ATS is free software;  you can  redistribute it and/or modify it under
-** the terms of the GNU LESSER GENERAL PUBLIC LICENSE as published by the
-** Free Software Foundation; either version 2.1, or (at your option)  any
+** the terms of  the GNU GENERAL PUBLIC LICENSE (GPL) as published by the
+** Free Software Foundation; either version 3, or (at  your  option)  any
 ** later version.
-**
+** 
 ** ATS is distributed in the hope that it will be useful, but WITHOUT ANY
 ** WARRANTY; without  even  the  implied  warranty  of MERCHANTABILITY or
 ** FITNESS FOR A PARTICULAR PURPOSE.  See the  GNU General Public License
 ** for more details.
-**
+** 
 ** You  should  have  received  a  copy of the GNU General Public License
 ** along  with  ATS;  see the  file COPYING.  If not, please write to the
 ** Free Software Foundation,  51 Franklin Street, Fifth Floor, Boston, MA
 ** 02110-1301, USA.
-*) */
+*/
 
 /* ****** ****** */
 
@@ -53,6 +53,13 @@
 #define ATStyclo() struct{ void *cfun; }
 
 /* ****** ****** */
+//
+// HX: for supporting lazy-evaluation
+//
+#define ATStylazy(tyval) \
+  struct{ int flag; union{ void* thunk; tyval saved; } lazy; }
+//
+/* ****** ****** */
 
 #define ATSempty()
 
@@ -76,6 +83,11 @@
 #define ATScaseofend() } while (0) ;
 #define ATSbranchbeg()
 #define ATSbranchend() break
+
+/* ****** ****** */
+
+#define ATStailcalbeg() do {
+#define ATStailcalend() } while (0) ;
 
 /* ****** ****** */
 
@@ -140,13 +152,13 @@
 #define ATSfunclo_clo(pmv, targs, tres) ((tres(*)targs)(((ATStyclo()*)pmv)->cfun))
 
 /* ****** ****** */
-
+//
 #define ATStmpdec(tmp, hit) hit tmp
 #define ATStmpdec_void(tmp, hit)
-
+//
 #define ATSstatmpdec(tmp, hit) static hit tmp
 #define ATSstatmpdec_void(tmp, hit)
-
+//
 /* ****** ****** */
 
 #define ATSderef(pmv, hit) (*(hit*)pmv)
@@ -204,6 +216,7 @@
 //
 /* ****** ****** */
 
+#define ATSINSfreeclo(cloptr) ATS_MFREE(cloptr)
 #define ATSINSfreecon(datconptr) ATS_MFREE(datconptr)
 
 /* ****** ****** */
@@ -236,6 +249,11 @@
 #define ATSINSmove_exn1(tmp, tyexn) (tmp = ATS_MALLOC(sizeof(tyexn)))
 #define ATSINSstore_exntag(tmp, d2c) (((ATStyexn()*)tmp)->exntag = (&(d2c))->exntag)
 #define ATSINSstore_exnmsg(tmp, d2c) (((ATStyexn()*)tmp)->exnmsg = (&(d2c))->exnmsg)
+
+/* ****** ****** */
+
+#define ATSINSmove_tlcal(argx, tmp) (argx = tmp)
+#define ATSINSargmove_tlcal(arg, argx) (arg = argx)
 
 /* ****** ****** */
 
@@ -275,9 +293,56 @@
 #define ATSINSraise_exn(tmp, pmv) atsruntime_raise(pmv)
 
 #define ATSINScaseof_fail(msg) atsruntime_handle_unmatchedval(msg)
+
 /*
 #define ATSINSfunarg_fail(msg) ...
 */
+
+/* ****** ****** */
+
+#define \
+ATSINSmove_delay(tmpret, tyval, pmv_thk) \
+do { \
+  tmpret = \
+    ATS_MALLOC(sizeof(ATStylazy(tyval))) ; \
+  (*(ATStylazy(tyval)*)tmpret).flag = 0 ; \
+  (*(ATStylazy(tyval)*)tmpret).lazy.thunk = pmv_thk ; \
+} while (0) ; /* end of [do ... while ...] */
+
+#define \
+ATSINSmove_lazyeval(tmpret, tyval, pmv_lazy) \
+do { \
+  if ( \
+    (*(ATStylazy(tyval)*)pmv_lazy).flag==0 \
+  ) { \
+    (*(ATStylazy(tyval)*)pmv_lazy).flag += 1 ; \
+    atstype_cloptr __thunk = (*(ATStylazy(tyval)*)pmv_lazy).lazy.thunk ; \
+    tmpret = ATSfcall(ATSfunclo_clo(__thunk, (atstype_cloptr), tyval), (__thunk)) ; \
+    (*(ATStylazy(tyval)*)pmv_lazy).lazy.saved = tmpret ; \
+  } else { \
+    tmpret = (*(ATStylazy(tyval)*)pmv_lazy).lazy.saved ; \
+  } /* end of [if] */ \
+} while (0) /* end of [do ... while ...] */
+
+/* ****** ****** */
+
+#define \
+ATSINSmove_ldelay(tmpret, tyval, pmv_thk) ATSINSmove(tmpret, pmv_thk)
+
+#define \
+ATSINSmove_llazyeval(tmpret, tyval, __thunk) \
+do { \
+ tmpret = \
+ ATSfcall(ATSfunclo_clo(__thunk, (atstype_cloptr, atstype_bool), tyval), (__thunk, atsbool_true)) ; \
+ ATS_MFREE(__thunk) ; \
+} while (0) /* end of [do ... while ...] */
+
+#define \
+atspre_lazy_vt_free(__thunk) \
+do { \
+  ATSfcall(ATSfunclo_clo(__thunk, (atstype_cloptr, atstype_bool), void), (__thunk, atsbool_false)) ; \
+  ATS_MFREE(__thunk) ; \
+} while (0) /* atspre_lazy_vt_free */
 
 /* ****** ****** */
 

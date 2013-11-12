@@ -1,7 +1,7 @@
 (* ****** ****** *)
 //
 // HX-2013-04:
-// Effective ATS: Copying files (1)
+// Effective ATS: Copying files (2)
 //
 (* ****** ****** *)
 
@@ -12,7 +12,7 @@
 (* ****** ****** *)
 //
 #include
-"share/atspre_staload_tmpdef.hats"
+"share/atspre_staload.hats"
 //
 (* ****** ****** *)
 

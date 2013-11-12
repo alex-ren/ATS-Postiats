@@ -6,7 +6,7 @@
 
 (*
 ** ATS/Postiats - Unleashing the Potential of Types!
-** Copyright (C) 2011-20?? Hongwei Xi, ATS Trustful Software, Inc.
+** Copyright (C) 2011-2013 Hongwei Xi, ATS Trustful Software, Inc.
 ** All rights reserved
 **
 ** ATS is free software;  you can  redistribute it and/or modify it under
@@ -27,17 +27,15 @@
 
 (* ****** ****** *)
 //
-// Author: Hongwei Xi (gmhwxi AT gmail DOT com)
+// Author: Hongwei Xi
+// Authoremail: gmhwxi AT gmail DOT com
 // Start Time: April, 2013
 //
 (* ****** ****** *)
-
-(*
-staload _(*anon*) = "prelude/DATS/list.dats"
-staload _(*anon*) = "prelude/DATS/list_vt.dats"
-*)
-staload _(*anon*) = "prelude/DATS/reference.dats"
-
+//
+staload
+ATSPRE = "./pats_atspre.dats"
+//
 (* ****** ****** *)
 
 staload
@@ -115,14 +113,9 @@ fun auxtrclo
 , xss: funlablst2_vt
 , res: funlabset_vt
 ) : funlabset_vt = let
-//
 (*
-val () =
-(
-  println! ("auxtrclo: flvl0 = ", flvl0)
-) (* end of [val] *)
+val () = println! ("auxtrclo: flvl0 = ", flvl0)
 *)
-//
 in
 //
 case+ xs of
@@ -174,6 +167,10 @@ in (* in of [local] *)
 implement
 funent_eval_flablst
   (fent) = let
+(*
+val fl = funent_get_lab (fent)
+val () = println! ("funent_eval_flablst: fent.lab = ", fl)
+*)
 //
 val opt = funent_get_flablst_fin (fent)
 //
@@ -228,9 +225,16 @@ aux_funlab_get_d2envlst
   (flab: funlab): d2envlst = let
 //
 val-Some (fent) = funlab_get_funent (flab)
+val d2esopt = funent_get_d2envlst_fin (fent)
 //
 in
-  funent_get_d2envlst (fent)
+//
+case+ d2esopt of
+| Some (d2es) => d2es
+| None ((*void*)) =>
+    funent_get_d2envlst (fent) (* HX-2013-10-09: error? *)
+  // end of [None]
+//
 end // end of [aux_funlab_get_d2envlst]
 
 fun auxd2es
@@ -265,6 +269,7 @@ case+ d2es of
 //
 end // end of [auxd2es]
 
+(* ****** ****** *)
 //
 // HX-2013:-04:
 // [vbmap] is not actually used.
@@ -274,6 +279,9 @@ fun auxtrclo
   fls: funlablst
 , vbmap: vbindmap, res: d2envset_vt
 ) : d2envset_vt = let
+(*
+val () = fprintln! (stdout_ref, "auxtrclo: fls = ", fls)
+*)
 in
 //
 case+ fls of
@@ -282,6 +290,10 @@ case+ fls of
     val d2es =
       aux_funlab_get_d2envlst (fl)
     // end of [val]
+(*
+    val () = fprintln! (stdout_ref, "auxtrclo: fl = ", fl)
+    val () = fprintln! (stdout_ref, "auxtrclo: d2es = ", d2es)
+*)
     val res = auxd2es (d2es, vbmap, res)
   in
     auxtrclo (fls, vbmap, res)
@@ -295,6 +307,10 @@ in (* in of [local] *)
 implement
 funent_eval_d2envlst
   (fent) = let
+(*
+val fl = funent_get_lab (fent)
+val () = println! ("funent_eval_d2envlst: fent.lab = ", fl)
+*)
 //
 val opt = funent_get_d2envlst_fin (fent)
 //

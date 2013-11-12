@@ -34,7 +34,7 @@
 (* ****** ****** *)
 //
 #include
-"share/atspre_staload_tmpdef.hats"
+"share/atspre_staload.hats"
 //
 (* ****** ****** *)
 
@@ -423,7 +423,7 @@ val res = list_vt_reverse (res)
 //
 in
   list_vt2t(res)
-end // end of [atsccproc]
+end // end of [atsccproc_commline]
 
 end (* end of [local] *)
 
@@ -751,7 +751,7 @@ local
 #define CNUL '\0'
 #define SPACE " "
 
-overload + with add_ptr_bsz
+overload + with add_ptr0_bsz of 10
 
 (* ****** ****** *)
 

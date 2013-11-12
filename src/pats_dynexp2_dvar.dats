@@ -6,7 +6,7 @@
 
 (*
 ** ATS/Postiats - Unleashing the Potential of Types!
-** Copyright (C) 2011-20?? Hongwei Xi, ATS Trustful Software, Inc.
+** Copyright (C) 2011-2013 Hongwei Xi, ATS Trustful Software, Inc.
 ** All rights reserved
 **
 ** ATS is free software;  you can  redistribute it and/or modify it under
@@ -27,19 +27,19 @@
 
 (* ****** ****** *)
 //
-// Author: Hongwei Xi (hwxi AT cs DOT bu DOT edu)
+// Author: Hongwei Xi
+// Authoremail: gmhwxi AT gmail DOT com
 // Start Time: May, 2011
 //
 (* ****** ****** *)
-
-staload UN = "prelude/SATS/unsafe.sats"
-
+//
+staload
+ATSPRE = "./pats_atspre.dats"
+//
 (* ****** ****** *)
 
-staload _(*anon*) = "prelude/DATS/list.dats"
-staload _(*anon*) = "prelude/DATS/list_vt.dats"
-staload _(*anon*) = "prelude/DATS/pointer.dats"
-staload _(*anon*) = "prelude/DATS/reference.dats"
+staload
+UN = "prelude/SATS/unsafe.sats"
 
 (* ****** ****** *)
 
@@ -105,7 +105,7 @@ local
 
 assume d2var_type = ref (d2var_struct)
 
-in // in of [local]
+in (* in of [local] *)
 
 implement
 d2var_make (loc, id) = let
@@ -377,65 +377,72 @@ d2var_ptr_viewat_make_none
 (* ****** ****** *)
 
 implement
-fprint_d2var (out, d2v) = let
-  val () = $SYM.fprint_symbol (out, d2var_get_sym d2v)
-// (*
-  val () = fprint_string (out, "$")
-  val () = $STMP.fprint_stamp (out, d2var_get_stamp d2v)
-// *)
-// (*
-  val () = fprint_string (out, "(")
-  val () = fprint_int (out, d2var_get_level d2v)
-  val () = fprint_string (out, ")")
-// *)
-in
-  // nothing
-end // end of [fprint_d2var]
+print_d2var (d2v) = fprint_d2var (stdout_ref, d2v)
+implement
+prerr_d2var (d2v) = fprint_d2var (stderr_ref, d2v)
 
-implement print_d2var (x) = fprint_d2var (stdout_ref, x)
-implement prerr_d2var (x) = fprint_d2var (stderr_ref, x)
+implement
+fprint_d2var
+  (out, d2v) = {
+//
+val () =
+  $SYM.fprint_symbol (out, d2var_get_sym d2v)
+//
+val () = fprint_string (out, "$")
+val () = $STMP.fprint_stamp (out, d2var_get_stamp d2v)
+//
+val () = fprint_string (out, "(")
+val () = fprint_int (out, d2var_get_level d2v)
+val () = fprint_string (out, ")")
+//
+} (* end of [fprint_d2var] *)
 
 implement
 fprint_d2varlst
-  (out, xs) = $UT.fprintlst (out, xs, ", ", fprint_d2var)
+  (out, d2vs) = $UT.fprintlst (out, d2vs, ", ", fprint_d2var)
 // end of [fprint_d2varlst]
 
 (* ****** ****** *)
 
 implement
-fprint_d2vfin
-  (out, d2vfin) = let
-  macdef prstr (s) = fprint_string (out, ,(s))
-in
-  case+ d2vfin of
-  | D2VFINnone () =>
-      prstr "D2VFINnone()"
-  | D2VFINsome (s2e) => {
-      val () = prstr "D2VFINsome("
-      val () = fprint_s2exp (out, s2e)
-      val () = prstr ")"
-    }
-  | D2VFINsome_lvar (s2e) => {
-      val () = prstr "D2VFINsome_lvar("
-      val () = fprint_s2exp (out, s2e)
-      val () = prstr ")"
-    }
-  | D2VFINsome_vbox (s2e) => {
-      val () = prstr "D2VFINsome_vbox("
-      val () = fprint_s2exp (out, s2e)
-      val () = prstr ")"
-    }
-  | D2VFINdone (d2vfin) => {
-      val () = prstr "D2VFINdone("
-      val () = fprint_d2vfin (out, d2vfin)
-      val () = prstr ")"
-    }
-end // end of [fprint_d2vfin]
-
-implement
 print_d2vfin (x) = fprint_d2vfin (stdout_ref, x)
 implement
 prerr_d2vfin (x) = fprint_d2vfin (stderr_ref, x)
+
+implement
+fprint_d2vfin
+  (out, d2vfin) = let
+//
+macdef
+prstr (str) = fprint_string (out, ,(str))
+//
+in
+//
+case+ d2vfin of
+| D2VFINnone () =>
+    prstr "D2VFINnone()"
+| D2VFINsome (s2e) => {
+    val () = prstr "D2VFINsome("
+    val () = fprint_s2exp (out, s2e)
+    val () = prstr ")"
+  }
+| D2VFINsome_lvar (s2e) => {
+    val () = prstr "D2VFINsome_lvar("
+    val () = fprint_s2exp (out, s2e)
+    val () = prstr ")"
+  }
+| D2VFINsome_vbox (s2e) => {
+    val () = prstr "D2VFINsome_vbox("
+    val () = fprint_s2exp (out, s2e)
+    val () = prstr ")"
+  }
+| D2VFINdone (d2vfin) => {
+    val () = prstr "D2VFINdone("
+    val () = fprint_d2vfin (out, d2vfin)
+    val () = prstr ")"
+  } (* end of [D2FINdone] *)
+//
+end // end of [fprint_d2vfin]
 
 (* ****** ****** *)
 
@@ -458,7 +465,7 @@ val cmp = lam (
 assume d2varset_type = $FS.set (d2var)
 assume d2varset_vtype = $LS.set (d2var)
 
-in // in of [local]
+in (* in of [local] *)
 
 implement
 d2varset_nil () = $FS.funset_make_nil ()
@@ -528,7 +535,7 @@ d2varmap_type (a:type) = $FM.map (d2var, a)
 assume
 d2varmap_vtype (a:type) = $LM.map (d2var, a)
 
-in // in of [local]
+in (* in of [local] *)
 
 implement
 d2varmap_nil () = $FM.funmap_make_nil ()

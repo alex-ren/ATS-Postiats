@@ -5,17 +5,16 @@
 (* ****** ****** *)
 //
 #include
-"share/atspre_staload_tmpdef.hats"
+"share/atspre_staload.hats"
 //
 (* ****** ****** *)
 
-staload UN = "prelude/SATS/unsafe.sats"
+staload
+UN = "prelude/SATS/unsafe.sats"
 
 (* ****** ****** *)
 
-staload
-TYPES = "libc/sys/SATS/types.sats"
-overload = with $TYPES.eq_time_time
+staload "libc/sys/SATS/types.sats"
 
 (* ****** ****** *)
 

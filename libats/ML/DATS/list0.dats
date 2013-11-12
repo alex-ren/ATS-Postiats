@@ -33,14 +33,26 @@
 
 (* ****** ****** *)
 
-staload
-UN = "prelude/SATS/unsafe.sats"
+#define ATS_DYNLOADFLAG 0
+  
+(* ****** ****** *)
+  
+staload UN = "prelude/SATS/unsafe.sats"
 
 (* ****** ****** *)
 
 staload "libats/ML/SATS/basis.sats"
 staload "libats/ML/SATS/list0.sats"
 
+(* ****** ****** *)
+//
+implement{a}
+list0_make_sing (x) =
+  list0_cons{a}(x, list0_nil)
+implement{a}
+list0_make_pair (x1, x2) =
+  list0_cons{a}(x1, list0_cons{a}(x2, list0_nil))
+//
 (* ****** ****** *)
 
 implement{a}
@@ -216,7 +228,8 @@ in
 case+ xs of
 | list0_cons
     (x, _) => Some_vt{a}(x)
-| list0_nil _ => None_vt(*void*)
+  // end of [list0_cons]
+| list0_nil ((*void*)) => None_vt()
 //
 end // end of [list0_head_opt]
 
@@ -241,9 +254,41 @@ case+ xs of
     (_, xs) =>
     Some_vt{list0(a)}(xs)
   // end of [list_cons]
-| list0_nil _ => None_vt(*void*)
+| list0_nil ((*void*)) => None_vt()
 //
 end // end of [list0_tail_opt]
+
+(* ****** ****** *)
+
+implement{a}
+list0_last_exn
+  (xs) = let
+//
+val xs = g1ofg0_list(xs)
+//
+in
+//
+case+ xs of
+| list_cons _ => list_last (xs)
+| list_nil () => $raise ListSubscriptExn()
+//
+end // end of [list0_last_exn]
+
+implement{a}
+list0_last_opt
+  (xs) = let
+//
+val xs = g1ofg0_list(xs)
+//
+in
+//
+case+ xs of
+| list_cons _ =>
+    Some_vt{a}(list_last(xs))
+  // end of [list_cons]
+| list_nil ((*void*)) => None_vt()
+//
+end // end of [list0_last_opt]
 
 (* ****** ****** *)
 
@@ -260,7 +305,7 @@ case+ xs of
 | list0_cons
     (x, xs) =>
   (
-    if i > 0 then loop (xs, i-1) else x
+    if i > 0 then loop<a> (xs, i-1) else x
   ) // end of [list0_cons]
 | list0_nil () => $raise ListSubscriptExn()
 //
@@ -290,7 +335,7 @@ in
 //
 if i >= 0 then (
   $effmask_exn (
-    try Some_vt (loop<a> (xs, i)) with ~ListSubscriptExn() => None_vt()
+    try Some_vt{a}(loop<a> (xs, i)) with ~ListSubscriptExn() => None_vt()
   ) // end of [$effmask_exn]
 ) else None_vt () // end of [if]
 //
@@ -703,11 +748,11 @@ list0_find_opt (xs, p) = let
 in
 //
 case+ xs of
-| list0_cons (x, xs) =>
-  (
-    if p (x) then Some_vt (x) else list0_find_opt (xs, p)
-  )
-| list0_nil () => None_vt ()
+| list0_cons (x, xs) => (
+    if p (x) then Some_vt{a}(x) else list0_find_opt (xs, p)
+  ) (* end of [list_cons] *)
+| list0_nil () => None_vt{a}((*void*))
+//
 end // end of [list0_find_opt]
 
 (* ****** ****** *)

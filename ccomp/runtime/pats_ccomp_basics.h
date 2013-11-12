@@ -1,29 +1,29 @@
-/***********************************************************************/
+/* ******************************************************************* */
 /*                                                                     */
 /*                         Applied Type System                         */
 /*                                                                     */
-/***********************************************************************/
+/* ******************************************************************* */
 
-/* (*
+/*
 ** ATS/Postiats - Unleashing the Potential of Types!
-** Copyright (C) 2011-2012 Hongwei Xi, ATS Trustful Software, Inc.
+** Copyright (C) 2011-20?? Hongwei Xi, ATS Trustful Software, Inc.
 ** All rights reserved
 **
 ** ATS is free software;  you can  redistribute it and/or modify it under
-** the terms of the GNU LESSER GENERAL PUBLIC LICENSE as published by the
-** Free Software Foundation; either version 2.1, or (at your option)  any
+** the terms of  the GNU GENERAL PUBLIC LICENSE (GPL) as published by the
+** Free Software Foundation; either version 3, or (at  your  option)  any
 ** later version.
-**
+** 
 ** ATS is distributed in the hope that it will be useful, but WITHOUT ANY
 ** WARRANTY; without  even  the  implied  warranty  of MERCHANTABILITY or
 ** FITNESS FOR A PARTICULAR PURPOSE.  See the  GNU General Public License
 ** for more details.
-**
+** 
 ** You  should  have  received  a  copy of the GNU General Public License
 ** along  with  ATS;  see the  file COPYING.  If not, please write to the
 ** Free Software Foundation,  51 Franklin Street, Fifth Floor, Boston, MA
 ** 02110-1301, USA.
-*) */
+*/
 
 /* ****** ****** */
 
@@ -67,16 +67,17 @@
 
 /* ****** ****** */
 
-#define ATSdynexn_dec(d2c) atstype_exncon d2c = { 0, "not-yet-named" }
+#ifndef _ATS_EXCEPTION_NONE
+//
+#define ATSdynexn_dec(d2c) atstype_exncon d2c = { 0, "ats-exncon-name" }
 #define ATSdynexn_initize(d2c, exnmsg) the_atsexncon_initize(&(d2c), exnmsg)
+#define ATSdynexn_extdec(d2c) ATSglobaldec() atstype_exncon d2c
+//
+#endif // end of [_ATS_EXCEPTION_NONE]
 
 /* ****** ****** */
 
 #define ATSassume(flag) void *flag = (void*)0
-
-/* ****** ****** */
-
-#define ATSdynexn_extdec(d2c) ATSglobaldec() atstype_exncon d2c
 
 /* ****** ****** */
 

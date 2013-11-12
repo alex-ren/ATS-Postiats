@@ -6,7 +6,7 @@
 
 (*
 ** ATS/Postiats - Unleashing the Potential of Types!
-** Copyright (C) 2011-20?? Hongwei Xi, ATS Trustful Software, Inc.
+** Copyright (C) 2011-2013 Hongwei Xi, ATS Trustful Software, Inc.
 ** All rights reserved
 **
 ** ATS is free software;  you can  redistribute it and/or modify it under
@@ -27,7 +27,8 @@
 
 (* ****** ****** *)
 //
-// Author: Hongwei Xi (hwxi AT cs DOT bu DOT edu)
+// Author: Hongwei Xi
+// Authoremail: gmhwxi AT gmail DOT com
 // Start Time: April, 2011
 //
 (* ****** ****** *)
@@ -109,9 +110,14 @@ fun symenv_pervasive_insert
   {itm:type} (env: &symenv itm, k: symbol, i: itm):<> void
 // end of [symenv_pervasive_insert]
 
-fun symenv_pervasive_joinwth
-  {itm:type} (env: &symenv itm, map: symmap itm):<> void
-// end of [symenv_pervasive_join]
+(* ****** ****** *)
+
+fun symenv_pervasive_joinwth0
+  {itm:type} (env: &symenv itm, map:  symmap itm):<> void
+// end of [symenv_pervasive_joinwth0]
+fun symenv_pervasive_joinwth1
+  {itm:type} (env: &symenv itm, map: !symmap itm):<> void
+// end of [symenv_pervasive_joinwth1]
 
 (* ****** ****** *)
 

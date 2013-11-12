@@ -8,7 +8,7 @@ val () = theAtextMap_insert_str ("thisfilename", _thisfilename)
 %}\
 \
 #atscode_banner_for_C()
-#atscode_copyright_LGPL_for_C()
+#atscode_copyright_GPL_for_C()
 
 #atscode_separator_for_C()
 
@@ -39,6 +39,10 @@ val () = theAtextMap_insert_str ("thisfilename", _thisfilename)
 
 typedef time_t atslib_time_type ;
 typedef struct tm atslib_tm_struct_type ;
+
+#atscode_separator_for_C()
+
+typedef clock_t atslib_clock_type ;
 
 #atscode_separator_for_C()
 

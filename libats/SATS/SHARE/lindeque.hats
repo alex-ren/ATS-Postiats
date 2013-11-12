@@ -10,15 +10,15 @@
 ** All rights reserved
 **
 ** ATS is free software;  you can  redistribute it and/or modify it under
-** the terms of the GNU LESSER GENERAL PUBLIC LICENSE as published by the
-** Free Software Foundation; either version 2.1, or (at your option)  any
+** the terms of  the GNU GENERAL PUBLIC LICENSE (GPL) as published by the
+** Free Software Foundation; either version 3, or (at  your  option)  any
 ** later version.
-**
+** 
 ** ATS is distributed in the hope that it will be useful, but WITHOUT ANY
 ** WARRANTY; without  even  the  implied  warranty  of MERCHANTABILITY or
 ** FITNESS FOR A PARTICULAR PURPOSE.  See the  GNU General Public License
 ** for more details.
-**
+** 
 ** You  should  have  received  a  copy of the GNU General Public License
 ** along  with  ATS;  see the  file COPYING.  If not, please write to the
 ** Free Software Foundation,  51 Franklin Street, Fifth Floor, Boston, MA
@@ -28,7 +28,11 @@
 (* ****** ****** *)
 
 absvtype
-deque_vtype (a:viewt@ype+, n:int) = ptr
+deque_vtype (a:vt@ype+, n:int) = ptr
+
+(* ****** ****** *)
+
+stadef deque = deque_vtype
 vtypedef deque (a:vt0p, n:int) = deque_vtype (a, n)
 vtypedef Deque (a:vt0p) = [n:int] deque (a, n)
 
@@ -78,7 +82,8 @@ lindeque_insert_atend{n:int}
 (* ****** ****** *)
 //
 fun{a:vt0p}
-lindeque_takeout_at{n:int}{i:nat | i < n}
+lindeque_takeout_at
+  {n:int}{i:nat | i < n}
 (
   dq: &deque (INV(a), n) >> deque (a, n-1), i: int i
 ) : a // end of [lindeque_takeout_at]

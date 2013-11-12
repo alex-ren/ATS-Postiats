@@ -1,0 +1,89 @@
+(* ****** ****** *)
+
+%{
+implement srcfilename_get () = "../stream.sats"
+%}
+
+(* ****** ****** *)
+
+%{
+val () = patscode_count_reset()
+val () = patscode_prefix_set("TRYIT/prelude_stream")
+%}
+
+(* ****** ****** *)
+
+#decltitle("\
+ATSLIB/prelude/stream\
+")
+
+(* ****** ****** *)
+
+#declpreamble('\
+
+')#comment("declpreamble")
+
+(* ****** ****** *)
+
+#declname("stream")
+#declsynop2('\
+#pats2xhtmls('\
+typedef
+stream (a:t0p) = lazy (stream_con(a))
+')
+')
+
+#declnamesynop("stream_con")
+
+(* ****** ****** *)
+
+#declnamesynop("stream2list")
+
+(* ****** ****** *)
+
+#declnamesynop("stream_take_exn")
+#declnamesynop("stream_drop_exn")
+
+(* ****** ****** *)
+
+#declnamesynop("stream_nth_exn")
+#declnamesynop("stream_nth_opt")
+
+(* ****** ****** *)
+
+#declnamesynop("stream_foreach$cont")
+#declnamesynop("stream_foreach$fwork")
+#declnamesynop("stream_foreach")
+#declnamesynop("stream_foreach_env")
+
+(* ****** ****** *)
+
+#declnamesynop("stream_filter$pred")
+#declnamesynop("stream_filter")
+#declnamesynop("stream_filter_fun")
+#declnamesynop("stream_filter_cloref")
+
+(* ****** ****** *)
+
+#declnamesynop("stream_map$fwork")
+#declnamesynop("stream_map")
+#declnamesynop("stream_map_fun")
+#declnamesynop("stream_map_cloref")
+
+(* ****** ****** *)
+
+#declnamesynop("stream_map2$fwork")
+#declnamesynop("stream_map2")
+#declnamesynop("stream_map2_fun")
+#declnamesynop("stream_map2_cloref")
+
+(* ****** ****** *)
+
+#declnamesynop("stream_merge$cmp")
+#declnamesynop("stream_merge")
+#declnamesynop("stream_merge_fun")
+#declnamesynop("stream_merge_cloref")
+
+(* ****** ****** *)
+
+(* end of [stream.atxt] *)

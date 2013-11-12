@@ -8,7 +8,7 @@ val () = theAtextMap_insert_str ("thisfilename", _thisfilename)
 %}\
 \
 #atscode_banner_for_C()
-#atscode_copyright_LGPL_for_C()
+#atscode_copyright_GPL_for_C()
 
 #atscode_separator_for_C()
 
@@ -33,18 +33,42 @@ val () = theAtextMap_insert_str ("thisfilename", _thisfilename)
 
 #atscode_separator_for_C()
 //
-// [string.h]
+// [stdlib.h]
 //
 extern
-void *memcpy(void *dst, const void *src, size_t n) ;
+void qsort
+(
+  void *base, size_t nmemb, size_t size
+, int(*compar)(const void *, const void *)
+) ; // end of [qsort]
 extern
-void *memmove(void *dst, const void *src, size_t n) ;
+void *bsearch
+(
+  const void *key
+, const void *base
+, size_t nmemb, size_t size
+, int (*compar)(const void *, const void *)
+) ; // end of [bsearch]
+//
+\#define atspre_array_qsort qsort
+\#define atspre_array_bsearch bsearch
 //
 #atscode_separator_for_C()
-
+//
+// [string.h]
+//
+\#ifndef memcpy
+extern
+void *memcpy(void *dst, const void *src, size_t n) ;
+\#endif // \#ifndef
+\#ifndef memmove
+extern
+void *memmove(void *dst, const void *src, size_t n) ;
+\#endif // \#ifndef
+//
 \#define atspre_array_memcpy memcpy
 \#define atspre_array_memmove memmove
-
+//
 #atscode_separator_for_C()
 
 \#endif // ifndef ATSLIB_PRELUDE_ARRAY_CATS

@@ -8,7 +8,7 @@ val () = theAtextMap_insert_str ("thisfilename", _thisfilename)
 %}\
 \
 #atscode_banner_for_C()
-#atscode_copyright_LGPL_for_C()
+#atscode_copyright_GPL_for_C()
 
 #atscode_separator_for_C()
 
@@ -92,6 +92,12 @@ atspre_fprint_strptr
 } // end of [atspre_fprint_strptr]
 \#define atspre_print_strptr(x) atspre_fprint_strptr(stdout, (x))
 \#define atspre_prerr_strptr(x) atspre_fprint_strptr(stderr, (x))
+
+#atscode_separator_for_C()
+
+\#define atspre_fprint_strbuf atspre_fprint_strptr
+\#define atspre_print_strbuf(x) atspre_fprint_strbuf(stdout, (x))
+\#define atspre_prerr_strbuf(x) atspre_fprint_strbuf(stderr, (x))
 
 #atscode_separator_for_C()
 

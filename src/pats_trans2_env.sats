@@ -6,7 +6,7 @@
 
 (*
 ** ATS/Postiats - Unleashing the Potential of Types!
-** Copyright (C) 2011-20?? Hongwei Xi, ATS Trustful Software, Inc.
+** Copyright (C) 2011-2013 Hongwei Xi, ATS Trustful Software, Inc.
 ** All rights reserved
 **
 ** ATS is free software;  you can  redistribute it and/or modify it under
@@ -27,15 +27,26 @@
 
 (* ****** ****** *)
 //
-// Author: Hongwei Xi (hwxi AT cs DOT bu DOT edu)
+// Author: Hongwei Xi
+// Authoremail: gmhwxi AT gmail DOT com
 // Start Time: May, 2011
 //
 (* ****** ****** *)
 
+staload "./pats_basics.sats"
+
+(* ****** ****** *)
+
 staload SYM = "./pats_symbol.sats"
 typedef symbol = $SYM.symbol
+
+(* ****** ****** *)
+
 staload SYMMAP = "./pats_symmap.sats"
-stadef symmap = $SYMMAP.symmap
+vtypedef symmap(itm:type) = $SYMMAP.symmap(itm)
+
+(* ****** ****** *)
+
 staload SYN = "./pats_syntax.sats"
 
 (* ****** ****** *)
@@ -56,7 +67,9 @@ viewtypedef s2temap = symmap (s2rtext)
 viewtypedef s2itmmap = symmap (s2itm)
 viewtypedef d2itmmap = symmap (d2itm)
 
-fun filenv_make (
+fun
+filenv_make
+(
   fil: filename
 , m0: s2temap, m1: s2itmmap, m2: d2itmmap, d2cs: d2eclist
 ) : filenv // end of [filenv_make]
@@ -105,10 +118,12 @@ fun the_s2rtenv_pop_free (pf: s2rtenv_push_v | (*none*)): void
 fun the_s2rtenv_push_nil (): (s2rtenv_push_v | void)
 
 fun the_s2rtenv_localjoin
-  (pf1: s2rtenv_push_v, pf2: s2rtenv_push_v | (*none*)): void
-// end of [the_s2rtenv_localjoin]
+(
+  pf1: s2rtenv_push_v, pf2: s2rtenv_push_v | (*none*)
+) : void // end of [the_s2rtenv_localjoin]
 
-fun the_s2rtenv_pervasive_joinwth (map: s2temap): void
+fun the_s2rtenv_pervasive_joinwth0 (map: s2temap): void
+fun the_s2rtenv_pervasive_joinwth1 (map: !s2temap): void
 
 (* ****** ****** *)
 
@@ -133,10 +148,12 @@ fun the_s2expenv_pop_free (pf: s2expenv_push_v | (*none*)): void
 fun the_s2expenv_push_nil (): (s2expenv_push_v | void)
 
 fun the_s2expenv_localjoin
-  (pf1: s2expenv_push_v, pf2: s2expenv_push_v | (*none*)): void
-// end of [the_s2expenv_localjoin]
+(
+  pf1: s2expenv_push_v, pf2: s2expenv_push_v | (*none*)
+) : void // end of [the_s2expenv_localjoin]
 
-fun the_s2expenv_pervasive_joinwth (map: s2itmmap): void
+fun the_s2expenv_pervasive_joinwth0 (map: s2itmmap): void
+fun the_s2expenv_pervasive_joinwth1 (map: !s2itmmap): void
 
 (* ****** ****** *)
 
@@ -171,10 +188,9 @@ fun the_d2varlev_save (): int
 fun the_d2varlev_restore (lev0: int): void
 //
 (* ****** ****** *)
-
-fun the_d2expenv_add
-  (id: symbol, d2i: d2itm): void
-// end of [the_d2expenv_add]
+//
+fun the_d2expenv_add (id: symbol, d2i: d2itm): void
+//
 fun the_d2expenv_add_dcon (d2c: d2con): void
 fun the_d2expenv_add_dcst (d2c: d2cst): void
 fun the_d2expenv_add_dmacdef (d2m: d2mac): void
@@ -182,6 +198,11 @@ fun the_d2expenv_add_dmacvar (d2v: d2var): void
 fun the_d2expenv_add_dmacvarlst (d2vs: d2varlst): void
 fun the_d2expenv_add_dvar (d2v: d2var): void
 fun the_d2expenv_add_dvarlst (d2vs: d2varlst): void
+fun the_d2expenv_add_dvaropt (d2vopt: d2varopt): void
+//
+fun the_d2expenv_add_fundeclst (knd: funkind, f2ds: f2undeclst): void
+//
+(* ****** ****** *)
 
 fun the_d2expenv_find (id: symbol): d2itmopt_vt
 fun the_d2expenv_find_qua (q: $SYN.d0ynq, id: symbol): d2itmopt_vt
@@ -189,16 +210,23 @@ fun the_d2expenv_find_qua (q: $SYN.d0ynq, id: symbol): d2itmopt_vt
 fun the_d2expenv_current_find (id: symbol): Option_vt (d2itm)
 fun the_d2expenv_pervasive_find (id: symbol): Option_vt (d2itm)
 
+(* ****** ****** *)
+//
 absview d2expenv_push_v
+//
 fun the_d2expenv_pop (pf: d2expenv_push_v | (*none*)): d2itmmap
 fun the_d2expenv_pop_free (pf: d2expenv_push_v | (*none*)): void
 fun the_d2expenv_push_nil (): (d2expenv_push_v | void)
+//
+(* ****** ****** *)
 
 fun the_d2expenv_localjoin
-  (pf1: d2expenv_push_v, pf2: d2expenv_push_v | (*none*)): void
-// end of [the_d2expenv_localjoin]
+(
+  pf1: d2expenv_push_v, pf2: d2expenv_push_v | (*none*)
+) : void // end of [the_d2expenv_localjoin]
 
-fun the_d2expenv_pervasive_joinwth (map: d2itmmap): void
+fun the_d2expenv_pervasive_joinwth0 (map: d2itmmap): void
+fun the_d2expenv_pervasive_joinwth1 (map: !d2itmmap): void
 
 (* ****** ****** *)
 
@@ -215,15 +243,21 @@ fun the_filenvmap_find (fid: symbol): Option_vt (filenv)
 (* ****** ****** *)
 
 absview trans2_env_push_v
-fun the_trans2_env_pop (pf: trans2_env_push_v | (*none*)): void
+
+fun the_trans2_env_pop
+  (pf: trans2_env_push_v | (*none*)): void
 fun the_trans2_env_push (): (trans2_env_push_v | void)
 
-fun the_trans2_env_localjoin
-  (pf1: trans2_env_push_v, pf2: trans2_env_push_v | (*none*)): void
-// end of [trans2_env_localjoin]
+fun the_trans2_env_localjoin (
+  pf1: trans2_env_push_v, pf2: trans2_env_push_v | (*none*)
+) : void // end of [trans2_env_localjoin]
+
+(* ****** ****** *)
 
 absview trans2_env_save_v
-fun the_trans2_env_save ((*none*)): (trans2_env_save_v | void)
+
+fun the_trans2_env_save
+  ((*none*)): (trans2_env_save_v | void)
 fun the_trans2_env_restore
   (pf: trans2_env_save_v | (*none*)) : (s2temap, s2itmmap, d2itmmap)
 // end of [the_trans2_env_restore]
@@ -231,7 +265,7 @@ fun the_trans2_env_restore
 (* ****** ****** *)
 
 fun the_trans2_env_pervasive_joinwth
-  (pf: trans2_env_push_v | (*none*)): void
+  (pf: trans2_env_push_v | fil: filename, d2cs: d2eclist): void
 // end of [the_trans2_env_pervasive_joinwth]
 
 (* ****** ****** *)

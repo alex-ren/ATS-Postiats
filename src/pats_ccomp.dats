@@ -6,7 +6,7 @@
 
 (*
 ** ATS/Postiats - Unleashing the Potential of Types!
-** Copyright (C) 2011-20?? Hongwei Xi, ATS Trustful Software, Inc.
+** Copyright (C) 2011-2013 Hongwei Xi, ATS Trustful Software, Inc.
 ** All rights reserved
 **
 ** ATS is free software;  you can  redistribute it and/or modify it under
@@ -27,7 +27,8 @@
 
 (* ****** ****** *)
 //
-// Author: Hongwei Xi (gmhwxi AT gmail DOT com)
+// Author: Hongwei Xi
+// Authoremail: gmhwxi AT gmail DOT com
 // Start Time: October, 2012
 //
 (* ****** ****** *)
@@ -365,8 +366,8 @@ primval_ptrofsel (
 
 implement
 primval_refarg
-  (loc, hse, knd, pmv) =
-  primval_make_node (loc, hse, PMVrefarg (knd, pmv))
+  (loc, hse, knd, freeknd, pmv) =
+  primval_make_node (loc, hse, PMVrefarg (knd, freeknd, pmv))
 // end of [primval_refarg]
 
 (* ****** ****** *)
@@ -411,21 +412,19 @@ primval_tmpltcst
   (loc, hse, d2c, t2mas) =
   primval_make_node (loc, hse, PMVtmpltcst (d2c, t2mas))
 // end of [primval_tmpltcst]
-
-implement
-primval_tmpltcstmat
-  (loc, hse, d2c, t2mas, mat) =
-  primval_make_node (loc, hse, PMVtmpltcstmat (d2c, t2mas, mat))
-// end of [primval_tmpltcstmat]
-
-(* ****** ****** *)
-
 implement
 primval_tmpltvar
   (loc, hse, d2v, t2mas) =
   primval_make_node (loc, hse, PMVtmpltvar (d2v, t2mas))
 // end of [primval_tmpltvar]
 
+(* ****** ****** *)
+
+implement
+primval_tmpltcstmat
+  (loc, hse, d2c, t2mas, mat) =
+  primval_make_node (loc, hse, PMVtmpltcstmat (d2c, t2mas, mat))
+// end of [primval_tmpltcstmat]
 implement
 primval_tmpltvarmat
   (loc, hse, d2v, t2mas, mat) =
@@ -456,6 +455,12 @@ primval_make_tmp
   (loc, tmp) = let
   val hse = tmpvar_get_type (tmp) in primval_tmp (loc, hse, tmp)
 end // end of [primval_make_tmp]
+
+implement
+primval_make_tmpref
+  (loc, tmp) = let
+  val hse = tmpvar_get_type (tmp) in primval_tmpref (loc, hse, tmp)
+end // end of [primval_make_tmpref]
   
 (* ****** ****** *)
 
@@ -565,6 +570,14 @@ instr_fcall
 ) = instr_make_node
   (loc, INSfcall (tmpret, hde_fun, hse_fun, hdes_arg))
 // end of [instr_fcall]
+
+implement
+instr_fcall2
+(
+  loc, tmpret, flab, ntl ,hse_fun, hdes_arg
+) = instr_make_node
+  (loc, INSfcall2 (tmpret, flab, ntl, hse_fun, hdes_arg))
+// end of [instr_fcall2]
 
 implement
 instr_extfcall
@@ -725,9 +738,15 @@ end // end of [instr_select2]
 
 implement
 instr_move_ptrofsel
-  (loc, tmp, pmv, hse_rt, hils) =
-  instr_make_node (loc, INSmove_ptrofsel (tmp, pmv, hse_rt, hils))
-// end of [instr_move_ptrofsel]
+(
+  loc, tmp, pmv, hse_rt, hils
+) = let
+//
+val ins = INSmove_ptrofsel (tmp, pmv, hse_rt, hils)
+//
+in
+  instr_make_node (loc, ins)
+end // end of [instr_move_ptrofsel]
 
 (* ****** ****** *)
 
@@ -743,15 +762,27 @@ instr_load_ptrofs
 
 implement
 instr_store_ptrofs
-  (loc, pmv_l, hse_rt, ofs, pmv_r) =
-  instr_make_node (loc, INSstore_ptrofs (pmv_l, hse_rt, ofs, pmv_r))
-// end of [instr_store_ptrofs]
+(
+  loc, pmv_l, hse_rt, ofs, pmv_r
+) = let
+//
+val ins = INSstore_ptrofs (pmv_l, hse_rt, ofs, pmv_r)
+//
+in
+  instr_make_node (loc, ins)
+end // end of [instr_store_ptrofs]
 
 implement
 instr_xstore_ptrofs
-  (loc, tmp, pmv_l, hse_rt, ofs, pmv_r) =
-  instr_make_node (loc, INSxstore_ptrofs (tmp, pmv_l, hse_rt, ofs, pmv_r))
-// end of [instr_xstore_ptrofs]
+(
+  loc, tmp, pmv_l, hse_rt, ofs, pmv_r
+) = let
+//
+val ins = INSxstore_ptrofs (tmp, pmv_l, hse_rt, ofs, pmv_r)
+//
+in
+  instr_make_node (loc, ins)
+end // end of [instr_xstore_ptrofs]
 
 (* ****** ****** *)
 
@@ -760,6 +791,22 @@ instr_raise
   (loc, tmp, pmv_exn) =
   instr_make_node (loc, INSraise (tmp, pmv_exn))
 // end of [instr_raise]
+
+(* ****** ****** *)
+
+implement
+instr_move_delay
+  (loc, tmp, lin, hse, thunk) = let
+in
+  instr_make_node (loc, INSmove_delay (tmp, lin, hse, thunk))
+end // end of [instr_move_delay]
+
+implement
+instr_move_lazyeval
+  (loc, tmp, lin, hse, pmv_lazy) = let
+in
+  instr_make_node (loc, INSmove_lazyeval (tmp, lin, hse, pmv_lazy))
+end // end of [instr_move_lazyeval]
 
 (* ****** ****** *)
 
