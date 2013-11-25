@@ -31,7 +31,7 @@ all:: mytest
 
 ######
 
-mytest: mytest.dats
+mytest: mytest.dats ../libatsyn2json.a
 	$(ATSCC) -I$(PATSHOME)/src -IATS $(PATSHOME) -IATS $(ATSHOME) \
   -IATS $(ATSCTRB) -I $(ATSCTRB) $(CFLAGS_JANSSON) -o $@ $< \
   -L $(PATSHOME)/libatsyn2json -latsyn2json -lgmp $(LDFLAGS_JANSSON)

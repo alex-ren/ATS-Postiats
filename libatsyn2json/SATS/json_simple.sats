@@ -25,6 +25,8 @@ fun json_dump_output (jv: jsonVal, out: FILEref): void
 
 fun jsonize_int (x: int): jsonVal
 
+fun jsonize_lint (x: lint): jsonVal
+
 fun jsonize_double (x: double): jsonVal
 
 fun jsonize_string (x: string): jsonVal

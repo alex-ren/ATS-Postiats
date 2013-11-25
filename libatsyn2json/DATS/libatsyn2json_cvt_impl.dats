@@ -42,7 +42,7 @@ staload _(* anon *) = "prelude/DATS/array0.dats"
 
 
 
-staload "../SATS/libatsyn2json_cvt_impl.sats"
+staload "../SATS/libatsyn2json_cvt.sats"
 
 // ====== to be implemented ==========
 
@@ -58,9 +58,6 @@ jsonize_string ("s2lab is not supported.")
 implement jsonize_labs2exp (x) = 
 jsonize_string ("labs2exp is not supported.")
 
-implement jsonize_symbol_type (x) = 
-jsonize_string ("symbol_type is not supported.")
-
 implement jsonize_token (x) = 
 jsonize_string ("token is not supported.")
 
@@ -69,9 +66,6 @@ jsonize_string ("d2cst_type is not supported.")
 
 implement jsonize_labd2exp (x) = 
 jsonize_string ("labd2exp is not supported.")
-
-implement jsonize_d2var_type (x) = 
-jsonize_string ("d2var_type is not supported.")
 
 implement jsonize_cstsp (x) = 
 jsonize_string ("cstsp is not supported.")

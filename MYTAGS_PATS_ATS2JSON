@@ -1,0 +1,287 @@
+{
+"tagfile" : "/home/grad2/aren/workspace/Postiats/ATS-Postiats/libatsyn2json/SATS/libatsyn2json.sats",
+"tagentarr" : [
+{
+"name" : "symbol", "nline" : 25, "nchar" : 361
+}
+,
+{
+"name" : "position", "nline" : 32, "nchar" : 458
+}
+,
+{
+"name" : "location", "nline" : 33, "nchar" : 491
+}
+,
+{
+"name" : "jsonVal", "nline" : 38, "nchar" : 582
+}
+,
+{
+"name" : "jsonize_position", "nline" : 43, "nchar" : 632
+}
+,
+{
+"name" : "jsonize_location", "nline" : 45, "nchar" : 689
+}
+,
+{
+"name" : "s2exp", "nline" : 52, "nchar" : 815
+}
+,
+{
+"name" : "s2explst", "nline" : 53, "nchar" : 842
+}
+,
+{
+"name" : "d2var", "nline" : 60, "nchar" : 942
+}
+,
+{
+"name" : "d2cst", "nline" : 61, "nchar" : 969
+}
+,
+{
+"name" : "p2at", "nline" : 63, "nchar" : 999
+}
+,
+{
+"name" : "p2atlst", "nline" : 64, "nchar" : 1024
+}
+,
+{
+"name" : "d2exp", "nline" : 65, "nchar" : 1055
+}
+,
+{
+"name" : "d2explst", "nline" : 66, "nchar" : 1082
+}
+,
+{
+"name" : "d2ecl", "nline" : 67, "nchar" : 1115
+}
+,
+{
+"name" : "d2eclist", "nline" : 68, "nchar" : 1142
+}
+,
+{
+"name" : "jsonize_d2var", "nline" : 73, "nchar" : 1195
+}
+,
+{
+"name" : "jsonize_d2cst", "nline" : 75, "nchar" : 1246
+}
+,
+{
+"name" : "jsonize_p2at", "nline" : 79, "nchar" : 1319
+}
+,
+{
+"name" : "jsonize_d2exp", "nline" : 83, "nchar" : 1390
+}
+,
+{
+"name" : "jsonize_d2ecl", "nline" : 87, "nchar" : 1463
+}
+,
+{
+"name" : "jsonize_d2eclist", "nline" : 88, "nchar" : 1503
+}
+]
+}
+
+{
+"tagfile" : "/home/grad2/aren/workspace/Postiats/ATS-Postiats/libatsyn2json/SATS/json_simple.sats",
+"tagentarr" : [
+{
+"name" : "jsonVal", "nline" : 5, "nchar" : 14
+}
+,
+{
+"name" : "json_int", "nline" : 15, "nchar" : 208
+}
+,
+{
+"name" : "labjsonVal", "nline" : 17, "nchar" : 229
+}
+,
+{
+"name" : "labjsonValist", "nline" : 19, "nchar" : 264
+}
+,
+{
+"name" : "json_dump_string", "nline" : 21, "nchar" : 304
+}
+]
+}
+
+{
+"tagfile" : "/home/grad2/aren/workspace/Postiats/ATS-Postiats/libatsyn2json/DATS/libatsyn2json.dats",
+"tagentarr" : [
+{
+"name" : "s2exp_hnfize_flag_svar", "nline" : 26, "nchar" : 379
+}
+]
+}
+
+{
+"tagfile" : "/home/grad2/aren/workspace/Postiats/ATS-Postiats/libatsyn2json/DATS/libatsyn2json_d2exp.dats",
+"tagentarr" : [
+{
+"name" : "jsonize_d2exp", "nline" : 41, "nchar" : 614
+}
+]
+}
+
+{
+"tagfile" : "/home/grad2/aren/workspace/Postiats/ATS-Postiats/libatsyn2json/DATS/libatsyn2json_p2at.dats",
+"tagentarr" : [
+{
+"name" : "jsonize_p2at", "nline" : 41, "nchar" : 614
+}
+]
+}
+
+{
+"tagfile" : "/home/grad2/aren/workspace/Postiats/ATS-Postiats/libatsyn2json/DATS/json_simple.dats",
+"tagentarr" : [
+{
+"name" : "json_dump_string", "nline" : 8, "nchar" : 139
+}
+]
+}
+
+{
+"tagfile" : "/home/grad2/aren/workspace/Postiats/ATS-Postiats/libatsyn2json/TEST/DATA/foo.dats",
+"tagentarr" : [
+{
+"name" : "AB", "nline" : 0, "nchar" : 9
+}
+]
+}
+
+{
+"tagfile" : "/home/grad2/aren/workspace/Postiats/ATS-Postiats/libatsyn2json/TEST/DATA/foo2.dats",
+"tagentarr" : [
+{
+"name" : "knob", "nline" : 2, "nchar" : 16
+}
+,
+{
+"name" : "foo", "nline" : 4, "nchar" : 38
+}
+,
+{
+"name" : "main0", "nline" : 11, "nchar" : 89
+}
+]
+}
+
+{
+"tagfile" : "/home/grad2/aren/workspace/Postiats/ATS-Postiats/libatsyn2json/TEST/mytest.dats",
+"tagentarr" : [
+{
+"name" : "waitkind", "nline" : 81, "nchar" : 1413
+}
+,
+{
+"name" : "waitkind_get_stadyn", "nline" : 90, "nchar" : 1630
+}
+,
+{
+"name" : "outchan", "nline" : 101, "nchar" : 1848
+}
+,
+{
+"name" : "outchan_get_filr", "nline" : 106, "nchar" : 1937
+}
+,
+{
+"name" : "outchan_make_path", "nline" : 113, "nchar" : 2091
+}
+,
+{
+"name" : "cmdstate", "nline" : 137, "nchar" : 2497
+}
+,
+{
+"name" : "cmdstate_set_outchan", "nline" : 157, "nchar" : 2817
+}
+,
+{
+"name" : "isinpwait", "nline" : 172, "nchar" : 3171
+}
+,
+{
+"name" : "isoutwait", "nline" : 180, "nchar" : 3332
+}
+,
+{
+"name" : "isdatswait", "nline" : 186, "nchar" : 3460
+}
+,
+{
+"name" : "isiatswait", "nline" : 192, "nchar" : 3590
+}
+,
+{
+"name" : "fixity_load", "nline" : 227, "nchar" : 4278
+}
+,
+{
+"name" : "pervasive_load", "nline" : 260, "nchar" : 5113
+}
+,
+{
+"name" : "prelude_load", "nline" : 304, "nchar" : 6213
+}
+,
+{
+"name" : "prelude_load_if", "nline" : 379, "nchar" : 9035
+}
+,
+{
+"name" : "do_trans12", "nline" : 391, "nchar" : 9260
+}
+,
+{
+"name" : "do_transfinal", "nline" : 394, "nchar" : 9326
+}
+,
+{
+"name" : "do_trans12", "nline" : 400, "nchar" : 9432
+}
+,
+{
+"name" : "do_transfinal", "nline" : 433, "nchar" : 10066
+}
+,
+{
+"name" : "process_cmdline", "nline" : 445, "nchar" : 10304
+}
+,
+{
+"name" : "process_cmdline2", "nline" : 483, "nchar" : 11181
+}
+,
+{
+"name" : "process_cmdline2_COMARGkey1", "nline" : 570, "nchar" : 13365
+}
+,
+{
+"name" : "process_cmdline2_COMARGkey2", "nline" : 638, "nchar" : 14737
+}
+,
+{
+"name" : "main", "nline" : 673, "nchar" : 15408
+}
+]
+}
+
+{
+"tagfile" : "/home/grad2/aren/workspace/Postiats/ATS-Postiats/libatsyn2json/dynloadall.dats",
+"tagentarr" : [
+]
+}
+

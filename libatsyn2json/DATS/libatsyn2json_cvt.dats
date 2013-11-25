@@ -55,31 +55,31 @@ staload "../SATS/libatsyn2json_cvt.sats"
 
 implement jsonize_v1al (x) =
 case+ x of
-| $S1E.V1ALint (__e0) => let
+| $S1E.V1ALint (__e1) => let
   val __arr = array0_make_elt (2, JSONnul ())
   val () = __arr[0] := JSONstring ("V1ALint")
-  val () = __arr[0] := jsonize_int (__e0)
+  val () = __arr[1] := jsonize_int (__e1)
 in
   JSONarray (__arr)
 end
-| $S1E.V1ALchar (__e0) => let
+| $S1E.V1ALchar (__e1) => let
   val __arr = array0_make_elt (2, JSONnul ())
   val () = __arr[0] := JSONstring ("V1ALchar")
-  val () = __arr[0] := jsonize_char (__e0)
+  val () = __arr[1] := jsonize_char (__e1)
 in
   JSONarray (__arr)
 end
-| $S1E.V1ALstring (__e0) => let
+| $S1E.V1ALstring (__e1) => let
   val __arr = array0_make_elt (2, JSONnul ())
   val () = __arr[0] := JSONstring ("V1ALstring")
-  val () = __arr[0] := jsonize_string (__e0)
+  val () = __arr[1] := jsonize_string (__e1)
 in
   JSONarray (__arr)
 end
-| $S1E.V1ALfloat (__e0) => let
+| $S1E.V1ALfloat (__e1) => let
   val __arr = array0_make_elt (2, JSONnul ())
   val () = __arr[0] := JSONstring ("V1ALfloat")
-  val () = __arr[0] := jsonize_double (__e0)
+  val () = __arr[1] := jsonize_double (__e1)
 in
   JSONarray (__arr)
 end
@@ -112,52 +112,52 @@ implement jsonize_v1alist(x) =
 
 implement jsonize_e1xp_node (x) =
 case+ x of
-| $S1E.E1XPide (__e0) => let
+| $S1E.E1XPide (__e1) => let
   val __arr = array0_make_elt (2, JSONnul ())
   val () = __arr[0] := JSONstring ("E1XPide")
-  val () = __arr[0] := jsonize_symbol(__e0)
+  val () = __arr[1] := jsonize_symbol(__e1)
 in
   JSONarray (__arr)
 end
-| $S1E.E1XPint (__e0) => let
+| $S1E.E1XPint (__e1) => let
   val __arr = array0_make_elt (2, JSONnul ())
   val () = __arr[0] := JSONstring ("E1XPint")
-  val () = __arr[0] := jsonize_int (__e0)
+  val () = __arr[1] := jsonize_int (__e1)
 in
   JSONarray (__arr)
 end
-| $S1E.E1XPintrep (__e0) => let
+| $S1E.E1XPintrep (__e1) => let
   val __arr = array0_make_elt (2, JSONnul ())
   val () = __arr[0] := JSONstring ("E1XPintrep")
-  val () = __arr[0] := jsonize_string (__e0)
+  val () = __arr[1] := jsonize_string (__e1)
 in
   JSONarray (__arr)
 end
-| $S1E.E1XPchar (__e0) => let
+| $S1E.E1XPchar (__e1) => let
   val __arr = array0_make_elt (2, JSONnul ())
   val () = __arr[0] := JSONstring ("E1XPchar")
-  val () = __arr[0] := jsonize_char (__e0)
+  val () = __arr[1] := jsonize_char (__e1)
 in
   JSONarray (__arr)
 end
-| $S1E.E1XPstring (__e0) => let
+| $S1E.E1XPstring (__e1) => let
   val __arr = array0_make_elt (2, JSONnul ())
   val () = __arr[0] := JSONstring ("E1XPstring")
-  val () = __arr[0] := jsonize_string (__e0)
+  val () = __arr[1] := jsonize_string (__e1)
 in
   JSONarray (__arr)
 end
-| $S1E.E1XPfloat (__e0) => let
+| $S1E.E1XPfloat (__e1) => let
   val __arr = array0_make_elt (2, JSONnul ())
   val () = __arr[0] := JSONstring ("E1XPfloat")
-  val () = __arr[0] := jsonize_string (__e0)
+  val () = __arr[1] := jsonize_string (__e1)
 in
   JSONarray (__arr)
 end
-| $S1E.E1XPv1al (__e0) => let
+| $S1E.E1XPv1al (__e1) => let
   val __arr = array0_make_elt (2, JSONnul ())
   val () = __arr[0] := JSONstring ("E1XPv1al")
-  val () = __arr[0] := jsonize_v1al(__e0)
+  val () = __arr[1] := jsonize_v1al(__e1)
 in
   JSONarray (__arr)
 end
@@ -173,43 +173,43 @@ end
 in
   JSONarray (__arr)
 end
-| $S1E.E1XPapp (__e0,__e1,__e2) => let
+| $S1E.E1XPapp (__e1,__e2,__e3) => let
   val __arr = array0_make_elt (4, JSONnul ())
   val () = __arr[0] := JSONstring ("E1XPapp")
-  val () = __arr[0] := jsonize_e1xp(__e0)
-  val () = __arr[1] := jsonize_location(__e1)
-  val () = __arr[2] := jsonize_e1xplst(__e2)
+  val () = __arr[1] := jsonize_e1xp(__e1)
+  val () = __arr[2] := jsonize_location(__e2)
+  val () = __arr[3] := jsonize_e1xplst(__e3)
 in
   JSONarray (__arr)
 end
-| $S1E.E1XPfun (__e0,__e1) => let
+| $S1E.E1XPfun (__e1,__e2) => let
   val __arr = array0_make_elt (3, JSONnul ())
   val () = __arr[0] := JSONstring ("E1XPfun")
-  val () = __arr[0] := jsonize_symbolist(__e0)
-  val () = __arr[1] := jsonize_e1xp(__e1)
+  val () = __arr[1] := jsonize_symbolist(__e1)
+  val () = __arr[2] := jsonize_e1xp(__e2)
 in
   JSONarray (__arr)
 end
-| $S1E.E1XPeval (__e0) => let
+| $S1E.E1XPeval (__e1) => let
   val __arr = array0_make_elt (2, JSONnul ())
   val () = __arr[0] := JSONstring ("E1XPeval")
-  val () = __arr[0] := jsonize_e1xp(__e0)
+  val () = __arr[1] := jsonize_e1xp(__e1)
 in
   JSONarray (__arr)
 end
-| $S1E.E1XPlist (__e0) => let
+| $S1E.E1XPlist (__e1) => let
   val __arr = array0_make_elt (2, JSONnul ())
   val () = __arr[0] := JSONstring ("E1XPlist")
-  val () = __arr[0] := jsonize_e1xplst(__e0)
+  val () = __arr[1] := jsonize_e1xplst(__e1)
 in
   JSONarray (__arr)
 end
-| $S1E.E1XPif (__e0,__e1,__e2) => let
+| $S1E.E1XPif (__e1,__e2,__e3) => let
   val __arr = array0_make_elt (4, JSONnul ())
   val () = __arr[0] := JSONstring ("E1XPif")
-  val () = __arr[0] := jsonize_e1xp(__e0)
   val () = __arr[1] := jsonize_e1xp(__e1)
   val () = __arr[2] := jsonize_e1xp(__e2)
+  val () = __arr[3] := jsonize_e1xp(__e3)
 in
   JSONarray (__arr)
 end
@@ -500,9 +500,19 @@ implement jsonize_location (x) =
 let
   val __jp_lst = list0_nil ()
 
-  val __name = "_get_string"
-  val __v = todolocation_get_string(x)
-  val __value = jsonize_string (__v)
+  val __name = "location_beg_nrow"
+  val __v = $LOC.location_beg_nrow(x)
+  val __value = jsonize_int (__v)
+  val __p = '(__name, __value)
+  val __jp_lst = list0_cons (__p, __jp_lst)
+  val __name = "location_beg_ntot"
+  val __v = $LOC.location_beg_ntot(x)
+  val __value = jsonize_lint (__v)
+  val __p = '(__name, __value)
+  val __jp_lst = list0_cons (__p, __jp_lst)
+  val __name = "location_end_ntot"
+  val __v = $LOC.location_end_ntot(x)
+  val __value = jsonize_lint (__v)
   val __p = '(__name, __value)
   val __jp_lst = list0_cons (__p, __jp_lst)
 
@@ -511,8 +521,20 @@ in
   __ret
 end
 
-implement jsonize_symbol(x) = 
-  jsonize_symbol_type(x)
+implement jsonize_symbol (x) =
+let
+  val __jp_lst = list0_nil ()
+
+  val __name = "symbol_get_name"
+  val __v = $SYM.symbol_get_name(x)
+  val __value = jsonize_string (__v)
+  val __p = '(__name, __value)
+  val __jp_lst = list0_cons (__p, __jp_lst)
+
+  val __ret = JSONobject (__jp_lst)
+in
+  __ret
+end
 
 implement jsonize_symbolist(x) = 
   let
@@ -789,8 +811,20 @@ implement jsonize_d2exparglst(x) =
     JSONarray (__arr)
   end
 
-implement jsonize_d2var(x) = 
-  jsonize_d2var_type(x)
+implement jsonize_d2var (x) =
+let
+  val __jp_lst = list0_nil ()
+
+  val __name = "d2var_get_sym"
+  val __v = $D2E.d2var_get_sym(x)
+  val __value = jsonize_symbol(__v)
+  val __p = '(__name, __value)
+  val __jp_lst = list0_cons (__p, __jp_lst)
+
+  val __ret = JSONobject (__jp_lst)
+in
+  __ret
+end
 
 implement jsonize_d2varlst(x) = 
   let
@@ -994,25 +1028,25 @@ implement jsonize_d2lablst(x) =
 
 implement jsonize_s2eff (x) =
 case+ x of
-| $S2E.S2EFFset (__e0) => let
+| $S2E.S2EFFset (__e1) => let
   val __arr = array0_make_elt (2, JSONnul ())
   val () = __arr[0] := JSONstring ("S2EFFset")
-  val () = __arr[0] := jsonize_effset(__e0)
+  val () = __arr[1] := jsonize_effset(__e1)
 in
   JSONarray (__arr)
 end
-| $S2E.S2EFFexp (__e0) => let
+| $S2E.S2EFFexp (__e1) => let
   val __arr = array0_make_elt (2, JSONnul ())
   val () = __arr[0] := JSONstring ("S2EFFexp")
-  val () = __arr[0] := jsonize_s2exp(__e0)
+  val () = __arr[1] := jsonize_s2exp(__e1)
 in
   JSONarray (__arr)
 end
-| $S2E.S2EFFadd (__e0,__e1) => let
+| $S2E.S2EFFadd (__e1,__e2) => let
   val __arr = array0_make_elt (3, JSONnul ())
   val () = __arr[0] := JSONstring ("S2EFFadd")
-  val () = __arr[0] := jsonize_s2eff(__e0)
   val () = __arr[1] := jsonize_s2eff(__e1)
+  val () = __arr[2] := jsonize_s2eff(__e2)
 in
   JSONarray (__arr)
 end
@@ -1127,64 +1161,64 @@ end
 
 implement jsonize_d2itm (x) =
 case+ x of
-| $D2E.D2ITMcst (__e0) => let
+| $D2E.D2ITMcst (__e1) => let
   val __arr = array0_make_elt (2, JSONnul ())
   val () = __arr[0] := JSONstring ("D2ITMcst")
-  val () = __arr[0] := jsonize_d2cst(__e0)
+  val () = __arr[1] := jsonize_d2cst(__e1)
 in
   JSONarray (__arr)
 end
-| $D2E.D2ITMvar (__e0) => let
+| $D2E.D2ITMvar (__e1) => let
   val __arr = array0_make_elt (2, JSONnul ())
   val () = __arr[0] := JSONstring ("D2ITMvar")
-  val () = __arr[0] := jsonize_d2var(__e0)
+  val () = __arr[1] := jsonize_d2var(__e1)
 in
   JSONarray (__arr)
 end
-| $D2E.D2ITMcon (__e0) => let
+| $D2E.D2ITMcon (__e1) => let
   val __arr = array0_make_elt (2, JSONnul ())
   val () = __arr[0] := JSONstring ("D2ITMcon")
-  val () = __arr[0] := jsonize_d2conlst(__e0)
+  val () = __arr[1] := jsonize_d2conlst(__e1)
 in
   JSONarray (__arr)
 end
-| $D2E.D2ITMe1xp (__e0) => let
+| $D2E.D2ITMe1xp (__e1) => let
   val __arr = array0_make_elt (2, JSONnul ())
   val () = __arr[0] := JSONstring ("D2ITMe1xp")
-  val () = __arr[0] := jsonize_e1xp(__e0)
+  val () = __arr[1] := jsonize_e1xp(__e1)
 in
   JSONarray (__arr)
 end
-| $D2E.D2ITMsymdef (__e0,__e1) => let
+| $D2E.D2ITMsymdef (__e1,__e2) => let
   val __arr = array0_make_elt (3, JSONnul ())
   val () = __arr[0] := JSONstring ("D2ITMsymdef")
-  val () = __arr[0] := jsonize_symbol(__e0)
-  val () = __arr[1] := jsonize_d2pitmlst(__e1)
+  val () = __arr[1] := jsonize_symbol(__e1)
+  val () = __arr[2] := jsonize_d2pitmlst(__e2)
 in
   JSONarray (__arr)
 end
-| $D2E.D2ITMmacdef (__e0) => let
+| $D2E.D2ITMmacdef (__e1) => let
   val __arr = array0_make_elt (2, JSONnul ())
   val () = __arr[0] := JSONstring ("D2ITMmacdef")
-  val () = __arr[0] := jsonize_d2mac(__e0)
+  val () = __arr[1] := jsonize_d2mac(__e1)
 in
   JSONarray (__arr)
 end
-| $D2E.D2ITMmacvar (__e0) => let
+| $D2E.D2ITMmacvar (__e1) => let
   val __arr = array0_make_elt (2, JSONnul ())
   val () = __arr[0] := JSONstring ("D2ITMmacvar")
-  val () = __arr[0] := jsonize_d2var(__e0)
+  val () = __arr[1] := jsonize_d2var(__e1)
 in
   JSONarray (__arr)
 end
 
 implement jsonize_d2pitm (x) =
 case+ x of
-| $D2E.D2PITM (__e0,__e1) => let
+| $D2E.D2PITM (__e1,__e2) => let
   val __arr = array0_make_elt (3, JSONnul ())
   val () = __arr[0] := JSONstring ("D2PITM")
-  val () = __arr[0] := jsonize_int (__e0)
-  val () = __arr[1] := jsonize_d2itm(__e1)
+  val () = __arr[1] := jsonize_int (__e1)
+  val () = __arr[2] := jsonize_d2itm(__e2)
 in
   JSONarray (__arr)
 end
@@ -1255,10 +1289,10 @@ case+ x of
 in
   JSONarray (__arr)
 end
-| $BAS.FUNCLOclo (__e0) => let
+| $BAS.FUNCLOclo (__e1) => let
   val __arr = array0_make_elt (2, JSONnul ())
   val () = __arr[0] := JSONstring ("FUNCLOclo")
-  val () = __arr[0] := jsonize_int (__e0)
+  val () = __arr[1] := jsonize_int (__e1)
 in
   JSONarray (__arr)
 end
@@ -1268,37 +1302,37 @@ implement jsonize_label(x) =
 
 implement jsonize_d2exparg (x) =
 case+ x of
-| $D2E.D2EXPARGsta (__e0,__e1) => let
+| $D2E.D2EXPARGsta (__e1,__e2) => let
   val __arr = array0_make_elt (3, JSONnul ())
   val () = __arr[0] := JSONstring ("D2EXPARGsta")
-  val () = __arr[0] := jsonize_location(__e0)
-  val () = __arr[1] := jsonize_s2exparglst(__e1)
+  val () = __arr[1] := jsonize_location(__e1)
+  val () = __arr[2] := jsonize_s2exparglst(__e2)
 in
   JSONarray (__arr)
 end
-| $D2E.D2EXPARGdyn (__e0,__e1,__e2) => let
+| $D2E.D2EXPARGdyn (__e1,__e2,__e3) => let
   val __arr = array0_make_elt (4, JSONnul ())
   val () = __arr[0] := JSONstring ("D2EXPARGdyn")
-  val () = __arr[0] := jsonize_int (__e0)
-  val () = __arr[1] := jsonize_location(__e1)
-  val () = __arr[2] := jsonize_d2explst(__e2)
+  val () = __arr[1] := jsonize_int (__e1)
+  val () = __arr[2] := jsonize_location(__e2)
+  val () = __arr[3] := jsonize_d2explst(__e3)
 in
   JSONarray (__arr)
 end
 
 implement jsonize_d2lab_node (x) =
 case+ x of
-| $D2E.D2LABlab (__e0) => let
+| $D2E.D2LABlab (__e1) => let
   val __arr = array0_make_elt (2, JSONnul ())
   val () = __arr[0] := JSONstring ("D2LABlab")
-  val () = __arr[0] := jsonize_label(__e0)
+  val () = __arr[1] := jsonize_label(__e1)
 in
   JSONarray (__arr)
 end
-| $D2E.D2LABind (__e0) => let
+| $D2E.D2LABind (__e1) => let
   val __arr = array0_make_elt (2, JSONnul ())
   val () = __arr[0] := JSONstring ("D2LABind")
-  val () = __arr[0] := jsonize_d2explst(__e0)
+  val () = __arr[1] := jsonize_d2explst(__e1)
 in
   JSONarray (__arr)
 end
@@ -1794,19 +1828,9 @@ implement jsonize_filename (x) =
 let
   val __jp_lst = list0_nil ()
 
-  val __name = "_get_givename"
-  val __v = todofilename_get_givename(x)
+  val __name = "filename_get_givename"
+  val __v = $FIL.filename_get_givename(x)
   val __value = jsonize_string (__v)
-  val __p = '(__name, __value)
-  val __jp_lst = list0_cons (__p, __jp_lst)
-  val __name = "_get_partname"
-  val __v = todofilename_get_partname(x)
-  val __value = jsonize_string (__v)
-  val __p = '(__name, __value)
-  val __jp_lst = list0_cons (__p, __jp_lst)
-  val __name = "_get_fullname"
-  val __v = todofilename_get_fullname(x)
-  val __value = jsonize_symbol(__v)
   val __p = '(__name, __value)
   val __jp_lst = list0_cons (__p, __jp_lst)
 
@@ -1819,8 +1843,8 @@ implement jsonize_filenv (x) =
 let
   val __jp_lst = list0_nil ()
 
-  val __name = "_get_name"
-  val __v = todofilenv_get_name(x)
+  val __name = "filenv_get_name"
+  val __v = $S2E.filenv_get_name(x)
   val __value = jsonize_filename(__v)
   val __p = '(__name, __value)
   val __jp_lst = list0_cons (__p, __jp_lst)
@@ -1905,168 +1929,168 @@ case+ x of
 in
   JSONarray (__arr)
 end
-| $D2E.D2Clist (__e0) => let
+| $D2E.D2Clist (__e1) => let
   val __arr = array0_make_elt (2, JSONnul ())
   val () = __arr[0] := JSONstring ("D2Clist")
-  val () = __arr[0] := jsonize_d2eclist(__e0)
+  val () = __arr[1] := jsonize_d2eclist(__e1)
 in
   JSONarray (__arr)
 end
-| $D2E.D2Csymintr (__e0) => let
+| $D2E.D2Csymintr (__e1) => let
   val __arr = array0_make_elt (2, JSONnul ())
   val () = __arr[0] := JSONstring ("D2Csymintr")
-  val () = __arr[0] := jsonize_i0delst(__e0)
+  val () = __arr[1] := jsonize_i0delst(__e1)
 in
   JSONarray (__arr)
 end
-| $D2E.D2Csymelim (__e0) => let
+| $D2E.D2Csymelim (__e1) => let
   val __arr = array0_make_elt (2, JSONnul ())
   val () = __arr[0] := JSONstring ("D2Csymelim")
-  val () = __arr[0] := jsonize_i0delst(__e0)
+  val () = __arr[1] := jsonize_i0delst(__e1)
 in
   JSONarray (__arr)
 end
-| $D2E.D2Coverload (__e0,__e1,__e2) => let
+| $D2E.D2Coverload (__e1,__e2,__e3) => let
   val __arr = array0_make_elt (4, JSONnul ())
   val () = __arr[0] := JSONstring ("D2Coverload")
-  val () = __arr[0] := jsonize_i0de(__e0)
-  val () = __arr[1] := jsonize_int (__e1)
-  val () = __arr[2] := jsonize_d2itmopt(__e2)
+  val () = __arr[1] := jsonize_i0de(__e1)
+  val () = __arr[2] := jsonize_int (__e2)
+  val () = __arr[3] := jsonize_d2itmopt(__e3)
 in
   JSONarray (__arr)
 end
-| $D2E.D2Csaspdec (__e0) => let
+| $D2E.D2Csaspdec (__e1) => let
   val __arr = array0_make_elt (2, JSONnul ())
   val () = __arr[0] := JSONstring ("D2Csaspdec")
-  val () = __arr[0] := jsonize_s2aspdec(__e0)
+  val () = __arr[1] := jsonize_s2aspdec(__e1)
 in
   JSONarray (__arr)
 end
-| $D2E.D2Cextype (__e0,__e1) => let
+| $D2E.D2Cextype (__e1,__e2) => let
   val __arr = array0_make_elt (3, JSONnul ())
   val () = __arr[0] := JSONstring ("D2Cextype")
-  val () = __arr[0] := jsonize_string (__e0)
-  val () = __arr[1] := jsonize_s2exp(__e1)
+  val () = __arr[1] := jsonize_string (__e1)
+  val () = __arr[2] := jsonize_s2exp(__e2)
 in
   JSONarray (__arr)
 end
-| $D2E.D2Cextval (__e0,__e1) => let
+| $D2E.D2Cextval (__e1,__e2) => let
   val __arr = array0_make_elt (3, JSONnul ())
   val () = __arr[0] := JSONstring ("D2Cextval")
-  val () = __arr[0] := jsonize_string (__e0)
-  val () = __arr[1] := jsonize_d2exp(__e1)
+  val () = __arr[1] := jsonize_string (__e1)
+  val () = __arr[2] := jsonize_d2exp(__e2)
 in
   JSONarray (__arr)
 end
-| $D2E.D2Cextcode (__e0,__e1,__e2) => let
+| $D2E.D2Cextcode (__e1,__e2,__e3) => let
   val __arr = array0_make_elt (4, JSONnul ())
   val () = __arr[0] := JSONstring ("D2Cextcode")
-  val () = __arr[0] := jsonize_int (__e0)
   val () = __arr[1] := jsonize_int (__e1)
-  val () = __arr[2] := jsonize_string (__e2)
+  val () = __arr[2] := jsonize_int (__e2)
+  val () = __arr[3] := jsonize_string (__e3)
 in
   JSONarray (__arr)
 end
-| $D2E.D2Cdatdecs (__e0,__e1) => let
+| $D2E.D2Cdatdecs (__e1,__e2) => let
   val __arr = array0_make_elt (3, JSONnul ())
   val () = __arr[0] := JSONstring ("D2Cdatdecs")
-  val () = __arr[0] := jsonize_int (__e0)
-  val () = __arr[1] := jsonize_s2cstlst(__e1)
+  val () = __arr[1] := jsonize_int (__e1)
+  val () = __arr[2] := jsonize_s2cstlst(__e2)
 in
   JSONarray (__arr)
 end
-| $D2E.D2Cexndecs (__e0) => let
+| $D2E.D2Cexndecs (__e1) => let
   val __arr = array0_make_elt (2, JSONnul ())
   val () = __arr[0] := JSONstring ("D2Cexndecs")
-  val () = __arr[0] := jsonize_d2conlst(__e0)
+  val () = __arr[1] := jsonize_d2conlst(__e1)
 in
   JSONarray (__arr)
 end
-| $D2E.D2Cdcstdecs (__e0,__e1) => let
+| $D2E.D2Cdcstdecs (__e1,__e2) => let
   val __arr = array0_make_elt (3, JSONnul ())
   val () = __arr[0] := JSONstring ("D2Cdcstdecs")
-  val () = __arr[0] := jsonize_dcstkind(__e0)
-  val () = __arr[1] := jsonize_d2cstlst(__e1)
+  val () = __arr[1] := jsonize_dcstkind(__e1)
+  val () = __arr[2] := jsonize_d2cstlst(__e2)
 in
   JSONarray (__arr)
 end
-| $D2E.D2Cimpdec (__e0,__e1) => let
+| $D2E.D2Cimpdec (__e1,__e2) => let
   val __arr = array0_make_elt (3, JSONnul ())
   val () = __arr[0] := JSONstring ("D2Cimpdec")
-  val () = __arr[0] := jsonize_int (__e0)
-  val () = __arr[1] := jsonize_i2mpdec(__e1)
+  val () = __arr[1] := jsonize_int (__e1)
+  val () = __arr[2] := jsonize_i2mpdec(__e2)
 in
   JSONarray (__arr)
 end
-| $D2E.D2Cfundecs (__e0,__e1,__e2) => let
+| $D2E.D2Cfundecs (__e1,__e2,__e3) => let
   val __arr = array0_make_elt (4, JSONnul ())
   val () = __arr[0] := JSONstring ("D2Cfundecs")
-  val () = __arr[0] := jsonize_funkind(__e0)
-  val () = __arr[1] := jsonize_s2qualst(__e1)
-  val () = __arr[2] := jsonize_f2undeclst(__e2)
+  val () = __arr[1] := jsonize_funkind(__e1)
+  val () = __arr[2] := jsonize_s2qualst(__e2)
+  val () = __arr[3] := jsonize_f2undeclst(__e3)
 in
   JSONarray (__arr)
 end
-| $D2E.D2Cvaldecs (__e0,__e1) => let
+| $D2E.D2Cvaldecs (__e1,__e2) => let
   val __arr = array0_make_elt (3, JSONnul ())
   val () = __arr[0] := JSONstring ("D2Cvaldecs")
-  val () = __arr[0] := jsonize_valkind(__e0)
-  val () = __arr[1] := jsonize_v2aldeclst(__e1)
+  val () = __arr[1] := jsonize_valkind(__e1)
+  val () = __arr[2] := jsonize_v2aldeclst(__e2)
 in
   JSONarray (__arr)
 end
-| $D2E.D2Cvaldecs_rec (__e0,__e1) => let
+| $D2E.D2Cvaldecs_rec (__e1,__e2) => let
   val __arr = array0_make_elt (3, JSONnul ())
   val () = __arr[0] := JSONstring ("D2Cvaldecs_rec")
-  val () = __arr[0] := jsonize_valkind(__e0)
-  val () = __arr[1] := jsonize_v2aldeclst(__e1)
+  val () = __arr[1] := jsonize_valkind(__e1)
+  val () = __arr[2] := jsonize_v2aldeclst(__e2)
 in
   JSONarray (__arr)
 end
-| $D2E.D2Cvardecs (__e0) => let
+| $D2E.D2Cvardecs (__e1) => let
   val __arr = array0_make_elt (2, JSONnul ())
   val () = __arr[0] := JSONstring ("D2Cvardecs")
-  val () = __arr[0] := jsonize_v2ardeclst(__e0)
+  val () = __arr[1] := jsonize_v2ardeclst(__e1)
 in
   JSONarray (__arr)
 end
-| $D2E.D2Cprvardecs (__e0) => let
+| $D2E.D2Cprvardecs (__e1) => let
   val __arr = array0_make_elt (2, JSONnul ())
   val () = __arr[0] := JSONstring ("D2Cprvardecs")
-  val () = __arr[0] := jsonize_prv2ardeclst(__e0)
+  val () = __arr[1] := jsonize_prv2ardeclst(__e1)
 in
   JSONarray (__arr)
 end
-| $D2E.D2Cinclude (__e0) => let
+| $D2E.D2Cinclude (__e1) => let
   val __arr = array0_make_elt (2, JSONnul ())
   val () = __arr[0] := JSONstring ("D2Cinclude")
-  val () = __arr[0] := jsonize_d2eclist(__e0)
+  val () = __arr[1] := jsonize_d2eclist(__e1)
 in
   JSONarray (__arr)
 end
-| $D2E.D2Cstaload (__e0,__e1,__e2,__e3,__e4) => let
+| $D2E.D2Cstaload (__e1,__e2,__e3,__e4,__e5) => let
   val __arr = array0_make_elt (6, JSONnul ())
   val () = __arr[0] := JSONstring ("D2Cstaload")
-  val () = __arr[0] := jsonize_symbolopt(__e0)
-  val () = __arr[1] := jsonize_filename(__e1)
-  val () = __arr[2] := jsonize_int (__e2)
-  val () = __arr[3] := jsonize_filenv(__e3)
-  val () = __arr[4] := jsonize_int (__e4)
+  val () = __arr[1] := jsonize_symbolopt(__e1)
+  val () = __arr[2] := jsonize_filename(__e2)
+  val () = __arr[3] := jsonize_int (__e3)
+  val () = __arr[4] := jsonize_filenv(__e4)
+  val () = __arr[5] := jsonize_int (__e5)
 in
   JSONarray (__arr)
 end
-| $D2E.D2Cdynload (__e0) => let
+| $D2E.D2Cdynload (__e1) => let
   val __arr = array0_make_elt (2, JSONnul ())
   val () = __arr[0] := JSONstring ("D2Cdynload")
-  val () = __arr[0] := jsonize_filename(__e0)
+  val () = __arr[1] := jsonize_filename(__e1)
 in
   JSONarray (__arr)
 end
-| $D2E.D2Clocal (__e0,__e1) => let
+| $D2E.D2Clocal (__e1,__e2) => let
   val __arr = array0_make_elt (3, JSONnul ())
   val () = __arr[0] := JSONstring ("D2Clocal")
-  val () = __arr[0] := jsonize_d2eclist(__e0)
   val () = __arr[1] := jsonize_d2eclist(__e1)
+  val () = __arr[2] := jsonize_d2eclist(__e2)
 in
   JSONarray (__arr)
 end
@@ -2079,87 +2103,87 @@ end
 
 implement jsonize_d2exp_node (x) =
 case+ x of
-| $D2E.D2Ecst (__e0) => let
+| $D2E.D2Ecst (__e1) => let
   val __arr = array0_make_elt (2, JSONnul ())
   val () = __arr[0] := JSONstring ("D2Ecst")
-  val () = __arr[0] := jsonize_d2cst(__e0)
+  val () = __arr[1] := jsonize_d2cst(__e1)
 in
   JSONarray (__arr)
 end
-| $D2E.D2Evar (__e0) => let
+| $D2E.D2Evar (__e1) => let
   val __arr = array0_make_elt (2, JSONnul ())
   val () = __arr[0] := JSONstring ("D2Evar")
-  val () = __arr[0] := jsonize_d2var(__e0)
+  val () = __arr[1] := jsonize_d2var(__e1)
 in
   JSONarray (__arr)
 end
-| $D2E.D2Eint (__e0) => let
+| $D2E.D2Eint (__e1) => let
   val __arr = array0_make_elt (2, JSONnul ())
   val () = __arr[0] := JSONstring ("D2Eint")
-  val () = __arr[0] := jsonize_int (__e0)
+  val () = __arr[1] := jsonize_int (__e1)
 in
   JSONarray (__arr)
 end
-| $D2E.D2Eintrep (__e0) => let
+| $D2E.D2Eintrep (__e1) => let
   val __arr = array0_make_elt (2, JSONnul ())
   val () = __arr[0] := JSONstring ("D2Eintrep")
-  val () = __arr[0] := jsonize_string (__e0)
+  val () = __arr[1] := jsonize_string (__e1)
 in
   JSONarray (__arr)
 end
-| $D2E.D2Ebool (__e0) => let
+| $D2E.D2Ebool (__e1) => let
   val __arr = array0_make_elt (2, JSONnul ())
   val () = __arr[0] := JSONstring ("D2Ebool")
-  val () = __arr[0] := jsonize_bool (__e0)
+  val () = __arr[1] := jsonize_bool (__e1)
 in
   JSONarray (__arr)
 end
-| $D2E.D2Echar (__e0) => let
+| $D2E.D2Echar (__e1) => let
   val __arr = array0_make_elt (2, JSONnul ())
   val () = __arr[0] := JSONstring ("D2Echar")
-  val () = __arr[0] := jsonize_char (__e0)
+  val () = __arr[1] := jsonize_char (__e1)
 in
   JSONarray (__arr)
 end
-| $D2E.D2Efloat (__e0) => let
+| $D2E.D2Efloat (__e1) => let
   val __arr = array0_make_elt (2, JSONnul ())
   val () = __arr[0] := JSONstring ("D2Efloat")
-  val () = __arr[0] := jsonize_string (__e0)
+  val () = __arr[1] := jsonize_string (__e1)
 in
   JSONarray (__arr)
 end
-| $D2E.D2Estring (__e0) => let
+| $D2E.D2Estring (__e1) => let
   val __arr = array0_make_elt (2, JSONnul ())
   val () = __arr[0] := JSONstring ("D2Estring")
-  val () = __arr[0] := jsonize_string (__e0)
+  val () = __arr[1] := jsonize_string (__e1)
 in
   JSONarray (__arr)
 end
-| $D2E.D2Ei0nt (__e0) => let
+| $D2E.D2Ei0nt (__e1) => let
   val __arr = array0_make_elt (2, JSONnul ())
   val () = __arr[0] := JSONstring ("D2Ei0nt")
-  val () = __arr[0] := jsonize_i0nt(__e0)
+  val () = __arr[1] := jsonize_i0nt(__e1)
 in
   JSONarray (__arr)
 end
-| $D2E.D2Ec0har (__e0) => let
+| $D2E.D2Ec0har (__e1) => let
   val __arr = array0_make_elt (2, JSONnul ())
   val () = __arr[0] := JSONstring ("D2Ec0har")
-  val () = __arr[0] := jsonize_c0har(__e0)
+  val () = __arr[1] := jsonize_c0har(__e1)
 in
   JSONarray (__arr)
 end
-| $D2E.D2Ef0loat (__e0) => let
+| $D2E.D2Ef0loat (__e1) => let
   val __arr = array0_make_elt (2, JSONnul ())
   val () = __arr[0] := JSONstring ("D2Ef0loat")
-  val () = __arr[0] := jsonize_f0loat(__e0)
+  val () = __arr[1] := jsonize_f0loat(__e1)
 in
   JSONarray (__arr)
 end
-| $D2E.D2Es0tring (__e0) => let
+| $D2E.D2Es0tring (__e1) => let
   val __arr = array0_make_elt (2, JSONnul ())
   val () = __arr[0] := JSONstring ("D2Es0tring")
-  val () = __arr[0] := jsonize_s0tring(__e0)
+  val () = __arr[1] := jsonize_s0tring(__e1)
 in
   JSONarray (__arr)
 end
@@ -2169,10 +2193,10 @@ end
 in
   JSONarray (__arr)
 end
-| $D2E.D2Etop2 (__e0) => let
+| $D2E.D2Etop2 (__e1) => let
   val __arr = array0_make_elt (2, JSONnul ())
   val () = __arr[0] := JSONstring ("D2Etop2")
-  val () = __arr[0] := jsonize_s2exp(__e0)
+  val () = __arr[1] := jsonize_s2exp(__e1)
 in
   JSONarray (__arr)
 end
@@ -2182,430 +2206,430 @@ end
 in
   JSONarray (__arr)
 end
-| $D2E.D2Ecstsp (__e0) => let
+| $D2E.D2Ecstsp (__e1) => let
   val __arr = array0_make_elt (2, JSONnul ())
   val () = __arr[0] := JSONstring ("D2Ecstsp")
-  val () = __arr[0] := jsonize_cstsp(__e0)
+  val () = __arr[1] := jsonize_cstsp(__e1)
 in
   JSONarray (__arr)
 end
-| $D2E.D2Eextval (__e0,__e1) => let
+| $D2E.D2Eextval (__e1,__e2) => let
   val __arr = array0_make_elt (3, JSONnul ())
   val () = __arr[0] := JSONstring ("D2Eextval")
-  val () = __arr[0] := jsonize_s2exp(__e0)
-  val () = __arr[1] := jsonize_string (__e1)
+  val () = __arr[1] := jsonize_s2exp(__e1)
+  val () = __arr[2] := jsonize_string (__e2)
 in
   JSONarray (__arr)
 end
-| $D2E.D2Eextfcall (__e0,__e1,__e2) => let
+| $D2E.D2Eextfcall (__e1,__e2,__e3) => let
   val __arr = array0_make_elt (4, JSONnul ())
   val () = __arr[0] := JSONstring ("D2Eextfcall")
-  val () = __arr[0] := jsonize_s2exp(__e0)
-  val () = __arr[1] := jsonize_string (__e1)
-  val () = __arr[2] := jsonize_d2explst(__e2)
-in
-  JSONarray (__arr)
-end
-| $D2E.D2Econ (__e0,__e1,__e2,__e3,__e4,__e5) => let
-  val __arr = array0_make_elt (7, JSONnul ())
-  val () = __arr[0] := JSONstring ("D2Econ")
-  val () = __arr[0] := jsonize_d2con(__e0)
-  val () = __arr[1] := jsonize_location(__e1)
-  val () = __arr[2] := jsonize_s2exparglst(__e2)
-  val () = __arr[3] := jsonize_int (__e3)
-  val () = __arr[4] := jsonize_location(__e4)
-  val () = __arr[5] := jsonize_d2explst(__e5)
-in
-  JSONarray (__arr)
-end
-| $D2E.D2Esym (__e0) => let
-  val __arr = array0_make_elt (2, JSONnul ())
-  val () = __arr[0] := JSONstring ("D2Esym")
-  val () = __arr[0] := jsonize_d2sym(__e0)
-in
-  JSONarray (__arr)
-end
-| $D2E.D2Efoldat (__e0,__e1) => let
-  val __arr = array0_make_elt (3, JSONnul ())
-  val () = __arr[0] := JSONstring ("D2Efoldat")
-  val () = __arr[0] := jsonize_s2exparglst(__e0)
-  val () = __arr[1] := jsonize_d2exp(__e1)
-in
-  JSONarray (__arr)
-end
-| $D2E.D2Efreeat (__e0,__e1) => let
-  val __arr = array0_make_elt (3, JSONnul ())
-  val () = __arr[0] := JSONstring ("D2Efreeat")
-  val () = __arr[0] := jsonize_s2exparglst(__e0)
-  val () = __arr[1] := jsonize_d2exp(__e1)
-in
-  JSONarray (__arr)
-end
-| $D2E.D2Etmpid (__e0,__e1) => let
-  val __arr = array0_make_elt (3, JSONnul ())
-  val () = __arr[0] := JSONstring ("D2Etmpid")
-  val () = __arr[0] := jsonize_d2exp(__e0)
-  val () = __arr[1] := jsonize_t2mpmarglst(__e1)
-in
-  JSONarray (__arr)
-end
-| $D2E.D2Elet (__e0,__e1) => let
-  val __arr = array0_make_elt (3, JSONnul ())
-  val () = __arr[0] := JSONstring ("D2Elet")
-  val () = __arr[0] := jsonize_d2eclist(__e0)
-  val () = __arr[1] := jsonize_d2exp(__e1)
-in
-  JSONarray (__arr)
-end
-| $D2E.D2Ewhere (__e0,__e1) => let
-  val __arr = array0_make_elt (3, JSONnul ())
-  val () = __arr[0] := JSONstring ("D2Ewhere")
-  val () = __arr[0] := jsonize_d2exp(__e0)
-  val () = __arr[1] := jsonize_d2eclist(__e1)
-in
-  JSONarray (__arr)
-end
-| $D2E.D2Eapplst (__e0,__e1) => let
-  val __arr = array0_make_elt (3, JSONnul ())
-  val () = __arr[0] := JSONstring ("D2Eapplst")
-  val () = __arr[0] := jsonize_d2exp(__e0)
-  val () = __arr[1] := jsonize_d2exparglst(__e1)
-in
-  JSONarray (__arr)
-end
-| $D2E.D2Eifhead (__e0,__e1,__e2,__e3) => let
-  val __arr = array0_make_elt (5, JSONnul ())
-  val () = __arr[0] := JSONstring ("D2Eifhead")
-  val () = __arr[0] := jsonize_i2nvresstate(__e0)
-  val () = __arr[1] := jsonize_d2exp(__e1)
-  val () = __arr[2] := jsonize_d2exp(__e2)
-  val () = __arr[3] := jsonize_d2expopt(__e3)
-in
-  JSONarray (__arr)
-end
-| $D2E.D2Esifhead (__e0,__e1,__e2,__e3) => let
-  val __arr = array0_make_elt (5, JSONnul ())
-  val () = __arr[0] := JSONstring ("D2Esifhead")
-  val () = __arr[0] := jsonize_i2nvresstate(__e0)
   val () = __arr[1] := jsonize_s2exp(__e1)
-  val () = __arr[2] := jsonize_d2exp(__e2)
-  val () = __arr[3] := jsonize_d2exp(__e3)
-in
-  JSONarray (__arr)
-end
-| $D2E.D2Ecasehead (__e0,__e1,__e2,__e3) => let
-  val __arr = array0_make_elt (5, JSONnul ())
-  val () = __arr[0] := JSONstring ("D2Ecasehead")
-  val () = __arr[0] := jsonize_caskind(__e0)
-  val () = __arr[1] := jsonize_i2nvresstate(__e1)
-  val () = __arr[2] := jsonize_d2explst(__e2)
-  val () = __arr[3] := jsonize_c2laulst(__e3)
-in
-  JSONarray (__arr)
-end
-| $D2E.D2Escasehead (__e0,__e1,__e2) => let
-  val __arr = array0_make_elt (4, JSONnul ())
-  val () = __arr[0] := JSONstring ("D2Escasehead")
-  val () = __arr[0] := jsonize_i2nvresstate(__e0)
-  val () = __arr[1] := jsonize_s2exp(__e1)
-  val () = __arr[2] := jsonize_sc2laulst(__e2)
-in
-  JSONarray (__arr)
-end
-| $D2E.D2Elist (__e0,__e1) => let
-  val __arr = array0_make_elt (3, JSONnul ())
-  val () = __arr[0] := JSONstring ("D2Elist")
-  val () = __arr[0] := jsonize_int (__e0)
-  val () = __arr[1] := jsonize_d2explst(__e1)
-in
-  JSONarray (__arr)
-end
-| $D2E.D2Elst (__e0,__e1,__e2) => let
-  val __arr = array0_make_elt (4, JSONnul ())
-  val () = __arr[0] := JSONstring ("D2Elst")
-  val () = __arr[0] := jsonize_int (__e0)
-  val () = __arr[1] := jsonize_s2expopt(__e1)
-  val () = __arr[2] := jsonize_d2explst(__e2)
-in
-  JSONarray (__arr)
-end
-| $D2E.D2Etup (__e0,__e1,__e2) => let
-  val __arr = array0_make_elt (4, JSONnul ())
-  val () = __arr[0] := JSONstring ("D2Etup")
-  val () = __arr[0] := jsonize_int (__e0)
-  val () = __arr[1] := jsonize_int (__e1)
-  val () = __arr[2] := jsonize_d2explst(__e2)
-in
-  JSONarray (__arr)
-end
-| $D2E.D2Erec (__e0,__e1,__e2) => let
-  val __arr = array0_make_elt (4, JSONnul ())
-  val () = __arr[0] := JSONstring ("D2Erec")
-  val () = __arr[0] := jsonize_int (__e0)
-  val () = __arr[1] := jsonize_int (__e1)
-  val () = __arr[2] := jsonize_labd2explst(__e2)
-in
-  JSONarray (__arr)
-end
-| $D2E.D2Eseq (__e0) => let
-  val __arr = array0_make_elt (2, JSONnul ())
-  val () = __arr[0] := JSONstring ("D2Eseq")
-  val () = __arr[0] := jsonize_d2explst(__e0)
-in
-  JSONarray (__arr)
-end
-| $D2E.D2Eselab (__e0,__e1) => let
-  val __arr = array0_make_elt (3, JSONnul ())
-  val () = __arr[0] := JSONstring ("D2Eselab")
-  val () = __arr[0] := jsonize_d2exp(__e0)
-  val () = __arr[1] := jsonize_d2lablst(__e1)
-in
-  JSONarray (__arr)
-end
-| $D2E.D2Eptrof (__e0) => let
-  val __arr = array0_make_elt (2, JSONnul ())
-  val () = __arr[0] := JSONstring ("D2Eptrof")
-  val () = __arr[0] := jsonize_d2exp(__e0)
-in
-  JSONarray (__arr)
-end
-| $D2E.D2Eviewat (__e0) => let
-  val __arr = array0_make_elt (2, JSONnul ())
-  val () = __arr[0] := JSONstring ("D2Eviewat")
-  val () = __arr[0] := jsonize_d2exp(__e0)
-in
-  JSONarray (__arr)
-end
-| $D2E.D2Ederef (__e0) => let
-  val __arr = array0_make_elt (2, JSONnul ())
-  val () = __arr[0] := JSONstring ("D2Ederef")
-  val () = __arr[0] := jsonize_d2exp(__e0)
-in
-  JSONarray (__arr)
-end
-| $D2E.D2Eassgn (__e0,__e1) => let
-  val __arr = array0_make_elt (3, JSONnul ())
-  val () = __arr[0] := JSONstring ("D2Eassgn")
-  val () = __arr[0] := jsonize_d2exp(__e0)
-  val () = __arr[1] := jsonize_d2exp(__e1)
-in
-  JSONarray (__arr)
-end
-| $D2E.D2Exchng (__e0,__e1) => let
-  val __arr = array0_make_elt (3, JSONnul ())
-  val () = __arr[0] := JSONstring ("D2Exchng")
-  val () = __arr[0] := jsonize_d2exp(__e0)
-  val () = __arr[1] := jsonize_d2exp(__e1)
-in
-  JSONarray (__arr)
-end
-| $D2E.D2Earrsub (__e0,__e1,__e2,__e3) => let
-  val __arr = array0_make_elt (5, JSONnul ())
-  val () = __arr[0] := JSONstring ("D2Earrsub")
-  val () = __arr[0] := jsonize_d2sym(__e0)
-  val () = __arr[1] := jsonize_d2exp(__e1)
-  val () = __arr[2] := jsonize_location(__e2)
+  val () = __arr[2] := jsonize_string (__e2)
   val () = __arr[3] := jsonize_d2explst(__e3)
 in
   JSONarray (__arr)
 end
-| $D2E.D2Earrpsz (__e0,__e1) => let
-  val __arr = array0_make_elt (3, JSONnul ())
-  val () = __arr[0] := JSONstring ("D2Earrpsz")
-  val () = __arr[0] := jsonize_s2expopt(__e0)
-  val () = __arr[1] := jsonize_d2explst(__e1)
+| $D2E.D2Econ (__e1,__e2,__e3,__e4,__e5,__e6) => let
+  val __arr = array0_make_elt (7, JSONnul ())
+  val () = __arr[0] := JSONstring ("D2Econ")
+  val () = __arr[1] := jsonize_d2con(__e1)
+  val () = __arr[2] := jsonize_location(__e2)
+  val () = __arr[3] := jsonize_s2exparglst(__e3)
+  val () = __arr[4] := jsonize_int (__e4)
+  val () = __arr[5] := jsonize_location(__e5)
+  val () = __arr[6] := jsonize_d2explst(__e6)
 in
   JSONarray (__arr)
 end
-| $D2E.D2Earrinit (__e0,__e1,__e2) => let
-  val __arr = array0_make_elt (4, JSONnul ())
-  val () = __arr[0] := JSONstring ("D2Earrinit")
-  val () = __arr[0] := jsonize_s2exp(__e0)
-  val () = __arr[1] := jsonize_d2expopt(__e1)
-  val () = __arr[2] := jsonize_d2explst(__e2)
-in
-  JSONarray (__arr)
-end
-| $D2E.D2Eraise (__e0) => let
+| $D2E.D2Esym (__e1) => let
   val __arr = array0_make_elt (2, JSONnul ())
-  val () = __arr[0] := JSONstring ("D2Eraise")
-  val () = __arr[0] := jsonize_d2exp(__e0)
+  val () = __arr[0] := JSONstring ("D2Esym")
+  val () = __arr[1] := jsonize_d2sym(__e1)
 in
   JSONarray (__arr)
 end
-| $D2E.D2Eeffmask (__e0,__e1) => let
+| $D2E.D2Efoldat (__e1,__e2) => let
   val __arr = array0_make_elt (3, JSONnul ())
-  val () = __arr[0] := JSONstring ("D2Eeffmask")
-  val () = __arr[0] := jsonize_s2eff(__e0)
-  val () = __arr[1] := jsonize_d2exp(__e1)
+  val () = __arr[0] := JSONstring ("D2Efoldat")
+  val () = __arr[1] := jsonize_s2exparglst(__e1)
+  val () = __arr[2] := jsonize_d2exp(__e2)
 in
   JSONarray (__arr)
 end
-| $D2E.D2Eshowtype (__e0) => let
-  val __arr = array0_make_elt (2, JSONnul ())
-  val () = __arr[0] := JSONstring ("D2Eshowtype")
-  val () = __arr[0] := jsonize_d2exp(__e0)
-in
-  JSONarray (__arr)
-end
-| $D2E.D2Evcopyenv (__e0,__e1) => let
+| $D2E.D2Efreeat (__e1,__e2) => let
   val __arr = array0_make_elt (3, JSONnul ())
-  val () = __arr[0] := JSONstring ("D2Evcopyenv")
-  val () = __arr[0] := jsonize_int (__e0)
-  val () = __arr[1] := jsonize_d2exp(__e1)
+  val () = __arr[0] := JSONstring ("D2Efreeat")
+  val () = __arr[1] := jsonize_s2exparglst(__e1)
+  val () = __arr[2] := jsonize_d2exp(__e2)
 in
   JSONarray (__arr)
 end
-| $D2E.D2Eexist (__e0,__e1) => let
+| $D2E.D2Etmpid (__e1,__e2) => let
   val __arr = array0_make_elt (3, JSONnul ())
-  val () = __arr[0] := JSONstring ("D2Eexist")
-  val () = __arr[0] := jsonize_s2exparg(__e0)
+  val () = __arr[0] := JSONstring ("D2Etmpid")
   val () = __arr[1] := jsonize_d2exp(__e1)
+  val () = __arr[2] := jsonize_t2mpmarglst(__e2)
 in
   JSONarray (__arr)
 end
-| $D2E.D2Elam_dyn (__e0,__e1,__e2,__e3) => let
+| $D2E.D2Elet (__e1,__e2) => let
+  val __arr = array0_make_elt (3, JSONnul ())
+  val () = __arr[0] := JSONstring ("D2Elet")
+  val () = __arr[1] := jsonize_d2eclist(__e1)
+  val () = __arr[2] := jsonize_d2exp(__e2)
+in
+  JSONarray (__arr)
+end
+| $D2E.D2Ewhere (__e1,__e2) => let
+  val __arr = array0_make_elt (3, JSONnul ())
+  val () = __arr[0] := JSONstring ("D2Ewhere")
+  val () = __arr[1] := jsonize_d2exp(__e1)
+  val () = __arr[2] := jsonize_d2eclist(__e2)
+in
+  JSONarray (__arr)
+end
+| $D2E.D2Eapplst (__e1,__e2) => let
+  val __arr = array0_make_elt (3, JSONnul ())
+  val () = __arr[0] := JSONstring ("D2Eapplst")
+  val () = __arr[1] := jsonize_d2exp(__e1)
+  val () = __arr[2] := jsonize_d2exparglst(__e2)
+in
+  JSONarray (__arr)
+end
+| $D2E.D2Eifhead (__e1,__e2,__e3,__e4) => let
   val __arr = array0_make_elt (5, JSONnul ())
-  val () = __arr[0] := JSONstring ("D2Elam_dyn")
-  val () = __arr[0] := jsonize_int (__e0)
-  val () = __arr[1] := jsonize_int (__e1)
-  val () = __arr[2] := jsonize_p2atlst(__e2)
+  val () = __arr[0] := JSONstring ("D2Eifhead")
+  val () = __arr[1] := jsonize_i2nvresstate(__e1)
+  val () = __arr[2] := jsonize_d2exp(__e2)
   val () = __arr[3] := jsonize_d2exp(__e3)
+  val () = __arr[4] := jsonize_d2expopt(__e4)
 in
   JSONarray (__arr)
 end
-| $D2E.D2Elaminit_dyn (__e0,__e1,__e2,__e3) => let
+| $D2E.D2Esifhead (__e1,__e2,__e3,__e4) => let
   val __arr = array0_make_elt (5, JSONnul ())
-  val () = __arr[0] := JSONstring ("D2Elaminit_dyn")
-  val () = __arr[0] := jsonize_int (__e0)
-  val () = __arr[1] := jsonize_int (__e1)
-  val () = __arr[2] := jsonize_p2atlst(__e2)
-  val () = __arr[3] := jsonize_d2exp(__e3)
-in
-  JSONarray (__arr)
-end
-| $D2E.D2Elam_met (__e0,__e1,__e2) => let
-  val __arr = array0_make_elt (4, JSONnul ())
-  val () = __arr[0] := JSONstring ("D2Elam_met")
-  val () = __arr[0] := jsonize_ref ()
-  val () = __arr[1] := jsonize_s2explst(__e1)
-  val () = __arr[2] := jsonize_d2exp(__e2)
-in
-  JSONarray (__arr)
-end
-| $D2E.D2Elam_sta (__e0,__e1,__e2) => let
-  val __arr = array0_make_elt (4, JSONnul ())
-  val () = __arr[0] := JSONstring ("D2Elam_sta")
-  val () = __arr[0] := jsonize_s2varlst(__e0)
-  val () = __arr[1] := jsonize_s2explst(__e1)
-  val () = __arr[2] := jsonize_d2exp(__e2)
-in
-  JSONarray (__arr)
-end
-| $D2E.D2Efix (__e0,__e1,__e2) => let
-  val __arr = array0_make_elt (4, JSONnul ())
-  val () = __arr[0] := JSONstring ("D2Efix")
-  val () = __arr[0] := jsonize_int (__e0)
-  val () = __arr[1] := jsonize_d2var(__e1)
-  val () = __arr[2] := jsonize_d2exp(__e2)
-in
-  JSONarray (__arr)
-end
-| $D2E.D2Edelay (__e0) => let
-  val __arr = array0_make_elt (2, JSONnul ())
-  val () = __arr[0] := JSONstring ("D2Edelay")
-  val () = __arr[0] := jsonize_d2exp(__e0)
-in
-  JSONarray (__arr)
-end
-| $D2E.D2Eldelay (__e0,__e1) => let
-  val __arr = array0_make_elt (3, JSONnul ())
-  val () = __arr[0] := JSONstring ("D2Eldelay")
-  val () = __arr[0] := jsonize_d2exp(__e0)
-  val () = __arr[1] := jsonize_d2expopt(__e1)
-in
-  JSONarray (__arr)
-end
-| $D2E.D2Efor (__e0,__e1,__e2,__e3,__e4) => let
-  val __arr = array0_make_elt (6, JSONnul ())
-  val () = __arr[0] := JSONstring ("D2Efor")
-  val () = __arr[0] := jsonize_loopi2nv(__e0)
-  val () = __arr[1] := jsonize_d2exp(__e1)
-  val () = __arr[2] := jsonize_d2exp(__e2)
+  val () = __arr[0] := JSONstring ("D2Esifhead")
+  val () = __arr[1] := jsonize_i2nvresstate(__e1)
+  val () = __arr[2] := jsonize_s2exp(__e2)
   val () = __arr[3] := jsonize_d2exp(__e3)
   val () = __arr[4] := jsonize_d2exp(__e4)
 in
   JSONarray (__arr)
 end
-| $D2E.D2Ewhile (__e0,__e1,__e2) => let
+| $D2E.D2Ecasehead (__e1,__e2,__e3,__e4) => let
+  val __arr = array0_make_elt (5, JSONnul ())
+  val () = __arr[0] := JSONstring ("D2Ecasehead")
+  val () = __arr[1] := jsonize_caskind(__e1)
+  val () = __arr[2] := jsonize_i2nvresstate(__e2)
+  val () = __arr[3] := jsonize_d2explst(__e3)
+  val () = __arr[4] := jsonize_c2laulst(__e4)
+in
+  JSONarray (__arr)
+end
+| $D2E.D2Escasehead (__e1,__e2,__e3) => let
   val __arr = array0_make_elt (4, JSONnul ())
-  val () = __arr[0] := JSONstring ("D2Ewhile")
-  val () = __arr[0] := jsonize_loopi2nv(__e0)
+  val () = __arr[0] := JSONstring ("D2Escasehead")
+  val () = __arr[1] := jsonize_i2nvresstate(__e1)
+  val () = __arr[2] := jsonize_s2exp(__e2)
+  val () = __arr[3] := jsonize_sc2laulst(__e3)
+in
+  JSONarray (__arr)
+end
+| $D2E.D2Elist (__e1,__e2) => let
+  val __arr = array0_make_elt (3, JSONnul ())
+  val () = __arr[0] := JSONstring ("D2Elist")
+  val () = __arr[1] := jsonize_int (__e1)
+  val () = __arr[2] := jsonize_d2explst(__e2)
+in
+  JSONarray (__arr)
+end
+| $D2E.D2Elst (__e1,__e2,__e3) => let
+  val __arr = array0_make_elt (4, JSONnul ())
+  val () = __arr[0] := JSONstring ("D2Elst")
+  val () = __arr[1] := jsonize_int (__e1)
+  val () = __arr[2] := jsonize_s2expopt(__e2)
+  val () = __arr[3] := jsonize_d2explst(__e3)
+in
+  JSONarray (__arr)
+end
+| $D2E.D2Etup (__e1,__e2,__e3) => let
+  val __arr = array0_make_elt (4, JSONnul ())
+  val () = __arr[0] := JSONstring ("D2Etup")
+  val () = __arr[1] := jsonize_int (__e1)
+  val () = __arr[2] := jsonize_int (__e2)
+  val () = __arr[3] := jsonize_d2explst(__e3)
+in
+  JSONarray (__arr)
+end
+| $D2E.D2Erec (__e1,__e2,__e3) => let
+  val __arr = array0_make_elt (4, JSONnul ())
+  val () = __arr[0] := JSONstring ("D2Erec")
+  val () = __arr[1] := jsonize_int (__e1)
+  val () = __arr[2] := jsonize_int (__e2)
+  val () = __arr[3] := jsonize_labd2explst(__e3)
+in
+  JSONarray (__arr)
+end
+| $D2E.D2Eseq (__e1) => let
+  val __arr = array0_make_elt (2, JSONnul ())
+  val () = __arr[0] := JSONstring ("D2Eseq")
+  val () = __arr[1] := jsonize_d2explst(__e1)
+in
+  JSONarray (__arr)
+end
+| $D2E.D2Eselab (__e1,__e2) => let
+  val __arr = array0_make_elt (3, JSONnul ())
+  val () = __arr[0] := JSONstring ("D2Eselab")
+  val () = __arr[1] := jsonize_d2exp(__e1)
+  val () = __arr[2] := jsonize_d2lablst(__e2)
+in
+  JSONarray (__arr)
+end
+| $D2E.D2Eptrof (__e1) => let
+  val __arr = array0_make_elt (2, JSONnul ())
+  val () = __arr[0] := JSONstring ("D2Eptrof")
+  val () = __arr[1] := jsonize_d2exp(__e1)
+in
+  JSONarray (__arr)
+end
+| $D2E.D2Eviewat (__e1) => let
+  val __arr = array0_make_elt (2, JSONnul ())
+  val () = __arr[0] := JSONstring ("D2Eviewat")
+  val () = __arr[1] := jsonize_d2exp(__e1)
+in
+  JSONarray (__arr)
+end
+| $D2E.D2Ederef (__e1) => let
+  val __arr = array0_make_elt (2, JSONnul ())
+  val () = __arr[0] := JSONstring ("D2Ederef")
+  val () = __arr[1] := jsonize_d2exp(__e1)
+in
+  JSONarray (__arr)
+end
+| $D2E.D2Eassgn (__e1,__e2) => let
+  val __arr = array0_make_elt (3, JSONnul ())
+  val () = __arr[0] := JSONstring ("D2Eassgn")
   val () = __arr[1] := jsonize_d2exp(__e1)
   val () = __arr[2] := jsonize_d2exp(__e2)
 in
   JSONarray (__arr)
 end
-| $D2E.D2Eloopexn (__e0) => let
+| $D2E.D2Exchng (__e1,__e2) => let
+  val __arr = array0_make_elt (3, JSONnul ())
+  val () = __arr[0] := JSONstring ("D2Exchng")
+  val () = __arr[1] := jsonize_d2exp(__e1)
+  val () = __arr[2] := jsonize_d2exp(__e2)
+in
+  JSONarray (__arr)
+end
+| $D2E.D2Earrsub (__e1,__e2,__e3,__e4) => let
+  val __arr = array0_make_elt (5, JSONnul ())
+  val () = __arr[0] := JSONstring ("D2Earrsub")
+  val () = __arr[1] := jsonize_d2sym(__e1)
+  val () = __arr[2] := jsonize_d2exp(__e2)
+  val () = __arr[3] := jsonize_location(__e3)
+  val () = __arr[4] := jsonize_d2explst(__e4)
+in
+  JSONarray (__arr)
+end
+| $D2E.D2Earrpsz (__e1,__e2) => let
+  val __arr = array0_make_elt (3, JSONnul ())
+  val () = __arr[0] := JSONstring ("D2Earrpsz")
+  val () = __arr[1] := jsonize_s2expopt(__e1)
+  val () = __arr[2] := jsonize_d2explst(__e2)
+in
+  JSONarray (__arr)
+end
+| $D2E.D2Earrinit (__e1,__e2,__e3) => let
+  val __arr = array0_make_elt (4, JSONnul ())
+  val () = __arr[0] := JSONstring ("D2Earrinit")
+  val () = __arr[1] := jsonize_s2exp(__e1)
+  val () = __arr[2] := jsonize_d2expopt(__e2)
+  val () = __arr[3] := jsonize_d2explst(__e3)
+in
+  JSONarray (__arr)
+end
+| $D2E.D2Eraise (__e1) => let
+  val __arr = array0_make_elt (2, JSONnul ())
+  val () = __arr[0] := JSONstring ("D2Eraise")
+  val () = __arr[1] := jsonize_d2exp(__e1)
+in
+  JSONarray (__arr)
+end
+| $D2E.D2Eeffmask (__e1,__e2) => let
+  val __arr = array0_make_elt (3, JSONnul ())
+  val () = __arr[0] := JSONstring ("D2Eeffmask")
+  val () = __arr[1] := jsonize_s2eff(__e1)
+  val () = __arr[2] := jsonize_d2exp(__e2)
+in
+  JSONarray (__arr)
+end
+| $D2E.D2Eshowtype (__e1) => let
+  val __arr = array0_make_elt (2, JSONnul ())
+  val () = __arr[0] := JSONstring ("D2Eshowtype")
+  val () = __arr[1] := jsonize_d2exp(__e1)
+in
+  JSONarray (__arr)
+end
+| $D2E.D2Evcopyenv (__e1,__e2) => let
+  val __arr = array0_make_elt (3, JSONnul ())
+  val () = __arr[0] := JSONstring ("D2Evcopyenv")
+  val () = __arr[1] := jsonize_int (__e1)
+  val () = __arr[2] := jsonize_d2exp(__e2)
+in
+  JSONarray (__arr)
+end
+| $D2E.D2Eexist (__e1,__e2) => let
+  val __arr = array0_make_elt (3, JSONnul ())
+  val () = __arr[0] := JSONstring ("D2Eexist")
+  val () = __arr[1] := jsonize_s2exparg(__e1)
+  val () = __arr[2] := jsonize_d2exp(__e2)
+in
+  JSONarray (__arr)
+end
+| $D2E.D2Elam_dyn (__e1,__e2,__e3,__e4) => let
+  val __arr = array0_make_elt (5, JSONnul ())
+  val () = __arr[0] := JSONstring ("D2Elam_dyn")
+  val () = __arr[1] := jsonize_int (__e1)
+  val () = __arr[2] := jsonize_int (__e2)
+  val () = __arr[3] := jsonize_p2atlst(__e3)
+  val () = __arr[4] := jsonize_d2exp(__e4)
+in
+  JSONarray (__arr)
+end
+| $D2E.D2Elaminit_dyn (__e1,__e2,__e3,__e4) => let
+  val __arr = array0_make_elt (5, JSONnul ())
+  val () = __arr[0] := JSONstring ("D2Elaminit_dyn")
+  val () = __arr[1] := jsonize_int (__e1)
+  val () = __arr[2] := jsonize_int (__e2)
+  val () = __arr[3] := jsonize_p2atlst(__e3)
+  val () = __arr[4] := jsonize_d2exp(__e4)
+in
+  JSONarray (__arr)
+end
+| $D2E.D2Elam_met (__e1,__e2,__e3) => let
+  val __arr = array0_make_elt (4, JSONnul ())
+  val () = __arr[0] := JSONstring ("D2Elam_met")
+  val () = __arr[1] := jsonize_ref ()
+  val () = __arr[2] := jsonize_s2explst(__e2)
+  val () = __arr[3] := jsonize_d2exp(__e3)
+in
+  JSONarray (__arr)
+end
+| $D2E.D2Elam_sta (__e1,__e2,__e3) => let
+  val __arr = array0_make_elt (4, JSONnul ())
+  val () = __arr[0] := JSONstring ("D2Elam_sta")
+  val () = __arr[1] := jsonize_s2varlst(__e1)
+  val () = __arr[2] := jsonize_s2explst(__e2)
+  val () = __arr[3] := jsonize_d2exp(__e3)
+in
+  JSONarray (__arr)
+end
+| $D2E.D2Efix (__e1,__e2,__e3) => let
+  val __arr = array0_make_elt (4, JSONnul ())
+  val () = __arr[0] := JSONstring ("D2Efix")
+  val () = __arr[1] := jsonize_int (__e1)
+  val () = __arr[2] := jsonize_d2var(__e2)
+  val () = __arr[3] := jsonize_d2exp(__e3)
+in
+  JSONarray (__arr)
+end
+| $D2E.D2Edelay (__e1) => let
+  val __arr = array0_make_elt (2, JSONnul ())
+  val () = __arr[0] := JSONstring ("D2Edelay")
+  val () = __arr[1] := jsonize_d2exp(__e1)
+in
+  JSONarray (__arr)
+end
+| $D2E.D2Eldelay (__e1,__e2) => let
+  val __arr = array0_make_elt (3, JSONnul ())
+  val () = __arr[0] := JSONstring ("D2Eldelay")
+  val () = __arr[1] := jsonize_d2exp(__e1)
+  val () = __arr[2] := jsonize_d2expopt(__e2)
+in
+  JSONarray (__arr)
+end
+| $D2E.D2Efor (__e1,__e2,__e3,__e4,__e5) => let
+  val __arr = array0_make_elt (6, JSONnul ())
+  val () = __arr[0] := JSONstring ("D2Efor")
+  val () = __arr[1] := jsonize_loopi2nv(__e1)
+  val () = __arr[2] := jsonize_d2exp(__e2)
+  val () = __arr[3] := jsonize_d2exp(__e3)
+  val () = __arr[4] := jsonize_d2exp(__e4)
+  val () = __arr[5] := jsonize_d2exp(__e5)
+in
+  JSONarray (__arr)
+end
+| $D2E.D2Ewhile (__e1,__e2,__e3) => let
+  val __arr = array0_make_elt (4, JSONnul ())
+  val () = __arr[0] := JSONstring ("D2Ewhile")
+  val () = __arr[1] := jsonize_loopi2nv(__e1)
+  val () = __arr[2] := jsonize_d2exp(__e2)
+  val () = __arr[3] := jsonize_d2exp(__e3)
+in
+  JSONarray (__arr)
+end
+| $D2E.D2Eloopexn (__e1) => let
   val __arr = array0_make_elt (2, JSONnul ())
   val () = __arr[0] := JSONstring ("D2Eloopexn")
-  val () = __arr[0] := jsonize_int (__e0)
+  val () = __arr[1] := jsonize_int (__e1)
 in
   JSONarray (__arr)
 end
-| $D2E.D2Etrywith (__e0,__e1,__e2) => let
+| $D2E.D2Etrywith (__e1,__e2,__e3) => let
   val __arr = array0_make_elt (4, JSONnul ())
   val () = __arr[0] := JSONstring ("D2Etrywith")
-  val () = __arr[0] := jsonize_i2nvresstate(__e0)
-  val () = __arr[1] := jsonize_d2exp(__e1)
-  val () = __arr[2] := jsonize_c2laulst(__e2)
+  val () = __arr[1] := jsonize_i2nvresstate(__e1)
+  val () = __arr[2] := jsonize_d2exp(__e2)
+  val () = __arr[3] := jsonize_c2laulst(__e3)
 in
   JSONarray (__arr)
 end
-| $D2E.D2Emac (__e0) => let
+| $D2E.D2Emac (__e1) => let
   val __arr = array0_make_elt (2, JSONnul ())
   val () = __arr[0] := JSONstring ("D2Emac")
-  val () = __arr[0] := jsonize_d2mac(__e0)
+  val () = __arr[1] := jsonize_d2mac(__e1)
 in
   JSONarray (__arr)
 end
-| $D2E.D2Emacsyn (__e0,__e1) => let
+| $D2E.D2Emacsyn (__e1,__e2) => let
   val __arr = array0_make_elt (3, JSONnul ())
   val () = __arr[0] := JSONstring ("D2Emacsyn")
-  val () = __arr[0] := jsonize_macsynkind(__e0)
-  val () = __arr[1] := jsonize_d2exp(__e1)
+  val () = __arr[1] := jsonize_macsynkind(__e1)
+  val () = __arr[2] := jsonize_d2exp(__e2)
 in
   JSONarray (__arr)
 end
-| $D2E.D2Emacfun (__e0,__e1) => let
+| $D2E.D2Emacfun (__e1,__e2) => let
   val __arr = array0_make_elt (3, JSONnul ())
   val () = __arr[0] := JSONstring ("D2Emacfun")
-  val () = __arr[0] := jsonize_symbol(__e0)
-  val () = __arr[1] := jsonize_d2explst(__e1)
+  val () = __arr[1] := jsonize_symbol(__e1)
+  val () = __arr[2] := jsonize_d2explst(__e2)
 in
   JSONarray (__arr)
 end
-| $D2E.D2Eann_type (__e0,__e1) => let
+| $D2E.D2Eann_type (__e1,__e2) => let
   val __arr = array0_make_elt (3, JSONnul ())
   val () = __arr[0] := JSONstring ("D2Eann_type")
-  val () = __arr[0] := jsonize_d2exp(__e0)
-  val () = __arr[1] := jsonize_s2exp(__e1)
+  val () = __arr[1] := jsonize_d2exp(__e1)
+  val () = __arr[2] := jsonize_s2exp(__e2)
 in
   JSONarray (__arr)
 end
-| $D2E.D2Eann_seff (__e0,__e1) => let
+| $D2E.D2Eann_seff (__e1,__e2) => let
   val __arr = array0_make_elt (3, JSONnul ())
   val () = __arr[0] := JSONstring ("D2Eann_seff")
-  val () = __arr[0] := jsonize_d2exp(__e0)
-  val () = __arr[1] := jsonize_s2eff(__e1)
+  val () = __arr[1] := jsonize_d2exp(__e1)
+  val () = __arr[2] := jsonize_s2eff(__e2)
 in
   JSONarray (__arr)
 end
-| $D2E.D2Eann_funclo (__e0,__e1) => let
+| $D2E.D2Eann_funclo (__e1,__e2) => let
   val __arr = array0_make_elt (3, JSONnul ())
   val () = __arr[0] := JSONstring ("D2Eann_funclo")
-  val () = __arr[0] := jsonize_d2exp(__e0)
-  val () = __arr[1] := jsonize_funclo(__e1)
+  val () = __arr[1] := jsonize_d2exp(__e1)
+  val () = __arr[2] := jsonize_funclo(__e2)
 in
   JSONarray (__arr)
 end
@@ -2624,78 +2648,78 @@ case+ x of
 in
   JSONarray (__arr)
 end
-| $D2E.P2Tvar (__e0) => let
+| $D2E.P2Tvar (__e1) => let
   val __arr = array0_make_elt (2, JSONnul ())
   val () = __arr[0] := JSONstring ("P2Tvar")
-  val () = __arr[0] := jsonize_d2var(__e0)
+  val () = __arr[1] := jsonize_d2var(__e1)
 in
   JSONarray (__arr)
 end
-| $D2E.P2Tcon (__e0,__e1,__e2,__e3,__e4,__e5) => let
+| $D2E.P2Tcon (__e1,__e2,__e3,__e4,__e5,__e6) => let
   val __arr = array0_make_elt (7, JSONnul ())
   val () = __arr[0] := JSONstring ("P2Tcon")
-  val () = __arr[0] := jsonize_pckind(__e0)
-  val () = __arr[1] := jsonize_d2con(__e1)
-  val () = __arr[2] := jsonize_s2qualst(__e2)
-  val () = __arr[3] := jsonize_s2exp(__e3)
-  val () = __arr[4] := jsonize_int (__e4)
-  val () = __arr[5] := jsonize_p2atlst(__e5)
+  val () = __arr[1] := jsonize_pckind(__e1)
+  val () = __arr[2] := jsonize_d2con(__e2)
+  val () = __arr[3] := jsonize_s2qualst(__e3)
+  val () = __arr[4] := jsonize_s2exp(__e4)
+  val () = __arr[5] := jsonize_int (__e5)
+  val () = __arr[6] := jsonize_p2atlst(__e6)
 in
   JSONarray (__arr)
 end
-| $D2E.P2Tint (__e0) => let
+| $D2E.P2Tint (__e1) => let
   val __arr = array0_make_elt (2, JSONnul ())
   val () = __arr[0] := JSONstring ("P2Tint")
-  val () = __arr[0] := jsonize_int (__e0)
+  val () = __arr[1] := jsonize_int (__e1)
 in
   JSONarray (__arr)
 end
-| $D2E.P2Tintrep (__e0) => let
+| $D2E.P2Tintrep (__e1) => let
   val __arr = array0_make_elt (2, JSONnul ())
   val () = __arr[0] := JSONstring ("P2Tintrep")
-  val () = __arr[0] := jsonize_string (__e0)
+  val () = __arr[1] := jsonize_string (__e1)
 in
   JSONarray (__arr)
 end
-| $D2E.P2Tbool (__e0) => let
+| $D2E.P2Tbool (__e1) => let
   val __arr = array0_make_elt (2, JSONnul ())
   val () = __arr[0] := JSONstring ("P2Tbool")
-  val () = __arr[0] := jsonize_bool (__e0)
+  val () = __arr[1] := jsonize_bool (__e1)
 in
   JSONarray (__arr)
 end
-| $D2E.P2Tchar (__e0) => let
+| $D2E.P2Tchar (__e1) => let
   val __arr = array0_make_elt (2, JSONnul ())
   val () = __arr[0] := JSONstring ("P2Tchar")
-  val () = __arr[0] := jsonize_char (__e0)
+  val () = __arr[1] := jsonize_char (__e1)
 in
   JSONarray (__arr)
 end
-| $D2E.P2Tfloat (__e0) => let
+| $D2E.P2Tfloat (__e1) => let
   val __arr = array0_make_elt (2, JSONnul ())
   val () = __arr[0] := JSONstring ("P2Tfloat")
-  val () = __arr[0] := jsonize_string (__e0)
+  val () = __arr[1] := jsonize_string (__e1)
 in
   JSONarray (__arr)
 end
-| $D2E.P2Tstring (__e0) => let
+| $D2E.P2Tstring (__e1) => let
   val __arr = array0_make_elt (2, JSONnul ())
   val () = __arr[0] := JSONstring ("P2Tstring")
-  val () = __arr[0] := jsonize_string (__e0)
+  val () = __arr[1] := jsonize_string (__e1)
 in
   JSONarray (__arr)
 end
-| $D2E.P2Ti0nt (__e0) => let
+| $D2E.P2Ti0nt (__e1) => let
   val __arr = array0_make_elt (2, JSONnul ())
   val () = __arr[0] := JSONstring ("P2Ti0nt")
-  val () = __arr[0] := jsonize_i0nt(__e0)
+  val () = __arr[1] := jsonize_i0nt(__e1)
 in
   JSONarray (__arr)
 end
-| $D2E.P2Tf0loat (__e0) => let
+| $D2E.P2Tf0loat (__e1) => let
   val __arr = array0_make_elt (2, JSONnul ())
   val () = __arr[0] := JSONstring ("P2Tf0loat")
-  val () = __arr[0] := jsonize_f0loat(__e0)
+  val () = __arr[1] := jsonize_f0loat(__e1)
 in
   JSONarray (__arr)
 end
@@ -2705,59 +2729,59 @@ end
 in
   JSONarray (__arr)
 end
-| $D2E.P2Trec (__e0,__e1,__e2) => let
+| $D2E.P2Trec (__e1,__e2,__e3) => let
   val __arr = array0_make_elt (4, JSONnul ())
   val () = __arr[0] := JSONstring ("P2Trec")
-  val () = __arr[0] := jsonize_int (__e0)
   val () = __arr[1] := jsonize_int (__e1)
-  val () = __arr[2] := jsonize_labp2atlst(__e2)
+  val () = __arr[2] := jsonize_int (__e2)
+  val () = __arr[3] := jsonize_labp2atlst(__e3)
 in
   JSONarray (__arr)
 end
-| $D2E.P2Tlst (__e0,__e1) => let
+| $D2E.P2Tlst (__e1,__e2) => let
   val __arr = array0_make_elt (3, JSONnul ())
   val () = __arr[0] := JSONstring ("P2Tlst")
-  val () = __arr[0] := jsonize_int (__e0)
-  val () = __arr[1] := jsonize_p2atlst(__e1)
+  val () = __arr[1] := jsonize_int (__e1)
+  val () = __arr[2] := jsonize_p2atlst(__e2)
 in
   JSONarray (__arr)
 end
-| $D2E.P2Trefas (__e0,__e1) => let
+| $D2E.P2Trefas (__e1,__e2) => let
   val __arr = array0_make_elt (3, JSONnul ())
   val () = __arr[0] := JSONstring ("P2Trefas")
-  val () = __arr[0] := jsonize_d2var(__e0)
-  val () = __arr[1] := jsonize_p2at(__e1)
+  val () = __arr[1] := jsonize_d2var(__e1)
+  val () = __arr[2] := jsonize_p2at(__e2)
 in
   JSONarray (__arr)
 end
-| $D2E.P2Texist (__e0,__e1) => let
+| $D2E.P2Texist (__e1,__e2) => let
   val __arr = array0_make_elt (3, JSONnul ())
   val () = __arr[0] := JSONstring ("P2Texist")
-  val () = __arr[0] := jsonize_s2varlst(__e0)
-  val () = __arr[1] := jsonize_p2at(__e1)
+  val () = __arr[1] := jsonize_s2varlst(__e1)
+  val () = __arr[2] := jsonize_p2at(__e2)
 in
   JSONarray (__arr)
 end
-| $D2E.P2Tvbox (__e0) => let
+| $D2E.P2Tvbox (__e1) => let
   val __arr = array0_make_elt (2, JSONnul ())
   val () = __arr[0] := JSONstring ("P2Tvbox")
-  val () = __arr[0] := jsonize_d2var(__e0)
+  val () = __arr[1] := jsonize_d2var(__e1)
 in
   JSONarray (__arr)
 end
-| $D2E.P2Tann (__e0,__e1) => let
+| $D2E.P2Tann (__e1,__e2) => let
   val __arr = array0_make_elt (3, JSONnul ())
   val () = __arr[0] := JSONstring ("P2Tann")
-  val () = __arr[0] := jsonize_p2at(__e0)
-  val () = __arr[1] := jsonize_s2exp(__e1)
+  val () = __arr[1] := jsonize_p2at(__e1)
+  val () = __arr[2] := jsonize_s2exp(__e2)
 in
   JSONarray (__arr)
 end
-| $D2E.P2Tlist (__e0,__e1) => let
+| $D2E.P2Tlist (__e1,__e2) => let
   val __arr = array0_make_elt (3, JSONnul ())
   val () = __arr[0] := JSONstring ("P2Tlist")
-  val () = __arr[0] := jsonize_int (__e0)
-  val () = __arr[1] := jsonize_p2atlst(__e1)
+  val () = __arr[1] := jsonize_int (__e1)
+  val () = __arr[2] := jsonize_p2atlst(__e2)
 in
   JSONarray (__arr)
 end
@@ -2770,18 +2794,18 @@ end
 
 implement jsonize_labp2at (x) =
 case+ x of
-| $D2E.LABP2ATnorm (__e0,__e1) => let
+| $D2E.LABP2ATnorm (__e1,__e2) => let
   val __arr = array0_make_elt (3, JSONnul ())
   val () = __arr[0] := JSONstring ("LABP2ATnorm")
-  val () = __arr[0] := jsonize_l0ab(__e0)
-  val () = __arr[1] := jsonize_p2at(__e1)
+  val () = __arr[1] := jsonize_l0ab(__e1)
+  val () = __arr[2] := jsonize_p2at(__e2)
 in
   JSONarray (__arr)
 end
-| $D2E.LABP2ATomit (__e0) => let
+| $D2E.LABP2ATomit (__e1) => let
   val __arr = array0_make_elt (2, JSONnul ())
   val () = __arr[0] := JSONstring ("LABP2ATomit")
-  val () = __arr[0] := jsonize_location(__e0)
+  val () = __arr[1] := jsonize_location(__e1)
 in
   JSONarray (__arr)
 end

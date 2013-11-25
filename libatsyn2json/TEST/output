@@ -4,32 +4,39 @@ The 2nd translation (binding) of [DATA/foo.dats] is successfully completed!
 [
   {
     "d2ecl_loc": {
-      "_get_string": "dd"
+      "location_end_ntot": 35,
+      "location_beg_nrow": 0,
+      "location_beg_ntot": 0
     },
     "d2ecl_node": [
+      "D2Cdatdecs",
       0,
       [
         {
           "s2cst_get_fil": {
-            "_get_fullname": "symbol_type is not supported.",
-            "_get_partname": "dd",
-            "_get_givename": "dd"
+            "filename_get_givename": "DATA/foo.dats"
           },
           "s2cst_get_name": "AB",
           "s2cst_get_loc": {
-            "_get_string": "dd"
+            "location_end_ntot": 35,
+            "location_beg_nrow": 0,
+            "location_beg_ntot": 9
           },
-          "s2cst_get_sym": "symbol_type is not supported."
+          "s2cst_get_sym": {
+            "symbol_get_name": "AB"
+          }
         }
-      ],
-      null
+      ]
     ]
   },
   {
     "d2ecl_loc": {
-      "_get_string": "dd"
+      "location_end_ntot": 51,
+      "location_beg_nrow": 2,
+      "location_beg_ntot": 37
     },
     "d2ecl_node": [
+      "D2Cvaldecs",
       [
         "VK_val"
       ],
@@ -40,20 +47,29 @@ The 2nd translation (binding) of [DATA/foo.dats] is successfully completed!
           ],
           "v2aldec_pat": {
             "p2at_loc": {
-              "_get_string": "dd"
+              "location_end_ntot": 47,
+              "location_beg_nrow": 2,
+              "location_beg_ntot": 41
             },
             "p2at_svs": "lstord_s2var is not supported.",
             "p2at_dvs": "lstord_d2var is not supported.",
             "p2at_node": [
+              "P2Tann",
               {
                 "p2at_loc": {
-                  "_get_string": "dd"
+                  "location_end_ntot": 42,
+                  "location_beg_nrow": 2,
+                  "location_beg_ntot": 41
                 },
                 "p2at_svs": "lstord_s2var is not supported.",
                 "p2at_dvs": "lstord_d2var is not supported.",
                 "p2at_node": [
-                  "d2var_type is not supported.",
-                  null
+                  "P2Tvar",
+                  {
+                    "d2var_get_sym": {
+                      "symbol_get_name": "x"
+                    }
+                  }
                 ],
                 "p2at_type": [
                   "None"
@@ -62,8 +78,7 @@ The 2nd translation (binding) of [DATA/foo.dats] is successfully completed!
               {
                 "s2exp_srt": "s2rt is not supported.",
                 "s2exp_node": "s2exp_node is not supported."
-              },
-              null
+              }
             ],
             "p2at_type": [
               "None"
@@ -74,19 +89,403 @@ The 2nd translation (binding) of [DATA/foo.dats] is successfully completed!
               "None"
             ],
             "d2exp_node": [
-              "token is not supported.",
-              null
+              "D2Ei0nt",
+              "token is not supported."
             ],
             "d2exp_loc": {
-              "_get_string": "dd"
+              "location_end_ntot": 51,
+              "location_beg_nrow": 2,
+              "location_beg_ntot": 50
             }
           },
           "v2aldec_loc": {
-            "_get_string": "dd"
+            "location_end_ntot": 51,
+            "location_beg_nrow": 2,
+            "location_beg_ntot": 41
           }
         }
+      ]
+    ]
+  },
+  {
+    "d2ecl_loc": {
+      "location_end_ntot": 113,
+      "location_beg_nrow": 4,
+      "location_beg_ntot": 53
+    },
+    "d2ecl_node": [
+      "D2Cfundecs",
+      [
+        "FK_fun"
       ],
-      null
+      [],
+      [
+        {
+          "f2undec_ann": [
+            "None"
+          ],
+          "f2undec_def": {
+            "d2exp_type": [
+              "None"
+            ],
+            "d2exp_node": [
+              "D2Elam_dyn",
+              0,
+              -1,
+              [
+                {
+                  "p2at_loc": {
+                    "location_end_ntot": 69,
+                    "location_beg_nrow": 4,
+                    "location_beg_ntot": 63
+                  },
+                  "p2at_svs": "lstord_s2var is not supported.",
+                  "p2at_dvs": "lstord_d2var is not supported.",
+                  "p2at_node": [
+                    "P2Tann",
+                    {
+                      "p2at_loc": {
+                        "location_end_ntot": 64,
+                        "location_beg_nrow": 4,
+                        "location_beg_ntot": 63
+                      },
+                      "p2at_svs": "lstord_s2var is not supported.",
+                      "p2at_dvs": "lstord_d2var is not supported.",
+                      "p2at_node": [
+                        "P2Tvar",
+                        {
+                          "d2var_get_sym": {
+                            "symbol_get_name": "x"
+                          }
+                        }
+                      ],
+                      "p2at_type": [
+                        "None"
+                      ]
+                    },
+                    {
+                      "s2exp_srt": "s2rt is not supported.",
+                      "s2exp_node": "s2exp_node is not supported."
+                    }
+                  ],
+                  "p2at_type": [
+                    "None"
+                  ]
+                }
+              ],
+              {
+                "d2exp_type": [
+                  "None"
+                ],
+                "d2exp_node": [
+                  "D2Eann_seff",
+                  {
+                    "d2exp_type": [
+                      "None"
+                    ],
+                    "d2exp_node": [
+                      "D2Eifhead",
+                      "i2nvresstate is not supported.",
+                      {
+                        "d2exp_type": [
+                          "None"
+                        ],
+                        "d2exp_node": [
+                          "D2Eapplst",
+                          {
+                            "d2exp_type": [
+                              "None"
+                            ],
+                            "d2exp_node": [
+                              "D2Esym",
+                              "d2sym is not supported."
+                            ],
+                            "d2exp_loc": {
+                              "location_end_ntot": 81,
+                              "location_beg_nrow": 5,
+                              "location_beg_ntot": 79
+                            }
+                          },
+                          [
+                            [
+                              "D2EXPARGdyn",
+                              -1,
+                              {
+                                "location_end_ntot": 83,
+                                "location_beg_nrow": 5,
+                                "location_beg_ntot": 77
+                              },
+                              [
+                                {
+                                  "d2exp_type": [
+                                    "None"
+                                  ],
+                                  "d2exp_node": [
+                                    "D2Evar",
+                                    {
+                                      "d2var_get_sym": {
+                                        "symbol_get_name": "x"
+                                      }
+                                    }
+                                  ],
+                                  "d2exp_loc": {
+                                    "location_end_ntot": 78,
+                                    "location_beg_nrow": 5,
+                                    "location_beg_ntot": 77
+                                  }
+                                },
+                                {
+                                  "d2exp_type": [
+                                    "None"
+                                  ],
+                                  "d2exp_node": [
+                                    "D2Ei0nt",
+                                    "token is not supported."
+                                  ],
+                                  "d2exp_loc": {
+                                    "location_end_ntot": 83,
+                                    "location_beg_nrow": 5,
+                                    "location_beg_ntot": 82
+                                  }
+                                }
+                              ]
+                            ]
+                          ]
+                        ],
+                        "d2exp_loc": {
+                          "location_end_ntot": 83,
+                          "location_beg_nrow": 5,
+                          "location_beg_ntot": 77
+                        }
+                      },
+                      {
+                        "d2exp_type": [
+                          "None"
+                        ],
+                        "d2exp_node": [
+                          "D2Ei0nt",
+                          "token is not supported."
+                        ],
+                        "d2exp_loc": {
+                          "location_end_ntot": 91,
+                          "location_beg_nrow": 5,
+                          "location_beg_ntot": 90
+                        }
+                      },
+                      [
+                        "Some",
+                        {
+                          "d2exp_type": [
+                            "None"
+                          ],
+                          "d2exp_node": [
+                            "D2Eapplst",
+                            {
+                              "d2exp_type": [
+                                "None"
+                              ],
+                              "d2exp_node": [
+                                "D2Esym",
+                                "d2sym is not supported."
+                              ],
+                              "d2exp_loc": {
+                                "location_end_ntot": 100,
+                                "location_beg_nrow": 5,
+                                "location_beg_ntot": 99
+                              }
+                            },
+                            [
+                              [
+                                "D2EXPARGdyn",
+                                -1,
+                                {
+                                  "location_end_ntot": 112,
+                                  "location_beg_nrow": 5,
+                                  "location_beg_ntot": 97
+                                },
+                                [
+                                  {
+                                    "d2exp_type": [
+                                      "None"
+                                    ],
+                                    "d2exp_node": [
+                                      "D2Evar",
+                                      {
+                                        "d2var_get_sym": {
+                                          "symbol_get_name": "x"
+                                        }
+                                      }
+                                    ],
+                                    "d2exp_loc": {
+                                      "location_end_ntot": 98,
+                                      "location_beg_nrow": 5,
+                                      "location_beg_ntot": 97
+                                    }
+                                  },
+                                  {
+                                    "d2exp_type": [
+                                      "None"
+                                    ],
+                                    "d2exp_node": [
+                                      "D2Eapplst",
+                                      {
+                                        "d2exp_type": [
+                                          "None"
+                                        ],
+                                        "d2exp_node": [
+                                          "D2Evar",
+                                          {
+                                            "d2var_get_sym": {
+                                              "symbol_get_name": "fact"
+                                            }
+                                          }
+                                        ],
+                                        "d2exp_loc": {
+                                          "location_end_ntot": 105,
+                                          "location_beg_nrow": 5,
+                                          "location_beg_ntot": 101
+                                        }
+                                      },
+                                      [
+                                        [
+                                          "D2EXPARGdyn",
+                                          -1,
+                                          {
+                                            "location_end_ntot": 112,
+                                            "location_beg_nrow": 5,
+                                            "location_beg_ntot": 107
+                                          },
+                                          [
+                                            {
+                                              "d2exp_type": [
+                                                "None"
+                                              ],
+                                              "d2exp_node": [
+                                                "D2Eapplst",
+                                                {
+                                                  "d2exp_type": [
+                                                    "None"
+                                                  ],
+                                                  "d2exp_node": [
+                                                    "D2Esym",
+                                                    "d2sym is not supported."
+                                                  ],
+                                                  "d2exp_loc": {
+                                                    "location_end_ntot": 110,
+                                                    "location_beg_nrow": 5,
+                                                    "location_beg_ntot": 109
+                                                  }
+                                                },
+                                                [
+                                                  [
+                                                    "D2EXPARGdyn",
+                                                    -1,
+                                                    {
+                                                      "location_end_ntot": 112,
+                                                      "location_beg_nrow": 5,
+                                                      "location_beg_ntot": 107
+                                                    },
+                                                    [
+                                                      {
+                                                        "d2exp_type": [
+                                                          "None"
+                                                        ],
+                                                        "d2exp_node": [
+                                                          "D2Evar",
+                                                          {
+                                                            "d2var_get_sym": {
+                                                              "symbol_get_name": "x"
+                                                            }
+                                                          }
+                                                        ],
+                                                        "d2exp_loc": {
+                                                          "location_end_ntot": 108,
+                                                          "location_beg_nrow": 5,
+                                                          "location_beg_ntot": 107
+                                                        }
+                                                      },
+                                                      {
+                                                        "d2exp_type": [
+                                                          "None"
+                                                        ],
+                                                        "d2exp_node": [
+                                                          "D2Ei0nt",
+                                                          "token is not supported."
+                                                        ],
+                                                        "d2exp_loc": {
+                                                          "location_end_ntot": 112,
+                                                          "location_beg_nrow": 5,
+                                                          "location_beg_ntot": 111
+                                                        }
+                                                      }
+                                                    ]
+                                                  ]
+                                                ]
+                                              ],
+                                              "d2exp_loc": {
+                                                "location_end_ntot": 112,
+                                                "location_beg_nrow": 5,
+                                                "location_beg_ntot": 107
+                                              }
+                                            }
+                                          ]
+                                        ]
+                                      ]
+                                    ],
+                                    "d2exp_loc": {
+                                      "location_end_ntot": 112,
+                                      "location_beg_nrow": 5,
+                                      "location_beg_ntot": 101
+                                    }
+                                  }
+                                ]
+                              ]
+                            ]
+                          ],
+                          "d2exp_loc": {
+                            "location_end_ntot": 112,
+                            "location_beg_nrow": 5,
+                            "location_beg_ntot": 97
+                          }
+                        }
+                      ]
+                    ],
+                    "d2exp_loc": {
+                      "location_end_ntot": 113,
+                      "location_beg_nrow": 5,
+                      "location_beg_ntot": 73
+                    }
+                  },
+                  [
+                    "S2EFFset",
+                    "effset_t0ype is not supported."
+                  ]
+                ],
+                "d2exp_loc": {
+                  "location_end_ntot": 113,
+                  "location_beg_nrow": 5,
+                  "location_beg_ntot": 73
+                }
+              }
+            ],
+            "d2exp_loc": {
+              "location_end_ntot": 113,
+              "location_beg_nrow": 4,
+              "location_beg_ntot": 62
+            }
+          },
+          "f2undec_var": {
+            "d2var_get_sym": {
+              "symbol_get_name": "fact"
+            }
+          },
+          "f2undec_loc": {
+            "location_end_ntot": 113,
+            "location_beg_nrow": 4,
+            "location_beg_ntot": 57
+          }
+        }
+      ]
     ]
   }
 ]

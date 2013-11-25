@@ -270,12 +270,12 @@ json_simple_dats.o: DATS/json_simple.dats
 
 ######
 
-libatsyn2json:: libatsyn2json_cvt_dats.o
-libatsyn2json_cvt_dats.o: DATS/libatsyn2json_cvt.dats
+libatsyn2json:: libatsyn2json_cvt_sats.o
+libatsyn2json_cvt_sats.o: SATS/libatsyn2json_cvt.sats
 	$(ATSCC) $(INCLATS) $(INCLUDE) $(CCFLAGS) -c $<; $(AR) -r libatsyn2json.a $@
 
-libatsyn2json:: libatsyn2json_cvt_impl_sats.o
-libatsyn2json_cvt_impl_sats.o: SATS/libatsyn2json_cvt_impl.sats
+libatsyn2json:: libatsyn2json_cvt_dats.o
+libatsyn2json_cvt_dats.o: DATS/libatsyn2json_cvt.dats
 	$(ATSCC) $(INCLATS) $(INCLUDE) $(CCFLAGS) -c $<; $(AR) -r libatsyn2json.a $@
 
 libatsyn2json:: libatsyn2json_cvt_impl_dats.o

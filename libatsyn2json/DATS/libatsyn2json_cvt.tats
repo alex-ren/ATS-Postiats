@@ -125,12 +125,18 @@ $S2E.s2aspdec = '{
 
 (* ******* ********* *)
 
-abstype $LOC.location = {_get_string=string}
+abstype $LOC.location = {
+@$LOC.location_beg_nrow = int,
+@$LOC.location_beg_ntot = lint,
+@$LOC.location_end_ntot = lint
+}
 
 (* ******* ********* *)
 
-abstype $SYM.symbol_type // boxed
-typedef $SYM.symbol = symbol_type
+abstype $SYM.symbol = {
+@$SYM.symbol_get_name = string
+}
+
 typedef $SYM.symbolist = List ($SYM.symbol)
 typedef $SYM.symbolopt = Option (symbol)
 
@@ -171,8 +177,9 @@ typedef $D2E.labd2explst = List ($D2E.labd2exp)
 typedef $D2E.d2exparglst = List ($D2E.d2exparg)
 
 
-abstype $D2E.d2var_type
-typedef $D2E.d2var = d2var_type
+abstype $D2E.d2var = {
+@$D2E.d2var_get_sym = symbol
+}
 typedef $D2E.d2varlst = List ($D2E.d2var)
 typedef $D2E.d2varopt = Option (d2var)
 
@@ -369,11 +376,12 @@ typedef $D2E.prv2ardec = '{
 typedef $D2E.prv2ardeclst = List ($D2E.prv2ardec)
 
 abstype $FIL.filename = '{
-  _get_givename= string
-, _get_partname= string, _get_fullname= $SYM.symbol
+@$FIL.filename_get_givename = string
 } // end of [filename]
 
-abstype $S2E.filenv = {_get_name=$FIL.filename}
+abstype $S2E.filenv = {
+@$S2E.filenv_get_name = filename
+}
 
 datatype $D2E.pckind =
   | PCKcon of () // 0 // nonlin

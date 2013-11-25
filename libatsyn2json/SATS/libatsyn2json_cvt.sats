@@ -45,15 +45,6 @@ staload _(* anon *) = "prelude/DATS/array0.dats"
 
 // ====== to be implemented ==========
 
-fun todolocation_get_string (x: $LOC.location): string  // abs member
-
-fun todofilename_get_givename (x: $FIL.filename): string  // abs member
-
-fun todofilename_get_partname (x: $FIL.filename): string  // abs member
-
-fun todofilename_get_fullname (x: $FIL.filename): $SYM.symbol  // abs member
-
-fun todofilenv_get_name (x: $S2E.filenv): $FIL.filename  // abs member
 
 // ====================================================
 
@@ -65,15 +56,11 @@ fun jsonize_s2lab (x: $S2E.s2lab): jsonVal
 
 fun jsonize_labs2exp (x: $S2E.labs2exp): jsonVal
 
-fun jsonize_symbol_type (x: $SYM.symbol_type): jsonVal
-
 fun jsonize_token (x: $LEX.token): jsonVal
 
 fun jsonize_d2cst_type (x: $D2E.d2cst_type): jsonVal
 
 fun jsonize_labd2exp (x: $D2E.labd2exp): jsonVal
-
-fun jsonize_d2var_type (x: $D2E.d2var_type): jsonVal
 
 fun jsonize_cstsp (x: $SYN.cstsp): jsonVal
 

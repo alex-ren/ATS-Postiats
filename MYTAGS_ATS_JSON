@@ -1,0 +1,458 @@
+{
+"tagfile" : "/home/grad2/aren/programs/ats/ats-lang-anairiats-0.2.11/contrib/jansson/SATS/jansson.sats",
+"tagentarr" : [
+{
+"name" : "SHR", "nline" : 37, "nchar" : 1131
+}
+,
+{
+"name" : "NSH", "nline" : 38, "nchar" : 1181
+}
+,
+{
+"name" : "json_error_t", "nline" : 55, "nchar" : 1816
+}
+,
+{
+"name" : "JSONptr0", "nline" : 71, "nchar" : 2127
+}
+,
+{
+"name" : "JSONptr1", "nline" : 72, "nchar" : 2171
+}
+,
+{
+"name" : "JSONiter0", "nline" : 77, "nchar" : 2288
+}
+,
+{
+"name" : "JSONiter1", "nline" : 78, "nchar" : 2350
+}
+,
+{
+"name" : "JSONptr_is_gtez", "nline" : 83, "nchar" : 2440
+}
+,
+{
+"name" : "JSONiter_is_gtez", "nline" : 85, "nchar" : 2505
+}
+,
+{
+"name" : "JSONptr2ptr", "nline" : 89, "nchar" : 2607
+}
+,
+{
+"name" : "JSONiter2ptr", "nline" : 90, "nchar" : 2662
+}
+,
+{
+"name" : "JSONptr_free_null", "nline" : 95, "nchar" : 2752
+}
+,
+{
+"name" : "JSONiter_return", "nline" : 100, "nchar" : 2853
+}
+,
+{
+"name" : "JSONptr_is_null", "nline" : 107, "nchar" : 2993
+}
+,
+{
+"name" : "JSONptr_isnot_null", "nline" : 111, "nchar" : 3114
+}
+,
+{
+"name" : "~", "nline" : 115, "nchar" : 3252
+}
+,
+{
+"name" : "json_typeof", "nline" : 119, "nchar" : 3304
+}
+,
+{
+"name" : "json_is_null", "nline" : 127, "nchar" : 3486
+}
+,
+{
+"name" : "json_is_true", "nline" : 129, "nchar" : 3571
+}
+,
+{
+"name" : "json_is_false", "nline" : 131, "nchar" : 3656
+}
+,
+{
+"name" : "json_is_boolean", "nline" : 134, "nchar" : 3744
+}
+,
+{
+"name" : "json_is_integer", "nline" : 137, "nchar" : 3838
+}
+,
+{
+"name" : "json_is_real", "nline" : 139, "nchar" : 3929
+}
+,
+{
+"name" : "json_is_number", "nline" : 141, "nchar" : 4014
+}
+,
+{
+"name" : "json_is_string", "nline" : 144, "nchar" : 4104
+}
+,
+{
+"name" : "json_is_array", "nline" : 146, "nchar" : 4193
+}
+,
+{
+"name" : "json_is_object", "nline" : 148, "nchar" : 4280
+}
+,
+{
+"name" : "json_incref", "nline" : 153, "nchar" : 4391
+}
+,
+{
+"name" : "json_decref", "nline" : 157, "nchar" : 4483
+}
+,
+{
+"name" : "json_null", "nline" : 162, "nchar" : 4587
+}
+,
+{
+"name" : "json_true", "nline" : 164, "nchar" : 4642
+}
+,
+{
+"name" : "json_false", "nline" : 165, "nchar" : 4696
+}
+,
+{
+"name" : "json_string", "nline" : 169, "nchar" : 4774
+}
+,
+{
+"name" : "json_string_nocheck", "nline" : 173, "nchar" : 4877
+}
+,
+{
+"name" : "json_string_value", "nline" : 177, "nchar" : 5004
+}
+,
+{
+"name" : "json_string_set", "nline" : 184, "nchar" : 5185
+}
+,
+{
+"name" : "json_string_set_nocheck", "nline" : 191, "nchar" : 5328
+}
+,
+{
+"name" : "json_int", "nline" : 199, "nchar" : 5484
+}
+,
+{
+"name" : "int2json_int", "nline" : 201, "nchar" : 5514
+}
+,
+{
+"name" : "lint2json_int", "nline" : 202, "nchar" : 5553
+}
+,
+{
+"name" : "llint2json_int", "nline" : 203, "nchar" : 5594
+}
+,
+{
+"name" : "json_integer", "nline" : 205, "nchar" : 5635
+}
+,
+{
+"name" : "json_integer_value", "nline" : 209, "nchar" : 5738
+}
+,
+{
+"name" : "json_integer_set", "nline" : 214, "nchar" : 5869
+}
+,
+{
+"name" : "json_real", "nline" : 221, "nchar" : 6008
+}
+,
+{
+"name" : "json_real_value", "nline" : 225, "nchar" : 6097
+}
+,
+{
+"name" : "json_real_set", "nline" : 228, "nchar" : 6187
+}
+,
+{
+"name" : "json_number_value", "nline" : 235, "nchar" : 6311
+}
+,
+{
+"name" : "json_array", "nline" : 241, "nchar" : 6456
+}
+,
+{
+"name" : "json_array_size", "nline" : 245, "nchar" : 6546
+}
+,
+{
+"name" : "json_array_get", "nline" : 251, "nchar" : 6686
+}
+,
+{
+"name" : "json_array_get_exnmsg", "nline" : 258, "nchar" : 6876
+}
+,
+{
+"name" : "json_array_get1", "nline" : 272, "nchar" : 7246
+}
+,
+{
+"name" : "json_array_get1_exnmsg", "nline" : 277, "nchar" : 7362
+}
+,
+{
+"name" : "json_array_set", "nline" : 289, "nchar" : 7654
+}
+,
+{
+"name" : "json_array_set_new", "nline" : 294, "nchar" : 7812
+}
+,
+{
+"name" : "json_array_append", "nline" : 299, "nchar" : 7979
+}
+,
+{
+"name" : "json_array_append_new", "nline" : 304, "nchar" : 8143
+}
+,
+{
+"name" : "json_array_insert", "nline" : 309, "nchar" : 8316
+}
+,
+{
+"name" : "json_array_insert_new", "nline" : 314, "nchar" : 8480
+}
+,
+{
+"name" : "json_array_remove", "nline" : 319, "nchar" : 8653
+}
+,
+{
+"name" : "json_array_clear", "nline" : 325, "nchar" : 8773
+}
+,
+{
+"name" : "json_array_extend", "nline" : 329, "nchar" : 8897
+}
+,
+{
+"name" : "json_object", "nline" : 336, "nchar" : 9051
+}
+,
+{
+"name" : "json_object_size", "nline" : 340, "nchar" : 9144
+}
+,
+{
+"name" : "json_object_get", "nline" : 344, "nchar" : 9265
+}
+,
+{
+"name" : "json_object_get_exnmsg", "nline" : 351, "nchar" : 9459
+}
+,
+{
+"name" : "json_object_get1", "nline" : 364, "nchar" : 9797
+}
+,
+{
+"name" : "json_object_get1_exnmsg", "nline" : 369, "nchar" : 9915
+}
+,
+{
+"name" : "json_object_set", "nline" : 381, "nchar" : 10213
+}
+,
+{
+"name" : "json_object_set_nocheck", "nline" : 388, "nchar" : 10378
+}
+,
+{
+"name" : "json_object_set_new", "nline" : 395, "nchar" : 10559
+}
+,
+{
+"name" : "json_object_set_new_nocheck", "nline" : 402, "nchar" : 10731
+}
+,
+{
+"name" : "json_object_del", "nline" : 409, "nchar" : 10919
+}
+,
+{
+"name" : "json_object_clear", "nline" : 414, "nchar" : 11036
+}
+,
+{
+"name" : "json_object_update", "nline" : 418, "nchar" : 11164
+}
+,
+{
+"name" : "json_object_update_existing", "nline" : 423, "nchar" : 11301
+}
+,
+{
+"name" : "json_object_update_missing", "nline" : 428, "nchar" : 11456
+}
+,
+{
+"name" : "JSONiter_is_null", "nline" : 435, "nchar" : 11630
+}
+,
+{
+"name" : "JSONiter_isnot_null", "nline" : 440, "nchar" : 11768
+}
+,
+{
+"name" : "~", "nline" : 445, "nchar" : 11921
+}
+,
+{
+"name" : "json_object_iter", "nline" : 449, "nchar" : 11974
+}
+,
+{
+"name" : "json_object_iter_at", "nline" : 454, "nchar" : 12083
+}
+,
+{
+"name" : "json_object_iter_next", "nline" : 459, "nchar" : 12216
+}
+,
+{
+"name" : "json_object_iter_nextret", "nline" : 464, "nchar" : 12362
+}
+,
+{
+"name" : "objkey", "nline" : 473, "nchar" : 12586
+}
+,
+{
+"name" : "objkey_return", "nline" : 476, "nchar" : 12623
+}
+,
+{
+"name" : "json_object_iter_key", "nline" : 480, "nchar" : 12721
+}
+,
+{
+"name" : "json_object_iter_value", "nline" : 485, "nchar" : 12841
+}
+,
+{
+"name" : "json_object_iter_set", "nline" : 492, "nchar" : 12985
+}
+,
+{
+"name" : "json_object_iter_set_new", "nline" : 499, "nchar" : 13163
+}
+,
+{
+"name" : "json_object_key_to_iter", "nline" : 512, "nchar" : 13424
+}
+,
+{
+"name" : "json_err", "nline" : 527, "nchar" : 13883
+}
+,
+{
+"name" : "json_loads", "nline" : 529, "nchar" : 13912
+}
+,
+{
+"name" : "json_loadb", "nline" : 535, "nchar" : 14034
+}
+,
+{
+"name" : "json_loadf", "nline" : 544, "nchar" : 14229
+}
+,
+{
+"name" : "json_load_file", "nline" : 550, "nchar" : 14347
+}
+,
+{
+"name" : "json_dumps", "nline" : 558, "nchar" : 14499
+}
+,
+{
+"name" : "json_dumpf", "nline" : 563, "nchar" : 14617
+}
+,
+{
+"name" : "json_dump_file", "nline" : 570, "nchar" : 14735
+}
+]
+}
+
+{
+"tagfile" : "/home/grad2/aren/programs/ats/ats-lang-anairiats-0.2.11/contrib/jansson/TEST/test01.dats",
+"tagentarr" : [
+{
+"name" : "main", "nline" : 32, "nchar" : 983
+}
+]
+}
+
+{
+"tagfile" : "/home/grad2/aren/programs/ats/ats-lang-anairiats-0.2.11/contrib/jansson/TEST/test02.dats",
+"tagentarr" : [
+{
+"name" : "main", "nline" : 33, "nchar" : 1015
+}
+]
+}
+
+{
+"tagfile" : "/home/grad2/aren/programs/ats/ats-lang-anairiats-0.2.11/contrib/jansson/TEST/github_commits.dats",
+"tagentarr" : [
+{
+"name" : "request", "nline" : 106, "nchar" : 2183
+}
+,
+{
+"name" : "process_root", "nline" : 111, "nchar" : 2263
+}
+,
+{
+"name" : "process_root_array", "nline" : 117, "nchar" : 2367
+}
+,
+{
+"name" : "process_root", "nline" : 120, "nchar" : 2430
+}
+,
+{
+"name" : "process_root_array", "nline" : 151, "nchar" : 3066
+}
+,
+{
+"name" : "main", "nline" : 213, "nchar" : 4540
+}
+]
+}
+
+{
+"tagfile" : "/home/grad2/aren/programs/ats/ats-lang-anairiats-0.2.11/contrib/jansson/DATS/jansson.dats",
+"tagentarr" : [
+]
+}
+

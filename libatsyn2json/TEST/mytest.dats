@@ -60,7 +60,7 @@ staload "src/pats_comarg.sats"
 (* ****** ****** *)
 
 // staload "./../SATS/libatsyn2json.sats"
-staload "./../SATS/libatsyn2json_cvt_impl.sats"
+staload "./../SATS/libatsyn2json_cvt.sats"
 
 (* ****** ****** *)
 

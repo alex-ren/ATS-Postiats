@@ -105,6 +105,11 @@ end
 end
 
 implement jsonize_int (x) = JSONint (llint_of_int(x))
+implement jsonize_lint (x) = let
+  extern castfn llint_of_lint (x: lint): llint
+in
+  JSONint (llint_of_lint(x))
+end
 
 implement jsonize_double (x) = JSONdouble (x)
 

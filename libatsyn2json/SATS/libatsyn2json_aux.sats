@@ -27,7 +27,7 @@ typedef jsonVal = $JS.jsonVal
 
 (* ***** ***** *)
 
-staload "./libatsyn2json_cvt_impl.sats"
+staload "./libatsyn2json_cvt.sats"
 
 
 (* ***** ***** *)
