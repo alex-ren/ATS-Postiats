@@ -1,0 +1,647 @@
+
+%{
+
+(* ****** ****** *)
+
+staload "./../SATS/json_simple.sats"
+
+(* ****** ****** *)
+
+staload S2E = "src/pats_staexp2.sats"
+
+staload LEX = "src/pats_lexing.sats"
+
+staload D2E = "src/pats_dynexp2.sats"
+
+staload LOC = "src/pats_location.sats"
+
+staload SYN = "src/pats_syntax.sats"
+
+staload STAEXP2 = "src/pats_staexp2.sats"
+
+staload BAS = "src/pats_basics.sats"
+
+staload EFF = "src/pats_effect.sats"
+
+staload LAB = "src/pats_label.sats"
+
+staload S1E = "src/pats_staexp1.sats"
+
+staload D1E = "src/pats_dynexp1.sats"
+
+staload FIL = "src/pats_filename.sats"
+
+staload SYM = "src/pats_symbol.sats"
+
+
+(* ****** ****** *)
+
+staload _(*anon*) = "prelude/DATS/list.dats"
+staload _(* anon *) = "prelude/DATS/array0.dats"
+
+(* ****** ****** *)
+
+%}
+
+(* ******* ********* *)
+
+datatype $S1E.v1al =
+  | V1ALint of int
+  | V1ALchar of char
+  | V1ALstring of string
+  | V1ALfloat of double
+  | V1ALerr of () // HX: indicating of an error
+// end of [v1al]
+
+typedef $S1E.v1alist = List ($S1E.v1al)
+
+datatype
+$S1E.e1xp_node =
+//
+  | E1XPide of symbol
+//
+  | E1XPint of (int)
+  | E1XPintrep of string(*rep*)
+//
+  | E1XPchar of char
+  | E1XPstring of string
+  | E1XPfloat of string(*rep*)
+//
+  | E1XPv1al of v1al
+//
+  | E1XPnone of () // defintion is not given
+  | E1XPundef of () // a special value for marking un-definition
+//
+  | E1XPapp of (e1xp, location(*arg*), e1xplst)
+  | E1XPfun of (symbolist, e1xp)
+//
+  | E1XPeval of e1xp
+  | E1XPlist of e1xplst
+//
+  | E1XPif of (e1xp, e1xp, e1xp)
+//
+  | E1XPerr of () // HX: placeholder for error indication
+//
+// end of [e1xp_node]
+
+typedef $S1E.e1xp = '{
+  e1xp_loc= location, e1xp_node= e1xp_node
+}
+
+typedef $S1E.e1xplst = List ($S1E.e1xp)
+
+
+abstype $S2E.s2cst = {
+@$S2E.s2cst_get_name = string,
+@$S2E.s2cst_get_sym = symbol,
+@$S2E.s2cst_get_loc = location,
+@$S2E.s2cst_get_fil = filename
+}
+
+typedef $S2E.s2cstlst = List ($S2E.s2cst)
+typedef $S2E.s2cstopt = Option (s2cst)
+
+abstype $S2E.s2rt
+abstype $S2E.s2exp_node
+abstype $S2E.s2lab
+abstype $S2E.labs2exp
+
+typedef $S2E.s2exp = '{
+  s2exp_srt= s2rt, s2exp_node= s2exp_node
+} // end of [s2exp]
+typedef $S2E.s2explst = List ($S2E.s2exp)
+typedef $S2E.s2expopt = Option (s2exp)
+typedef $S2E.s2explstlst = List ($S2E.s2explst)
+typedef $S2E.s2explstopt = Option (s2explst)
+typedef $S2E.s2lablst = List ($S2E.s2lab)
+typedef $S2E.labs2explst = List ($S2E.labs2exp)
+
+typedef
+$S2E.s2aspdec = '{
+  s2aspdec_loc= location
+, s2aspdec_cst= s2cst
+, s2aspdec_def= s2exp
+} // end of [s2aspdec]
+
+(* ******* ********* *)
+
+abstype $LOC.location = {_get_string=string}
+
+(* ******* ********* *)
+
+abstype $SYM.symbol_type // boxed
+typedef $SYM.symbol = symbol_type
+typedef $SYM.symbolist = List ($SYM.symbol)
+typedef $SYM.symbolopt = Option (symbol)
+
+abstype $LEX.token
+
+typedef $SYN.i0nt = token
+typedef $SYN.i0ntopt = Option (i0nt)
+typedef $SYN.c0har = token
+typedef $SYN.f0loat = token
+typedef $SYN.s0tring = token
+typedef $SYN.s0tringopt = Option (s0tring)
+
+
+typedef
+$SYN.i0de = '{
+  i0de_loc= location, i0de_sym= symbol
+} // end of [i0de]
+
+typedef $SYN.i0delst = List ($SYN.i0de)
+
+(* ******* ********* *)
+
+abstype $D2E.d2cst_type
+typedef $D2E.d2cst = d2cst_type
+typedef $D2E.d2cstlst = List ($D2E.d2cst)
+typedef $D2E.d2cstopt = Option (d2cst)
+
+typedef $D2E.d2exp = '{
+  d2exp_loc= location
+, d2exp_node= d2exp_node
+, d2exp_type= s2expopt
+} // end of [d2exp]
+
+typedef $D2E.d2explst = List ($D2E.d2exp)
+typedef $D2E.d2expopt = Option (d2exp)
+abstype $D2E.labd2exp // todo
+typedef $D2E.labd2explst = List ($D2E.labd2exp)
+typedef $D2E.d2exparglst = List ($D2E.d2exparg)
+
+
+abstype $D2E.d2var_type
+typedef $D2E.d2var = d2var_type
+typedef $D2E.d2varlst = List ($D2E.d2var)
+typedef $D2E.d2varopt = Option (d2var)
+
+
+abstype $SYN.cstsp // special constants
+
+abstype $STAEXP2.d2con_type
+typedef $STAEXP2.d2con = d2con_type
+typedef $STAEXP2.d2conlst = List ($STAEXP2.d2con)
+
+abstype $S2E.s2exparg
+typedef $S2E.s2exparglst = List ($S2E.s2exparg)
+
+abstype $D2E.d2sym
+typedef $D2E.d2symopt = Option (d2sym)
+
+abstype $S2E.t2mpmarg
+typedef $S2E.t2mpmarglst = List ($S2E.t2mpmarg)
+
+abstype $D2E.i2nvresstate
+
+datatype
+$BAS.caskind =
+  | CK_case // case
+  | CK_case_pos // case+
+  | CK_case_neg // case-
+// end of [caskind]
+
+abstype $D2E.c2lau
+typedef $D2E.c2laulst = List ($D2E.c2lau)
+
+abstype $D2E.sc2lau
+typedef $D2E.sc2laulst = List ($D2E.sc2lau)
+
+abstype $D2E.d2lab
+typedef $D2E.d2lablst = List ($D2E.d2lab)
+
+
+datatype $S2E.s2eff =
+  | S2EFFset of effset
+  | S2EFFexp of (s2exp)
+  | S2EFFadd of (s2eff, s2eff)
+
+abstype $EFF.effset_t0ype
+typedef $EFF.effset = effset_t0ype
+
+abstype $S2E.s2var_type
+typedef $S2E.s2var = s2var_type
+typedef $S2E.s2varlst = List ($S2E.s2var)
+typedef $S2E.s2varopt = Option (s2var)
+typedef $S2E.s2varlstlst = List ($S2E.s2varlst)
+
+abstype $D2E.loopi2nv
+
+abstype $D2E.d2mac_type
+typedef $D2E.d2mac = d2mac_type
+typedef $D2E.d2maclst = List ($D2E.d2mac)
+
+datatype
+$SYN.macsynkind =
+  | MSKencode of ()
+  | MSKdecode of ()
+// HX: cross-stage persistence:
+  | MSKxstage of () // = decode(lift(.))
+// end of [macsynkind]
+
+datatype $D2E.d2itm =
+  | D2ITMcst of d2cst
+  | D2ITMvar of d2var
+  | D2ITMcon of d2conlst
+  | D2ITMe1xp of (e1xp)
+  | D2ITMsymdef of (symbol, d2pitmlst) (* overloaded symbol *)
+  | D2ITMmacdef of d2mac
+  | D2ITMmacvar of d2var
+// end of [d2itm]
+
+datatype $D2E.d2pitm = | D2PITM of (int(*pval*), d2itm)
+
+typedef $D2E.d2itmlst = List ($D2E.d2itm)
+typedef $D2E.d2pitmlst = List ($D2E.d2pitm)
+
+typedef $D2E.d2itmopt = Option (d2itm)
+
+datatype
+$BAS.funclo =
+//
+// function or closure
+//
+  | FUNCLOfun (* function *)
+  | FUNCLOclo of int (*knd*) // closure: knd=1/0/~1: ptr/clo/ref
+
+abstype $LAB.label_type
+typedef $LAB.label = label_type
+//
+
+datatype $D2E.d2exparg =
+  | D2EXPARGsta of (location(*arg*), s2exparglst)
+  | D2EXPARGdyn of (int(*npf*), location(*arg*), d2explst)
+// end of [d2exparg]
+
+datatype $D2E.d2lab_node =
+  | D2LABlab of (label) | D2LABind of (d2explst)
+// end of [d2lab_node]
+
+typedef $D2E.d2eclist = List ($D2E.d2ecl)
+
+typedef $D2E.d2ecl = {d2ecl_loc=location, d2ecl_node=d2ecl_node}
+
+datatype $BAS.dcstkind =
+  | DCKfun of ()
+  | DCKval of ()
+  | DCKpraxi of ()
+  | DCKprfun of ()
+  | DCKprval of ()
+  | DCKcastfn of ()
+// end of [dcstkind]
+
+
+typedef $D2E.i2mpdec = '{
+  i2mpdec_loc= location
+, i2mpdec_locid= location
+, i2mpdec_cst= d2cst
+, i2mpdec_imparg= s2varlst // static variables
+, i2mpdec_tmparg= s2explstlst // static args
+, i2mpdec_tmpgua= s2explstlst // static guards
+, i2mpdec_def= d2exp
+} // end of [i2mpdec]
+
+datatype $BAS.funkind =
+//
+  | FK_fn // nonrec fun
+  | FK_fnx // tailrec fun
+  | FK_fun // recursive fun
+//
+  | FK_prfn // nonrec proof fun
+  | FK_prfun // recursive proof fun
+//
+  | FK_praxi // proof axion
+//
+  | FK_castfn // casting fun
+// end of [funkind]
+
+typedef $S2E.s2qua = @{
+  s2qua_svs= s2varlst, s2qua_sps= s2explst
+} // end of [s2qua]
+typedef $S2E.s2qualst = List ($S2E.s2qua)
+
+
+typedef $D2E.f2undec = '{
+  f2undec_loc= location
+, f2undec_var= d2var
+, f2undec_def= d2exp
+, f2undec_ann= s2expopt
+} // end of [f2undec]
+
+typedef $D2E.f2undeclst = List $D2E.f2undec
+
+datatype $BAS.valkind =
+  | VK_val // val
+  | VK_prval // prval
+  | VK_val_pos // val+
+  | VK_val_neg // val-
+// end of [valkind]
+
+typedef $D2E.v2aldec = '{
+  v2aldec_loc= location
+, v2aldec_pat= p2at
+, v2aldec_def= d2exp
+, v2aldec_ann= s2expopt // [withtype] annotation
+} (* end of [v2aldec] *)
+
+typedef $D2E.v2aldeclst = List ($D2E.v2aldec)
+
+typedef $D2E.v2ardec = '{
+  v2ardec_loc= location
+, v2ardec_knd= int (* knd=0/1:var/ptr *)
+, v2ardec_svar= s2var // static address
+, v2ardec_dvar= d2var // dynamic variable
+, v2ardec_pfat= d2varopt // proof of at-view
+, v2ardec_type= s2expopt (* type annotation *)
+, v2ardec_init= d2expopt // value for initialization
+, v2ardec_dvaropt= d2varopt // address of variable
+} (* end of [v2ardec] *)
+
+typedef $D2E.v2ardeclst = List ($D2E.v2ardec)
+
+typedef $D2E.prv2ardec = '{
+  prv2ardec_loc= location
+, prv2ardec_dvar= d2var // dynamic address
+, prv2ardec_type= s2expopt (* optional type anno *)
+, prv2ardec_init= d2expopt // initial value (optional)
+} // end of [prv2ardec]
+
+typedef $D2E.prv2ardeclst = List ($D2E.prv2ardec)
+
+abstype $FIL.filename = '{
+  _get_givename= string
+, _get_partname= string, _get_fullname= $SYM.symbol
+} // end of [filename]
+
+abstype $S2E.filenv = {_get_name=$FIL.filename}
+
+datatype $D2E.pckind =
+  | PCKcon of () // 0 // nonlin
+  | PCKlincon of () // 1 // lincon
+  | PCKfree of () // 2 // freeing
+  | PCKunfold of () // 3 // folding
+// end of [pckind]
+
+typedef $D2E.pckindopt = Option (pckind)
+
+typedef $SYN.l0ab = '{
+  l0ab_loc= location, l0ab_lab= label
+} // end of [l0ab]
+
+datatype
+$D2E.d2ecl_node =
+  | D2Cnone of () // for something already erased
+  | D2Clist of d2eclist // for list of declarations
+//
+  | D2Csymintr of ($SYN.i0delst)
+  | D2Csymelim of ($SYN.i0delst) // for temporary use
+  | D2Coverload of // symbol overloading
+      ($SYN.i0de, int(*pval*), d2itmopt) // [None] indicates error
+    // end of [D2Coverload]
+//
+(*
+  | D2Cstavars of s2tavarlst // for [stavar] declarations
+*)
+//
+  | D2Csaspdec of s2aspdec (* for static assumption *)
+  | D2Cextype of (string(*name*), s2exp(*def*))
+  | D2Cextval of (string(*name*), d2exp(*def*))
+  | D2Cextcode of (int(*knd*), int(*pos*), string(*code*))
+//
+  | D2Cdatdecs of (int(*knd*), s2cstlst) // datatype declarations
+  | D2Cexndecs of (d2conlst) // exception constructor declarations
+//
+  | D2Cdcstdecs of (dcstkind, d2cstlst) // dyn. const. declarations
+//
+  | D2Cimpdec of (int(*knd*), i2mpdec) // knd=0/1 : implement/primplmnt
+//
+  | D2Cfundecs of (funkind, s2qualst, f2undeclst)
+  | D2Cvaldecs of
+      (valkind, v2aldeclst) // (nonrec) value declarations
+    // end of [D2Cvaldecs]
+  | D2Cvaldecs_rec of
+      (valkind, v2aldeclst) // (recursive) value declarations
+    // end of [D2Cvaldecs_rec]
+//
+  | D2Cvardecs of (v2ardeclst) // variable declarations
+  | D2Cprvardecs of (prv2ardeclst) // proof variable declarations
+//
+  | D2Cinclude of d2eclist (* file inclusion *)
+//
+  | D2Cstaload of (
+      symbolopt(*id*), filename, int(*loadflag*), filenv, int(*loaded*)
+    ) // end of [D2staload]
+  | D2Cdynload of (filename) (* dynamic load *)
+//
+  | D2Clocal of (d2eclist(*head*), d2eclist(*body*)) // local declaration
+//
+  | D2Cerrdec of () // indication of error
+// end of [d2ecl_node]
+
+datatype $D2E.d2exp_node =
+//
+  | D2Ecst of d2cst (* dynamic constants *)
+  | D2Evar of d2var (* dynamic variables *)
+//
+  | D2Eint of int
+  | D2Eintrep of string(*rep*)
+  | D2Ebool of bool
+  | D2Echar of char
+  | D2Efloat of string(*rep*)
+  | D2Estring of string
+//
+  | D2Ei0nt of i0nt
+  | D2Ec0har of c0har
+  | D2Ef0loat of f0loat
+  | D2Es0tring of s0tring
+//
+  | D2Etop of () // a placeholder of unspecified type
+  | D2Etop2 of (s2exp) // a placeholder of specified type
+  | D2Eempty of () // the void-value (of unspecified size)
+//
+  | D2Ecstsp of $SYN.cstsp // special constants
+//
+  | D2Eextval of (s2exp(*type*), string(*name*))
+  | D2Eextfcall of
+    (
+      s2exp(*res*), string(*fun*), d2explst(*arg*)
+    ) (* end of [D2Eextfcall] *)
+//
+// HX: data-constructor
+//
+  | D2Econ of (
+      d2con, location(*fun*)
+    , s2exparglst(*sarg*), int(*npf*), location(*arg*), d2explst(*darg*)
+    ) (* end of [D2Econ] *)
+//
+  | D2Esym of d2sym // overloaded dynamic symbol
+//
+  | D2Efoldat of (* folding at a given address *)
+      (s2exparglst, d2exp)
+  | D2Efreeat of (* freeing at a given address *)
+      (s2exparglst, d2exp)
+//
+  | D2Etmpid of (* template instantiation *)
+      (d2exp(*id*), t2mpmarglst)
+//
+  | D2Elet of (d2eclist, d2exp) // let-expression
+  | D2Ewhere of (d2exp, d2eclist) // where-expression
+//
+  | D2Eapplst of (d2exp, d2exparglst)
+//
+  | D2Eifhead of // dynamic conditional
+      (i2nvresstate, d2exp, d2exp, d2expopt)
+  | D2Esifhead of // static conditional
+      (i2nvresstate, s2exp, d2exp, d2exp)
+//
+  | D2Ecasehead of
+    ( // dynamic case-expression
+      caskind, i2nvresstate, d2explst, c2laulst
+    ) // end of [D2Ecaseof]
+  | D2Escasehead of
+    (
+      i2nvresstate, s2exp, sc2laulst // static case-expression
+    ) // end of [D2Escaseof]
+//
+  | D2Elist of (int(*pfarity*), d2explst) // temporary
+//
+  | D2Elst of (int(*lin*), s2expopt, d2explst) // list
+  | D2Etup of (int(*knd*), int(*npf*), d2explst) // tuple
+  | D2Erec of (int (*knd*), int (*npf*), labd2explst) // record
+  | D2Eseq of d2explst // sequence-expressions // sequencing
+//
+  | D2Eselab of (d2exp, d2lablst) // record/tuple field selection
+//
+  | D2Eptrof of (d2exp) // taking the address of
+  | D2Eviewat of (d2exp) // taking view at a given address
+//
+  | D2Ederef of (d2exp) // deref a left-value
+  | D2Eassgn of (d2exp(*left*), d2exp(*right*))
+  | D2Exchng of (d2exp(*left*), d2exp(*right*))
+//
+  | D2Earrsub of (* array subscription *)
+      (d2sym, d2exp, location(*ind*), d2explst(*ind*))
+  | D2Earrpsz of (* $arrpsz expression *)
+      (s2expopt (*elt*), d2explst (*elements*))
+  | D2Earrinit of (* array initialization *)
+      (s2exp (*elt*), d2expopt (*asz*), d2explst (*ini*))
+//
+  | D2Eraise of (d2exp) // raised exception
+//
+  | D2Eeffmask of (s2eff, d2exp) // $effmask (s2eff, d2exp)
+//
+  | D2Eshowtype of (d2exp) // $showtype: for debugging
+//
+  | D2Evcopyenv of (int(*knd*), d2exp) // $vcopyenv_v/$vcopyenv_vt
+//
+  | D2Eexist of (s2exparg, d2exp) // witness-carrying expression
+//
+  | D2Elam_dyn of (* boxed dynamic abstraction *)
+      (int(*lin*), int(*npf*), p2atlst(*arg*), d2exp(*body*))
+  | D2Elaminit_dyn of (* flat dynamic abstraction *)
+      (int(*lin*), int(*npf*), p2atlst(*arg*), d2exp(*body*))
+  | D2Elam_met of (ref(d2varlst), s2explst(*met*), d2exp(*body*))
+  | D2Elam_sta of (s2varlst, s2explst(*s2ps*), d2exp) // static abstraction
+//
+  | D2Efix of (
+      int(*knd=0/1:flat/boxed*), d2var(*fixvar*), d2exp(*def*)
+    ) // end of [D2Efix]
+//
+  | D2Edelay of (d2exp(*eval*)) // $delay
+  | D2Eldelay of (d2exp(*eval*), d2expopt(*free*)) // $ldelay
+//
+  | D2Efor of (
+      loopi2nv, d2exp(*init*), d2exp(*test*), d2exp(*post*), d2exp(*body*)
+    ) // end of [D2Efor]
+  | D2Ewhile of (loopi2nv, d2exp(*test*), d2exp(*body*))
+//
+  | D2Eloopexn of int(*knd*)
+//
+  | D2Etrywith of (i2nvresstate, d2exp, c2laulst)
+//
+  | D2Emac of (d2mac) // macro-expression
+  | D2Emacsyn of (macsynkind, d2exp) // backquote-comma-notation
+  | D2Emacfun of (symbol(*name*), d2explst) // built-in macfun
+//
+  | D2Eann_type of (d2exp, s2exp) // ascribled expression
+  | D2Eann_seff of (d2exp, s2eff) // ascribed with effects
+  | D2Eann_funclo of (d2exp, funclo) // ascribed with funtype
+//
+  | D2Eerr of () // HX: placeholder for indicating an error
+
+
+
+datatype
+$D2E.p2at_node =
+//
+  | P2Tany of () // wildcard
+  | P2Tvar of d2var // mutability determined by the context
+//
+  | P2Tcon of ( // constructor pattern
+      pckind, d2con, s2qualst, s2exp(*con*), int(*npf*), p2atlst
+    ) // end of [P2Tcon]
+//
+  | P2Tint of int
+  | P2Tintrep of string
+//
+  | P2Tbool of bool
+  | P2Tchar of char
+  | P2Tfloat of string(*rep*)
+  | P2Tstring of string
+//
+  | P2Ti0nt of i0nt
+  | P2Tf0loat of f0loat
+//
+  | P2Tempty of ()
+//
+  | P2Trec of (int(*knd*), int(*npf*), labp2atlst)
+  | P2Tlst of (int(*lin*), p2atlst) // pattern list
+//
+  | P2Trefas of (d2var, p2at)
+//
+  | P2Texist of (s2varlst, p2at) // existential opening
+//
+  | P2Tvbox of d2var // vbox pattern for handling references
+//
+  | P2Tann of (p2at, s2exp) // no s2Var in the ascribed type
+//
+  | P2Tlist of (int(*npf*), p2atlst)
+//
+  | P2Terr of () // HX: placeholder for indicating an error
+// end of [p2at_node]
+
+datatype $D2E.labp2at =
+  | LABP2ATnorm of (l0ab, p2at)
+  | LABP2ATomit of (location) // for [...]
+// end of [labp2at]
+
+typedef $D2E.p2at = '{
+  p2at_loc= location
+, p2at_svs= lstord (s2var)
+, p2at_dvs= lstord (d2var)
+, p2at_type= s2expopt // ref@ (s2expopt)
+, p2at_node= p2at_node
+}
+
+typedef $D2E.p2atlst = List ($D2E.p2at)
+typedef $D2E.p2atopt = Option ($D2E.p2at)
+typedef $D2E.labp2atlst = List ($D2E.labp2at)
+
+abstype $D2E.lstord ($D2E.d2var)
+
+abstype $D2E.lstord ($S2E.s2var)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

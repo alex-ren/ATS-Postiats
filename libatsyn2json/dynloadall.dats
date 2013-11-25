@@ -120,13 +120,32 @@ dynload "src/pats_trans2_decl.dats"
 //
 dynload "src/pats_comarg.dats"
 //
+
 (* ****** ****** *)
 
 dynload "libatsyn2json/DATS/libatsyn2json.dats"
-dynload "libatsyn2json/DATS/libatsyn2json_p2at.dats"
-dynload "libatsyn2json/DATS/libatsyn2json_d2exp.dats"
-dynload "libatsyn2json/DATS/libatsyn2json_d2ecl.dats"
+// dynload "libatsyn2json/DATS/libatsyn2json_p2at.dats"
+// dynload "libatsyn2json/DATS/libatsyn2json_d2exp.dats"
+// dynload "libatsyn2json/DATS/libatsyn2json_d2ecl.dats"
+
+dynload "libatsyn2json/DATS/json_simple.dats"
+
+dynload "libatsyn2json/DATS/libatsyn2json_cvt.dats"
+dynload "libatsyn2json/DATS/libatsyn2json_cvt_impl.dats"
+
+dynload "libatsyn2json/DATS/libatsyn2json_aux.dats"
 
 (* ****** ****** *)
 
 (* end of [dynloadall.dats] *)
+
+
+
+
+
+
+
+
+
+
+

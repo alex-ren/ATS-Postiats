@@ -35,10 +35,13 @@ typedef location = $LOC.location
 //
 (* ****** ****** *)
 
+staload JSON = "json_simple.sats"
+typedef jsonVal = $JSON.jsonVal
+
+(* ****** ****** *)
+
 fun
 jsonize_position (out: FILEref, pos: position): void
-fun
-jsonize_location (out: FILEref, loc: location): void
 
 (* ****** ****** *)
 //
@@ -79,9 +82,9 @@ fun jsonize_p2at (out: FILEref, p2t: p2at): void
 fun jsonize_d2exp (out: FILEref, d2e: d2exp): void
 
 (* ****** ****** *)
-
-fun jsonize_d2ecl (out: FILEref, d2c: d2ecl): void
-fun jsonize_d2eclist (out: FILEref, d2cs: d2eclist): void
+fun jsonize_location (loc: location): jsonVal
+fun jsonize_d2ecl (d2c: d2ecl): jsonVal
+fun jsonize_d2eclist (d2cs: d2eclist): jsonVal
 
 (* ****** ****** *)
 

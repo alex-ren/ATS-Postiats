@@ -38,13 +38,32 @@ staload "./../SATS/libatsyn2json.sats"
 
 (* ****** ****** *)
 
+staload "./../SATS/json_simple.sats"
+
+(* ****** ****** *)
+
+staload _(* anon *) = "prelude/DATS/array0.dats"
+
+(* ****** ****** *)
+
+
+#define isnz JSONptr_isnot_null
+
 implement
 jsonize_d2ecl
-  (out, d2c0) = let
+  (d2c) = let
+  val lst = list0_nil ()
+  val jlocation = '("d2ecl_loc", jsonize_location (d2c.d2ecl_loc))
+  val lst = list0_cons (jlocation, lst)
+
 in
 //
-case+ d2c0.d2ecl_node of
-| _ => fprint_d2ecl (out, d2c0)
+case+ d2c.d2ecl_node of
+| _ => let
+in
+  JSONobject (lst)
+end
+
 (*
 | _ => let
     val () = (
@@ -60,25 +79,41 @@ end // end of [jsonize_d2ecl]
   
 (* ****** ****** *)
 
+(* ****** ****** *)
+
 implement
 jsonize_d2eclist
-  (out, d2cs) = let
-in
-//
-case+ d2cs of 
-| list_nil () => ()
-| list_cons
-    (d2c, d2cs) => let
-    val () =
-      jsonize_d2ecl (out, d2c)
-    // end of [val]
-    val () = fprint_newline (out)
+  (d2cs) = let
+  val len = list_length (d2cs)
+  val arr = array0_make_elt (size_of_int (len), JSONnul ())
+
+  fun loop (arr: array0 (jsonVal), d2cs: d2eclist, n: int): void =
+  case+ d2cs of
+  | list_nil () => ()
+  | list_cons (d2c, d2cs) => let
+    val jd2c = jsonize_d2ecl (d2c)
+    val () = arr[n] := jd2c
   in
-    jsonize_d2eclist (out, d2cs)
-  end // end of [list_cons]
-//
-end // end of [jsonize_d2eclist]
+    loop (arr, d2cs, n + 1)
+  end
+  val () = loop (arr, d2cs, 0)
+in
+  JSONarray (arr)
+end
+    
 
 (* ****** ****** *)
 
 (* end of [libatsyn2json_d2ecl.dats] *)
+
+
+
+
+
+
+
+
+
+
+
+

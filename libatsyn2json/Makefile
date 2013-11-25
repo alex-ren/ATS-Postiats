@@ -32,6 +32,10 @@
 # // Start Time: November, 2013
 # //
 # (* ****** ****** *)
+# // Author: Zhiqiang Ren
+# // Authoremail: alex.ren2006 AT gmail DOT com
+# // Start Time: November, 2013
+# (* ****** ****** *)
 
 ######
 
@@ -45,6 +49,8 @@ ATSCCFLAGS=
 ATSRUNTIME=$(ATSHOMEQ)/ccomp/runtime
 
 ######
+ATSCTRB=$(ATSHOMEQ)/contrib
+######
 
 ATSLIB=$(ATSHOMEQ)/ccomp/lib
 ATSLIB64=$(ATSHOMEQ)/ccomp/lib64
@@ -55,8 +61,16 @@ CCFLAGS=-fPIC -O2
 
 ######
 
-INCLUDE:=-I $(PATSHOMEQ)/src
-INCLATS:=-IATS $(PATSHOMEQ) -IATS $(ATSHOMEQ)
+CFLAGS_JANSSON=$(shell pkg-config jansson --cflags)
+INCLUDE:=-I $(PATSHOMEQ)/src -I $(ATSCTRB) $(CFLAGS_JANSSON)
+INCLATS:=-IATS $(PATSHOMEQ) -IATS $(ATSHOMEQ) -IATS $(ATSCTRB)
+
+######
+
+ifeq ($(CFLAGS_JANSSON), )
+$(error Cannot locate jansson. Please run e.g.  \
+  export PKG_CONFIG_PATH=${HOME}/programs/install/lib/pkgconfig:${PKG_CONFIG_PATH})
+endif
 
 ######
 
@@ -223,24 +237,61 @@ libatsyn2json:: libatsyn2json_dats.o
 libatsyn2json_dats.o: DATS/libatsyn2json.dats
 	$(ATSCC) $(INCLATS) $(INCLUDE) $(CCFLAGS) -c $<; $(AR) -r libatsyn2json.a $@
 
-libatsyn2json:: libatsyn2json_p2at_dats.o
-libatsyn2json_p2at_dats.o: DATS/libatsyn2json_p2at.dats
-	$(ATSCC) $(INCLATS) $(INCLUDE) $(CCFLAGS) -c $<; $(AR) -r libatsyn2json.a $@
-
-libatsyn2json:: libatsyn2json_d2exp_dats.o
-libatsyn2json_d2exp_dats.o: DATS/libatsyn2json_d2exp.dats
-	$(ATSCC) $(INCLATS) $(INCLUDE) $(CCFLAGS) -c $<; $(AR) -r libatsyn2json.a $@
-
-libatsyn2json:: libatsyn2json_d2ecl_dats.o
-libatsyn2json_d2ecl_dats.o: DATS/libatsyn2json_d2ecl.dats
-	$(ATSCC) $(INCLATS) $(INCLUDE) $(CCFLAGS) -c $<; $(AR) -r libatsyn2json.a $@
-
+# libatsyn2json:: libatsyn2json_p2at_dats.o
+# libatsyn2json_p2at_dats.o: DATS/libatsyn2json_p2at.dats
+# 	$(ATSCC) $(INCLATS) $(INCLUDE) $(CCFLAGS) -c $<; $(AR) -r libatsyn2json.a $@
+# 
+# libatsyn2json:: libatsyn2json_d2exp_dats.o
+# libatsyn2json_d2exp_dats.o: DATS/libatsyn2json_d2exp.dats
+# 	$(ATSCC) $(INCLATS) $(INCLUDE) $(CCFLAGS) -c $<; $(AR) -r libatsyn2json.a $@
+# 
+# libatsyn2json:: libatsyn2json_d2ecl_dats.o
+# libatsyn2json_d2ecl_dats.o: DATS/libatsyn2json_d2ecl.dats
+# 	$(ATSCC) $(INCLATS) $(INCLUDE) $(CCFLAGS) -c $<; $(AR) -r libatsyn2json.a $@
+# 
+# libatsyn2json:: libatsyn2json_location_dats.o
+# libatsyn2json_location_dats.o: DATS/libatsyn2json_location.dats
+# 	$(ATSCC) $(INCLATS) $(INCLUDE) $(CCFLAGS) -c $<; $(AR) -r libatsyn2json.a $@
 ######
 
 libatsyn2json:: dynloadall_dats.o
 dynloadall_dats.o: dynloadall.dats
 	$(ATSCC) $(INCLATS) $(INCLUDE) $(CCFLAGS) -c $<; $(AR) -r libatsyn2json.a $@
 
+######
+
+libatsyn2json:: json_simple_sats.o
+json_simple_sats.o: SATS/json_simple.sats
+	$(ATSCC) $(INCLATS) $(INCLUDE) $(CCFLAGS) -c $<; $(AR) -r libatsyn2json.a $@
+
+libatsyn2json:: json_simple_dats.o
+json_simple_dats.o: DATS/json_simple.dats
+	$(ATSCC) $(INCLATS) $(INCLUDE) $(CCFLAGS) -c $<; $(AR) -r libatsyn2json.a $@
+
+######
+
+libatsyn2json:: libatsyn2json_cvt_dats.o
+libatsyn2json_cvt_dats.o: DATS/libatsyn2json_cvt.dats
+	$(ATSCC) $(INCLATS) $(INCLUDE) $(CCFLAGS) -c $<; $(AR) -r libatsyn2json.a $@
+
+libatsyn2json:: libatsyn2json_cvt_impl_sats.o
+libatsyn2json_cvt_impl_sats.o: SATS/libatsyn2json_cvt_impl.sats
+	$(ATSCC) $(INCLATS) $(INCLUDE) $(CCFLAGS) -c $<; $(AR) -r libatsyn2json.a $@
+
+libatsyn2json:: libatsyn2json_cvt_impl_dats.o
+libatsyn2json_cvt_impl_dats.o: DATS/libatsyn2json_cvt_impl.dats
+	$(ATSCC) $(INCLATS) $(INCLUDE) $(CCFLAGS) -c $<; $(AR) -r libatsyn2json.a $@
+
+######
+
+libatsyn2json:: libatsyn2json_aux_sats.o
+libatsyn2json_aux_sats.o: SATS/libatsyn2json_aux.sats
+	$(ATSCC) $(INCLATS) $(INCLUDE) $(CCFLAGS) -c $<; $(AR) -r libatsyn2json.a $@
+
+
+libatsyn2json:: libatsyn2json_aux_dats.o
+libatsyn2json_aux_dats.o: DATS/libatsyn2json_aux.dats
+	$(ATSCC) $(INCLATS) $(INCLUDE) $(CCFLAGS) -c $<; $(AR) -r libatsyn2json.a $@
 ######
 
 AR=ar

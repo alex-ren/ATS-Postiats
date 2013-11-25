@@ -1,0 +1,92 @@
+Hello from ATS/Postiats!
+The 1st translation (fixity) of [DATA/foo.dats] is successfully completed!
+The 2nd translation (binding) of [DATA/foo.dats] is successfully completed!
+[
+  {
+    "d2ecl_loc": {
+      "_get_string": "dd"
+    },
+    "d2ecl_node": [
+      0,
+      [
+        {
+          "s2cst_get_fil": {
+            "_get_fullname": "symbol_type is not supported.",
+            "_get_partname": "dd",
+            "_get_givename": "dd"
+          },
+          "s2cst_get_name": "AB",
+          "s2cst_get_loc": {
+            "_get_string": "dd"
+          },
+          "s2cst_get_sym": "symbol_type is not supported."
+        }
+      ],
+      null
+    ]
+  },
+  {
+    "d2ecl_loc": {
+      "_get_string": "dd"
+    },
+    "d2ecl_node": [
+      [
+        "VK_val"
+      ],
+      [
+        {
+          "v2aldec_ann": [
+            "None"
+          ],
+          "v2aldec_pat": {
+            "p2at_loc": {
+              "_get_string": "dd"
+            },
+            "p2at_svs": "lstord_s2var is not supported.",
+            "p2at_dvs": "lstord_d2var is not supported.",
+            "p2at_node": [
+              {
+                "p2at_loc": {
+                  "_get_string": "dd"
+                },
+                "p2at_svs": "lstord_s2var is not supported.",
+                "p2at_dvs": "lstord_d2var is not supported.",
+                "p2at_node": [
+                  "d2var_type is not supported.",
+                  null
+                ],
+                "p2at_type": [
+                  "None"
+                ]
+              },
+              {
+                "s2exp_srt": "s2rt is not supported.",
+                "s2exp_node": "s2exp_node is not supported."
+              },
+              null
+            ],
+            "p2at_type": [
+              "None"
+            ]
+          },
+          "v2aldec_def": {
+            "d2exp_type": [
+              "None"
+            ],
+            "d2exp_node": [
+              "token is not supported.",
+              null
+            ],
+            "d2exp_loc": {
+              "_get_string": "dd"
+            }
+          },
+          "v2aldec_loc": {
+            "_get_string": "dd"
+          }
+        }
+      ],
+      null
+    ]
+  }
+]

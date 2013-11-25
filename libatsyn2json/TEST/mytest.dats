@@ -59,7 +59,12 @@ staload "src/pats_comarg.sats"
 
 (* ****** ****** *)
 
-staload "./../SATS/libatsyn2json.sats"
+// staload "./../SATS/libatsyn2json.sats"
+staload "./../SATS/libatsyn2json_cvt_impl.sats"
+
+(* ****** ****** *)
+
+staload "./../SATS/json_simple.sats"
 
 (* ****** ****** *)
 
@@ -435,7 +440,8 @@ do_transfinal
   (state, given, d0cs) = let
   val d2cs = do_trans12 (given, d0cs)
   val out = outchan_get_filr (state.outchan)
-  val () = jsonize_d2eclist (out, d2cs)
+  val jv = jsonize_d2eclist (d2cs)
+  val () = json_dump_output (jv, out)
 in
   // nothing
 end // end of [do_transfinal]
