@@ -70,7 +70,8 @@ fun filenv_get_d3eclistopt (fenv: filenv): d3eclistopt
 
 (* ****** ****** *)
 
-datatype c3nstrkind =
+datatype
+c3nstrkind =
   | C3NSTRKINDmain of () // generic
   | C3NSTRKINDcase_exhaustiveness of
       (caskind (*case/case+*), p2atcstlst) // HX: no [case-]
@@ -121,7 +122,8 @@ and c3nstr = '{
 
 and c3nstropt = Option (c3nstr)
 
-and c3nstroptref = '{
+and
+c3nstroptref = '{
   c3nstroptref_loc= location
 , c3nstroptref_ref= ref (c3nstropt)
 } // end of [c3nstroptref]
@@ -136,11 +138,15 @@ and h3ypo = '{
 fun c3nstr_prop
   (loc: location, s2e: s2exp): c3nstr
 
-fun c3nstr_itmlst (
+fun
+c3nstr_itmlst
+(
   loc: location, knd: c3nstrkind, s3is: s3itmlst
 ) : c3nstr // end of [c3nstr_itmlst]
 
-fun c3nstr_case_exhaustiveness (
+fun
+c3nstr_case_exhaustiveness
+(
   loc: location, casknd: caskind, p2tcs: !p2atcstlst_vt
 ) : c3nstr // end of [c3nstr_case_exhaustiveness]
 
@@ -565,8 +571,8 @@ fun the_pfmanenv_push_try (): (pfmanenv_push_v | void)
 fun the_pfmanenv_pop (pf: pfmanenv_push_v | (*none*)): void
 
 fun the_pfmanenv_add_dvar (d2v: d2var): void
-fun the_pfmanenv_add_dvarlst (d2vs: d2varlst): void
 fun the_pfmanenv_add_dvaropt (opt: d2varopt): void
+fun the_pfmanenv_add_dvarlst (d2vs: d2varlst): void
 fun the_pfmanenv_add_p3at (p3t: p3at): void
 fun the_pfmanenv_add_p3atlst (p3ts: p3atlst): void
 

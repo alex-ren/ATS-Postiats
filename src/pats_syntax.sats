@@ -888,7 +888,8 @@ fun s0expdef_make
 
 (* ****** ****** *)
 
-typedef s0aspdec = '{
+typedef
+s0aspdec = '{
   s0aspdec_loc= location
 , s0aspdec_qid= sqi0de
 , s0aspdec_arg= s0marglst
@@ -1249,7 +1250,7 @@ d0ecl_node =
   | D0Ce0xpundef of (symbol) (* undefinition *)
   | D0Ce0xpact of (e0xpactkind, e0xp)
 //
-  | D0Cdatsrts of d0atsrtdeclst (* datasort declaration *)
+  | D0Cdatsrts of d0atsrtdeclst (* datasorts *)
   | D0Csrtdefs of s0rtdeflst (* sort definition *)
 //
   | D0Cstacsts of (s0tacstlst) (* static constants *)
@@ -1275,17 +1276,18 @@ d0ecl_node =
 //
   | D0Cdcstdecs of (int(*knd*), token, q0marglst, d0cstdeclst)
 //
+  | D0Cimpdec of
+      (int(*knd*), i0mparg, i0mpdec) // knd=0/1: implement/primplmnt
+    // end of [D0Cimpdec]
+//
   | D0Cmacdefs of
       (int(*knd*), bool(*rec*), m0acdeflst) // macro definitions
+//
   | D0Cfundecs of (funkind, q0marglst, f0undeclst) // fun declarations
   | D0Cvaldecs of (valkind, bool(*isrec*), v0aldeclst) // val declarations
   | D0Cvardecs of
       (int(*knd*), v0ardeclst) // variable declarations // knd=0/1:var/prvar
     // end of [D0Cvardec]
-//
-  | D0Cimpdec of
-      (int(*knd*), i0mparg, i0mpdec) // knd=0/1: implement/primplmnt
-    // end of [D0Cimpdec]
 //
   | D0Cinclude of (* file inclusion *)
       (filename(*pfil*), int(*0:sta/1:dyn*), string(*filename*))

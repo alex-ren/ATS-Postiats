@@ -52,6 +52,8 @@ SOURCES := \
   pats_location.sats \
   pats_location.dats \
   pats_location.cats \
+  pats_jsonize.sats \
+  pats_jsonize.dats \
   pats_errmsg.sats \
   pats_errmsg.dats \
   pats_reader.sats \
@@ -142,6 +144,7 @@ SOURCES := \
   pats_staexp2_util1.dats \
   pats_staexp2_util2.dats \
   pats_staexp2_util3.dats \
+  pats_staexp2_jsonize.dats \
   pats_staexp2_error.sats \
   pats_staexp2_error.dats \
   pats_staexp2_solve.sats \
@@ -156,8 +159,8 @@ SOURCES := \
   pats_dynexp2_dcst.dats \
   pats_dynexp2_dvar.dats \
   pats_dynexp2_dmac.dats \
-  pats_dynexp2_util.sats \
   pats_dynexp2_util.dats \
+  pats_dynexp2_jsonize.dats \
   pats_trans2.sats \
   pats_namespace.sats \
   pats_namespace.dats \
@@ -294,6 +297,8 @@ OBJECTS := \
   pats_filename_reloc_dats.o \
   pats_location_sats.o \
   pats_location_dats.o \
+  pats_jsonize_sats.o \
+  pats_jsonize_dats.o \
   pats_errmsg_sats.o \
   pats_errmsg_dats.o \
   pats_reader_sats.o \
@@ -378,6 +383,7 @@ OBJECTS := \
   pats_staexp2_util1_dats.o \
   pats_staexp2_util2_dats.o \
   pats_staexp2_util3_dats.o \
+  pats_staexp2_jsonize_dats.o \
   pats_staexp2_error_sats.o \
   pats_staexp2_error_dats.o \
   pats_staexp2_solve_sats.o \
@@ -392,8 +398,8 @@ OBJECTS := \
   pats_dynexp2_dcst_dats.o \
   pats_dynexp2_dvar_dats.o \
   pats_dynexp2_dmac_dats.o \
-  pats_dynexp2_util_sats.o \
   pats_dynexp2_util_dats.o \
+  pats_dynexp2_jsonize_dats.o \
   pats_trans2_sats.o \
   pats_namespace_sats.o \
   pats_namespace_dats.o \
@@ -600,6 +606,12 @@ pats_location_sats.o: pats_location_sats.c; $(ATSCC) $(ATSCCFLAGS) -c $<
 
 pats_location_dats.c: pats_location.dats; $(ATSCC) -cc $<
 pats_location_dats.o: pats_location_dats.c; $(ATSCC) $(ATSCCFLAGS) -c $<
+
+pats_jsonize_sats.c: pats_jsonize.sats; $(ATSCC) -cc $<
+pats_jsonize_sats.o: pats_jsonize_sats.c; $(ATSCC) $(ATSCCFLAGS) -c $<
+
+pats_jsonize_dats.c: pats_jsonize.dats; $(ATSCC) -cc $<
+pats_jsonize_dats.o: pats_jsonize_dats.c; $(ATSCC) $(ATSCCFLAGS) -c $<
 
 pats_errmsg_sats.c: pats_errmsg.sats; $(ATSCC) -cc $<
 pats_errmsg_sats.o: pats_errmsg_sats.c; $(ATSCC) $(ATSCCFLAGS) -c $<
@@ -853,6 +865,9 @@ pats_staexp2_util2_dats.o: pats_staexp2_util2_dats.c; $(ATSCC) $(ATSCCFLAGS) -c 
 pats_staexp2_util3_dats.c: pats_staexp2_util3.dats; $(ATSCC) -cc $<
 pats_staexp2_util3_dats.o: pats_staexp2_util3_dats.c; $(ATSCC) $(ATSCCFLAGS) -c $<
 
+pats_staexp2_jsonize_dats.c: pats_staexp2_jsonize.dats; $(ATSCC) -cc $<
+pats_staexp2_jsonize_dats.o: pats_staexp2_jsonize_dats.c; $(ATSCC) $(ATSCCFLAGS) -c $<
+
 pats_staexp2_error_sats.c: pats_staexp2_error.sats; $(ATSCC) -cc $<
 pats_staexp2_error_sats.o: pats_staexp2_error_sats.c; $(ATSCC) $(ATSCCFLAGS) -c $<
 
@@ -895,11 +910,11 @@ pats_dynexp2_dvar_dats.o: pats_dynexp2_dvar_dats.c; $(ATSCC) $(ATSCCFLAGS) -c $<
 pats_dynexp2_dmac_dats.c: pats_dynexp2_dmac.dats; $(ATSCC) -cc $<
 pats_dynexp2_dmac_dats.o: pats_dynexp2_dmac_dats.c; $(ATSCC) $(ATSCCFLAGS) -c $<
 
-pats_dynexp2_util_sats.c: pats_dynexp2_util.sats; $(ATSCC) -cc $<
-pats_dynexp2_util_sats.o: pats_dynexp2_util_sats.c; $(ATSCC) $(ATSCCFLAGS) -c $<
-
 pats_dynexp2_util_dats.c: pats_dynexp2_util.dats; $(ATSCC) -cc $<
 pats_dynexp2_util_dats.o: pats_dynexp2_util_dats.c; $(ATSCC) $(ATSCCFLAGS) -c $<
+
+pats_dynexp2_jsonize_dats.c: pats_dynexp2_jsonize.dats; $(ATSCC) -cc $<
+pats_dynexp2_jsonize_dats.o: pats_dynexp2_jsonize_dats.c; $(ATSCC) $(ATSCCFLAGS) -c $<
 
 pats_trans2_sats.c: pats_trans2.sats; $(ATSCC) -cc $<
 pats_trans2_sats.o: pats_trans2_sats.c; $(ATSCC) $(ATSCCFLAGS) -c $<

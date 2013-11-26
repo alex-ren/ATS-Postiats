@@ -25,8 +25,11 @@ dynload "./eval_subst.dats"
 implement
 main0 (argc, argv) =
 {
+//
+val () = println! ("Hello from [eval_cloenv]!")
+//
 } (* end of [main0] *)
 
 (* ****** ****** *)
 
-(* end of [test.dats] *)
+(* end of [main.dats] *)

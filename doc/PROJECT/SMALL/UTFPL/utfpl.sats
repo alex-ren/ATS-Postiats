@@ -5,6 +5,28 @@
 (* ****** ****** *)
 
 abstype
+stamp_type = ptr
+typedef
+stamp = stamp_type
+
+(* ****** ****** *)
+//
+fun
+compare_stamp_stamp
+  : (stamp, stamp) -<fun0> int
+//
+overload compare with compare_stamp_stamp
+//
+(* ****** ****** *)
+
+abstype
+symbol_type = ptr
+typedef
+symbol = symbol_type
+
+(* ****** ****** *)
+
+abstype
 location_type = ptr
 typedef
 location = location_type
@@ -38,6 +60,13 @@ overload != with eq_d2var_d2var
 overload compare with compare_d2var_d2var
 //
 (* ****** ****** *)
+//
+fun d2var_get_stamp (d2var):<> stamp
+//
+symintr .stamp
+overload .stamp with d2var_get_stamp
+//
+(* ****** ****** *)
 
 abstype d2cst_type = ptr
 typedef d2cst = d2cst_type
@@ -67,7 +96,6 @@ d2exp_node =
 //
   | D2Eapp of (d2exp, d2explst)
 //
-  | D2Elet of (d2var, d2exp, d2exp)
 // end of [d2exp_node]
 
 where

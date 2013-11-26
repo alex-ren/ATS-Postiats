@@ -53,14 +53,9 @@ staload GLOB = "./pats_global.sats"
 
 (* ****** ****** *)
 
-staload
-FIL = "./pats_filename.sats"
-staload
-LOC = "./pats_location.sats"
-
-(* ****** ****** *)
-
 staload SYM = "./pats_symbol.sats"
+staload FIL = "./pats_filename.sats"
+staload LOC = "./pats_location.sats"
 
 (* ****** ****** *)
 
@@ -68,6 +63,10 @@ staload "./pats_lexing.sats"
 staload "./pats_tokbuf.sats"
 staload "./pats_parsing.sats"
 staload "./pats_syntax.sats"
+
+(* ****** ****** *)
+
+staload "./pats_jsonize.sats"
 
 (* ****** ****** *)
 
@@ -132,6 +131,8 @@ dynload "pats_symbol.dats"
 dynload "pats_filename.dats"
 //
 dynload "pats_location.dats"
+//
+dynload "pats_jsonize.dats"
 //
 dynload "pats_errmsg.dats"
 //
@@ -216,6 +217,8 @@ dynload "pats_staexp2_util1.dats"
 dynload "pats_staexp2_util2.dats"
 dynload "pats_staexp2_util3.dats"
 //
+dynload "pats_staexp2_jsonize.dats"
+//
 dynload "pats_staexp2_error.dats"
 dynload "pats_staexp2_solve.dats"
 //
@@ -230,6 +233,8 @@ dynload "pats_dynexp2_dvar.dats"
 dynload "pats_dynexp2_dmac.dats"
 //
 dynload "pats_dynexp2_util.dats"
+//
+dynload "pats_dynexp2_jsonize.dats"
 //
 dynload "pats_namespace.dats"
 //
@@ -394,8 +399,11 @@ fprintln! (out, "  --output filename (output into <filename>)");
 fprintln! (out, "  -tc (for typechecking only)");
 fprintln! (out, "  --typecheck (for typechecking only)");
 fprintln! (out, "  --gline (for generating line pragma information in target code)");
+fprintln! (out, "  -dep (for generating information on file dependencices)");
 fprintln! (out, "  --depgen (for generating information on file dependencices)");
+fprintln! (out, "  -tag (for generating tagging information on syntactic entities)");
 fprintln! (out, "  --taggen (for generating tagging information on syntactic entities)");
+fprintln! (out, "  --json=2 (for output level-2 syntax in JSON format)");
 fprint_newline (out);
 //
 end // end of [patsopt_usage]
@@ -405,6 +413,8 @@ end // end of [patsopt_usage]
 (*
 HX: VERSION-0.0.1 released on September 2, 2013
 HX: VERSION-0.0.2 released on September 19, 2013
+HX: VERSION-0.0.3 released in the October of 2013
+HX: VERSION-0.0.4 released in the November of 2013
 *)
 #define PATS_MAJOR_VERSION 0
 #define PATS_MINOR_VERSION 0
@@ -505,6 +515,8 @@ cmdstate = @{
 //
 , depgenflag= int // dep info generation
 , taggenflag= int // tagging info generation
+//
+, json2_flag= int // level-2 syntax in JSON
 //
 , typecheckonly= bool
 // number of accumulated errors
@@ -753,6 +765,55 @@ fun prelude_load_if
 (* ****** ****** *)
 //
 extern
+fun do_depgen
+  (state: &cmdstate, given: string, d0cs: d0eclist): void
+extern
+fun do_taggen
+  (state: &cmdstate, given: string, d0cs: d0eclist): void
+//
+(* ****** ****** *)
+
+implement
+do_depgen
+  (state, given, d0cs) = let
+  val ents = $DEPGEN.depgen_eval (d0cs)
+  val filr = outchan_get_filr (state.outchan)
+in
+  $DEPGEN.fprint_entlst (filr, given, ents)
+end // end of [do_depgen]
+
+implement
+do_taggen
+  (state, given, d0cs) = let
+  val ents = $TAGGEN.taggen_proc (d0cs)
+  val filr = outchan_get_filr (state.outchan)
+in
+  $TAGGEN.fprint_entlst (filr, given, ents)
+end // end of [do_taggen]
+
+(* ****** ****** *)
+//
+extern
+fun do_jsonize2
+  (state: &cmdstate, given: string, d2cs: d2eclist): void
+//
+(* ****** ****** *)
+
+implement
+do_jsonize2
+  (state, given, d2cs) =
+{
+//
+val jsv_d2cs = jsonize_d2eclist (d2cs)
+val out = outchan_get_filr (state.outchan)
+val ((*void*)) = fprint_jsonval (out, jsv_d2cs)
+val ((*void*)) = fprint_newline (out)
+//
+} (* end of [do_jsonize2] *)
+
+(* ****** ****** *)
+//
+extern
 fun do_trans12
   (given: string, d0cs: d0eclist): d2eclist
 extern
@@ -871,9 +932,15 @@ in
 //
 case+ 0 of
 | _ when
-    state.typecheckonly =>
-    let val d3cs = do_trans123 (given, d0cs) in (*none*) end
-  // end of [...]
+    state.typecheckonly => let
+    val d3cs = do_trans123 (given, d0cs) in (*none*)
+  end // end of [when ...]
+| _ when
+    state.json2_flag > 0 => let
+    val d2cs = do_trans12 (given, d0cs)
+  in
+    do_jsonize2 (state, given, d2cs)
+  end // end of [when ...]
 | _ => let
     val hids = do_trans1234 (given, d0cs)
     val out = outchan_get_filr (state.outchan)
@@ -885,15 +952,6 @@ case+ 0 of
 //
 end // end of [do_transfinal]
 
-(* ****** ****** *)
-//
-extern
-fun process_depgen
-  (state: &cmdstate, d0cs: d0eclist, given: string): void
-extern
-fun process_taggen
-  (state: &cmdstate, d0cs: d0eclist, given: string): void
-//
 (* ****** ****** *)
 
 fn*
@@ -933,10 +991,8 @@ case+ arglst of
 //
         val given = "<STDIN>"
 //
-        val () =
-          if isdepgen then process_depgen (state, d0cs, given)
-        val () =
-          if istaggen then process_taggen (state, d0cs, given)
+        val () = if isdepgen then do_depgen (state, given, d0cs)
+        val () = if istaggen then do_taggen (state, given, d0cs)
 //
         val () = if istrans then do_transfinal (state, given, d0cs)
 //
@@ -986,10 +1042,8 @@ case+ arg of
         val istaggen = state.taggenflag > 0
         val () = if istaggen then istrans := false
 //
-        val () =
-          if isdepgen then process_depgen (state, d0cs, given)
-        val () =
-          if istaggen then process_taggen (state, d0cs, given)
+        val () = if isdepgen then do_depgen (state, given, d0cs)
+        val () = if istaggen then do_taggen (state, given, d0cs)
 //
         val () = if istrans then do_transfinal (state, given, d0cs)
 //
@@ -1081,6 +1135,9 @@ case+ key of
 | "-dep" => {
     val () = state.depgenflag := 1
   } // end of [-dep]
+| "-tag" => {
+    val () = state.taggenflag := 1
+  } // end of [-tag]
 //
 | _ when
     is_DATS_flag (key) => let
@@ -1160,6 +1217,10 @@ case+ key of
     val () = state.taggenflag := 1
   } // end of [--taggen]
 //
+| "--json=2" => {
+    val () = state.json2_flag := 1
+  } // end of [--json=2]
+//
 | "--help" => patsopt_usage (stdout_ref, state.comarg0)
 | "--version" => patsopt_version (stdout_ref, state.comarg0)
 //
@@ -1170,26 +1231,6 @@ case+ key of
 in
   process_cmdline (state, arglst)
 end // end of [process_cmdline2_COMARGkey2]
-
-(* ****** ****** *)
-
-implement
-process_depgen
-  (state, d0cs, given) = let
-  val ents = $DEPGEN.depgen_eval (d0cs)
-  val filr = outchan_get_filr (state.outchan)
-in
-  $DEPGEN.fprint_entlst (filr, given, ents)
-end // end of [process_depgen]
-
-implement
-process_taggen
-  (state, d0cs, given) = let
-  val ents = $TAGGEN.taggen_proc (d0cs)
-  val filr = outchan_get_filr (state.outchan)
-in
-  $TAGGEN.fprint_entlst (filr, given, ents)
-end // end of [process_taggen]
 
 (* ****** ****** *)
 
@@ -1252,6 +1293,8 @@ state = @{
 //
 , depgenflag= 0 // dep info generation
 , taggenflag= 0 // tagging info generation
+//
+, json2_flag= 0 // level-2 syntax in JSON
 //
 , typecheckonly= false
 , nerror= 0 // number of accumulated errors

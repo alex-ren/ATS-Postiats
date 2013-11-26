@@ -105,6 +105,10 @@ upload_DiningPhil2:: ; \
   scp \
   DiningPhil2/Makefile \
   DiningPhil2/main.html \
+  DiningPhil2/DiningPhil2.sats \
+  DiningPhil2/DiningPhil2.dats \
+  DiningPhil2/DiningPhil2_fork.dats \
+  DiningPhil2/DiningPhil2_thread.dats \
   ats-hwxi,ats-lang@web.sourceforge.net:htdocs/EXAMPLE/EFFECTIVATS/DiningPhil2/
 
 ######
@@ -115,6 +119,7 @@ upload_Producer-Consumer:: ; \
   Producer-Consumer/main.html \
   Producer-Consumer/sbuffer.sats \
   Producer-Consumer/sbuffer.dats \
+  Producer-Consumer/SharedResource.dats \
   ats-hwxi,ats-lang@web.sourceforge.net:htdocs/EXAMPLE/EFFECTIVATS/Producer-Consumer/
 
 ######

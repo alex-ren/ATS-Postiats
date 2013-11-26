@@ -50,9 +50,7 @@ OBJECTS := $(patsubst %.dats, %_dats.o, $(OBJECTS))
 
 ######
 
-test: $(OBJECTS) ; \
-  $(PATSCC) $(ATSCCFLAGS) -o $@ $^ -L$(PATSLIB)-latslib
-cleanall:: ; $(RMF) test
+test: $(OBJECTS)
 
 ######
 
@@ -74,7 +72,7 @@ depend:: ; $(PATSOPT) -o .depend2 --depgen -d $(SOURCESdyn)
 
 upload_main: ; \
   scp main.html \
-  ats-hwxi,ats-lang@web.sourceforge.net:htdocs/EXAMPLE/EFFECTIVATS/producer-consumer/
+  ats-hwxi,ats-lang@web.sourceforge.net:htdocs/EXAMPLE/EFFECTIVATS/Producer-Consumer/
 
 ######
 

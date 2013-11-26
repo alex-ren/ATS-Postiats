@@ -28,34 +28,64 @@
 (* ****** ****** *)
 //
 // Author: Hongwei Xi
-// Authoremail: gmhwxi AT gmail DOT com
-// Start Time: May, 2011
+// Authoremail: gmhwxiATgmailDOTcom
+// Start Time: November, 2013
+//
+(* ****** ****** *)
+//
+staload
+ATSPRE = "./pats_atspre.dats"
 //
 (* ****** ****** *)
 
+staload
+UN = "prelude/SATS/unsafe.sats"
+
+(* ****** ****** *)
+
+staload "./pats_jsonize.sats"
+
+(* ****** ****** *)
+
+staload
+LEX = "./pats_lexing.sats"
+typedef token = $LEX.token
+
+(* ****** ****** *)
+
 staload "./pats_staexp2.sats"
-staload "./pats_dynexp2.sats"
 
 (* ****** ****** *)
 
-fun d2exp_is_varlamcst (d2e: d2exp): bool
+#define nil list_nil
+#define :: list_cons
+#define cons list_cons
 
 (* ****** ****** *)
 
-fun d2con_select_arity
-  (d2cs: d2conlst, n: int): d2conlst
-// end of [d2con_select_arity]
+macdef
+jsonize_loc (x) = jsonize_location (,(x))
 
 (* ****** ****** *)
 
-fun d2cst_match_def (d2c: d2cst, def: d1exp): bool
+extern
+fun jsonize_d2con : jsonize_type (d2con)
 
 (* ****** ****** *)
 
-fun d2exp_lvalize
-  (d2e: d2exp): d2lval // HX: translating [d2e] into a left-value
-// end of [d2exp_lvalize]
+implement
+jsonize_d2con
+  (d2c) = let
+//
+val sym = jsonize_symbol (d2con_get_sym (d2c))
+val stamp = jsonize_stamp (d2con_get_stamp (d2c))
+//
+in
+//
+jsonval_labval2 ("d2con_name", sym, "d2con_stamp", stamp)
+//
+end // end of [jsonize_d2con]
 
 (* ****** ****** *)
 
-(* end of [pats_dynexp2_util.sats] *)
+(* end of [pats_staexp2_jsonize.dats] *)
