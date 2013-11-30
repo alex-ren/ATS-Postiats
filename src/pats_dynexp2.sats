@@ -710,7 +710,7 @@ d2ecl_node =
 //
   | D2Clocal of (d2eclist(*head*), d2eclist(*body*)) // local declaration
 //
-  | D2Cerrdec of () // indication of error
+  | D2Cerrdec of () // HX: indication of error
 // end of [d2ecl_node]
 
 and d2exp_node =
@@ -1057,7 +1057,10 @@ overload fprint with fprint_d2ecl
 
 fun print_d2lval (x: d2lval): void
 and prerr_d2lval (x: d2lval): void
+overload print with print_d2lval
+overload prerr with prerr_d2lval
 fun fprint_d2lval : fprint_type (d2lval)
+overload fprint with fprint_d2lval
 
 (* ****** ****** *)
 //
