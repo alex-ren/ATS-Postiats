@@ -42,6 +42,8 @@ staload _(* anon *) = "prelude/DATS/array0.dats"
 
 
 
+staload _ = "prelude/DATS/list0.dats"
+
 staload "../SATS/libatsyn2json_cvt.sats"
 
 // ====== to be implemented ==========
@@ -93,6 +95,7 @@ end
 implement jsonize_v1alist(x) = 
   let
     val __len = list_length (x)
+
     val __arr = array0_make_elt (size_of_int (__len), JSONnul ())
 
     fun loop (arr: array0 (jsonVal), xs: List ($S1E.v1al), n: int): void =
@@ -237,6 +240,7 @@ implement jsonize_e1xp(x) =
     val __jp_lst = list0_cons (__p, __jp_lst)
 
 
+    val __jp_lst = list0_reverse(__jp_lst)
     val __ret = JSONobject (__jp_lst)
   in
     __ret
@@ -245,6 +249,7 @@ implement jsonize_e1xp(x) =
 implement jsonize_e1xplst(x) = 
   let
     val __len = list_length (x)
+
     val __arr = array0_make_elt (size_of_int (__len), JSONnul ())
 
     fun loop (arr: array0 (jsonVal), xs: List ($S1E.e1xp), n: int): void =
@@ -287,6 +292,7 @@ let
   val __p = '(__name, __value)
   val __jp_lst = list0_cons (__p, __jp_lst)
 
+  val __jp_lst = list0_reverse(__jp_lst)
   val __ret = JSONobject (__jp_lst)
 in
   __ret
@@ -295,6 +301,7 @@ end
 implement jsonize_s2cstlst(x) = 
   let
     val __len = list_length (x)
+
     val __arr = array0_make_elt (size_of_int (__len), JSONnul ())
 
     fun loop (arr: array0 (jsonVal), xs: List ($S2E.s2cst), n: int): void =
@@ -330,6 +337,50 @@ implement jsonize_s2cstopt(x) =
   end
   )
 
+implement jsonize_s2rt (x) =
+let
+  val __jp_lst = list0_nil ()
+
+
+  val __jp_lst = list0_reverse(__jp_lst)
+  val __ret = JSONobject (__jp_lst)
+in
+  __ret
+end
+
+implement jsonize_s2exp_node (x) =
+let
+  val __jp_lst = list0_nil ()
+
+
+  val __jp_lst = list0_reverse(__jp_lst)
+  val __ret = JSONobject (__jp_lst)
+in
+  __ret
+end
+
+implement jsonize_s2lab (x) =
+let
+  val __jp_lst = list0_nil ()
+
+
+  val __jp_lst = list0_reverse(__jp_lst)
+  val __ret = JSONobject (__jp_lst)
+in
+  __ret
+end
+
+implement jsonize_labs2exp (x) =
+let
+  val __jp_lst = list0_nil ()
+
+
+  val __jp_lst = list0_reverse(__jp_lst)
+  val __ret = JSONobject (__jp_lst)
+in
+  __ret
+end
+
 implement jsonize_s2exp(x) = 
   let
     val __jp_lst = list0_nil ()
@@ -347,6 +398,7 @@ implement jsonize_s2exp(x) =
     val __jp_lst = list0_cons (__p, __jp_lst)
 
 
+    val __jp_lst = list0_reverse(__jp_lst)
     val __ret = JSONobject (__jp_lst)
   in
     __ret
@@ -355,6 +407,7 @@ implement jsonize_s2exp(x) =
 implement jsonize_s2explst(x) = 
   let
     val __len = list_length (x)
+
     val __arr = array0_make_elt (size_of_int (__len), JSONnul ())
 
     fun loop (arr: array0 (jsonVal), xs: List ($S2E.s2exp), n: int): void =
@@ -393,6 +446,7 @@ implement jsonize_s2expopt(x) =
 implement jsonize_s2explstlst(x) = 
   let
     val __len = list_length (x)
+
     val __arr = array0_make_elt (size_of_int (__len), JSONnul ())
 
     fun loop (arr: array0 (jsonVal), xs: List ($S2E.s2explst), n: int): void =
@@ -431,6 +485,7 @@ implement jsonize_s2explstopt(x) =
 implement jsonize_s2lablst(x) = 
   let
     val __len = list_length (x)
+
     val __arr = array0_make_elt (size_of_int (__len), JSONnul ())
 
     fun loop (arr: array0 (jsonVal), xs: List ($S2E.s2lab), n: int): void =
@@ -451,6 +506,7 @@ implement jsonize_s2lablst(x) =
 implement jsonize_labs2explst(x) = 
   let
     val __len = list_length (x)
+
     val __arr = array0_make_elt (size_of_int (__len), JSONnul ())
 
     fun loop (arr: array0 (jsonVal), xs: List ($S2E.labs2exp), n: int): void =
@@ -491,6 +547,7 @@ implement jsonize_s2aspdec(x) =
     val __jp_lst = list0_cons (__p, __jp_lst)
 
 
+    val __jp_lst = list0_reverse(__jp_lst)
     val __ret = JSONobject (__jp_lst)
   in
     __ret
@@ -516,6 +573,7 @@ let
   val __p = '(__name, __value)
   val __jp_lst = list0_cons (__p, __jp_lst)
 
+  val __jp_lst = list0_reverse(__jp_lst)
   val __ret = JSONobject (__jp_lst)
 in
   __ret
@@ -531,6 +589,7 @@ let
   val __p = '(__name, __value)
   val __jp_lst = list0_cons (__p, __jp_lst)
 
+  val __jp_lst = list0_reverse(__jp_lst)
   val __ret = JSONobject (__jp_lst)
 in
   __ret
@@ -539,6 +598,7 @@ end
 implement jsonize_symbolist(x) = 
   let
     val __len = list_length (x)
+
     val __arr = array0_make_elt (size_of_int (__len), JSONnul ())
 
     fun loop (arr: array0 (jsonVal), xs: List ($SYM.symbol), n: int): void =
@@ -573,6 +633,17 @@ implement jsonize_symbolopt(x) =
     JSONarray (__arr)
   end
   )
+
+implement jsonize_token (x) =
+let
+  val __jp_lst = list0_nil ()
+
+
+  val __jp_lst = list0_reverse(__jp_lst)
+  val __ret = JSONobject (__jp_lst)
+in
+  __ret
+end
 
 implement jsonize_i0nt(x) = 
   jsonize_token(x)
@@ -639,6 +710,7 @@ implement jsonize_i0de(x) =
     val __jp_lst = list0_cons (__p, __jp_lst)
 
 
+    val __jp_lst = list0_reverse(__jp_lst)
     val __ret = JSONobject (__jp_lst)
   in
     __ret
@@ -647,6 +719,7 @@ implement jsonize_i0de(x) =
 implement jsonize_i0delst(x) = 
   let
     val __len = list_length (x)
+
     val __arr = array0_make_elt (size_of_int (__len), JSONnul ())
 
     fun loop (arr: array0 (jsonVal), xs: List ($SYN.i0de), n: int): void =
@@ -664,12 +737,41 @@ implement jsonize_i0delst(x) =
     JSONarray (__arr)
   end
 
-implement jsonize_d2cst(x) = 
-  jsonize_d2cst_type(x)
+implement jsonize_d2cst (x) =
+let
+  val __jp_lst = list0_nil ()
+
+  val __name = "d2cst_get_sym"
+  val __v = $D2E.d2cst_get_sym(x)
+  val __value = jsonize_symbol(__v)
+  val __p = '(__name, __value)
+  val __jp_lst = list0_cons (__p, __jp_lst)
+  val __name = "d2cst_get_loc"
+  val __v = $D2E.d2cst_get_loc(x)
+  val __value = jsonize_location(__v)
+  val __p = '(__name, __value)
+  val __jp_lst = list0_cons (__p, __jp_lst)
+  val __name = "d2cst_get_fil"
+  val __v = $D2E.d2cst_get_fil(x)
+  val __value = jsonize_filename(__v)
+  val __p = '(__name, __value)
+  val __jp_lst = list0_cons (__p, __jp_lst)
+  val __name = "d2cst_get_name"
+  val __v = $D2E.d2cst_get_name(x)
+  val __value = jsonize_string (__v)
+  val __p = '(__name, __value)
+  val __jp_lst = list0_cons (__p, __jp_lst)
+
+  val __jp_lst = list0_reverse(__jp_lst)
+  val __ret = JSONobject (__jp_lst)
+in
+  __ret
+end
 
 implement jsonize_d2cstlst(x) = 
   let
     val __len = list_length (x)
+
     val __arr = array0_make_elt (size_of_int (__len), JSONnul ())
 
     fun loop (arr: array0 (jsonVal), xs: List ($D2E.d2cst), n: int): void =
@@ -728,6 +830,7 @@ implement jsonize_d2exp(x) =
     val __jp_lst = list0_cons (__p, __jp_lst)
 
 
+    val __jp_lst = list0_reverse(__jp_lst)
     val __ret = JSONobject (__jp_lst)
   in
     __ret
@@ -736,6 +839,7 @@ implement jsonize_d2exp(x) =
 implement jsonize_d2explst(x) = 
   let
     val __len = list_length (x)
+
     val __arr = array0_make_elt (size_of_int (__len), JSONnul ())
 
     fun loop (arr: array0 (jsonVal), xs: List ($D2E.d2exp), n: int): void =
@@ -771,9 +875,21 @@ implement jsonize_d2expopt(x) =
   end
   )
 
+implement jsonize_labd2exp (x) =
+let
+  val __jp_lst = list0_nil ()
+
+
+  val __jp_lst = list0_reverse(__jp_lst)
+  val __ret = JSONobject (__jp_lst)
+in
+  __ret
+end
+
 implement jsonize_labd2explst(x) = 
   let
     val __len = list_length (x)
+
     val __arr = array0_make_elt (size_of_int (__len), JSONnul ())
 
     fun loop (arr: array0 (jsonVal), xs: List ($D2E.labd2exp), n: int): void =
@@ -794,6 +910,7 @@ implement jsonize_labd2explst(x) =
 implement jsonize_d2exparglst(x) = 
   let
     val __len = list_length (x)
+
     val __arr = array0_make_elt (size_of_int (__len), JSONnul ())
 
     fun loop (arr: array0 (jsonVal), xs: List ($D2E.d2exparg), n: int): void =
@@ -821,6 +938,7 @@ let
   val __p = '(__name, __value)
   val __jp_lst = list0_cons (__p, __jp_lst)
 
+  val __jp_lst = list0_reverse(__jp_lst)
   val __ret = JSONobject (__jp_lst)
 in
   __ret
@@ -829,6 +947,7 @@ end
 implement jsonize_d2varlst(x) = 
   let
     val __len = list_length (x)
+
     val __arr = array0_make_elt (size_of_int (__len), JSONnul ())
 
     fun loop (arr: array0 (jsonVal), xs: List ($D2E.d2var), n: int): void =
@@ -864,12 +983,35 @@ implement jsonize_d2varopt(x) =
   end
   )
 
+implement jsonize_cstsp (x) =
+let
+  val __jp_lst = list0_nil ()
+
+
+  val __jp_lst = list0_reverse(__jp_lst)
+  val __ret = JSONobject (__jp_lst)
+in
+  __ret
+end
+
+implement jsonize_d2con_type (x) =
+let
+  val __jp_lst = list0_nil ()
+
+
+  val __jp_lst = list0_reverse(__jp_lst)
+  val __ret = JSONobject (__jp_lst)
+in
+  __ret
+end
+
 implement jsonize_d2con(x) = 
   jsonize_d2con_type(x)
 
 implement jsonize_d2conlst(x) = 
   let
     val __len = list_length (x)
+
     val __arr = array0_make_elt (size_of_int (__len), JSONnul ())
 
     fun loop (arr: array0 (jsonVal), xs: List ($STAEXP2.d2con), n: int): void =
@@ -887,9 +1029,21 @@ implement jsonize_d2conlst(x) =
     JSONarray (__arr)
   end
 
+implement jsonize_s2exparg (x) =
+let
+  val __jp_lst = list0_nil ()
+
+
+  val __jp_lst = list0_reverse(__jp_lst)
+  val __ret = JSONobject (__jp_lst)
+in
+  __ret
+end
+
 implement jsonize_s2exparglst(x) = 
   let
     val __len = list_length (x)
+
     val __arr = array0_make_elt (size_of_int (__len), JSONnul ())
 
     fun loop (arr: array0 (jsonVal), xs: List ($S2E.s2exparg), n: int): void =
@@ -905,6 +1059,95 @@ implement jsonize_s2exparglst(x) =
     val () = loop (__arr, x, 0)
   in
     JSONarray (__arr)
+  end
+
+implement jsonize_d0ynq_node (x) =
+case+ x of
+| $SYN.D0YNQnone () => let
+  val __arr = array0_make_elt (1, JSONnul ())
+  val () = __arr[0] := JSONstring ("D0YNQnone")
+in
+  JSONarray (__arr)
+end
+| $SYN.D0YNQsymdot (__e1) => let
+  val __arr = array0_make_elt (2, JSONnul ())
+  val () = __arr[0] := JSONstring ("D0YNQsymdot")
+  val () = __arr[1] := jsonize_symbol(__e1)
+in
+  JSONarray (__arr)
+end
+| $SYN.D0YNQsymcolon (__e1) => let
+  val __arr = array0_make_elt (2, JSONnul ())
+  val () = __arr[0] := JSONstring ("D0YNQsymcolon")
+  val () = __arr[1] := jsonize_symbol(__e1)
+in
+  JSONarray (__arr)
+end
+| $SYN.D0YNQsymdotcolon (__e1,__e2) => let
+  val __arr = array0_make_elt (3, JSONnul ())
+  val () = __arr[0] := JSONstring ("D0YNQsymdotcolon")
+  val () = __arr[1] := jsonize_symbol(__e1)
+  val () = __arr[2] := jsonize_symbol(__e2)
+in
+  JSONarray (__arr)
+end
+
+implement jsonize_d0ynq(x) = 
+  let
+    val __jp_lst = list0_nil ()
+
+    val __name = "d0ynq_loc"
+    val __v = x.d0ynq_loc
+    val __value = jsonize_location(__v)
+    val __p = '(__name, __value)
+    val __jp_lst = list0_cons (__p, __jp_lst)
+
+    val __name = "d0ynq_node"
+    val __v = x.d0ynq_node
+    val __value = jsonize_d0ynq_node(__v)
+    val __p = '(__name, __value)
+    val __jp_lst = list0_cons (__p, __jp_lst)
+
+
+    val __jp_lst = list0_reverse(__jp_lst)
+    val __ret = JSONobject (__jp_lst)
+  in
+    __ret
+  end
+
+implement jsonize_d2sym(x) = 
+  let
+    val __jp_lst = list0_nil ()
+
+    val __name = "d2sym_loc"
+    val __v = x.d2sym_loc
+    val __value = jsonize_location(__v)
+    val __p = '(__name, __value)
+    val __jp_lst = list0_cons (__p, __jp_lst)
+
+    val __name = "d2sym_qua"
+    val __v = x.d2sym_qua
+    val __value = jsonize_d0ynq(__v)
+    val __p = '(__name, __value)
+    val __jp_lst = list0_cons (__p, __jp_lst)
+
+    val __name = "d2sym_sym"
+    val __v = x.d2sym_sym
+    val __value = jsonize_symbol(__v)
+    val __p = '(__name, __value)
+    val __jp_lst = list0_cons (__p, __jp_lst)
+
+    val __name = "d2sym_pitmlst"
+    val __v = x.d2sym_pitmlst
+    val __value = jsonize_d2pitmlst(__v)
+    val __p = '(__name, __value)
+    val __jp_lst = list0_cons (__p, __jp_lst)
+
+
+    val __jp_lst = list0_reverse(__jp_lst)
+    val __ret = JSONobject (__jp_lst)
+  in
+    __ret
   end
 
 implement jsonize_d2symopt(x) = 
@@ -925,9 +1168,21 @@ implement jsonize_d2symopt(x) =
   end
   )
 
+implement jsonize_t2mpmarg (x) =
+let
+  val __jp_lst = list0_nil ()
+
+
+  val __jp_lst = list0_reverse(__jp_lst)
+  val __ret = JSONobject (__jp_lst)
+in
+  __ret
+end
+
 implement jsonize_t2mpmarglst(x) = 
   let
     val __len = list_length (x)
+
     val __arr = array0_make_elt (size_of_int (__len), JSONnul ())
 
     fun loop (arr: array0 (jsonVal), xs: List ($S2E.t2mpmarg), n: int): void =
@@ -944,6 +1199,17 @@ implement jsonize_t2mpmarglst(x) =
   in
     JSONarray (__arr)
   end
+
+implement jsonize_i2nvresstate (x) =
+let
+  val __jp_lst = list0_nil ()
+
+
+  val __jp_lst = list0_reverse(__jp_lst)
+  val __ret = JSONobject (__jp_lst)
+in
+  __ret
+end
 
 implement jsonize_caskind (x) =
 case+ x of
@@ -966,9 +1232,21 @@ in
   JSONarray (__arr)
 end
 
+implement jsonize_c2lau (x) =
+let
+  val __jp_lst = list0_nil ()
+
+
+  val __jp_lst = list0_reverse(__jp_lst)
+  val __ret = JSONobject (__jp_lst)
+in
+  __ret
+end
+
 implement jsonize_c2laulst(x) = 
   let
     val __len = list_length (x)
+
     val __arr = array0_make_elt (size_of_int (__len), JSONnul ())
 
     fun loop (arr: array0 (jsonVal), xs: List ($D2E.c2lau), n: int): void =
@@ -986,9 +1264,21 @@ implement jsonize_c2laulst(x) =
     JSONarray (__arr)
   end
 
+implement jsonize_sc2lau (x) =
+let
+  val __jp_lst = list0_nil ()
+
+
+  val __jp_lst = list0_reverse(__jp_lst)
+  val __ret = JSONobject (__jp_lst)
+in
+  __ret
+end
+
 implement jsonize_sc2laulst(x) = 
   let
     val __len = list_length (x)
+
     val __arr = array0_make_elt (size_of_int (__len), JSONnul ())
 
     fun loop (arr: array0 (jsonVal), xs: List ($D2E.sc2lau), n: int): void =
@@ -1006,9 +1296,21 @@ implement jsonize_sc2laulst(x) =
     JSONarray (__arr)
   end
 
+implement jsonize_d2lab (x) =
+let
+  val __jp_lst = list0_nil ()
+
+
+  val __jp_lst = list0_reverse(__jp_lst)
+  val __ret = JSONobject (__jp_lst)
+in
+  __ret
+end
+
 implement jsonize_d2lablst(x) = 
   let
     val __len = list_length (x)
+
     val __arr = array0_make_elt (size_of_int (__len), JSONnul ())
 
     fun loop (arr: array0 (jsonVal), xs: List ($D2E.d2lab), n: int): void =
@@ -1051,8 +1353,30 @@ in
   JSONarray (__arr)
 end
 
+implement jsonize_effset_t0ype (x) =
+let
+  val __jp_lst = list0_nil ()
+
+
+  val __jp_lst = list0_reverse(__jp_lst)
+  val __ret = JSONobject (__jp_lst)
+in
+  __ret
+end
+
 implement jsonize_effset(x) = 
   jsonize_effset_t0ype(x)
+
+implement jsonize_s2var_type (x) =
+let
+  val __jp_lst = list0_nil ()
+
+
+  val __jp_lst = list0_reverse(__jp_lst)
+  val __ret = JSONobject (__jp_lst)
+in
+  __ret
+end
 
 implement jsonize_s2var(x) = 
   jsonize_s2var_type(x)
@@ -1060,6 +1384,7 @@ implement jsonize_s2var(x) =
 implement jsonize_s2varlst(x) = 
   let
     val __len = list_length (x)
+
     val __arr = array0_make_elt (size_of_int (__len), JSONnul ())
 
     fun loop (arr: array0 (jsonVal), xs: List ($S2E.s2var), n: int): void =
@@ -1098,6 +1423,7 @@ implement jsonize_s2varopt(x) =
 implement jsonize_s2varlstlst(x) = 
   let
     val __len = list_length (x)
+
     val __arr = array0_make_elt (size_of_int (__len), JSONnul ())
 
     fun loop (arr: array0 (jsonVal), xs: List ($S2E.s2varlst), n: int): void =
@@ -1115,12 +1441,35 @@ implement jsonize_s2varlstlst(x) =
     JSONarray (__arr)
   end
 
+implement jsonize_loopi2nv (x) =
+let
+  val __jp_lst = list0_nil ()
+
+
+  val __jp_lst = list0_reverse(__jp_lst)
+  val __ret = JSONobject (__jp_lst)
+in
+  __ret
+end
+
+implement jsonize_d2mac_type (x) =
+let
+  val __jp_lst = list0_nil ()
+
+
+  val __jp_lst = list0_reverse(__jp_lst)
+  val __ret = JSONobject (__jp_lst)
+in
+  __ret
+end
+
 implement jsonize_d2mac(x) = 
   jsonize_d2mac_type(x)
 
 implement jsonize_d2maclst(x) = 
   let
     val __len = list_length (x)
+
     val __arr = array0_make_elt (size_of_int (__len), JSONnul ())
 
     fun loop (arr: array0 (jsonVal), xs: List ($D2E.d2mac), n: int): void =
@@ -1226,6 +1575,7 @@ end
 implement jsonize_d2itmlst(x) = 
   let
     val __len = list_length (x)
+
     val __arr = array0_make_elt (size_of_int (__len), JSONnul ())
 
     fun loop (arr: array0 (jsonVal), xs: List ($D2E.d2itm), n: int): void =
@@ -1246,6 +1596,7 @@ implement jsonize_d2itmlst(x) =
 implement jsonize_d2pitmlst(x) = 
   let
     val __len = list_length (x)
+
     val __arr = array0_make_elt (size_of_int (__len), JSONnul ())
 
     fun loop (arr: array0 (jsonVal), xs: List ($D2E.d2pitm), n: int): void =
@@ -1297,6 +1648,17 @@ in
   JSONarray (__arr)
 end
 
+implement jsonize_label_type (x) =
+let
+  val __jp_lst = list0_nil ()
+
+
+  val __jp_lst = list0_reverse(__jp_lst)
+  val __ret = JSONobject (__jp_lst)
+in
+  __ret
+end
+
 implement jsonize_label(x) = 
   jsonize_label_type(x)
 
@@ -1340,6 +1702,7 @@ end
 implement jsonize_d2eclist(x) = 
   let
     val __len = list_length (x)
+
     val __arr = array0_make_elt (size_of_int (__len), JSONnul ())
 
     fun loop (arr: array0 (jsonVal), xs: List ($D2E.d2ecl), n: int): void =
@@ -1374,6 +1737,7 @@ implement jsonize_d2ecl(x) =
     val __jp_lst = list0_cons (__p, __jp_lst)
 
 
+    val __jp_lst = list0_reverse(__jp_lst)
     val __ret = JSONobject (__jp_lst)
   in
     __ret
@@ -1465,6 +1829,7 @@ implement jsonize_i2mpdec(x) =
     val __jp_lst = list0_cons (__p, __jp_lst)
 
 
+    val __jp_lst = list0_reverse(__jp_lst)
     val __ret = JSONobject (__jp_lst)
   in
     __ret
@@ -1532,6 +1897,7 @@ implement jsonize_s2qua(x) =
     val __jp_lst = list0_cons (__p, __jp_lst)
 
 
+    val __jp_lst = list0_reverse(__jp_lst)
     val __ret = JSONobject (__jp_lst)
   in
     __ret
@@ -1540,6 +1906,7 @@ implement jsonize_s2qua(x) =
 implement jsonize_s2qualst(x) = 
   let
     val __len = list_length (x)
+
     val __arr = array0_make_elt (size_of_int (__len), JSONnul ())
 
     fun loop (arr: array0 (jsonVal), xs: List ($S2E.s2qua), n: int): void =
@@ -1586,6 +1953,7 @@ implement jsonize_f2undec(x) =
     val __jp_lst = list0_cons (__p, __jp_lst)
 
 
+    val __jp_lst = list0_reverse(__jp_lst)
     val __ret = JSONobject (__jp_lst)
   in
     __ret
@@ -1594,6 +1962,7 @@ implement jsonize_f2undec(x) =
 implement jsonize_f2undeclst(x) = 
   let
     val __len = list_length (x)
+
     val __arr = array0_make_elt (size_of_int (__len), JSONnul ())
 
     fun loop (arr: array0 (jsonVal), xs: List ($D2E.f2undec), n: int): void =
@@ -1667,6 +2036,7 @@ implement jsonize_v2aldec(x) =
     val __jp_lst = list0_cons (__p, __jp_lst)
 
 
+    val __jp_lst = list0_reverse(__jp_lst)
     val __ret = JSONobject (__jp_lst)
   in
     __ret
@@ -1675,6 +2045,7 @@ implement jsonize_v2aldec(x) =
 implement jsonize_v2aldeclst(x) = 
   let
     val __len = list_length (x)
+
     val __arr = array0_make_elt (size_of_int (__len), JSONnul ())
 
     fun loop (arr: array0 (jsonVal), xs: List ($D2E.v2aldec), n: int): void =
@@ -1745,6 +2116,7 @@ implement jsonize_v2ardec(x) =
     val __jp_lst = list0_cons (__p, __jp_lst)
 
 
+    val __jp_lst = list0_reverse(__jp_lst)
     val __ret = JSONobject (__jp_lst)
   in
     __ret
@@ -1753,6 +2125,7 @@ implement jsonize_v2ardec(x) =
 implement jsonize_v2ardeclst(x) = 
   let
     val __len = list_length (x)
+
     val __arr = array0_make_elt (size_of_int (__len), JSONnul ())
 
     fun loop (arr: array0 (jsonVal), xs: List ($D2E.v2ardec), n: int): void =
@@ -1799,6 +2172,7 @@ implement jsonize_prv2ardec(x) =
     val __jp_lst = list0_cons (__p, __jp_lst)
 
 
+    val __jp_lst = list0_reverse(__jp_lst)
     val __ret = JSONobject (__jp_lst)
   in
     __ret
@@ -1807,6 +2181,7 @@ implement jsonize_prv2ardec(x) =
 implement jsonize_prv2ardeclst(x) = 
   let
     val __len = list_length (x)
+
     val __arr = array0_make_elt (size_of_int (__len), JSONnul ())
 
     fun loop (arr: array0 (jsonVal), xs: List ($D2E.prv2ardec), n: int): void =
@@ -1834,6 +2209,7 @@ let
   val __p = '(__name, __value)
   val __jp_lst = list0_cons (__p, __jp_lst)
 
+  val __jp_lst = list0_reverse(__jp_lst)
   val __ret = JSONobject (__jp_lst)
 in
   __ret
@@ -1849,6 +2225,7 @@ let
   val __p = '(__name, __value)
   val __jp_lst = list0_cons (__p, __jp_lst)
 
+  val __jp_lst = list0_reverse(__jp_lst)
   val __ret = JSONobject (__jp_lst)
 in
   __ret
@@ -1916,6 +2293,7 @@ implement jsonize_l0ab(x) =
     val __jp_lst = list0_cons (__p, __jp_lst)
 
 
+    val __jp_lst = list0_reverse(__jp_lst)
     val __ret = JSONobject (__jp_lst)
   in
     __ret
@@ -2845,6 +3223,7 @@ implement jsonize_p2at(x) =
     val __jp_lst = list0_cons (__p, __jp_lst)
 
 
+    val __jp_lst = list0_reverse(__jp_lst)
     val __ret = JSONobject (__jp_lst)
   in
     __ret
@@ -2853,6 +3232,7 @@ implement jsonize_p2at(x) =
 implement jsonize_p2atlst(x) = 
   let
     val __len = list_length (x)
+
     val __arr = array0_make_elt (size_of_int (__len), JSONnul ())
 
     fun loop (arr: array0 (jsonVal), xs: List ($D2E.p2at), n: int): void =
@@ -2891,6 +3271,7 @@ implement jsonize_p2atopt(x) =
 implement jsonize_labp2atlst(x) = 
   let
     val __len = list_length (x)
+
     val __arr = array0_make_elt (size_of_int (__len), JSONnul ())
 
     fun loop (arr: array0 (jsonVal), xs: List ($D2E.labp2at), n: int): void =
@@ -2907,3 +3288,25 @@ implement jsonize_labp2atlst(x) =
   in
     JSONarray (__arr)
   end
+
+implement jsonize_lstord_d2var (x) =
+let
+  val __jp_lst = list0_nil ()
+
+
+  val __jp_lst = list0_reverse(__jp_lst)
+  val __ret = JSONobject (__jp_lst)
+in
+  __ret
+end
+
+implement jsonize_lstord_s2var (x) =
+let
+  val __jp_lst = list0_nil ()
+
+
+  val __jp_lst = list0_reverse(__jp_lst)
+  val __ret = JSONobject (__jp_lst)
+in
+  __ret
+end

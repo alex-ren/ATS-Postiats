@@ -1,118 +1,5 @@
-Hello from ATS/Postiats!
-The 1st translation (fixity) of [DATA/foo.dats] is successfully completed!
-The 2nd translation (binding) of [DATA/foo.dats] is successfully completed!
 [
   {
-    "d2ecl_loc": {
-      "location_end_ntot": 35,
-      "location_beg_nrow": 0,
-      "location_beg_ntot": 0
-    },
-    "d2ecl_node": [
-      "D2Cdatdecs",
-      0,
-      [
-        {
-          "s2cst_get_fil": {
-            "filename_get_givename": "DATA/foo.dats"
-          },
-          "s2cst_get_name": "AB",
-          "s2cst_get_loc": {
-            "location_end_ntot": 35,
-            "location_beg_nrow": 0,
-            "location_beg_ntot": 9
-          },
-          "s2cst_get_sym": {
-            "symbol_get_name": "AB"
-          }
-        }
-      ]
-    ]
-  },
-  {
-    "d2ecl_loc": {
-      "location_end_ntot": 51,
-      "location_beg_nrow": 2,
-      "location_beg_ntot": 37
-    },
-    "d2ecl_node": [
-      "D2Cvaldecs",
-      [
-        "VK_val"
-      ],
-      [
-        {
-          "v2aldec_ann": [
-            "None"
-          ],
-          "v2aldec_pat": {
-            "p2at_loc": {
-              "location_end_ntot": 47,
-              "location_beg_nrow": 2,
-              "location_beg_ntot": 41
-            },
-            "p2at_svs": "lstord_s2var is not supported.",
-            "p2at_dvs": "lstord_d2var is not supported.",
-            "p2at_node": [
-              "P2Tann",
-              {
-                "p2at_loc": {
-                  "location_end_ntot": 42,
-                  "location_beg_nrow": 2,
-                  "location_beg_ntot": 41
-                },
-                "p2at_svs": "lstord_s2var is not supported.",
-                "p2at_dvs": "lstord_d2var is not supported.",
-                "p2at_node": [
-                  "P2Tvar",
-                  {
-                    "d2var_get_sym": {
-                      "symbol_get_name": "x"
-                    }
-                  }
-                ],
-                "p2at_type": [
-                  "None"
-                ]
-              },
-              {
-                "s2exp_srt": "s2rt is not supported.",
-                "s2exp_node": "s2exp_node is not supported."
-              }
-            ],
-            "p2at_type": [
-              "None"
-            ]
-          },
-          "v2aldec_def": {
-            "d2exp_type": [
-              "None"
-            ],
-            "d2exp_node": [
-              "D2Ei0nt",
-              "token is not supported."
-            ],
-            "d2exp_loc": {
-              "location_end_ntot": 51,
-              "location_beg_nrow": 2,
-              "location_beg_ntot": 50
-            }
-          },
-          "v2aldec_loc": {
-            "location_end_ntot": 51,
-            "location_beg_nrow": 2,
-            "location_beg_ntot": 41
-          }
-        }
-      ]
-    ]
-  },
-  {
-    "d2ecl_loc": {
-      "location_end_ntot": 113,
-      "location_beg_nrow": 4,
-      "location_beg_ntot": 53
-    },
     "d2ecl_node": [
       "D2Cfundecs",
       [
@@ -121,36 +8,31 @@ The 2nd translation (binding) of [DATA/foo.dats] is successfully completed!
       [],
       [
         {
-          "f2undec_ann": [
-            "None"
-          ],
+          "f2undec_loc": {
+            "location_beg_ntot": 4,
+            "location_beg_nrow": 0,
+            "location_end_ntot": 60
+          },
+          "f2undec_var": {
+            "d2var_get_sym": {
+              "symbol_get_name": "fact"
+            }
+          },
           "f2undec_def": {
-            "d2exp_type": [
-              "None"
-            ],
+            "d2exp_loc": {
+              "location_beg_ntot": 9,
+              "location_beg_nrow": 0,
+              "location_end_ntot": 60
+            },
             "d2exp_node": [
               "D2Elam_dyn",
               0,
               -1,
               [
                 {
-                  "p2at_loc": {
-                    "location_end_ntot": 69,
-                    "location_beg_nrow": 4,
-                    "location_beg_ntot": 63
-                  },
-                  "p2at_svs": "lstord_s2var is not supported.",
-                  "p2at_dvs": "lstord_d2var is not supported.",
                   "p2at_node": [
                     "P2Tann",
                     {
-                      "p2at_loc": {
-                        "location_end_ntot": 64,
-                        "location_beg_nrow": 4,
-                        "location_beg_ntot": 63
-                      },
-                      "p2at_svs": "lstord_s2var is not supported.",
-                      "p2at_dvs": "lstord_d2var is not supported.",
                       "p2at_node": [
                         "P2Tvar",
                         {
@@ -159,67 +41,509 @@ The 2nd translation (binding) of [DATA/foo.dats] is successfully completed!
                           }
                         }
                       ],
+                      "p2at_dvs": {},
+                      "p2at_svs": {},
+                      "p2at_loc": {
+                        "location_beg_ntot": 10,
+                        "location_beg_nrow": 0,
+                        "location_end_ntot": 11
+                      },
                       "p2at_type": [
                         "None"
                       ]
                     },
                     {
-                      "s2exp_srt": "s2rt is not supported.",
-                      "s2exp_node": "s2exp_node is not supported."
+                      "s2exp_node": {},
+                      "s2exp_srt": {}
                     }
                   ],
+                  "p2at_dvs": {},
+                  "p2at_svs": {},
+                  "p2at_loc": {
+                    "location_beg_ntot": 10,
+                    "location_beg_nrow": 0,
+                    "location_end_ntot": 16
+                  },
                   "p2at_type": [
                     "None"
                   ]
                 }
               ],
               {
-                "d2exp_type": [
-                  "None"
-                ],
+                "d2exp_loc": {
+                  "location_beg_ntot": 20,
+                  "location_beg_nrow": 1,
+                  "location_end_ntot": 60
+                },
                 "d2exp_node": [
                   "D2Eann_seff",
                   {
-                    "d2exp_type": [
-                      "None"
-                    ],
+                    "d2exp_loc": {
+                      "location_beg_ntot": 20,
+                      "location_beg_nrow": 1,
+                      "location_end_ntot": 60
+                    },
                     "d2exp_node": [
                       "D2Eifhead",
-                      "i2nvresstate is not supported.",
+                      {},
                       {
-                        "d2exp_type": [
-                          "None"
-                        ],
+                        "d2exp_loc": {
+                          "location_beg_ntot": 24,
+                          "location_beg_nrow": 1,
+                          "location_end_ntot": 30
+                        },
                         "d2exp_node": [
                           "D2Eapplst",
                           {
-                            "d2exp_type": [
-                              "None"
-                            ],
+                            "d2exp_loc": {
+                              "location_beg_ntot": 26,
+                              "location_beg_nrow": 1,
+                              "location_end_ntot": 28
+                            },
                             "d2exp_node": [
                               "D2Esym",
-                              "d2sym is not supported."
+                              {
+                                "d2sym_loc": {
+                                  "location_beg_ntot": 26,
+                                  "location_beg_nrow": 1,
+                                  "location_end_ntot": 28
+                                },
+                                "d2sym_qua": {
+                                  "d0ynq_loc": {
+                                    "location_beg_ntot": -1,
+                                    "location_beg_nrow": -1,
+                                    "location_end_ntot": -1
+                                  },
+                                  "d0ynq_node": [
+                                    "D0YNQnone"
+                                  ]
+                                },
+                                "d2sym_sym": {
+                                  "symbol_get_name": "<="
+                                },
+                                "d2sym_pitmlst": [
+                                  [
+                                    "D2PITM",
+                                    0,
+                                    [
+                                      "D2ITMcst",
+                                      {
+                                        "d2cst_get_name": "lte_strptr_strptr",
+                                        "d2cst_get_sym": {
+                                          "symbol_get_name": "lte_strptr_strptr"
+                                        },
+                                        "d2cst_get_loc": {
+                                          "location_beg_ntot": 4182,
+                                          "location_beg_nrow": 185,
+                                          "location_end_ntot": 4248
+                                        },
+                                        "d2cst_get_fil": {
+                                          "filename_get_givename": ""
+                                        }
+                                      }
+                                    ]
+                                  ],
+                                  [
+                                    "D2PITM",
+                                    0,
+                                    [
+                                      "D2ITMcst",
+                                      {
+                                        "d2cst_get_name": "lte_string_string",
+                                        "d2cst_get_sym": {
+                                          "symbol_get_name": "lte_string_string"
+                                        },
+                                        "d2cst_get_loc": {
+                                          "location_beg_ntot": 5717,
+                                          "location_beg_nrow": 225,
+                                          "location_end_ntot": 5779
+                                        },
+                                        "d2cst_get_fil": {
+                                          "filename_get_givename": ""
+                                        }
+                                      }
+                                    ]
+                                  ],
+                                  [
+                                    "D2PITM",
+                                    0,
+                                    [
+                                      "D2ITMcst",
+                                      {
+                                        "d2cst_get_name": "g0float_lte",
+                                        "d2cst_get_sym": {
+                                          "symbol_get_name": "g0float_lte"
+                                        },
+                                        "d2cst_get_loc": {
+                                          "location_beg_ntot": 4437,
+                                          "location_beg_nrow": 161,
+                                          "location_end_ntot": 4472
+                                        },
+                                        "d2cst_get_fil": {
+                                          "filename_get_givename": ""
+                                        }
+                                      }
+                                    ]
+                                  ],
+                                  [
+                                    "D2PITM",
+                                    20,
+                                    [
+                                      "D2ITMcst",
+                                      {
+                                        "d2cst_get_name": "lte_uchar1_uchar1",
+                                        "d2cst_get_sym": {
+                                          "symbol_get_name": "lte_uchar1_uchar1"
+                                        },
+                                        "d2cst_get_loc": {
+                                          "location_beg_ntot": 6692,
+                                          "location_beg_nrow": 237,
+                                          "location_end_ntot": 6786
+                                        },
+                                        "d2cst_get_fil": {
+                                          "filename_get_givename": ""
+                                        }
+                                      }
+                                    ]
+                                  ],
+                                  [
+                                    "D2PITM",
+                                    0,
+                                    [
+                                      "D2ITMcst",
+                                      {
+                                        "d2cst_get_name": "lte_uchar0_uchar0",
+                                        "d2cst_get_sym": {
+                                          "symbol_get_name": "lte_uchar0_uchar0"
+                                        },
+                                        "d2cst_get_loc": {
+                                          "location_beg_ntot": 5855,
+                                          "location_beg_nrow": 207,
+                                          "location_end_ntot": 5915
+                                        },
+                                        "d2cst_get_fil": {
+                                          "filename_get_givename": ""
+                                        }
+                                      }
+                                    ]
+                                  ],
+                                  [
+                                    "D2PITM",
+                                    20,
+                                    [
+                                      "D2ITMcst",
+                                      {
+                                        "d2cst_get_name": "lte_char1_char1",
+                                        "d2cst_get_sym": {
+                                          "symbol_get_name": "lte_char1_char1"
+                                        },
+                                        "d2cst_get_loc": {
+                                          "location_beg_ntot": 4172,
+                                          "location_beg_nrow": 152,
+                                          "location_end_ntot": 4261
+                                        },
+                                        "d2cst_get_fil": {
+                                          "filename_get_givename": ""
+                                        }
+                                      }
+                                    ]
+                                  ],
+                                  [
+                                    "D2PITM",
+                                    0,
+                                    [
+                                      "D2ITMcst",
+                                      {
+                                        "d2cst_get_name": "lte_char0_char0",
+                                        "d2cst_get_sym": {
+                                          "symbol_get_name": "lte_char0_char0"
+                                        },
+                                        "d2cst_get_loc": {
+                                          "location_beg_ntot": 2758,
+                                          "location_beg_nrow": 94,
+                                          "location_end_ntot": 2814
+                                        },
+                                        "d2cst_get_fil": {
+                                          "filename_get_givename": ""
+                                        }
+                                      }
+                                    ]
+                                  ],
+                                  [
+                                    "D2PITM",
+                                    20,
+                                    [
+                                      "D2ITMcst",
+                                      {
+                                        "d2cst_get_name": "lte_bool1_bool1",
+                                        "d2cst_get_sym": {
+                                          "symbol_get_name": "lte_bool1_bool1"
+                                        },
+                                        "d2cst_get_loc": {
+                                          "location_beg_ntot": 5193,
+                                          "location_beg_nrow": 203,
+                                          "location_end_ntot": 5284
+                                        },
+                                        "d2cst_get_fil": {
+                                          "filename_get_givename": ""
+                                        }
+                                      }
+                                    ]
+                                  ],
+                                  [
+                                    "D2PITM",
+                                    0,
+                                    [
+                                      "D2ITMcst",
+                                      {
+                                        "d2cst_get_name": "lte_bool0_bool0",
+                                        "d2cst_get_sym": {
+                                          "symbol_get_name": "lte_bool0_bool0"
+                                        },
+                                        "d2cst_get_loc": {
+                                          "location_beg_ntot": 2976,
+                                          "location_beg_nrow": 105,
+                                          "location_end_ntot": 3032
+                                        },
+                                        "d2cst_get_fil": {
+                                          "filename_get_givename": ""
+                                        }
+                                      }
+                                    ]
+                                  ],
+                                  [
+                                    "D2PITM",
+                                    20,
+                                    [
+                                      "D2ITMcst",
+                                      {
+                                        "d2cst_get_name": "lte_ptr1_ptr1",
+                                        "d2cst_get_sym": {
+                                          "symbol_get_name": "lte_ptr1_ptr1"
+                                        },
+                                        "d2cst_get_loc": {
+                                          "location_beg_ntot": 7457,
+                                          "location_beg_nrow": 313,
+                                          "location_end_ntot": 7548
+                                        },
+                                        "d2cst_get_fil": {
+                                          "filename_get_givename": ""
+                                        }
+                                      }
+                                    ]
+                                  ],
+                                  [
+                                    "D2PITM",
+                                    0,
+                                    [
+                                      "D2ITMcst",
+                                      {
+                                        "d2cst_get_name": "lte_ptr0_ptr0",
+                                        "d2cst_get_sym": {
+                                          "symbol_get_name": "lte_ptr0_ptr0"
+                                        },
+                                        "d2cst_get_loc": {
+                                          "location_beg_ntot": 3835,
+                                          "location_beg_nrow": 158,
+                                          "location_end_ntot": 3887
+                                        },
+                                        "d2cst_get_fil": {
+                                          "filename_get_givename": ""
+                                        }
+                                      }
+                                    ]
+                                  ],
+                                  [
+                                    "D2PITM",
+                                    21,
+                                    [
+                                      "D2ITMcst",
+                                      {
+                                        "d2cst_get_name": "lte_g1uint_int",
+                                        "d2cst_get_sym": {
+                                          "symbol_get_name": "lte_g1uint_int"
+                                        },
+                                        "d2cst_get_loc": {
+                                          "location_beg_ntot": 27889,
+                                          "location_beg_nrow": 1120,
+                                          "location_end_ntot": 27968
+                                        },
+                                        "d2cst_get_fil": {
+                                          "filename_get_givename": ""
+                                        }
+                                      }
+                                    ]
+                                  ],
+                                  [
+                                    "D2PITM",
+                                    20,
+                                    [
+                                      "D2ITMcst",
+                                      {
+                                        "d2cst_get_name": "g1uint_lte",
+                                        "d2cst_get_sym": {
+                                          "symbol_get_name": "g1uint_lte"
+                                        },
+                                        "d2cst_get_loc": {
+                                          "location_beg_ntot": 26310,
+                                          "location_beg_nrow": 1060,
+                                          "location_end_ntot": 26343
+                                        },
+                                        "d2cst_get_fil": {
+                                          "filename_get_givename": ""
+                                        }
+                                      }
+                                    ]
+                                  ],
+                                  [
+                                    "D2PITM",
+                                    11,
+                                    [
+                                      "D2ITMcst",
+                                      {
+                                        "d2cst_get_name": "lte_g0uint_int",
+                                        "d2cst_get_sym": {
+                                          "symbol_get_name": "lte_g0uint_int"
+                                        },
+                                        "d2cst_get_loc": {
+                                          "location_beg_ntot": 19670,
+                                          "location_beg_nrow": 812,
+                                          "location_end_ntot": 19717
+                                        },
+                                        "d2cst_get_fil": {
+                                          "filename_get_givename": ""
+                                        }
+                                      }
+                                    ]
+                                  ],
+                                  [
+                                    "D2PITM",
+                                    0,
+                                    [
+                                      "D2ITMcst",
+                                      {
+                                        "d2cst_get_name": "g0uint_lte",
+                                        "d2cst_get_sym": {
+                                          "symbol_get_name": "g0uint_lte"
+                                        },
+                                        "d2cst_get_loc": {
+                                          "location_beg_ntot": 18683,
+                                          "location_beg_nrow": 763,
+                                          "location_end_ntot": 18736
+                                        },
+                                        "d2cst_get_fil": {
+                                          "filename_get_givename": ""
+                                        }
+                                      }
+                                    ]
+                                  ],
+                                  [
+                                    "D2PITM",
+                                    21,
+                                    [
+                                      "D2ITMcst",
+                                      {
+                                        "d2cst_get_name": "lte_g1int_int",
+                                        "d2cst_get_sym": {
+                                          "symbol_get_name": "lte_g1int_int"
+                                        },
+                                        "d2cst_get_loc": {
+                                          "location_beg_ntot": 13604,
+                                          "location_beg_nrow": 573,
+                                          "location_end_ntot": 13677
+                                        },
+                                        "d2cst_get_fil": {
+                                          "filename_get_givename": ""
+                                        }
+                                      }
+                                    ]
+                                  ],
+                                  [
+                                    "D2PITM",
+                                    20,
+                                    [
+                                      "D2ITMcst",
+                                      {
+                                        "d2cst_get_name": "g1int_lte",
+                                        "d2cst_get_sym": {
+                                          "symbol_get_name": "g1int_lte"
+                                        },
+                                        "d2cst_get_loc": {
+                                          "location_beg_ntot": 12082,
+                                          "location_beg_nrow": 513,
+                                          "location_end_ntot": 12113
+                                        },
+                                        "d2cst_get_fil": {
+                                          "filename_get_givename": ""
+                                        }
+                                      }
+                                    ]
+                                  ],
+                                  [
+                                    "D2PITM",
+                                    11,
+                                    [
+                                      "D2ITMcst",
+                                      {
+                                        "d2cst_get_name": "lte_g0int_int",
+                                        "d2cst_get_sym": {
+                                          "symbol_get_name": "lte_g0int_int"
+                                        },
+                                        "d2cst_get_loc": {
+                                          "location_beg_ntot": 5905,
+                                          "location_beg_nrow": 242,
+                                          "location_end_ntot": 5950
+                                        },
+                                        "d2cst_get_fil": {
+                                          "filename_get_givename": ""
+                                        }
+                                      }
+                                    ]
+                                  ],
+                                  [
+                                    "D2PITM",
+                                    0,
+                                    [
+                                      "D2ITMcst",
+                                      {
+                                        "d2cst_get_name": "g0int_lte",
+                                        "d2cst_get_sym": {
+                                          "symbol_get_name": "g0int_lte"
+                                        },
+                                        "d2cst_get_loc": {
+                                          "location_beg_ntot": 5087,
+                                          "location_beg_nrow": 202,
+                                          "location_end_ntot": 5118
+                                        },
+                                        "d2cst_get_fil": {
+                                          "filename_get_givename": ""
+                                        }
+                                      }
+                                    ]
+                                  ]
+                                ]
+                              }
                             ],
-                            "d2exp_loc": {
-                              "location_end_ntot": 81,
-                              "location_beg_nrow": 5,
-                              "location_beg_ntot": 79
-                            }
+                            "d2exp_type": [
+                              "None"
+                            ]
                           },
                           [
                             [
                               "D2EXPARGdyn",
                               -1,
                               {
-                                "location_end_ntot": 83,
-                                "location_beg_nrow": 5,
-                                "location_beg_ntot": 77
+                                "location_beg_ntot": 24,
+                                "location_beg_nrow": 1,
+                                "location_end_ntot": 30
                               },
                               [
                                 {
-                                  "d2exp_type": [
-                                    "None"
-                                  ],
+                                  "d2exp_loc": {
+                                    "location_beg_ntot": 24,
+                                    "location_beg_nrow": 1,
+                                    "location_end_ntot": 25
+                                  },
                                   "d2exp_node": [
                                     "D2Evar",
                                     {
@@ -228,86 +552,380 @@ The 2nd translation (binding) of [DATA/foo.dats] is successfully completed!
                                       }
                                     }
                                   ],
-                                  "d2exp_loc": {
-                                    "location_end_ntot": 78,
-                                    "location_beg_nrow": 5,
-                                    "location_beg_ntot": 77
-                                  }
-                                },
-                                {
                                   "d2exp_type": [
                                     "None"
-                                  ],
+                                  ]
+                                },
+                                {
+                                  "d2exp_loc": {
+                                    "location_beg_ntot": 29,
+                                    "location_beg_nrow": 1,
+                                    "location_end_ntot": 30
+                                  },
                                   "d2exp_node": [
                                     "D2Ei0nt",
-                                    "token is not supported."
+                                    {}
                                   ],
-                                  "d2exp_loc": {
-                                    "location_end_ntot": 83,
-                                    "location_beg_nrow": 5,
-                                    "location_beg_ntot": 82
-                                  }
+                                  "d2exp_type": [
+                                    "None"
+                                  ]
                                 }
                               ]
                             ]
                           ]
                         ],
-                        "d2exp_loc": {
-                          "location_end_ntot": 83,
-                          "location_beg_nrow": 5,
-                          "location_beg_ntot": 77
-                        }
-                      },
-                      {
                         "d2exp_type": [
                           "None"
-                        ],
+                        ]
+                      },
+                      {
+                        "d2exp_loc": {
+                          "location_beg_ntot": 37,
+                          "location_beg_nrow": 1,
+                          "location_end_ntot": 38
+                        },
                         "d2exp_node": [
                           "D2Ei0nt",
-                          "token is not supported."
+                          {}
                         ],
-                        "d2exp_loc": {
-                          "location_end_ntot": 91,
-                          "location_beg_nrow": 5,
-                          "location_beg_ntot": 90
-                        }
+                        "d2exp_type": [
+                          "None"
+                        ]
                       },
                       [
                         "Some",
                         {
-                          "d2exp_type": [
-                            "None"
-                          ],
+                          "d2exp_loc": {
+                            "location_beg_ntot": 44,
+                            "location_beg_nrow": 1,
+                            "location_end_ntot": 59
+                          },
                           "d2exp_node": [
                             "D2Eapplst",
                             {
-                              "d2exp_type": [
-                                "None"
-                              ],
+                              "d2exp_loc": {
+                                "location_beg_ntot": 46,
+                                "location_beg_nrow": 1,
+                                "location_end_ntot": 47
+                              },
                               "d2exp_node": [
                                 "D2Esym",
-                                "d2sym is not supported."
+                                {
+                                  "d2sym_loc": {
+                                    "location_beg_ntot": 46,
+                                    "location_beg_nrow": 1,
+                                    "location_end_ntot": 47
+                                  },
+                                  "d2sym_qua": {
+                                    "d0ynq_loc": {
+                                      "location_beg_ntot": -1,
+                                      "location_beg_nrow": -1,
+                                      "location_end_ntot": -1
+                                    },
+                                    "d0ynq_node": [
+                                      "D0YNQnone"
+                                    ]
+                                  },
+                                  "d2sym_sym": {
+                                    "symbol_get_name": "*"
+                                  },
+                                  "d2sym_pitmlst": [
+                                    [
+                                      "D2PITM",
+                                      20,
+                                      [
+                                        "D2ITMcst",
+                                        {
+                                          "d2cst_get_name": "mul_double_int",
+                                          "d2cst_get_sym": {
+                                            "symbol_get_name": "mul_double_int"
+                                          },
+                                          "d2cst_get_loc": {
+                                            "location_beg_ntot": 10558,
+                                            "location_beg_nrow": 384,
+                                            "location_end_ntot": 10610
+                                          },
+                                          "d2cst_get_fil": {
+                                            "filename_get_givename": ""
+                                          }
+                                        }
+                                      ]
+                                    ],
+                                    [
+                                      "D2PITM",
+                                      20,
+                                      [
+                                        "D2ITMcst",
+                                        {
+                                          "d2cst_get_name": "mul_int_double",
+                                          "d2cst_get_sym": {
+                                            "symbol_get_name": "mul_int_double"
+                                          },
+                                          "d2cst_get_loc": {
+                                            "location_beg_ntot": 10501,
+                                            "location_beg_nrow": 383,
+                                            "location_end_ntot": 10553
+                                          },
+                                          "d2cst_get_fil": {
+                                            "filename_get_givename": ""
+                                          }
+                                        }
+                                      ]
+                                    ],
+                                    [
+                                      "D2PITM",
+                                      20,
+                                      [
+                                        "D2ITMcst",
+                                        {
+                                          "d2cst_get_name": "mul_float_int",
+                                          "d2cst_get_sym": {
+                                            "symbol_get_name": "mul_float_int"
+                                          },
+                                          "d2cst_get_loc": {
+                                            "location_beg_ntot": 10375,
+                                            "location_beg_nrow": 380,
+                                            "location_end_ntot": 10424
+                                          },
+                                          "d2cst_get_fil": {
+                                            "filename_get_givename": ""
+                                          }
+                                        }
+                                      ]
+                                    ],
+                                    [
+                                      "D2PITM",
+                                      20,
+                                      [
+                                        "D2ITMcst",
+                                        {
+                                          "d2cst_get_name": "mul_int_float",
+                                          "d2cst_get_sym": {
+                                            "symbol_get_name": "mul_int_float"
+                                          },
+                                          "d2cst_get_loc": {
+                                            "location_beg_ntot": 10321,
+                                            "location_beg_nrow": 379,
+                                            "location_end_ntot": 10370
+                                          },
+                                          "d2cst_get_fil": {
+                                            "filename_get_givename": ""
+                                          }
+                                        }
+                                      ]
+                                    ],
+                                    [
+                                      "D2PITM",
+                                      0,
+                                      [
+                                        "D2ITMcst",
+                                        {
+                                          "d2cst_get_name": "g0float_mul",
+                                          "d2cst_get_sym": {
+                                            "symbol_get_name": "g0float_mul"
+                                          },
+                                          "d2cst_get_loc": {
+                                            "location_beg_ntot": 3415,
+                                            "location_beg_nrow": 120,
+                                            "location_end_ntot": 3450
+                                          },
+                                          "d2cst_get_fil": {
+                                            "filename_get_givename": ""
+                                          }
+                                        }
+                                      ]
+                                    ],
+                                    [
+                                      "D2PITM",
+                                      20,
+                                      [
+                                        "D2ITMcst",
+                                        {
+                                          "d2cst_get_name": "mul_bool1_bool1",
+                                          "d2cst_get_sym": {
+                                            "symbol_get_name": "mul_bool1_bool1"
+                                          },
+                                          "d2cst_get_loc": {
+                                            "location_beg_ntot": 4840,
+                                            "location_beg_nrow": 184,
+                                            "location_end_ntot": 4926
+                                          },
+                                          "d2cst_get_fil": {
+                                            "filename_get_givename": ""
+                                          }
+                                        }
+                                      ]
+                                    ],
+                                    [
+                                      "D2PITM",
+                                      10,
+                                      [
+                                        "D2ITMcst",
+                                        {
+                                          "d2cst_get_name": "mul_bool0_bool1",
+                                          "d2cst_get_sym": {
+                                            "symbol_get_name": "mul_bool0_bool1"
+                                          },
+                                          "d2cst_get_loc": {
+                                            "location_beg_ntot": 4719,
+                                            "location_beg_nrow": 179,
+                                            "location_end_ntot": 4796
+                                          },
+                                          "d2cst_get_fil": {
+                                            "filename_get_givename": ""
+                                          }
+                                        }
+                                      ]
+                                    ],
+                                    [
+                                      "D2PITM",
+                                      10,
+                                      [
+                                        "D2ITMcst",
+                                        {
+                                          "d2cst_get_name": "mul_bool1_bool0",
+                                          "d2cst_get_sym": {
+                                            "symbol_get_name": "mul_bool1_bool0"
+                                          },
+                                          "d2cst_get_loc": {
+                                            "location_beg_ntot": 4598,
+                                            "location_beg_nrow": 174,
+                                            "location_end_ntot": 4675
+                                          },
+                                          "d2cst_get_fil": {
+                                            "filename_get_givename": ""
+                                          }
+                                        }
+                                      ]
+                                    ],
+                                    [
+                                      "D2PITM",
+                                      0,
+                                      [
+                                        "D2ITMcst",
+                                        {
+                                          "d2cst_get_name": "mul_bool0_bool0",
+                                          "d2cst_get_sym": {
+                                            "symbol_get_name": "mul_bool0_bool0"
+                                          },
+                                          "d2cst_get_loc": {
+                                            "location_beg_ntot": 2760,
+                                            "location_beg_nrow": 96,
+                                            "location_end_ntot": 2816
+                                          },
+                                          "d2cst_get_fil": {
+                                            "filename_get_givename": ""
+                                          }
+                                        }
+                                      ]
+                                    ],
+                                    [
+                                      "D2PITM",
+                                      20,
+                                      [
+                                        "D2ITMcst",
+                                        {
+                                          "d2cst_get_name": "g1uint_mul",
+                                          "d2cst_get_sym": {
+                                            "symbol_get_name": "g1uint_mul"
+                                          },
+                                          "d2cst_get_loc": {
+                                            "location_beg_ntot": 24455,
+                                            "location_beg_nrow": 977,
+                                            "location_end_ntot": 24488
+                                          },
+                                          "d2cst_get_fil": {
+                                            "filename_get_givename": ""
+                                          }
+                                        }
+                                      ]
+                                    ],
+                                    [
+                                      "D2PITM",
+                                      0,
+                                      [
+                                        "D2ITMcst",
+                                        {
+                                          "d2cst_get_name": "g0uint_mul",
+                                          "d2cst_get_sym": {
+                                            "symbol_get_name": "g0uint_mul"
+                                          },
+                                          "d2cst_get_loc": {
+                                            "location_beg_ntot": 17336,
+                                            "location_beg_nrow": 704,
+                                            "location_end_ntot": 17396
+                                          },
+                                          "d2cst_get_fil": {
+                                            "filename_get_givename": ""
+                                          }
+                                        }
+                                      ]
+                                    ],
+                                    [
+                                      "D2PITM",
+                                      20,
+                                      [
+                                        "D2ITMcst",
+                                        {
+                                          "d2cst_get_name": "g1int_mul",
+                                          "d2cst_get_sym": {
+                                            "symbol_get_name": "g1int_mul"
+                                          },
+                                          "d2cst_get_loc": {
+                                            "location_beg_ntot": 8949,
+                                            "location_beg_nrow": 370,
+                                            "location_end_ntot": 8980
+                                          },
+                                          "d2cst_get_fil": {
+                                            "filename_get_givename": ""
+                                          }
+                                        }
+                                      ]
+                                    ],
+                                    [
+                                      "D2PITM",
+                                      0,
+                                      [
+                                        "D2ITMcst",
+                                        {
+                                          "d2cst_get_name": "g0int_mul",
+                                          "d2cst_get_sym": {
+                                            "symbol_get_name": "g0int_mul"
+                                          },
+                                          "d2cst_get_loc": {
+                                            "location_beg_ntot": 3927,
+                                            "location_beg_nrow": 152,
+                                            "location_end_ntot": 3958
+                                          },
+                                          "d2cst_get_fil": {
+                                            "filename_get_givename": ""
+                                          }
+                                        }
+                                      ]
+                                    ]
+                                  ]
+                                }
                               ],
-                              "d2exp_loc": {
-                                "location_end_ntot": 100,
-                                "location_beg_nrow": 5,
-                                "location_beg_ntot": 99
-                              }
+                              "d2exp_type": [
+                                "None"
+                              ]
                             },
                             [
                               [
                                 "D2EXPARGdyn",
                                 -1,
                                 {
-                                  "location_end_ntot": 112,
-                                  "location_beg_nrow": 5,
-                                  "location_beg_ntot": 97
+                                  "location_beg_ntot": 44,
+                                  "location_beg_nrow": 1,
+                                  "location_end_ntot": 59
                                 },
                                 [
                                   {
-                                    "d2exp_type": [
-                                      "None"
-                                    ],
+                                    "d2exp_loc": {
+                                      "location_beg_ntot": 44,
+                                      "location_beg_nrow": 1,
+                                      "location_end_ntot": 45
+                                    },
                                     "d2exp_node": [
                                       "D2Evar",
                                       {
@@ -316,22 +934,24 @@ The 2nd translation (binding) of [DATA/foo.dats] is successfully completed!
                                         }
                                       }
                                     ],
-                                    "d2exp_loc": {
-                                      "location_end_ntot": 98,
-                                      "location_beg_nrow": 5,
-                                      "location_beg_ntot": 97
-                                    }
-                                  },
-                                  {
                                     "d2exp_type": [
                                       "None"
-                                    ],
+                                    ]
+                                  },
+                                  {
+                                    "d2exp_loc": {
+                                      "location_beg_ntot": 48,
+                                      "location_beg_nrow": 1,
+                                      "location_end_ntot": 59
+                                    },
                                     "d2exp_node": [
                                       "D2Eapplst",
                                       {
-                                        "d2exp_type": [
-                                          "None"
-                                        ],
+                                        "d2exp_loc": {
+                                          "location_beg_ntot": 48,
+                                          "location_beg_nrow": 1,
+                                          "location_end_ntot": 52
+                                        },
                                         "d2exp_node": [
                                           "D2Evar",
                                           {
@@ -340,56 +960,352 @@ The 2nd translation (binding) of [DATA/foo.dats] is successfully completed!
                                             }
                                           }
                                         ],
-                                        "d2exp_loc": {
-                                          "location_end_ntot": 105,
-                                          "location_beg_nrow": 5,
-                                          "location_beg_ntot": 101
-                                        }
+                                        "d2exp_type": [
+                                          "None"
+                                        ]
                                       },
                                       [
                                         [
                                           "D2EXPARGdyn",
                                           -1,
                                           {
-                                            "location_end_ntot": 112,
-                                            "location_beg_nrow": 5,
-                                            "location_beg_ntot": 107
+                                            "location_beg_ntot": 54,
+                                            "location_beg_nrow": 1,
+                                            "location_end_ntot": 59
                                           },
                                           [
                                             {
-                                              "d2exp_type": [
-                                                "None"
-                                              ],
+                                              "d2exp_loc": {
+                                                "location_beg_ntot": 54,
+                                                "location_beg_nrow": 1,
+                                                "location_end_ntot": 59
+                                              },
                                               "d2exp_node": [
                                                 "D2Eapplst",
                                                 {
-                                                  "d2exp_type": [
-                                                    "None"
-                                                  ],
+                                                  "d2exp_loc": {
+                                                    "location_beg_ntot": 56,
+                                                    "location_beg_nrow": 1,
+                                                    "location_end_ntot": 57
+                                                  },
                                                   "d2exp_node": [
                                                     "D2Esym",
-                                                    "d2sym is not supported."
+                                                    {
+                                                      "d2sym_loc": {
+                                                        "location_beg_ntot": 56,
+                                                        "location_beg_nrow": 1,
+                                                        "location_end_ntot": 57
+                                                      },
+                                                      "d2sym_qua": {
+                                                        "d0ynq_loc": {
+                                                          "location_beg_ntot": -1,
+                                                          "location_beg_nrow": -1,
+                                                          "location_end_ntot": -1
+                                                        },
+                                                        "d0ynq_node": [
+                                                          "D0YNQnone"
+                                                        ]
+                                                      },
+                                                      "d2sym_sym": {
+                                                        "symbol_get_name": "-"
+                                                      },
+                                                      "d2sym_pitmlst": [
+                                                        [
+                                                          "D2PITM",
+                                                          20,
+                                                          [
+                                                            "D2ITMcst",
+                                                            {
+                                                              "d2cst_get_name": "sub_double_int",
+                                                              "d2cst_get_sym": {
+                                                                "symbol_get_name": "sub_double_int"
+                                                              },
+                                                              "d2cst_get_loc": {
+                                                                "location_beg_ntot": 10168,
+                                                                "location_beg_nrow": 373,
+                                                                "location_end_ntot": 10220
+                                                              },
+                                                              "d2cst_get_fil": {
+                                                                "filename_get_givename": ""
+                                                              }
+                                                            }
+                                                          ]
+                                                        ],
+                                                        [
+                                                          "D2PITM",
+                                                          20,
+                                                          [
+                                                            "D2ITMcst",
+                                                            {
+                                                              "d2cst_get_name": "sub_int_double",
+                                                              "d2cst_get_sym": {
+                                                                "symbol_get_name": "sub_int_double"
+                                                              },
+                                                              "d2cst_get_loc": {
+                                                                "location_beg_ntot": 10111,
+                                                                "location_beg_nrow": 372,
+                                                                "location_end_ntot": 10163
+                                                              },
+                                                              "d2cst_get_fil": {
+                                                                "filename_get_givename": ""
+                                                              }
+                                                            }
+                                                          ]
+                                                        ],
+                                                        [
+                                                          "D2PITM",
+                                                          20,
+                                                          [
+                                                            "D2ITMcst",
+                                                            {
+                                                              "d2cst_get_name": "sub_float_int",
+                                                              "d2cst_get_sym": {
+                                                                "symbol_get_name": "sub_float_int"
+                                                              },
+                                                              "d2cst_get_loc": {
+                                                                "location_beg_ntot": 9985,
+                                                                "location_beg_nrow": 369,
+                                                                "location_end_ntot": 10034
+                                                              },
+                                                              "d2cst_get_fil": {
+                                                                "filename_get_givename": ""
+                                                              }
+                                                            }
+                                                          ]
+                                                        ],
+                                                        [
+                                                          "D2PITM",
+                                                          20,
+                                                          [
+                                                            "D2ITMcst",
+                                                            {
+                                                              "d2cst_get_name": "sub_int_float",
+                                                              "d2cst_get_sym": {
+                                                                "symbol_get_name": "sub_int_float"
+                                                              },
+                                                              "d2cst_get_loc": {
+                                                                "location_beg_ntot": 9931,
+                                                                "location_beg_nrow": 368,
+                                                                "location_end_ntot": 9980
+                                                              },
+                                                              "d2cst_get_fil": {
+                                                                "filename_get_givename": ""
+                                                              }
+                                                            }
+                                                          ]
+                                                        ],
+                                                        [
+                                                          "D2PITM",
+                                                          0,
+                                                          [
+                                                            "D2ITMcst",
+                                                            {
+                                                              "d2cst_get_name": "g0float_sub",
+                                                              "d2cst_get_sym": {
+                                                                "symbol_get_name": "g0float_sub"
+                                                              },
+                                                              "d2cst_get_loc": {
+                                                                "location_beg_ntot": 3335,
+                                                                "location_beg_nrow": 117,
+                                                                "location_end_ntot": 3370
+                                                              },
+                                                              "d2cst_get_fil": {
+                                                                "filename_get_givename": ""
+                                                              }
+                                                            }
+                                                          ]
+                                                        ],
+                                                        [
+                                                          "D2PITM",
+                                                          0,
+                                                          [
+                                                            "D2ITMcst",
+                                                            {
+                                                              "d2cst_get_name": "sub_char0_char0",
+                                                              "d2cst_get_sym": {
+                                                                "symbol_get_name": "sub_char0_char0"
+                                                              },
+                                                              "d2cst_get_loc": {
+                                                                "location_beg_ntot": 2548,
+                                                                "location_beg_nrow": 85,
+                                                                "location_end_ntot": 2603
+                                                              },
+                                                              "d2cst_get_fil": {
+                                                                "filename_get_givename": ""
+                                                              }
+                                                            }
+                                                          ]
+                                                        ],
+                                                        [
+                                                          "D2PITM",
+                                                          0,
+                                                          [
+                                                            "D2ITMcst",
+                                                            {
+                                                              "d2cst_get_name": "sub_char0_int0",
+                                                              "d2cst_get_sym": {
+                                                                "symbol_get_name": "sub_char0_int0"
+                                                              },
+                                                              "d2cst_get_loc": {
+                                                                "location_beg_ntot": 2458,
+                                                                "location_beg_nrow": 82,
+                                                                "location_end_ntot": 2512
+                                                              },
+                                                              "d2cst_get_fil": {
+                                                                "filename_get_givename": ""
+                                                              }
+                                                            }
+                                                          ]
+                                                        ],
+                                                        [
+                                                          "D2PITM",
+                                                          20,
+                                                          [
+                                                            "D2ITMcst",
+                                                            {
+                                                              "d2cst_get_name": "sub_ptr1_ptr1",
+                                                              "d2cst_get_sym": {
+                                                                "symbol_get_name": "sub_ptr1_ptr1"
+                                                              },
+                                                              "d2cst_get_loc": {
+                                                                "location_beg_ntot": 6287,
+                                                                "location_beg_nrow": 260,
+                                                                "location_end_ntot": 6368
+                                                              },
+                                                              "d2cst_get_fil": {
+                                                                "filename_get_givename": ""
+                                                              }
+                                                            }
+                                                          ]
+                                                        ],
+                                                        [
+                                                          "D2PITM",
+                                                          0,
+                                                          [
+                                                            "D2ITMcst",
+                                                            {
+                                                              "d2cst_get_name": "sub_ptr0_ptr0",
+                                                              "d2cst_get_sym": {
+                                                                "symbol_get_name": "sub_ptr0_ptr0"
+                                                              },
+                                                              "d2cst_get_loc": {
+                                                                "location_beg_ntot": 2970,
+                                                                "location_beg_nrow": 119,
+                                                                "location_end_ntot": 3025
+                                                              },
+                                                              "d2cst_get_fil": {
+                                                                "filename_get_givename": ""
+                                                              }
+                                                            }
+                                                          ]
+                                                        ],
+                                                        [
+                                                          "D2PITM",
+                                                          20,
+                                                          [
+                                                            "D2ITMcst",
+                                                            {
+                                                              "d2cst_get_name": "g1uint_sub",
+                                                              "d2cst_get_sym": {
+                                                                "symbol_get_name": "g1uint_sub"
+                                                              },
+                                                              "d2cst_get_loc": {
+                                                                "location_beg_ntot": 24251,
+                                                                "location_beg_nrow": 968,
+                                                                "location_end_ntot": 24284
+                                                              },
+                                                              "d2cst_get_fil": {
+                                                                "filename_get_givename": ""
+                                                              }
+                                                            }
+                                                          ]
+                                                        ],
+                                                        [
+                                                          "D2PITM",
+                                                          0,
+                                                          [
+                                                            "D2ITMcst",
+                                                            {
+                                                              "d2cst_get_name": "g0uint_sub",
+                                                              "d2cst_get_sym": {
+                                                                "symbol_get_name": "g0uint_sub"
+                                                              },
+                                                              "d2cst_get_loc": {
+                                                                "location_beg_ntot": 17230,
+                                                                "location_beg_nrow": 699,
+                                                                "location_end_ntot": 17290
+                                                              },
+                                                              "d2cst_get_fil": {
+                                                                "filename_get_givename": ""
+                                                              }
+                                                            }
+                                                          ]
+                                                        ],
+                                                        [
+                                                          "D2PITM",
+                                                          20,
+                                                          [
+                                                            "D2ITMcst",
+                                                            {
+                                                              "d2cst_get_name": "g1int_sub",
+                                                              "d2cst_get_sym": {
+                                                                "symbol_get_name": "g1int_sub"
+                                                              },
+                                                              "d2cst_get_loc": {
+                                                                "location_beg_ntot": 8752,
+                                                                "location_beg_nrow": 361,
+                                                                "location_end_ntot": 8783
+                                                              },
+                                                              "d2cst_get_fil": {
+                                                                "filename_get_givename": ""
+                                                              }
+                                                            }
+                                                          ]
+                                                        ],
+                                                        [
+                                                          "D2PITM",
+                                                          0,
+                                                          [
+                                                            "D2ITMcst",
+                                                            {
+                                                              "d2cst_get_name": "g0int_sub",
+                                                              "d2cst_get_sym": {
+                                                                "symbol_get_name": "g0int_sub"
+                                                              },
+                                                              "d2cst_get_loc": {
+                                                                "location_beg_ntot": 3853,
+                                                                "location_beg_nrow": 149,
+                                                                "location_end_ntot": 3884
+                                                              },
+                                                              "d2cst_get_fil": {
+                                                                "filename_get_givename": ""
+                                                              }
+                                                            }
+                                                          ]
+                                                        ]
+                                                      ]
+                                                    }
                                                   ],
-                                                  "d2exp_loc": {
-                                                    "location_end_ntot": 110,
-                                                    "location_beg_nrow": 5,
-                                                    "location_beg_ntot": 109
-                                                  }
+                                                  "d2exp_type": [
+                                                    "None"
+                                                  ]
                                                 },
                                                 [
                                                   [
                                                     "D2EXPARGdyn",
                                                     -1,
                                                     {
-                                                      "location_end_ntot": 112,
-                                                      "location_beg_nrow": 5,
-                                                      "location_beg_ntot": 107
+                                                      "location_beg_ntot": 54,
+                                                      "location_beg_nrow": 1,
+                                                      "location_end_ntot": 59
                                                     },
                                                     [
                                                       {
-                                                        "d2exp_type": [
-                                                          "None"
-                                                        ],
+                                                        "d2exp_loc": {
+                                                          "location_beg_ntot": 54,
+                                                          "location_beg_nrow": 1,
+                                                          "location_end_ntot": 55
+                                                        },
                                                         "d2exp_node": [
                                                           "D2Evar",
                                                           {
@@ -398,94 +1314,78 @@ The 2nd translation (binding) of [DATA/foo.dats] is successfully completed!
                                                             }
                                                           }
                                                         ],
-                                                        "d2exp_loc": {
-                                                          "location_end_ntot": 108,
-                                                          "location_beg_nrow": 5,
-                                                          "location_beg_ntot": 107
-                                                        }
-                                                      },
-                                                      {
                                                         "d2exp_type": [
                                                           "None"
-                                                        ],
+                                                        ]
+                                                      },
+                                                      {
+                                                        "d2exp_loc": {
+                                                          "location_beg_ntot": 58,
+                                                          "location_beg_nrow": 1,
+                                                          "location_end_ntot": 59
+                                                        },
                                                         "d2exp_node": [
                                                           "D2Ei0nt",
-                                                          "token is not supported."
+                                                          {}
                                                         ],
-                                                        "d2exp_loc": {
-                                                          "location_end_ntot": 112,
-                                                          "location_beg_nrow": 5,
-                                                          "location_beg_ntot": 111
-                                                        }
+                                                        "d2exp_type": [
+                                                          "None"
+                                                        ]
                                                       }
                                                     ]
                                                   ]
                                                 ]
                                               ],
-                                              "d2exp_loc": {
-                                                "location_end_ntot": 112,
-                                                "location_beg_nrow": 5,
-                                                "location_beg_ntot": 107
-                                              }
+                                              "d2exp_type": [
+                                                "None"
+                                              ]
                                             }
                                           ]
                                         ]
                                       ]
                                     ],
-                                    "d2exp_loc": {
-                                      "location_end_ntot": 112,
-                                      "location_beg_nrow": 5,
-                                      "location_beg_ntot": 101
-                                    }
+                                    "d2exp_type": [
+                                      "None"
+                                    ]
                                   }
                                 ]
                               ]
                             ]
                           ],
-                          "d2exp_loc": {
-                            "location_end_ntot": 112,
-                            "location_beg_nrow": 5,
-                            "location_beg_ntot": 97
-                          }
+                          "d2exp_type": [
+                            "None"
+                          ]
                         }
                       ]
                     ],
-                    "d2exp_loc": {
-                      "location_end_ntot": 113,
-                      "location_beg_nrow": 5,
-                      "location_beg_ntot": 73
-                    }
+                    "d2exp_type": [
+                      "None"
+                    ]
                   },
                   [
                     "S2EFFset",
-                    "effset_t0ype is not supported."
+                    {}
                   ]
                 ],
-                "d2exp_loc": {
-                  "location_end_ntot": 113,
-                  "location_beg_nrow": 5,
-                  "location_beg_ntot": 73
-                }
+                "d2exp_type": [
+                  "None"
+                ]
               }
             ],
-            "d2exp_loc": {
-              "location_end_ntot": 113,
-              "location_beg_nrow": 4,
-              "location_beg_ntot": 62
-            }
+            "d2exp_type": [
+              "None"
+            ]
           },
-          "f2undec_var": {
-            "d2var_get_sym": {
-              "symbol_get_name": "fact"
-            }
-          },
-          "f2undec_loc": {
-            "location_end_ntot": 113,
-            "location_beg_nrow": 4,
-            "location_beg_ntot": 57
-          }
+          "f2undec_ann": [
+            "None"
+          ]
         }
       ]
-    ]
+    ],
+    "d2ecl_loc": {
+      "location_beg_ntot": 0,
+      "location_beg_nrow": 0,
+      "location_end_ntot": 60
+    }
   }
 ]

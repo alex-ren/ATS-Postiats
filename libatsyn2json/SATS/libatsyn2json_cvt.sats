@@ -48,51 +48,6 @@ staload _(* anon *) = "prelude/DATS/array0.dats"
 
 // ====================================================
 
-fun jsonize_s2rt (x: $S2E.s2rt): jsonVal
-
-fun jsonize_s2exp_node (x: $S2E.s2exp_node): jsonVal
-
-fun jsonize_s2lab (x: $S2E.s2lab): jsonVal
-
-fun jsonize_labs2exp (x: $S2E.labs2exp): jsonVal
-
-fun jsonize_token (x: $LEX.token): jsonVal
-
-fun jsonize_d2cst_type (x: $D2E.d2cst_type): jsonVal
-
-fun jsonize_labd2exp (x: $D2E.labd2exp): jsonVal
-
-fun jsonize_cstsp (x: $SYN.cstsp): jsonVal
-
-fun jsonize_d2con_type (x: $STAEXP2.d2con_type): jsonVal
-
-fun jsonize_s2exparg (x: $S2E.s2exparg): jsonVal
-
-fun jsonize_d2sym (x: $D2E.d2sym): jsonVal
-
-fun jsonize_t2mpmarg (x: $S2E.t2mpmarg): jsonVal
-
-fun jsonize_i2nvresstate (x: $D2E.i2nvresstate): jsonVal
-
-fun jsonize_c2lau (x: $D2E.c2lau): jsonVal
-
-fun jsonize_sc2lau (x: $D2E.sc2lau): jsonVal
-
-fun jsonize_d2lab (x: $D2E.d2lab): jsonVal
-
-fun jsonize_effset_t0ype (x: $EFF.effset_t0ype): jsonVal
-
-fun jsonize_s2var_type (x: $S2E.s2var_type): jsonVal
-
-fun jsonize_loopi2nv (x: $D2E.loopi2nv): jsonVal
-
-fun jsonize_d2mac_type (x: $D2E.d2mac_type): jsonVal
-
-fun jsonize_label_type (x: $LAB.label_type): jsonVal
-
-fun jsonize_lstord_d2var (x: $D2E.lstord($D2E.d2var)): jsonVal
-
-fun jsonize_lstord_s2var (x: $D2E.lstord($S2E.s2var)): jsonVal
 
 // ============ already implemented =============
 
@@ -111,6 +66,14 @@ fun jsonize_s2cst (x: $S2E.s2cst): jsonVal
 fun jsonize_s2cstlst (x: $S2E.s2cstlst): jsonVal
 
 fun jsonize_s2cstopt (x: $S2E.s2cstopt): jsonVal
+
+fun jsonize_s2rt (x: $S2E.s2rt): jsonVal
+
+fun jsonize_s2exp_node (x: $S2E.s2exp_node): jsonVal
+
+fun jsonize_s2lab (x: $S2E.s2lab): jsonVal
+
+fun jsonize_labs2exp (x: $S2E.labs2exp): jsonVal
 
 fun jsonize_s2exp (x: $S2E.s2exp): jsonVal
 
@@ -135,6 +98,8 @@ fun jsonize_symbol (x: $SYM.symbol): jsonVal
 fun jsonize_symbolist (x: $SYM.symbolist): jsonVal
 
 fun jsonize_symbolopt (x: $SYM.symbolopt): jsonVal
+
+fun jsonize_token (x: $LEX.token): jsonVal
 
 fun jsonize_i0nt (x: $SYN.i0nt): jsonVal
 
@@ -164,6 +129,8 @@ fun jsonize_d2explst (x: $D2E.d2explst): jsonVal
 
 fun jsonize_d2expopt (x: $D2E.d2expopt): jsonVal
 
+fun jsonize_labd2exp (x: $D2E.labd2exp): jsonVal
+
 fun jsonize_labd2explst (x: $D2E.labd2explst): jsonVal
 
 fun jsonize_d2exparglst (x: $D2E.d2exparglst): jsonVal
@@ -174,27 +141,53 @@ fun jsonize_d2varlst (x: $D2E.d2varlst): jsonVal
 
 fun jsonize_d2varopt (x: $D2E.d2varopt): jsonVal
 
+fun jsonize_cstsp (x: $SYN.cstsp): jsonVal
+
+fun jsonize_d2con_type (x: $STAEXP2.d2con_type): jsonVal
+
 fun jsonize_d2con (x: $STAEXP2.d2con): jsonVal
 
 fun jsonize_d2conlst (x: $STAEXP2.d2conlst): jsonVal
 
+fun jsonize_s2exparg (x: $S2E.s2exparg): jsonVal
+
 fun jsonize_s2exparglst (x: $S2E.s2exparglst): jsonVal
+
+fun jsonize_d0ynq_node (x: $SYN.d0ynq_node): jsonVal
+
+fun jsonize_d0ynq (x: $SYN.d0ynq): jsonVal
+
+fun jsonize_d2sym (x: $D2E.d2sym): jsonVal
 
 fun jsonize_d2symopt (x: $D2E.d2symopt): jsonVal
 
+fun jsonize_t2mpmarg (x: $S2E.t2mpmarg): jsonVal
+
 fun jsonize_t2mpmarglst (x: $S2E.t2mpmarglst): jsonVal
+
+fun jsonize_i2nvresstate (x: $D2E.i2nvresstate): jsonVal
 
 fun jsonize_caskind (x: $BAS.caskind): jsonVal
 
+fun jsonize_c2lau (x: $D2E.c2lau): jsonVal
+
 fun jsonize_c2laulst (x: $D2E.c2laulst): jsonVal
 
+fun jsonize_sc2lau (x: $D2E.sc2lau): jsonVal
+
 fun jsonize_sc2laulst (x: $D2E.sc2laulst): jsonVal
+
+fun jsonize_d2lab (x: $D2E.d2lab): jsonVal
 
 fun jsonize_d2lablst (x: $D2E.d2lablst): jsonVal
 
 fun jsonize_s2eff (x: $S2E.s2eff): jsonVal
 
+fun jsonize_effset_t0ype (x: $EFF.effset_t0ype): jsonVal
+
 fun jsonize_effset (x: $EFF.effset): jsonVal
+
+fun jsonize_s2var_type (x: $S2E.s2var_type): jsonVal
 
 fun jsonize_s2var (x: $S2E.s2var): jsonVal
 
@@ -203,6 +196,10 @@ fun jsonize_s2varlst (x: $S2E.s2varlst): jsonVal
 fun jsonize_s2varopt (x: $S2E.s2varopt): jsonVal
 
 fun jsonize_s2varlstlst (x: $S2E.s2varlstlst): jsonVal
+
+fun jsonize_loopi2nv (x: $D2E.loopi2nv): jsonVal
+
+fun jsonize_d2mac_type (x: $D2E.d2mac_type): jsonVal
 
 fun jsonize_d2mac (x: $D2E.d2mac): jsonVal
 
@@ -221,6 +218,8 @@ fun jsonize_d2pitmlst (x: $D2E.d2pitmlst): jsonVal
 fun jsonize_d2itmopt (x: $D2E.d2itmopt): jsonVal
 
 fun jsonize_funclo (x: $BAS.funclo): jsonVal
+
+fun jsonize_label_type (x: $LAB.label_type): jsonVal
 
 fun jsonize_label (x: $LAB.label): jsonVal
 
@@ -285,4 +284,8 @@ fun jsonize_p2atlst (x: $D2E.p2atlst): jsonVal
 fun jsonize_p2atopt (x: $D2E.p2atopt): jsonVal
 
 fun jsonize_labp2atlst (x: $D2E.labp2atlst): jsonVal
+
+fun jsonize_lstord_d2var (x: $D2E.lstord($D2E.d2var)): jsonVal
+
+fun jsonize_lstord_s2var (x: $D2E.lstord($S2E.s2var)): jsonVal
 

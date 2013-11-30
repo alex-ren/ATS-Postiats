@@ -146,6 +146,7 @@ SOURCES = \
   pats_dynexp1.sats \
   pats_dynexp1.dats \
   pats_dynexp1_print.dats \
+  pats_jsonize.sats \
   pats_trans1.sats \
   pats_trans1_env.sats \
   pats_trans1_env.dats \

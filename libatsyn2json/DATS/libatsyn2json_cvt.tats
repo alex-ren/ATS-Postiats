@@ -159,8 +159,14 @@ typedef $SYN.i0delst = List ($SYN.i0de)
 
 (* ******* ********* *)
 
-abstype $D2E.d2cst_type
-typedef $D2E.d2cst = d2cst_type
+
+abstype $D2E.d2cst = {
+@$D2E.d2cst_get_sym = symbol,
+@$D2E.d2cst_get_loc = location,
+@$D2E.d2cst_get_fil = filename,
+@$D2E.d2cst_get_name = string
+}
+
 typedef $D2E.d2cstlst = List ($D2E.d2cst)
 typedef $D2E.d2cstopt = Option (d2cst)
 
@@ -193,7 +199,24 @@ typedef $STAEXP2.d2conlst = List ($STAEXP2.d2con)
 abstype $S2E.s2exparg
 typedef $S2E.s2exparglst = List ($S2E.s2exparg)
 
-abstype $D2E.d2sym
+
+datatype
+$SYN.d0ynq_node =
+  | D0YNQnone of ()
+  | D0YNQsymdot of symbol
+  | D0YNQsymcolon of symbol
+  | D0YNQsymdotcolon of (symbol, symbol)
+// end of [d0ynq_node]
+
+typedef $SYN.d0ynq = '{
+  d0ynq_loc= location, d0ynq_node= d0ynq_node
+} // end of [d0ynq]
+
+typedef $D2E.d2sym = '{
+  d2sym_loc= location
+, d2sym_qua= $SYN.d0ynq, d2sym_sym= symbol
+, d2sym_pitmlst= d2pitmlst
+} // end of [d2sym]
 typedef $D2E.d2symopt = Option (d2sym)
 
 abstype $S2E.t2mpmarg
