@@ -78,8 +78,8 @@ jsonval_pair (x1, x2) = JSONlist (list_pair(x1, x2))
 (* ****** ****** *)
 //
 implement
-jsonval_labval (l, jsv) =
-  JSONlablist (list_cons((l, jsv), list_nil))
+jsonval_labval1 (l, v) =
+  JSONlablist (list_cons((l, v), list_nil))
 implement
 jsonval_labval2 (l1, v1, l2, v2) =
   JSONlablist (list_cons((l1, v1), list_cons((l2, v2), list_nil)))
@@ -99,6 +99,13 @@ jsonval_labval4
 (
   list_cons((l1, v1), list_cons((l2, v2), list_cons((l3, v3), list_cons((l4, v4), list_nil))))
 ) (* end of [jsonval_labval3] *)
+//
+(* ****** ****** *)
+//
+implement
+jsonval_none () = JSONoption (None())
+implement
+jsonval_some (x) = JSONoption (Some(x))
 //
 (* ****** ****** *)
 
@@ -131,12 +138,22 @@ case+ x0 of
     val () = fprint_jsonvalist (out, xs)
     val () = prstr "]"
   }
-//
 | JSONlablist (lxs) =>
   {
     val () = prstr "{"
     val () = fprint_labjsonvalist (out, lxs)
     val () = prstr "}"
+  }
+//
+| JSONoption (opt) =>
+  {
+    val () = prstr "["
+    val () =
+    (
+      case+ opt of
+      | Some x => fprint_jsonval (out, x) | None () => ()
+    ) : void // end of [val]
+    val () = prstr "]"
   }
 //
 end // end of [fprint_jsonval]
@@ -187,14 +204,16 @@ in
 //
 case+ lxs0 of
 | list_nil () => ()
-| list_cons ((l, x), lxs) => let
+| list_cons
+    (lx, lxs) => let
     val () =
       if i > 0
         then fprint (out, ", ")
       // end of [if]
-    val () = fprint_string (out, l)
+    val () =
+      fprintf (out, "\"%s\"", @(lx.0))
     val () = fprint_string (out, ": ")
-    val () = fprint_jsonval (out, x)
+    val () = fprint_jsonval (out, lx.1)
   in
     aux (out, lxs, i+1)
   end // end of [list_cons]
@@ -207,15 +226,41 @@ end // end of [fprint_labjsonvalist]
 
 (* ****** ****** *)
 
+local
+
+fun aux0
+(
+  name: string
+) : jsonval = let
+  val name = jsonval_string (name)
+  val arglst = jsonval_list (list_nil)
+in
+  jsonval_labval2 ("funclo_name", name, "funclo_arglst", arglst)
+end // end of [aux0]
+
+fun aux1
+(
+  name: string, arg: jsonval
+) : jsonval = let
+  val name = jsonval_string (name)
+  val arglst = jsonval_sing (arg)
+in
+  jsonval_labval2 ("funclo_name", name, "funclo_arglst", arglst)
+end // end of [aux1]
+
+in (* in of [local] *)
+
 implement
-jsonize_anon (x0) = JSONnul () 
+jsonize_funclo (fc) =
+(
+  case+ fc of
+  | FUNCLOfun () => aux0 ("FUNCLOfun")
+  | FUNCLOclo (knd) => aux1 ("FUNCLOclo", jsonval_int (knd))
+) (* end of [jsonize_funclo] *)
+
+end // end of [local]
 
 (* ****** ****** *)
-
-datatype
-funkind =
-//
-// end of [funkind]
 
 implement
 jsonize_funkind (knd) =
@@ -258,6 +303,10 @@ implement
 jsonize_symbol
   (sym) = jsonval_string (symbol_get_name (sym))
 //
+(* ****** ****** *)
+
+implement jsonize_ignored (x0) = JSONnul () 
+
 (* ****** ****** *)
 
 (* end of [pats_jsonize.dats] *)
