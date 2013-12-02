@@ -22,6 +22,16 @@ $(PATSHOMEQ)/bin/patscc \
 
 PATSOPT=$(PATSHOMEQ)/bin/patsopt
 
+
+# CFLAGS_JSONC=$(shell pkg-config json-c --cflags)
+CFLAGS_JSONC=-I/home/grad2/aren/programs/install/include
+LDFLAGS_JSONC=$(shell pkg-config json-c --libs)
+
+ifeq ($(CFLAGS_JSONC), )
+$(error Cannot locate jansson. Please run e.g.  \
+  export PKG_CONFIG_PATH=${HOME}/programs/install/lib/pkgconfig:${PKG_CONFIG_PATH})
+endif
+
 ######
 
 all:: UTFPL main
@@ -43,7 +53,8 @@ main: \
     -I${PATSHOME} \
     -I${PATSHOME}/ccomp/runtime \
     -L${PATSHOME}/ccomp/atslib/lib \
-    -O2 -o $@ $^ ../utfpl.o -latslib $(LGC) $(LJSONC)
+    -O2 -o $@ $^ ../utfpl.o -latslib $(LGC) \
+    $(LDFLAGS_JSONC)
 
 ######
 
@@ -51,20 +62,21 @@ UTFPL: ; make -C .. utfpl.o
 
 ######
 
-%_sats.o: %.sats ; $(PATSCC) -c $<
+%_sats.o: %.sats ; $(PATSCC) $(CFLAGS_JSONC) -c $<
 
 %_dats.c: \
   %.dats parsing.sats ; $(PATSCC) -ccats $<
-%_dats.o: %_dats.c; $(PATSCC) $(DATSMEMALLOC) -c $<
+
+%_dats.o: %_dats.c; $(PATSCC) $(CFLAGS_JSONC) $(DATSMEMALLOC) -c $<
 
 ######
 #
-#LGC=
-#DATSMEMALLOC=-DATS_MEMALLOC_LIBC
-#
-LGC=-lgc
-LJSONC=-ljson-c
-DATSMEMALLOC=-DATS_MEMALLOC_GCBDW
+LGC=
+DATSMEMALLOC=-DATS_MEMALLOC_LIBC
+
+# LGC=-lgc
+# LJSONC=-ljson-c
+# DATSMEMALLOC=-DATS_MEMALLOC_GCBDW
 #
 ######
 

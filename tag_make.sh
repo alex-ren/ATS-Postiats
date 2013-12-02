@@ -1,11 +1,16 @@
-rm -rf MYTAGS_PATS_ATS2JSON
-find ${PATSHOME}/libatsyn2json -name "*.sats" -exec atsopt -o MYTAGS_PATS_ATS2JSON --taggen -s {} \;
-find ${PATSHOME}/libatsyn2json -name "*.dats" -exec atsopt -o MYTAGS_PATS_ATS2JSON --taggen -d {} \;
 
-rm -rf MYTAGS_ALL
-cat MYTAGS_ATS_JSON >> MYTAGS_ALL
-cat MYTAGS_PATS_SRC >> MYTAGS_ALL 
-cat MYTAGS_PATS_ATS2JSON >> MYTAGS_ALL 
-cat MYTAGS_ATS_PRELUDE >> MYTAGS_ALL 
-java -jar ats-lang-tools.jar -c --input MYTAGS_ALL --output tags
+rm -rf ${PATSHOME}/MYTAGS_PATS_ATS2JSON_ATS
+find ${PATSHOME}/libatsyn2json -name "*.sats" -exec atsopt -o ${PATSHOME}/MYTAGS_PATS_ATS2JSON_ATS --taggen -s {} \;
+find ${PATSHOME}/libatsyn2json -name "*.dats" -exec atsopt -o ${PATSHOME}/MYTAGS_PATS_ATS2JSON_ATS --taggen -d {} \;
+
+rm -rf ${PATSHOME}/MYTAGS_ALL
+
+cat ${PATSHOME}/MYTAGS_ATS_JSON >> ${PATSHOME}/MYTAGS_ALL
+cat ${PATSHOME}/MYTAGS_ATS_PRELUDE >> ${PATSHOME}/MYTAGS_ALL 
+
+cat ${PATSHOME}/MYTAGS_PATS_SRC_ATS >> ${PATSHOME}/MYTAGS_ALL 
+cat ${PATSHOME}/MYTAGS_PATS_ATS2JSON_ATS >> ${PATSHOME}/MYTAGS_ALL 
+
+java -jar ${PATSHOME}/ats-lang-tools.jar -c --input ${PATSHOME}/MYTAGS_ALL --output ${PATSHOME}/tags
+
 
