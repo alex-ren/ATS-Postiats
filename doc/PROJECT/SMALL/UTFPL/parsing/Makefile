@@ -91,7 +91,7 @@ DATSMEMALLOC=-DATS_MEMALLOC_LIBC
 data: \
 DATA/test01_dats.json
 DATA/test01_dats.json: \
-  DATA/test01.dats ; ${PATSOPT} --json=2 -o $@ -d $<
+  DATA/test01.dats ; ${PATSOPT} --jsonize-2 -o $@ -d $<
 
 ######
 
