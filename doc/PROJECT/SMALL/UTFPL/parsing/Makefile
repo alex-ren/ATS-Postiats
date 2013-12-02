@@ -34,6 +34,21 @@ endif
 
 ######
 
+CFLAGS :=
+CFLAGS += -I${PATSHOME}
+CFLAGS += -I${PATSHOME}/ccomp/runtime
+CFLAGS += $(shell pkg-config --cflags json-c)
+
+######
+
+LDFLAGS :=
+LDFLAGS += $(LGC)
+LDFLAGS += -L${PATSHOME}/ccomp/atslib/lib
+LDFLAGS += -latslib
+LDFLAGS += $(shell pkg-config --libs json-c)
+
+######
+
 all:: UTFPL main
 
 ######
@@ -49,12 +64,7 @@ main: \
   parsing_d2exp_dats.o \
   parsing_d2ecl_dats.o \
   parsing_mylib_dats.o ; \
-  $(CCOPT) \
-    -I${PATSHOME} \
-    -I${PATSHOME}/ccomp/runtime \
-    -L${PATSHOME}/ccomp/atslib/lib \
-    -O2 -o $@ $^ ../utfpl.o -latslib $(LGC) \
-    $(LDFLAGS_JSONC)
+  $(CCOPT) $(CFLAGS) -O2 -o $@ $^ ../utfpl.o $(LDFLAGS)
 
 ######
 
@@ -62,20 +72,18 @@ UTFPL: ; make -C .. utfpl.o
 
 ######
 
-%_sats.o: %.sats ; $(PATSCC) $(CFLAGS_JSONC) -c $<
+%_sats.o: %.sats ; $(PATSCC) $(CFLAGS) -c $<
 
 %_dats.c: \
   %.dats parsing.sats ; $(PATSCC) -ccats $<
-
-%_dats.o: %_dats.c; $(PATSCC) $(CFLAGS_JSONC) $(DATSMEMALLOC) -c $<
+%_dats.o: %_dats.c; $(PATSCC) $(DATSMEMALLOC) $(CFLAGS) -c $<
 
 ######
 #
-LGC=
+LGC=-lgc
 DATSMEMALLOC=-DATS_MEMALLOC_LIBC
 
 # LGC=-lgc
-# LJSONC=-ljson-c
 # DATSMEMALLOC=-DATS_MEMALLOC_GCBDW
 #
 ######
