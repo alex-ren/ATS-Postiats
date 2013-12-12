@@ -4,6 +4,13 @@
 (* ****** ****** *)
 //
 #define
+LIBGMP_targetloc "$PATSHOMERELOC/contrib/pcre"
+#define
+LIBGMP_sourceloc "{http://www.ats-lang.org/LIBRARY}/contrib/pcre"
+//
+(* ****** ****** *)
+//
+#define
 LIBGMP_targetloc "$PATSHOMERELOC/contrib/libgmp"
 #define
 LIBGMP_sourceloc "{http://www.ats-lang.org/LIBRARY}/contrib/libgmp"
@@ -56,6 +63,13 @@ GTK_sourceloc "{http://www.ats-lang.org/LIBRARY}/contrib/GTK"
 CAIRO_targetloc "$PATSHOMERELOC/contrib/cairo"
 #define
 CAIRO_sourceloc "{http://www.ats-lang.org/LIBRARY}/contrib/cairo"
+//
+(* ****** ****** *)
+//
+#define
+JNI_targetloc "$PATSHOMERELOC/contrib/JNI"
+#define
+JNI_sourceloc "{http://www.ats-lang.org/LIBRARY}/contrib/JNI"
 //
 (* ****** ****** *)
 //

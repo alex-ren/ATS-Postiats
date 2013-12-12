@@ -42,10 +42,10 @@ case+ jsv of
     fprint! (out, "JSONfloat(", dbl, ")")
 | JSONstring (str) =>
     fprint! (out, "JSONstring(", str, ")")
-| JSONarray (A, n) =>
+| JSONarray (xs) =>
   {
     val () = fprint (out, "JSONarray(")
-    val () = fprint_arrayref (out, A, n)
+    val () = fprint_jsonvalist (out, xs)
     val () = fprint (out, ")")
   }
 | JSONobject (lxs) =>
@@ -60,11 +60,43 @@ end // end of [fprint_jsonval]
 (* ****** ****** *)
 
 implement
+fprint_jsonvalist
+  (out, xs) = let
+//
+macdef SEP = "; "
+//
+fun loop
+(
+  out: FILEref, xs: jsonvalist, i: int
+) : void = let
+//
+in
+//
+case+ xs of
+| list_cons
+    (x, xs) => let
+    val () =
+    if i > 0 then fprint (out, SEP)
+    val () = fprint_jsonval (out, x)
+  in
+    loop (out, xs, i+1)
+  end // end of [list_cons]
+| list_nil ((*void*)) => ()
+//
+end // end of [loop]
+//
+in
+  loop (out, xs, 0)
+end // end of [fprint_jsonvalist]
+
+(* ****** ****** *)
+
+implement
 fprint_labjsonvalist
   (out, lxs) = let
 //
 macdef SEP = "; "
-macdef MAPTO = ":"
+macdef MAPTO = ": "
 //
 fun loop
 (
@@ -96,6 +128,25 @@ implement
 jsonval_ofstring (str) = let
   val jso = json_tokener_parse (str) in json_object2val0 (jso)
 end // end of [jsonval_ofstring]
+
+(* ****** ****** *)
+
+implement
+jsonval_tostring
+  (jsv) = rep2 where
+{
+//
+  val jso = jsonval_objectify (jsv)
+//
+  val (
+    fpf | rep
+  ) = json_object_to_json_string (jso)
+  val rep2 = string_copy ($UN.strptr2string(rep))
+  prval ((*void*)) = fpf (rep)
+//
+  val freed(*1*) = json_object_put (jso)
+//
+} (* end of [jsonval_tostring] *)
 
 (* ****** ****** *)
 
@@ -160,31 +211,30 @@ case+ 0 of
   end // end of [json_type_string]
 | _ when type =
     json_type_array => let
-    prval (
-    ) = __assert_agz (jso) 
-    val [n:int] n = json_object_array_length (jso)
-    val (pf, pfgc | p) = array_ptr_alloc<jsonval> (i2sz(n))
+    vtypedef tenv = ptr(*list_vt*)
+    prval ((*void*)) = __assert_agz (jso) 
+    val asz = json_object_array_length (jso)
     local
-    implement(env)
-    json_object_iforeach$fwork<env>
+    implement
+    json_object_iforeach$fwork<tenv>
       (i, v, env) =
     {
       val v2 = json_object2val1 (v)
-      val p_i = ptr_add<jsonval> (p, i)
-      val () = $UN.ptr0_set (p_i, v2)
+      val vs2 = $UN.castvwtp0{jsonvalist_vt}(env)
+      val () = env := $UN.castvwtp0{ptr}(list_vt_cons{jsonval}(v2, vs2))
     }
     in (* in of [local] *)
-    val () = json_object_iforeach (jso)
+    var env: tenv = the_null_ptr
+    val ((*void*)) = json_object_iforeach_env<tenv> (jso, env)
+    val vs2 = $UN.castvwtp0{jsonvalist_vt}(env)
     end // end of [local]
-    val A = $UN.castvwtp0{arrayref(jsonval,n)}((pf, pfgc | p))
   in
-    JSONarray(A, i2sz(n))
+    JSONarray(list_vt2t(list_vt_reverse(vs2)))
   end // end of [json_type_array]
 | _ when type =
     json_type_object => let
-    prval (
-    ) = __assert_agz (jso)
     typedef tenv = ptr
+    prval () = __assert_agz (jso)
     local
     implement    
     json_object_kforeach$fwork<tenv>
@@ -210,6 +260,79 @@ case+ 0 of
     let val () = assertloc (false) in exit(1) end
 //
 end // end of [json_object2val1]
+
+(* ****** ****** *)
+
+implement
+jsonval_objectify
+  (jsv0) = let
+//
+fun auxarr
+(
+  jarr: !json_object1
+, jsvs: jsonvalist, i: intGte(0)
+) : void =
+(
+  case+ jsvs of
+  | list_cons
+      (jsv, jsvs) => let
+      val jso = jsonval_objectify (jsv)
+      val err = json_object_array_add (jarr, jso)
+    in
+      auxarr (jarr, jsvs, succ(i))
+    end // end of [list_cons]
+  | list_nil ((*void*)) => ()
+)
+//
+fun auxobj
+(
+  jobj: !json_object1, ljsvs: labjsonvalist
+) : void =
+(
+  case+ ljsvs of
+  | list_cons
+      ((l, jsv), ljsvs) => let
+      val jso = jsonval_objectify (jsv)
+      val ((*void*)) = json_object_object_add (jobj, l, jso)
+    in
+      auxobj (jobj, ljsvs)
+    end // end of [list_cons]
+  | list_nil ((*void*)) => ()
+)
+//
+in
+//
+case+ jsv0 of
+//
+| JSONnul () =>
+    $UN.castvwtp0{json_object0}(the_null_ptr)
+//
+| JSONint (lli) =>
+    json_object_new_int64($UN.cast{int64}(lli))
+//
+| JSONbool (tf) => json_object_new_boolean (tf)
+//
+| JSONfloat (dbl) => json_object_new_double (dbl)
+//
+| JSONstring (str) => json_object_new_string (str)
+//
+| JSONarray (jsvs) => let
+    val jarr = json_object_new_array ()
+    val isnot = json_object_isnot_null (jarr)
+    val () = if isnot then auxarr (jarr, jsvs, 0)
+  in
+    jarr
+  end // end of [JSONarray]
+//
+| JSONobject (ljsvs) => let
+    val jobj = json_object_new_object ()
+    val isnot = json_object_isnot_null (jobj)
+    val ((*void*)) = if isnot then auxobj (jobj, ljsvs)
+  in
+    jobj
+  end // end of [JSONobject]
+//
+end // end of [jsonval_objectify]
 
 (* ****** ****** *)
 

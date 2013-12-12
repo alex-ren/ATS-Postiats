@@ -1779,7 +1779,9 @@ array_v_ungroup	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/ar
 NSH	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/arrayptr.sats	44;"	kind:unknown
 SHR	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/arrayptr.sats	45;"	kind:unknown
 	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/arrayptr.sats	49;"	kind:unknown
-	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/arrayptr.sats	53;"	kind:unknown
+	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/arrayptr.sats	58;"	kind:unknown
+arrayptr	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/arrayptr.sats	63;"	kind:unknown
+arrayptr	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/arrayptr.sats	65;"	kind:unknown
 	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/arrayptr.sats	72;"	kind:unknown
 arrayptrout	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/arrayptr.sats	75;"	kind:unknown
 lemma_arrayptr_param	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/arrayptr.sats	80;"	kind:unknown
@@ -1849,7 +1851,8 @@ NSH	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/arrayref.sats	
 SHR	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/arrayref.sats	45;"	kind:unknown
 	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/arrayref.sats	49;"	kind:unknown
 	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/arrayref.sats	53;"	kind:unknown
-	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/arrayref.sats	61;"	kind:unknown
+	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/arrayref.sats	66;"	kind:unknown
+arrayref	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/arrayref.sats	69;"	kind:unknown
 lemma_arrayref_param	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/arrayref.sats	75;"	kind:unknown
 arrayptr_refize	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/arrayref.sats	87;"	kind:unknown
 arrayref_get_viewptr	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/arrayref.sats	95;"	kind:unknown
@@ -1891,7 +1894,8 @@ arrayref_iforeach_env	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/S
 arrayref_rforeach	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/arrayref.sats	277;"	kind:unknown
 arrayref_rforeach_env	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/arrayref.sats	282;"	kind:unknown
 arrayref_tabulate	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/arrayref.sats	293;"	kind:unknown
-	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/arrayref.sats	302;"	kind:unknown
+	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/arrayref.sats	307;"	kind:unknown
+arrszref	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/arrayref.sats	309;"	kind:unknown
 arrszref	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/arrayref.sats	315;"	kind:unknown
 arrszref_make_arrpsz	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/arrayref.sats	320;"	kind:unknown
 arrszref	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/arrayref.sats	323;"	kind:unknown
@@ -2814,7 +2818,17 @@ intrange_rforeach	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/
 intrange_rforeach_env	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/intrange.sats	68;"	kind:unknown
 NSH	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/list.sats	44;"	kind:unknown
 SHR	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/list.sats	45;"	kind:unknown
-	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/list.sats	49;"	kind:unknown
+list_t0ype_int_type	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/list.sats	54;"	kind:unknown
+list	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/list.sats	60;"	kind:unknown
+List	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/list.sats	62;"	kind:unknown
+List0	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/list.sats	64;"	kind:unknown
+List1	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/list.sats	66;"	kind:unknown
+listLt	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/list.sats	67;"	kind:unknown
+listLte	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/list.sats	69;"	kind:unknown
+listGt	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/list.sats	71;"	kind:unknown
+listGte	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/list.sats	73;"	kind:unknown
+listBtw	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/list.sats	75;"	kind:unknown
+listBtwe	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/list.sats	77;"	kind:unknown
 nil	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/list.sats	84;"	kind:unknown
 cons	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/list.sats	85;"	kind:unknown
 ListSubscriptExn	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/list.sats	89;"	kind:unknown
@@ -2958,7 +2972,17 @@ length	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/list.sats	8
 RD	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/list_vt.sats	45;"	kind:unknown
 NSH	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/list_vt.sats	46;"	kind:unknown
 SHR	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/list_vt.sats	47;"	kind:unknown
-	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/list_vt.sats	51;"	kind:unknown
+list_vt0ype_int_vtype	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/list_vt.sats	56;"	kind:unknown
+list_vt	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/list_vt.sats	62;"	kind:unknown
+List_vt	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/list_vt.sats	64;"	kind:unknown
+List0_vt	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/list_vt.sats	66;"	kind:unknown
+List1_vt	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/list_vt.sats	68;"	kind:unknown
+listLt_vt	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/list_vt.sats	69;"	kind:unknown
+listLte_vt	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/list_vt.sats	71;"	kind:unknown
+listGt_vt	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/list_vt.sats	73;"	kind:unknown
+listGte_vt	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/list_vt.sats	75;"	kind:unknown
+listBtw_vt	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/list_vt.sats	77;"	kind:unknown
+listBtwe_vt	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/list_vt.sats	79;"	kind:unknown
 nil_vt	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/list_vt.sats	86;"	kind:unknown
 cons_vt	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/list_vt.sats	87;"	kind:unknown
 lemma_list_vt_param	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/list_vt.sats	92;"	kind:unknown
@@ -3225,7 +3249,8 @@ minit_gc	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/memory.sa
 mfree_gc	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/memory.sats	86;"	kind:unknown
 malloc_gc	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/memory.sats	94;"	kind:unknown
 	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/option.sats	44;"	kind:unknown
-	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/option.sats	48;"	kind:unknown
+option	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/option.sats	52;"	kind:unknown
+Option	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/option.sats	53;"	kind:unknown
 NotSomeExn	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/option.sats	58;"	kind:unknown
 option_cast	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/option.sats	80;"	kind:unknown
 option_vt2t	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/option.sats	87;"	kind:unknown
@@ -3239,7 +3264,8 @@ option_unsome_exn	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/
 fprint_option	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/option.sats	125;"	kind:unknown
 fprint	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/option.sats	126;"	kind:unknown
 	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/option_vt.sats	44;"	kind:unknown
-	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/option_vt.sats	48;"	kind:unknown
+option_vt	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/option_vt.sats	52;"	kind:unknown
+Option_vt	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/option_vt.sats	53;"	kind:unknown
 option_vt_some	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/option_vt.sats	60;"	kind:unknown
 option_vt_none	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/option_vt.sats	62;"	kind:unknown
 option_vt_make_opt	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/SATS/option_vt.sats	68;"	kind:unknown
@@ -3744,7 +3770,7 @@ g1uint_of_uchar1	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/DATS/c
 fprint_val	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/DATS/char.dats	96;"	kind:unknown
 fprint_val	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/DATS/char.dats	97;"	kind:unknown
 fprint_val	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/DATS/char.dats	98;"	kind:unknown
-	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/DATS/fcontainer.dats	39;"	kind:unknown
+	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/DATS/fcontainer.dats	40;"	kind:unknown
 iforeach	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/DATS/fcontainer.dats	57;"	kind:unknown
 foldleft_funenv	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/DATS/fcontainer.dats	79;"	kind:unknown
 foldleft_clo	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/DATS/fcontainer.dats	119;"	kind:unknown
@@ -3759,8 +3785,8 @@ forall_funenv	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/DATS/fcon
 ismember_fun	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/DATS/fcontainer.dats	316;"	kind:unknown
 rlistize	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/DATS/fcontainer.dats	327;"	kind:unknown
 rlistize_funenv	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/DATS/fcontainer.dats	339;"	kind:unknown
-	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/DATS/fcontainer.dats	371;"	kind:unknown
-	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/DATS/fcontainer_foreach.dats	39;"	kind:unknown
+	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/DATS/fcontainer.dats	372;"	kind:unknown
+	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/DATS/fcontainer_foreach.dats	40;"	kind:unknown
 foreach_fun	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/DATS/fcontainer_foreach.dats	57;"	kind:unknown
 foreach_clo	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/DATS/fcontainer_foreach.dats	71;"	kind:unknown
 foreach_vclo	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/DATS/fcontainer_foreach.dats	85;"	kind:unknown
@@ -3773,7 +3799,7 @@ iforeach_vclo	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/DATS/fcon
 iforeach_cloptr	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/DATS/fcontainer_foreach.dats	232;"	kind:unknown
 iforeach_vcloptr	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/DATS/fcontainer_foreach.dats	252;"	kind:unknown
 iforeach_cloref	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/DATS/fcontainer_foreach.dats	264;"	kind:unknown
-	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/DATS/fcontainer_foreach.dats	279;"	kind:unknown
+	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/DATS/fcontainer_foreach.dats	280;"	kind:unknown
 ATS_DYNLOADFLAG	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/DATS/filebas.dats	44;"	kind:unknown
 FILEptr1	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/DATS/filebas.dats	57;"	kind:unknown
 c2i	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/DATS/filebas.dats	62;"	kind:unknown
@@ -3932,7 +3958,7 @@ giter_inc	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/DATS/giter_li
 giter_getref_inc	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/DATS/giter_list_vt.dats	199;"	kind:unknown
 giter_ins	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/DATS/giter_list_vt.dats	224;"	kind:unknown
 giter_rmv	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/DATS/giter_list_vt.dats	253;"	kind:unknown
-	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/DATS/giterator.dats	39;"	kind:unknown
+	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/DATS/giterator.dats	40;"	kind:unknown
 fprint_giter_sep	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/DATS/giterator.dats	57;"	kind:unknown
 giter_isnot_atbeg	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/DATS/giterator.dats	94;"	kind:unknown
 giter_isnot_atend	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/DATS/giterator.dats	100;"	kind:unknown
@@ -3964,7 +3990,7 @@ giter_rlistize_cpy	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/DATS
 giter_foreach	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/DATS/giterator.dats	431;"	kind:unknown
 giter_foreach_env	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/DATS/giterator.dats	437;"	kind:unknown
 giter_bsearch	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/DATS/giterator.dats	482;"	kind:unknown
-	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/DATS/giterator.dats	526;"	kind:unknown
+	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/DATS/giterator.dats	527;"	kind:unknown
 gnumber_int	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/DATS/gnumber_float.dats	45;"	kind:unknown
 gnumber_int	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/DATS/gnumber_float.dats	47;"	kind:unknown
 gnumber_double	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/DATS/gnumber_float.dats	56;"	kind:unknown
@@ -4863,7 +4889,7 @@ ref_exch_elt	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/DATS/refer
 ref_app_fun	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/DATS/reference.dats	82;"	kind:unknown
 ref_app_funenv	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/DATS/reference.dats	87;"	kind:unknown
 ref_vtakeout	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/DATS/reference.dats	95;"	kind:unknown
-	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/DATS/stream.dats	39;"	kind:unknown
+	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/DATS/stream.dats	40;"	kind:unknown
 stream2list	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/DATS/stream.dats	50;"	kind:unknown
 stream_nth_exn	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/DATS/stream.dats	79;"	kind:unknown
 stream_nth_opt	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/DATS/stream.dats	94;"	kind:unknown
@@ -4882,8 +4908,8 @@ stream_map2_cloref	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/DATS
 ::	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/DATS/stream.dats	318;"	kind:unknown
 stream_merge_fun	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/DATS/stream.dats	350;"	kind:unknown
 stream_merge_cloref	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/DATS/stream.dats	362;"	kind:unknown
-	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/DATS/stream.dats	375;"	kind:unknown
-	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/DATS/stream_vt.dats	39;"	kind:unknown
+	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/DATS/stream.dats	376;"	kind:unknown
+	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/DATS/stream_vt.dats	40;"	kind:unknown
 stream_vt_free	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/DATS/stream_vt.dats	50;"	kind:unknown
 stream_vt_drop	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/DATS/stream_vt.dats	55;"	kind:unknown
 stream_vt_foreach	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/DATS/stream_vt.dats	74;"	kind:unknown
@@ -4901,7 +4927,7 @@ stream_vt_map_con	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/DATS/
 stream_vt_map_fun	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/DATS/stream_vt.dats	284;"	kind:unknown
 stream_vt_map2_con	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/DATS/stream_vt.dats	313;"	kind:unknown
 stream_vt_map2_con	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/DATS/stream_vt.dats	313;"	kind:unknown
-	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/DATS/stream_vt.dats	387;"	kind:unknown
+	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/DATS/stream_vt.dats	388;"	kind:unknown
 ATS_DYNLOADFLAG	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/DATS/string.dats	44;"	kind:unknown
 CNUL	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/DATS/string.dats	52;"	kind:unknown
 +	/home/grad2/aren/workspace/Postiats/ATS-Postiats/prelude/DATS/string.dats	56;"	kind:unknown

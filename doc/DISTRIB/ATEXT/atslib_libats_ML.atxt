@@ -111,6 +111,7 @@ The ATSLIB/libats/ML library\
 #packfilename("SATS/string.sats")
 #packfilename("SATS/strarr.sats")
 #packfilename("SATS/filebas.sats")
+#packfilename("SATS/stdlib.sats")
 #packfilename("SATS/funset.sats")
 #packfilename("SATS/funmap.sats")
 #packfilename("SATS/hashtbl.sats")
@@ -123,6 +124,7 @@ The ATSLIB/libats/ML library\
 
 (* ****** ****** *)
 
+#packfilename("CATS/array0.cats")
 #packfilename("CATS/strarr.cats")
 
 (* ****** ****** *)
@@ -135,6 +137,8 @@ The ATSLIB/libats/ML library\
 
 #packfilename("DATS/filebas.dats")
 #packfilename("DATS/filebas_dirent.dats")
+
+#packfilename("DATS/stdlib.dats")
 
 #packfilename("DATS/funset.dats")
 #packfilename("DATS/funmap.dats")

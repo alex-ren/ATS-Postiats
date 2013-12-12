@@ -27,49 +27,58 @@
 
 (* ****** ****** *)
 
+(* Author: Hongwei Xi *)
+(* Authoremail: hwxi AT cs DOT bu DOT edu *)
+(* Start time: December, 2012 *)
+
+(* ****** ****** *)
+
+#define ATS_PACKNAME "ATSLIB.libats.ML"
+#define ATS_STALOADFLAG 0 // no need for staloading at run-time
+#define ATS_EXTERN_PREFIX "atslib_ML_" // prefix for external names
+
+(* ****** ****** *)
+
+staload "libats/ML/SATS/basis.sats"
+
+(* ****** ****** *)
+
+typedef SHR(a:type) = a // for commenting purpose
+typedef NSH(a:type) = a // for commenting purpose
+
+(* ****** ****** *)
+
+#if(0)
+//
+// HX: in [basis.sats]
+//
+abstype
+matrix0_vt0ype_type
+  (a: vt@ype(*invariant*)) = ptr
+stadef matrix0 = matrix0_vt0ype_type
+//
+#endif
+
+(* ****** ****** *)
+
 (*
-** Author: Hongwei Xi
-** Authoremail: gmhwxiATgmailDOTcom
-** Start Time: August, 2013
+typedef matrix0 (a: t@ype) = mtrxszref (a)
 *)
 
 (* ****** ****** *)
 
-abst@ype xmlChar = $extype"xmlChar"
+sortdef t0p = t@ype and vt0p = viewt@ype
 
 (* ****** ****** *)
-
-absvtype
-xmlStrptr(l:addr) = ptr(l) // xmlChar*
-vtypedef xmlStrptr0 = [l:agez] xmlStrptr(l)
-vtypedef xmlStrptr1 = [l:addr | l > null] xmlStrptr(l)
-
-castfn xmlStrptr2ptr : {l:addr} xmlStrptr(l) -<> ptr(l)
-
+//
+fun{}
+matrix0_of_mtrxszref
+  {a:vt0p} (mtrxszref (a)):<> matrix0 (a)
+//
+fun{}
+mtrxszref_of_matrix0
+  {a:vt0p} (M: matrix0 (a)):<> mtrxszref (a)
+//
 (* ****** ****** *)
 
-absvtype
-xmlDocPtr(l:addr) = ptr(l) // xmlDocPtr
-vtypedef xmlDocPtr0 = [l:agez] xmlDocPtr(l)
-vtypedef xmlDocPtr1 = [l:addr | l > null] xmlDocPtr(l)
-
-castfn xmlDocPtr2ptr : {l:addr} xmlDocPtr(l) -<> ptr(l)
-
-(* ****** ****** *)
-
-absvtype
-xmlNodePtr(l:addr) = ptr(l) // xmlNodePtr
-vtypedef xmlNodePtr0 = [l:agez] xmlNodePtr(l)
-vtypedef xmlNodePtr1 = [l:addr | l > null] xmlNodePtr(l)
-
-castfn xmlNodePtr2ptr : {l:addr} xmlNodePtr(l) -<> ptr(l)
-
-(* ****** ****** *)
-
-overload ptrcast with xmlStrptr2ptr
-overload ptrcast with xmlDocPtr2ptr
-overload ptrcast with xmlNodePtr2ptr
-
-(* ****** ****** *)
-
-(* end of [xml_header.sats] *)
+(* end of [matrix0.sats] *)

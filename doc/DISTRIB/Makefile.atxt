@@ -111,6 +111,8 @@ all_script::
 
 ######
 #
+#make_entry("atscntrb_pcre")
+#
 #make_entry("atscntrb_libgmp")
 #
 #make_entry("atscntrb_zeromq")
@@ -121,7 +123,11 @@ all_script::
 #make_entry("atscntrb_glib")
 #make_entry("atscntrb_cairo")
 #
+#make_entry("atscntrb_json-c")
+#make_entry("atscntrb_jansson")
 #make_entry("atscntrb_hiredis")
+#
+#make_entry("atscntrb_JNI")
 #
 #make_entry("atscntrb_HTML")
 #make_entry("atscntrb_HTML_canvas-2d")
@@ -205,6 +211,11 @@ atscontribing:: srcget_atscntrb
 
 ######
 
+srcget_atscntrb:: srcget_atscntrb_pcre
+srcget_atscntrb_pcre:: SCRIPT/atscntrb_pcre.bash ; bash $<
+
+######
+
 srcget_atscntrb:: srcget_atscntrb_libgmp
 srcget_atscntrb_libgmp:: SCRIPT/atscntrb_libgmp.bash ; bash $<
 
@@ -232,8 +243,20 @@ srcget_atscntrb_cairo:: SCRIPT/atscntrb_cairo.bash ; bash $<
 
 ######
 
+srcget_atscntrb:: srcget_atscntrb_json-c
+srcget_atscntrb_json-c:: SCRIPT/atscntrb_json-c.bash ; bash $<
+srcget_atscntrb:: srcget_atscntrb_jansson
+srcget_atscntrb_jansson:: SCRIPT/atscntrb_jansson.bash ; bash $<
+
+######
+
 srcget_atscntrb:: srcget_atscntrb_hiredis
 srcget_atscntrb_hiredis:: SCRIPT/atscntrb_hiredis.bash ; bash $<
+
+######
+
+srcget_atscntrb:: srcget_atscntrb_JNI
+srcget_atscntrb_JNI:: SCRIPT/atscntrb_JNI.bash ; bash $<
 
 ######
 

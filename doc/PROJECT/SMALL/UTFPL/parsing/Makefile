@@ -8,24 +8,32 @@ CCOPT=gcc -std=c99 -D_XOPEN_SOURCE -D_GNU_SOURCE
 
 ######
 
-PATSHOMEQ="$(PATSHOME)"
-PATSHOMERELOCQ="$(PATSHOMERELOC)"
+ifeq ("$(PATSHOME)","")
+  PATSHOMEQ="$(ATSHOME)"
+else
+  PATSHOMEQ="$(PATSHOME)"
+endif
+
+ifeq ("$(PATSHOMERELOC)","")
+  PATSHOMERELOCQ="$(ATSHOMERELOC)"
+else
+  PATSHOMERELOCQ="$(PATSHOMERELOC)"
+endif
 
 ######
 
-PATSCC=\
-$(PATSHOMEQ)/bin/patscc \
+PATSCC=$(PATSHOMEQ)/bin/patscc
+PATSOPT=$(PATSHOMEQ)/bin/patsopt
+
+PATSCC2=\
+  $(PATSCC) \
   -atsccomp "$(CCOPT)" \
   -IIATS $(PATSHOME) \
   -IIATS $(PATSHOME)/ccomp/runtime \
   -IIATS $(PATSHOMERELOCQ)/contrib \
 
-PATSOPT=$(PATSHOMEQ)/bin/patsopt
 
-
-# CFLAGS_JSONC=$(shell pkg-config json-c --cflags)
-CFLAGS_JSONC=-I/home/grad2/aren/programs/install/include
-LDFLAGS_JSONC=$(shell pkg-config json-c --libs)
+CFLAGS_JSONC=$(shell pkg-config json-c --cflags)
 
 ifeq ($(CFLAGS_JSONC), )
 $(error Cannot locate jansson. Please run e.g.  \
@@ -35,15 +43,15 @@ endif
 ######
 
 CFLAGS :=
-CFLAGS += -I${PATSHOME}
-CFLAGS += -I${PATSHOME}/ccomp/runtime
+CFLAGS += -I$(PATSHOMEQ)
+CFLAGS += -I$(PATSHOMEQ)/ccomp/runtime
 CFLAGS += $(shell pkg-config --cflags json-c)
 
 ######
 
 LDFLAGS :=
-LDFLAGS += $(LGC)
-LDFLAGS += -L${PATSHOME}/ccomp/atslib/lib
+# LDFLAGS += -lgc
+LDFLAGS += -L$(PATSHOMEQ)/ccomp/atslib/lib
 LDFLAGS += -latslib
 LDFLAGS += $(shell pkg-config --libs json-c)
 
@@ -72,11 +80,10 @@ UTFPL: ; make -C .. utfpl.o
 
 ######
 
-%_sats.o: %.sats ; $(PATSCC) $(CFLAGS) -c $<
+%_sats.o: %.sats ; $(PATSCC2) $(CFLAGS) -c $<
 
-%_dats.c: \
-  %.dats parsing.sats ; $(PATSCC) -ccats $<
-%_dats.o: %_dats.c; $(PATSCC) $(DATSMEMALLOC) $(CFLAGS) -c $<
+%_dats.c: %.dats parsing.sats ; $(PATSCC2) -ccats $<
+%_dats.o: %_dats.c ; $(PATSCC2) $(DATSMEMALLOC) $(CFLAGS) -c $<
 
 ######
 #
@@ -88,10 +95,10 @@ DATSMEMALLOC=-DATS_MEMALLOC_LIBC
 #
 ######
 
-data: \
-DATA/test01_dats.json
-DATA/test01_dats.json: \
-  DATA/test01.dats ; ${PATSOPT} --jsonize-2 -o $@ -d $<
+testdata: \
+TEST/test01_dats.json
+TEST/test01_dats.json: \
+  TEST/test01.dats ; $(PATSOPT) --jsonize-2 -o $@ -d $<
 
 ######
 
@@ -102,9 +109,12 @@ RMF=rm -f
 clean:: ; $(RMF) *~
 clean:: ; $(RMF) *_?ats.o
 clean:: ; $(RMF) *_?ats.c
+
+######
+
 cleanall:: clean
 cleanall:: ; $(RMF) main
-cleanall:: ; $(RMF) DATA/test??_dats.json
+cleanall:: ; $(RMF) TEST/test??_dats.json
 
 ######
 

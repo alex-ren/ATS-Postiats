@@ -189,6 +189,17 @@ cleanall:: ; $(RMF) SCRIPT/doc_example_pcpv.bash
 
 ######
 #
+all_html:: HTML/atscntrb_pcre.html
+HTML/atscntrb_pcre.html: atscntrb_pcre_atxt.exe ; ./$< > $@
+all_script:: SCRIPT/atscntrb_pcre.bash
+SCRIPT/atscntrb_pcre.bash: atscntrb_pcre_atxt.exe ; ./$< > $@
+atscntrb_pcre_atxt.dats: ATEXT/atscntrb_pcre.atxt ;   $(CAT) $< | $(ATSDOC) --prefix __datatok --outcode $@ > /dev/null
+atscntrb_pcre_atxt.exe: atscntrb_pcre_atxt.dats ; $(ATSCC) $(INCLATS) $(ATSGCFLAG) -o $@ $< -latsdoc
+clean:: ; $(RMF) atscntrb_pcre_atxt.exe
+cleanall:: ; $(RMF) HTML/atscntrb_pcre.html
+cleanall:: ; $(RMF) SCRIPT/atscntrb_pcre.bash
+
+#
 all_html:: HTML/atscntrb_libgmp.html
 HTML/atscntrb_libgmp.html: atscntrb_libgmp_atxt.exe ; ./$< > $@
 all_script:: SCRIPT/atscntrb_libgmp.bash
@@ -253,6 +264,26 @@ cleanall:: ; $(RMF) HTML/atscntrb_cairo.html
 cleanall:: ; $(RMF) SCRIPT/atscntrb_cairo.bash
 
 #
+all_html:: HTML/atscntrb_json-c.html
+HTML/atscntrb_json-c.html: atscntrb_json-c_atxt.exe ; ./$< > $@
+all_script:: SCRIPT/atscntrb_json-c.bash
+SCRIPT/atscntrb_json-c.bash: atscntrb_json-c_atxt.exe ; ./$< > $@
+atscntrb_json-c_atxt.dats: ATEXT/atscntrb_json-c.atxt ;   $(CAT) $< | $(ATSDOC) --prefix __datatok --outcode $@ > /dev/null
+atscntrb_json-c_atxt.exe: atscntrb_json-c_atxt.dats ; $(ATSCC) $(INCLATS) $(ATSGCFLAG) -o $@ $< -latsdoc
+clean:: ; $(RMF) atscntrb_json-c_atxt.exe
+cleanall:: ; $(RMF) HTML/atscntrb_json-c.html
+cleanall:: ; $(RMF) SCRIPT/atscntrb_json-c.bash
+
+all_html:: HTML/atscntrb_jansson.html
+HTML/atscntrb_jansson.html: atscntrb_jansson_atxt.exe ; ./$< > $@
+all_script:: SCRIPT/atscntrb_jansson.bash
+SCRIPT/atscntrb_jansson.bash: atscntrb_jansson_atxt.exe ; ./$< > $@
+atscntrb_jansson_atxt.dats: ATEXT/atscntrb_jansson.atxt ;   $(CAT) $< | $(ATSDOC) --prefix __datatok --outcode $@ > /dev/null
+atscntrb_jansson_atxt.exe: atscntrb_jansson_atxt.dats ; $(ATSCC) $(INCLATS) $(ATSGCFLAG) -o $@ $< -latsdoc
+clean:: ; $(RMF) atscntrb_jansson_atxt.exe
+cleanall:: ; $(RMF) HTML/atscntrb_jansson.html
+cleanall:: ; $(RMF) SCRIPT/atscntrb_jansson.bash
+
 all_html:: HTML/atscntrb_hiredis.html
 HTML/atscntrb_hiredis.html: atscntrb_hiredis_atxt.exe ; ./$< > $@
 all_script:: SCRIPT/atscntrb_hiredis.bash
@@ -262,6 +293,17 @@ atscntrb_hiredis_atxt.exe: atscntrb_hiredis_atxt.dats ; $(ATSCC) $(INCLATS) $(AT
 clean:: ; $(RMF) atscntrb_hiredis_atxt.exe
 cleanall:: ; $(RMF) HTML/atscntrb_hiredis.html
 cleanall:: ; $(RMF) SCRIPT/atscntrb_hiredis.bash
+
+#
+all_html:: HTML/atscntrb_JNI.html
+HTML/atscntrb_JNI.html: atscntrb_JNI_atxt.exe ; ./$< > $@
+all_script:: SCRIPT/atscntrb_JNI.bash
+SCRIPT/atscntrb_JNI.bash: atscntrb_JNI_atxt.exe ; ./$< > $@
+atscntrb_JNI_atxt.dats: ATEXT/atscntrb_JNI.atxt ;   $(CAT) $< | $(ATSDOC) --prefix __datatok --outcode $@ > /dev/null
+atscntrb_JNI_atxt.exe: atscntrb_JNI_atxt.dats ; $(ATSCC) $(INCLATS) $(ATSGCFLAG) -o $@ $< -latsdoc
+clean:: ; $(RMF) atscntrb_JNI_atxt.exe
+cleanall:: ; $(RMF) HTML/atscntrb_JNI.html
+cleanall:: ; $(RMF) SCRIPT/atscntrb_JNI.bash
 
 #
 all_html:: HTML/atscntrb_HTML.html
@@ -391,6 +433,11 @@ atscontribing:: srcget_atscntrb
 
 ######
 
+srcget_atscntrb:: srcget_atscntrb_pcre
+srcget_atscntrb_pcre:: SCRIPT/atscntrb_pcre.bash ; bash $<
+
+######
+
 srcget_atscntrb:: srcget_atscntrb_libgmp
 srcget_atscntrb_libgmp:: SCRIPT/atscntrb_libgmp.bash ; bash $<
 
@@ -418,8 +465,20 @@ srcget_atscntrb_cairo:: SCRIPT/atscntrb_cairo.bash ; bash $<
 
 ######
 
+srcget_atscntrb:: srcget_atscntrb_json-c
+srcget_atscntrb_json-c:: SCRIPT/atscntrb_json-c.bash ; bash $<
+srcget_atscntrb:: srcget_atscntrb_jansson
+srcget_atscntrb_jansson:: SCRIPT/atscntrb_jansson.bash ; bash $<
+
+######
+
 srcget_atscntrb:: srcget_atscntrb_hiredis
 srcget_atscntrb_hiredis:: SCRIPT/atscntrb_hiredis.bash ; bash $<
+
+######
+
+srcget_atscntrb:: srcget_atscntrb_JNI
+srcget_atscntrb_JNI:: SCRIPT/atscntrb_JNI.bash ; bash $<
 
 ######
 

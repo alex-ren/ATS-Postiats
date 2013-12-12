@@ -41,6 +41,10 @@ typedef Void = void
 //
 (* ****** ****** *)
 
+abst@ype jboxed = ptr // HX: usually okay
+
+(* ****** ****** *)
+
 abstype jstring (l:addr) = ptr(l)
 typedef jstring = [l:addr] jstring (l)
 typedef jstring0 = [l:agez] jstring (l)
@@ -49,7 +53,12 @@ typedef jstring1 = [l:addr | l > null] jstring (l)
 (* ****** ****** *)
 
 abstype jclass = ptr
+
+(* ****** ****** *)
+
 abstype jobject (l:addr) = ptr(l)
+typedef jobject0 = [l:agez] jobject(l)
+typedef jobject1 = [l:addr | l > null] jobject(l)
 
 (* ****** ****** *)
 
