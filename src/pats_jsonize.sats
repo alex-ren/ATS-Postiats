@@ -49,6 +49,10 @@ staload "./pats_location.sats"
 
 (* ****** ****** *)
 
+staload "./pats_label.sats"
+
+(* ****** ****** *)
+
 (*
 ** HX-2013-11: JSON value representation
 *)
@@ -87,9 +91,12 @@ fun jsonval_string (x: string): jsonval
 //
 fun jsonval_loc (loc: location): jsonval
 //
+(* ****** ****** *)
+//
 fun jsonval_sing (x: jsonval): jsonval
 fun jsonval_pair (x1: jsonval, x2: jsonval): jsonval
-fun jsonval_list (xs: jsonvalist): jsonval
+//
+(* ****** ****** *)
 //
 fun jsonval_labval1
   (l1: string, x1: jsonval): jsonval
@@ -120,7 +127,29 @@ jsonval_labval4
 (* ****** ****** *)
 
 fun
-jsonval_lablist (lxs: labjsonvalist): jsonval
+jsonval_conarglst
+  (con: string, arglst: jsonvalist): jsonval
+
+(* ****** ****** *)
+
+fun
+jsonval_conarg0 (con: string): jsonval
+fun
+jsonval_conarg1 (con: string, arg: jsonval): jsonval
+fun
+jsonval_conarg2
+  (con: string, arg1: jsonval, arg2: jsonval): jsonval
+fun
+jsonval_conarg3
+(
+  con: string, arg1: jsonval, arg2: jsonval, arg3: jsonval
+) : jsonval // end of [jsonval_conarg3]
+fun
+jsonval_conarg4
+(
+  con: string
+, arg1: jsonval, arg2: jsonval, arg3: jsonval, arg4: jsonval
+) : jsonval // end of [jsonval_conarg4]
 
 (* ****** ****** *)
 //
@@ -166,6 +195,10 @@ fun jsonize_location : jsonize_ftype (location)
 
 (* ****** ****** *)
 
+fun jsonize_label : jsonize_ftype (label)
+
+(* ****** ****** *)
+
 fun
 jsonize_ignored{a:type} (x: a): jsonval
 
@@ -175,6 +208,11 @@ fun
 jsonize_list_fun{a:type}
   (xs: List (a), f: jsonize_ftype (a)): jsonval
 // end of [jsonize_list_fun]
+
+fun
+jsonize_option_fun{a:type}
+  (xs: Option (a), f: jsonize_ftype (a)): jsonval
+// end of [jsonize_option_fun]
 
 (* ****** ****** *)
 

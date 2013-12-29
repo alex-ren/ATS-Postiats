@@ -1,6 +1,7 @@
-//
-// Library code for parsing
-//
+(*
+** Parsing constraints in JSON format
+*)
+
 (* ****** ****** *)
 //
 #include
@@ -10,7 +11,7 @@
 //
 (* ****** ****** *)
 
-#define ATS_DYNLOADFLAG 0
+#define ATS_DYNLOADFLAG 0 (* no run-time dynloading *)
 
 (* ****** ****** *)
 
@@ -27,4 +28,4 @@ end // end of [local]
 
 (* ****** ****** *)
 
-(* end of [constraint_mylib.dats] *)
+(* end of [parsing_mylib.dats] *)

@@ -612,7 +612,7 @@ entirety of the above presented code.
 Now we have implemented #dyncode("fastpow_elt_int"). How can it be used?
 Please find #mycodelink("CHAP_PRGTHMPRV/test_fastexp.dats", "on-line") an
 example in which #dyncode("fastpow_elt_int") is called to implement fast
-exponentiation on a 2-by-2 matrix so that Fibonacci numbers can be computed
+exponentiation on a 2-by-2 matrix so that the Fibonacci numbers can be computed
 in a highly efficient manner.
 
 ")

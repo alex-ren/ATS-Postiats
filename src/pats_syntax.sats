@@ -50,13 +50,16 @@ typedef symbolopt = $SYM.symbolopt
 
 (* ****** ****** *)
 
-staload LAB = "./pats_label.sats"
+staload
+LAB = "./pats_label.sats"
 typedef label = $LAB.label
 
-staload FIX = "./pats_fixity.sats"
+staload
+FIX = "./pats_fixity.sats"
 typedef assoc = $FIX.assoc
 
-staload FIL = "./pats_filename.sats"
+staload
+FIL = "./pats_filename.sats"
 typedef filename = $FIL.filename
 
 (* ****** ****** *)
@@ -961,6 +964,8 @@ dcstextdef =
   | DCSTEXTDEFsome_sta of string // static
 // end of [dcstextdef]
 
+fun dcstextdef_sta (sym: symbol): dcstextdef
+
 fun dcstextdef_is_ext (x: dcstextdef):<> bool
 fun dcstextdef_is_mac (x: dcstextdef):<> bool
 fun dcstextdef_is_sta (x: dcstextdef):<> bool
@@ -1262,7 +1267,7 @@ d0ecl_node =
   | D0Csexpdefs of (int(*knd*), s0expdeflst) (* staexp definition *)
   | D0Csaspdec of s0aspdec (* static assumption *)
 //
-  | D0Cexndecs of e0xndeclst
+  | D0Cexndecs of (e0xndeclst)
   | D0Cdatdecs of (int(*knd*), d0atdeclst, s0expdeflst)
 //
   | D0Cclassdec of (i0de, s0expopt) // class declaration
@@ -1274,7 +1279,8 @@ d0ecl_node =
   | D0Cextcode of
       (int(*knd*), int(*pos*), string(*code*)) // external code
 //
-  | D0Cdcstdecs of (int(*knd*), token, q0marglst, d0cstdeclst)
+  | D0Cdcstdecs of
+      (int(*0/1:sta/ext*), token, q0marglst, d0cstdeclst) // dyncst
 //
   | D0Cimpdec of
       (int(*knd*), i0mparg, i0mpdec) // knd=0/1: implement/primplmnt

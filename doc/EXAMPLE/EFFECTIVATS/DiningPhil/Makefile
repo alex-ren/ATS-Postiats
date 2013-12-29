@@ -1,46 +1,26 @@
-##
-##
-## A simple Makefile
-##
-##
-
-######
-
-PATSHOMEQ="$(PATSHOME)"
-
-######
-
-PATSCC=$(PATSHOMEQ)/bin/patscc
-PATSOPT=$(PATSHOMEQ)/bin/patsopt
-PATSLIB=$(PATSHOMEQ)/ccomp/atslib/lib
-
-######
-
 #
-# HX: Please uncomment the one you want, or skip it entirely
-#
-ATSCCFLAGS=
-ATSCCFLAGS=-O2
-#
-# '-flto' enables link-time optimization such as inlining lib functions
-#
-#ATSCCFLAGS=-O2 -flto
+# A simple Makefile
 #
 
 ######
 
-all:: test
+include \
+$(PATSHOME)/share/atsmake2-pre.mk
 
 ######
 
-cleanall::
+CFLAGS += -O2
 
 ######
 
-SOURCESsta := \
+LDFLAGS += -lrt
+
+######
+
+SOURCES_SATS += \
   DiningPhil.sats \
 
-SOURCESdyn := \
+SOURCES_DATS += \
   DiningPhil.dats \
   DiningPhil_fork.dats \
   DiningPhil_dine.dats \
@@ -48,30 +28,11 @@ SOURCESdyn := \
 
 ######
 
-OBJECTS := $(SOURCESdyn)
-OBJECTS := $(patsubst %.dats, %_dats.o, $(OBJECTS))
+MYTARGET=test
 
 ######
 
-test: $(OBJECTS) ; \
-  $(PATSCC) $(ATSCCFLAGS) -o $@ $^ -L$(PATSLIB) -lrt -latslib
-cleanall:: ; $(RMF) test
-
-######
-
-#
-# You may find these rules useful
-#
-
-%_sats.o: %.sats ; $(PATSCC) -DATS_MEMALLOC_LIBC -c $< || echo $@ ": ERROR!!!"
-%_dats.o: %.dats ; $(PATSCC) -D_BSD_SOURCE -DATS_MEMALLOC_LIBC $(ATSCCFLAGS) -c $< || echo $@ ": ERROR!!!"
-
-######
-
-depend:: ; $(RMF) -f .depend
-depend:: ; $(PATSOPT) --output-a .depend --depgen -s $(SOURCESsta)
-depend:: ; $(PATSOPT) --output-a .depend --depgen -d $(SOURCESdyn)
--include .depend
+include $(PATSHOME)/share/atsmake2-post.mk
 
 ######
 
@@ -79,19 +40,6 @@ upload_main: ; \
   scp main.html \
   ats-hwxi,ats-lang@web.sourceforge.net:htdocs/EXAMPLE/EFFECTIVATS/DiningPhil/
 
-
 ######
-
-RMF=rm -f
-
-######
-
-clean:: ; $(RMF) *~
-clean:: ; $(RMF) *_?ats.o
-clean:: ; $(RMF) *_?ats.c
-
-cleanall:: clean
-#cleanall:: ; $(RMF) .depend1
-#cleanall:: ; $(RMF) .depend2
 
 ###### end of [Makefile] ######
