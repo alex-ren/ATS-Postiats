@@ -356,4 +356,11 @@ doc/BOOK/ATS2TUTORIAL/CODE/chap_*.dats
 
 .*.swp
 
+#
+# tags for ats
+#
+
+MYTAGS_*
+tags
+
 ###### end of [.gitignore] ######
