@@ -9,7 +9,7 @@ all:: fannkuch
 ######
 
 fannkuch: fannkuch.dats ; \
-  patscc -DATS_MEMALLOC_LIBC -O3 -fomit-frame-pointer fannkuch.dats -o fannkuch
+  patscc -DATS_MEMALLOC_LIBC -O3 -fomit-frame-pointer $< -o $@
 
 ######
 

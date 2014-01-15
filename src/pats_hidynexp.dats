@@ -649,7 +649,9 @@ hidexp_trywith
 (* ****** ****** *)
 
 implement
-hidexp_err (loc, hse) = hidexp_make_node (loc, hse, HDEerr ())
+hidexp_errexp
+  (loc, hse) = hidexp_make_node (loc, hse, HDEerrexp ())
+// end of [hidexp_errexp]
 
 (* ****** ****** *)
 
@@ -844,8 +846,8 @@ hidecl_exndecs
 
 implement
 hidecl_dcstdecs
-  (loc, knd, d2cs) =
-  hidecl_make_node (loc, HIDdcstdecs (knd, d2cs))
+  (loc, dck, d2cs) =
+  hidecl_make_node (loc, HIDdcstdecs (dck, d2cs))
 // end of [hidecl_dcstdecs]
 
 (* ****** ****** *)

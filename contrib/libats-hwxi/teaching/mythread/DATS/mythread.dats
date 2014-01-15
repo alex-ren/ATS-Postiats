@@ -1,6 +1,6 @@
 (***********************************************************************)
 (*                                                                     *)
-(*                         ATS/contrib/atshwxi                         *)
+(*                       ATS/contrib/libats-hwxi                       *)
 (*                                                                     *)
 (***********************************************************************)
 
@@ -37,7 +37,8 @@ staload "./../SATS/mythread.sats"
 
 (* ****** ****** *)
 
-staload UN = "prelude/SATS/unsafe.sats"
+staload
+UN = "prelude/SATS/unsafe.sats"
 
 (* ****** ****** *)
 
@@ -45,14 +46,16 @@ implement
 mutex_create_exn () = let
 //
 val mtx = mutex_create ()
-val p_mtx = ptrcast (mtx)
+val p_mtx = mutex2ptr (mtx)
 val () =
 if p_mtx = the_null_ptr then
 {
 //
-val () = fprintln!
+val (
+) = fprintln!
 (
-  stderr_ref, "libats-hwxi: mythread: [mutex_create]: failed."
+  stderr_ref
+, "libats-hwxi: mythread: [mutex_create]: failed."
 )
 val ((*void*)) = assertloc (false)
 //
@@ -69,14 +72,16 @@ condvar_create_exn () = let
 //
 val cvr = condvar_create ()
 //
-val p_cvr = ptrcast (cvr)
+val p_cvr = condvar2ptr (cvr)
 val () =
 if p_cvr = the_null_ptr then
 {
 //
-val () = fprintln!
+val (
+) = fprintln!
 (
-  stderr_ref, "libats-hwxi: mythread: [condvar_create]: failed."
+  stderr_ref
+, "libats-hwxi: mythread: [condvar_create]: failed."
 )
 val ((*void*)) = assertloc (false)
 //
@@ -85,6 +90,22 @@ val ((*void*)) = assertloc (false)
 in
   $UN.cast{condvar1}(cvr)
 end // end of [condvar_create_exn]
+
+(* ****** ****** *)
+
+implement
+mythread_create_cloptr (fwork) = let
+//
+fun app
+(
+  f: () -<lincloptr1> void
+): void = let
+  val () = f () in cloptr_free($UN.castvwtp0{cloptr0}(f))
+end // end of [app]
+//
+in
+  mythread_create_funenv (app, fwork)
+end // end of [mythread_create_cloptr]
 
 (* ****** ****** *)
 

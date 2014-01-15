@@ -28,7 +28,7 @@
 (* ****** ****** *)
 //
 // Author: Hongwei Xi
-// Authoremail: gmhwxi AT gmail DOT com
+// Authoremail: gmhwxiATgmailDOTcom
 // Start Time: May, 2011
 //
 (* ****** ****** *)
@@ -42,25 +42,31 @@ staload "./pats_basics.sats"
 
 (* ****** ****** *)
 
-staload LOC = "./pats_location.sats"
-typedef location = $LOC.location
-
-(* ****** ****** *)
-
 staload
 LAB = "./pats_label.sats"
 typedef label = $LAB.label
+
+(* ****** ****** *)
 
 staload
 FIL = "./pats_filename.sats"
 typedef filename = $FIL.filename
 
 staload
+LOC = "./pats_location.sats"
+typedef location = $LOC.location
+
+(* ****** ****** *)
+
+staload
 SYM = "./pats_symbol.sats"
 typedef symbol = $SYM.symbol
 typedef symbolopt = $SYM.symbolopt
 
-staload SYN = "./pats_syntax.sats"
+(* ****** ****** *)
+
+staload
+SYN = "./pats_syntax.sats"
 typedef i0nt = $SYN.i0nt
 typedef c0har = $SYN.c0har
 typedef f0loat = $SYN.f0loat
@@ -69,6 +75,12 @@ typedef l0ab = $SYN.l0ab
 typedef dl0abeled (a:type) = $SYN.dl0abeled (a)
 typedef dcstextdef = $SYN.dcstextdef
 typedef macsynkind = $SYN.macsynkind
+
+(* ****** ****** *)
+
+staload
+JSON = "./pats_jsonize.sats"
+typedef jsonval = $JSON.jsonval
 
 (* ****** ****** *)
 
@@ -162,11 +174,13 @@ vtypedef d2itmopt_vt = Option_vt (d2itm)
 
 (* ****** ****** *)
 
-typedef d2sym = '{
+typedef
+d2sym = '{
   d2sym_loc= location
 , d2sym_qua= $SYN.d0ynq, d2sym_sym= symbol
 , d2sym_pitmlst= d2pitmlst
-} // end of [d2sym]
+} (* end of [d2sym] *)
+
 typedef d2symopt = Option (d2sym)
 
 (* ****** ****** *)
@@ -188,12 +202,12 @@ fun d2cst_make
 // HX: implemented in [pats_dynexp2_dcst.dats]
 //
 fun print_d2cst (x: d2cst): void
-overload print with print_d2cst
 fun prerr_d2cst (x: d2cst): void
+overload print with print_d2cst
 overload prerr with prerr_d2cst
 fun fprint_d2cst : fprint_type (d2cst)
-overload fprint with fprint_d2cst
 fun fprint_d2cstlst : fprint_type (d2cstlst)
+overload fprint with fprint_d2cst
 overload fprint with fprint_d2cstlst
 
 (* ****** ****** *)
@@ -498,9 +512,11 @@ p2at_node =
   | P2Tany of () // wildcard
   | P2Tvar of d2var // mutability determined by the context
 //
-  | P2Tcon of ( // constructor pattern
+// constructor pattern
+//
+  | P2Tcon of (
       pckind, d2con, s2qualst, s2exp(*con*), int(*npf*), p2atlst
-    ) // end of [P2Tcon]
+    ) (* end of [P2Tcon] *)
 //
   | P2Tint of int
   | P2Tintrep of string
@@ -528,7 +544,7 @@ p2at_node =
 //
   | P2Tlist of (int(*npf*), p2atlst)
 //
-  | P2Terr of () // HX: placeholder for indicating an error
+  | P2Terrpat of () // HX: placeholder for indicating an error
 // end of [p2at_node]
 
 and labp2at =
@@ -543,7 +559,7 @@ p2at = '{
 , p2at_dvs= lstord (d2var)
 , p2at_type= s2expopt // ref@ (s2expopt)
 , p2at_node= p2at_node
-}
+} (* end of [p2at] *)
 
 and p2atlst = List (p2at)
 and p2atopt = Option (p2at)
@@ -553,8 +569,9 @@ and labp2atlst = List (labp2at)
 (* ****** ****** *)
 
 fun p2at_set_type
-  (p2t: p2at, opt: s2expopt): void = "patsopt_p2at_set_type"
-// end of [p2at_set_type]
+(
+  p2t: p2at, opt: s2expopt
+) : void = "ext#patsopt_p2at_set_type"
 
 (* ****** ****** *)
 
@@ -623,7 +640,7 @@ fun p2at_vbox (loc: location, d2v: d2var): p2at
 
 fun p2at_ann (loc: location, p2t: p2at, ann: s2exp): p2at
 
-fun p2at_err (loc: location): p2at
+fun p2at_errpat (loc: location): p2at
 
 (* ****** ****** *)
 
@@ -646,6 +663,7 @@ fun fprint_labp2atlst : fprint_type (labp2atlst)
 
 datatype
 d2ecl_node =
+//
   | D2Cnone of () // for something already erased
   | D2Clist of d2eclist // for list of declarations
 //
@@ -660,6 +678,7 @@ d2ecl_node =
 *)
 //
   | D2Csaspdec of s2aspdec (* for static assumption *)
+//
   | D2Cextype of (string(*name*), s2exp(*def*))
   | D2Cextval of (string(*name*), d2exp(*def*))
   | D2Cextcode of (int(*knd*), int(*pos*), string(*code*))
@@ -667,7 +686,7 @@ d2ecl_node =
   | D2Cdatdecs of (int(*knd*), s2cstlst) // datatype declarations
   | D2Cexndecs of (d2conlst) // exception constructor declarations
 //
-  | D2Cdcstdecs of (dcstkind, d2cstlst) // dyn. const. declarations
+  | D2Cdcstdecs of (int(*0/1:sta/ext*), dcstkind, d2cstlst) // dyncst
 //
   | D2Cimpdec of (int(*knd*), i2mpdec) // knd=0/1 : implement/primplmnt
 //
@@ -691,7 +710,7 @@ d2ecl_node =
 //
   | D2Clocal of (d2eclist(*head*), d2eclist(*body*)) // local declaration
 //
-  | D2Cerrdec of () // indication of error
+  | D2Cerrdec of () // HX: indication of error
 // end of [d2ecl_node]
 
 and d2exp_node =
@@ -823,7 +842,7 @@ and d2exp_node =
   | D2Eann_seff of (d2exp, s2eff) // ascribed with effects
   | D2Eann_funclo of (d2exp, funclo) // ascribed with funtype
 //
-  | D2Eerr of () // HX: placeholder for indicating an error
+  | D2Eerrexp of () // HX: placeholder for indicating an error
 // end of [d2exp_node]
 
 and d2exparg =
@@ -1029,13 +1048,19 @@ fun fprint_i2nvresstate : fprint_type (i2nvresstate)
 
 fun print_d2ecl (x: d2ecl): void
 fun prerr_d2ecl (x: d2ecl): void
+overload print with print_d2ecl
+overload prerr with prerr_d2ecl
 fun fprint_d2ecl : fprint_type (d2ecl)
+overload fprint with fprint_d2ecl
 
 (* ****** ****** *)
 
 fun print_d2lval (x: d2lval): void
 and prerr_d2lval (x: d2lval): void
+overload print with print_d2lval
+overload prerr with prerr_d2lval
 fun fprint_d2lval : fprint_type (d2lval)
+overload fprint with fprint_d2lval
 
 (* ****** ****** *)
 //
@@ -1044,8 +1069,9 @@ fun fprint_d2lval : fprint_type (d2lval)
 (* ****** ****** *)
 
 fun d2exp_set_type
-  (d2e: d2exp, opt: s2expopt): void = "patsopt_d2exp_set_type"
-// end of [d2exp_set_type]
+(
+  d2e: d2exp, opt: s2expopt
+) : void = "ext#patsopt_d2exp_set_type"
 
 (* ****** ****** *)
 
@@ -1375,7 +1401,7 @@ fun d2exp_ann_funclo (loc: location, d2e: d2exp, fc: funclo): d2exp
 
 (* ****** ****** *)
 
-fun d2exp_err (loc: location): d2exp
+fun d2exp_errexp (loc: location): d2exp
 
 (* ****** ****** *)
 
@@ -1547,7 +1573,7 @@ fun d2ecl_exndecs (loc: location, d2cs: d2conlst): d2ecl
 
 fun d2ecl_dcstdecs
 (
-  loc: location, knd: dcstkind, d2cs: d2cstlst
+  loc: location, knd: int, dck: dcstkind, d2cs: d2cstlst
 ) : d2ecl // end of [d2ecl_dcstdecs]
 
 (* ****** ****** *)
@@ -1613,6 +1639,32 @@ dynexp2_tmpcstimpmap_type // placeholer for [tmpcstimpmap]
 abstype
 dynexp2_tmpvardecmap_type // placeholer for [tmpvardecmap]
 //
+(* ****** ****** *)
+(*
+** HX-2013-13:
+** these are implemented in [pats_dynexp2_util.dats]
+*)
+
+fun d2exp_is_varlamcst (d2e: d2exp): bool
+
+fun d2con_select_arity (d2cs: d2conlst, n: int): d2conlst
+
+fun d2cst_match_def (d2c: d2cst, def: d1exp): bool
+
+fun d2exp_lvalize
+  (d2e: d2exp): d2lval // HX: translating [d2e] into a left-value
+// end of [d2exp_lvalize]
+
+(* ****** ****** *)
+
+fun jsonize_d2cst (d2c: d2cst): jsonval
+fun jsonize_d2var (d2v: d2var): jsonval
+
+(* ****** ****** *)
+
+fun jsonize_d2ecl (d2c: d2ecl): jsonval
+fun jsonize_d2eclist (d2cs: d2eclist): jsonval
+
 (* ****** ****** *)
 
 (* end of [pats_dynexp2.sats] *)

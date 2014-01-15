@@ -20,8 +20,12 @@ PATSHOMEQ="$(PATSHOME)"
 
 ######
 
+SHAREDOCU=$(PATSHOMEQ)/share/DOCUGEN
+
+######
+
 INCLUDE:=-I $(PATSHOMEQ)/src
-INCLATS:=-IATS $(PATSHOMEQ) -IATS $(ATSHOMEQ)
+INCLATS:=-IATS $(SHAREDOCU) -IATS $(PATSHOMEQ) -IATS $(ATSHOMEQ)
 
 ######
 
@@ -37,10 +41,10 @@ DECLATEXT= \
   declatext_sats.o \
   declatext_dats.o \
 
-declatext_sats.o: \
-  declatext.sats ; $(ATSCC) $(INCLUDE) $(INCLATS) -c $(ATSCCFLAGS) $<
-declatext_dats.o: \
-  declatext.dats ; $(ATSCC) $(INCLUDE) $(INCLATS) -c $(ATSCCFLAGS) $<
+declatext_sats.o: ; \
+  $(ATSCC) $(INCLUDE) $(INCLATS) -c $(ATSCCFLAGS) $(SHAREDOCU)/declatext.sats
+declatext_dats.o: ; \
+  $(ATSCC) $(INCLUDE) $(INCLATS) -c $(ATSCCFLAGS) $(SHAREDOCU)/declatext.dats
 
 ######
 
@@ -48,12 +52,13 @@ HTMLGENDECL= \
   htmlgendecl_sats.o \
   htmlgendecl_dats.o \
 
-htmlgendecl_sats.o: \
-  htmlgendecl.sats ; $(ATSCC) $(INCLUDE) $(INCLATS) -c $(ATSCCFLAGS) $<
-htmlgendecl_dats.o: \
-  htmlgendecl.dats ; $(ATSCC) $(INCLUDE) $(INCLATS) -c $(ATSCCFLAGS) $<
+htmlgendecl_sats.o: ; \
+  $(ATSCC) $(INCLUDE) $(INCLATS) -c $(ATSCCFLAGS) $(SHAREDOCU)/htmlgendecl.sats
+htmlgendecl_dats.o: ; \
+  $(ATSCC) $(INCLUDE) $(INCLATS) -c $(ATSCCFLAGS) $(SHAREDOCU)/htmlgendecl.dats
 
-htmlgendecl_atxt.dats: htmlgendecl.atxt ;   $(ATSDOC) --outcode $@ -i $< > htmlgendecl_atxt.txt
+htmlgendecl_atxt.dats: ; \
+  $(ATSDOC) --outcode $@ -i $(SHAREDOCU)/htmlgendecl.atxt > htmlgendecl_atxt.txt
 
 ######
 
@@ -62,7 +67,7 @@ all_html::
 all_html:: HTML/intinf.html
 HTML/intinf.html:   intinf_atxt.exe ; ./$< > $@
 intinf_atxt.txt: intinf.atxt ; $(CAT) $< |   $(ATSDOC) --prefix __datatok --outcode htmlgendecl_data_atxt.dats > $@
-intinf_atxt.exe: htmlgendecl_atxt.dats   intinf_atxt.txt $(DECLATEXT) $(HTMLGENDECL) ;   $(ATSCC) $(INCLUDE) $(INCLATS) $(ATSGCFLAG) -o $@ $<     $(DECLATEXT) $(HTMLGENDECL) $(PATSHOME)/libatsyntax/libatsyntax.a -latsdoc
+intinf_atxt.exe: htmlgendecl_atxt.dats   intinf_atxt.txt $(DECLATEXT) $(HTMLGENDECL) ;   $(ATSCC) $(INCLUDE) $(INCLATS) $(ATSGCFLAG) -o $@ $<     $(DECLATEXT) $(HTMLGENDECL) $(PATSHOME)/libatsynmark/libatsynmark.a -latsdoc
 upload_intinf:: ;   scp HTML/intinf.html ats-hwxi,ats-lang@web.sourceforge.net:htdocs/LIBRARY/contrib/libats-hwxi
 clean:: ; $(RMF) intinf_atxt.exe
 cleanall:: ; $(RMF) HTML/intinf.html
@@ -70,7 +75,7 @@ cleanall:: ; $(RMF) HTML/intinf.html
 all_html:: HTML/intinf_t.html
 HTML/intinf_t.html:   intinf_t_atxt.exe ; ./$< > $@
 intinf_t_atxt.txt: intinf_t.atxt ; $(CAT) $< |   $(ATSDOC) --prefix __datatok --outcode htmlgendecl_data_atxt.dats > $@
-intinf_t_atxt.exe: htmlgendecl_atxt.dats   intinf_t_atxt.txt $(DECLATEXT) $(HTMLGENDECL) ;   $(ATSCC) $(INCLUDE) $(INCLATS) $(ATSGCFLAG) -o $@ $<     $(DECLATEXT) $(HTMLGENDECL) $(PATSHOME)/libatsyntax/libatsyntax.a -latsdoc
+intinf_t_atxt.exe: htmlgendecl_atxt.dats   intinf_t_atxt.txt $(DECLATEXT) $(HTMLGENDECL) ;   $(ATSCC) $(INCLUDE) $(INCLATS) $(ATSGCFLAG) -o $@ $<     $(DECLATEXT) $(HTMLGENDECL) $(PATSHOME)/libatsynmark/libatsynmark.a -latsdoc
 upload_intinf_t:: ;   scp HTML/intinf_t.html ats-hwxi,ats-lang@web.sourceforge.net:htdocs/LIBRARY/contrib/libats-hwxi
 clean:: ; $(RMF) intinf_t_atxt.exe
 cleanall:: ; $(RMF) HTML/intinf_t.html
@@ -78,7 +83,7 @@ cleanall:: ; $(RMF) HTML/intinf_t.html
 all_html:: HTML/intinf_vt.html
 HTML/intinf_vt.html:   intinf_vt_atxt.exe ; ./$< > $@
 intinf_vt_atxt.txt: intinf_vt.atxt ; $(CAT) $< |   $(ATSDOC) --prefix __datatok --outcode htmlgendecl_data_atxt.dats > $@
-intinf_vt_atxt.exe: htmlgendecl_atxt.dats   intinf_vt_atxt.txt $(DECLATEXT) $(HTMLGENDECL) ;   $(ATSCC) $(INCLUDE) $(INCLATS) $(ATSGCFLAG) -o $@ $<     $(DECLATEXT) $(HTMLGENDECL) $(PATSHOME)/libatsyntax/libatsyntax.a -latsdoc
+intinf_vt_atxt.exe: htmlgendecl_atxt.dats   intinf_vt_atxt.txt $(DECLATEXT) $(HTMLGENDECL) ;   $(ATSCC) $(INCLUDE) $(INCLATS) $(ATSGCFLAG) -o $@ $<     $(DECLATEXT) $(HTMLGENDECL) $(PATSHOME)/libatsynmark/libatsynmark.a -latsdoc
 upload_intinf_vt:: ;   scp HTML/intinf_vt.html ats-hwxi,ats-lang@web.sourceforge.net:htdocs/LIBRARY/contrib/libats-hwxi
 clean:: ; $(RMF) intinf_vt_atxt.exe
 cleanall:: ; $(RMF) HTML/intinf_vt.html

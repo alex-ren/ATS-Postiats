@@ -159,9 +159,7 @@ case+ hid0.hidecl_node of
 | HIDdatdecs _ => hidatdecs_ccomp (env, hid0)
 | HIDexndecs _ => hiexndecs_ccomp (env, hid0)
 //
-| HIDdcstdecs
-    (knd, d2cs) => primdec_none (loc0)
-  // end of [HIDdcstdecs]
+| HIDdcstdecs (dck, d2cs) => primdec_none (loc0)
 //
 | HIDimpdec
     (knd, imp) => let
@@ -338,6 +336,8 @@ hiextype_ccomp
   (env, hid0) = let
 //
 val loc0 = hid0.hidecl_loc
+val-HIDextype (name, hse_def) = hid0.hidecl_node
+val _(*hit*) = hisexp_typize (0(*flag*), hse_def)
 val () = the_extypelst_add (hid0)
 //
 in

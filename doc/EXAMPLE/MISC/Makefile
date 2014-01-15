@@ -10,7 +10,17 @@
 ######
 
 CCOPT=gcc -std=c99
-PATSHOMEQ="$(PATSHOME)"
+
+######
+
+ifeq ("$(PATSHOME)","")
+  PATSHOMEQ="$(ATSHOME)"
+else
+  PATSHOMEQ="$(PATSHOME)"
+endif
+
+######
+
 PATSOPT=$(PATSHOMEQ)/bin/patsopt
 PATSLIB=$(PATSHOMEQ)/ccomp/atslib/lib
 
@@ -107,6 +117,7 @@ monad_state_dats.c: monad_state.dats ;   $(PATSOPT) -IATS$(PATSHOMEQ)/contrib --
 clean:: ; $(RMF) monad_state_dats.o
 clean:: ; $(RMF) monad_state_dats.c
 cleanall:: ; $(RMF) monad_state monad_state.exe
+
 
 all:: passwdgen
 passwdgen: passwdgen.exe

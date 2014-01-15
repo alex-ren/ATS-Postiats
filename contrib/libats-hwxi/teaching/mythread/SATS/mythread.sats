@@ -1,6 +1,6 @@
 (***********************************************************************)
 (*                                                                     *)
-(*                         ATS/contrib/atshwxi                         *)
+(*                       ATS/contrib/libats-hwxi                       *)
 (*                                                                     *)
 (***********************************************************************)
 
@@ -33,6 +33,12 @@
 //
 (* ****** ****** *)
 //
+#define
+ATS_PACKNAME
+"ATSCNTRB.libats-hwxi.teaching.mythread"
+//
+(* ****** ****** *)
+//
 abst@ype
 thread_type = lint
 //
@@ -52,7 +58,7 @@ typedef mutex1 = [l:addr | l > null] mutex_type(l)
 (* ****** ****** *)
 
 castfn
-mutex2ptr {l:addr} (mutex(l)):<> ptr (l)
+mutex2ptr{l:addr} (mutex(l)):<> ptr (l)
 overload ptrcast with mutex2ptr
 
 (* ****** ****** *)
@@ -64,7 +70,7 @@ fun mutex_create_exn ((*void*)): mutex1
 (* ****** ****** *)
 //
 fun
-mutex_lock{l:agz} (m: mutex(l)): (mutex_v (l) | void)
+mutex_lock{l:agz} (m: mutex(l)): (mutex_v(l) | void)
 fun
 mutex_trylock
   {l:agz}(m: mutex(l)): [b:bool] (option_v(mutex_v(l), b) | bool(b))
@@ -83,7 +89,7 @@ typedef condvar1 = [l:addr | l > null] condvar_type(l)
 (* ****** ****** *)
 
 castfn
-condvar2ptr {l:addr} (condvar(l)):<> ptr (l)
+condvar2ptr{l:addr} (condvar(l)):<> ptr (l)
 overload ptrcast with condvar2ptr
 
 (* ****** ****** *)
@@ -91,14 +97,19 @@ overload ptrcast with condvar2ptr
 fun condvar_create (): condvar0
 fun condvar_create_exn (): condvar1
 //
-fun
-condvar_signal{l:agz} (pf: !mutex_v (l) | cv: condvar1): void
-fun
-condvar_broadcast{l:agz} (pf: !mutex_v (l) | cv: condvar1): void
+fun condvar_signal (cv: condvar1): void
+fun condvar_broadcast (cv: condvar1): void
 //
 fun
-condvar_wait
-  {l:agz} (pf: !mutex_v (l) | cv: condvar1, p: mutex (l)): void
+condvar_wait{l:agz}
+  (pf: !mutex_v (l) | cv: condvar1, p: mutex (l)): void
+//
+(* ****** ****** *)
+//
+fun mythread_create_funenv
+  {env:vtype} (fwork: (env) -> void, env: env): void
+//
+fun mythread_create_cloptr (fwork: () -<lincloptr1> void): void
 //
 (* ****** ****** *)
 

@@ -7,6 +7,15 @@
 //
 (* ****** ****** *)
 
+#include
+"share/atspre_define.hats"
+
+(* ****** ****** *)
+
+staload "{$LIBATSHWXI}/teaching/mythread/SATS/channel.sats"
+
+(* ****** ****** *)
+
 %{#
 #define NPHIL 5
 %} // end of [%{#]
@@ -14,72 +23,49 @@
 
 (* ****** ****** *)
 
-fun randsleep (n: intGte(1)): void
+typedef nphil = natLt(NPHIL)
+
+(* ****** ****** *)
+
+fun phil_left (n: nphil): nphil
+fun phil_right (n: nphil): nphil
 
 (* ****** ****** *)
 //
-abstype phil_type = ptr
-typedef phil = phil_type
+fun phil_loop (n: nphil): void
 //
-(* ****** ****** *)
-//
-absvtype fork_vtype = ptr
-vtypedef fork = fork_vtype
-//
-(* ****** ****** *)
-
-fun phil_acquire_lfork (ph: phil): fork
-fun phil_release_lfork (ph: phil, f: fork): void
-
-(* ****** ****** *)
-
-fun phil_acquire_rfork (ph: phil): fork
-fun phil_release_rfork (ph: phil, f: fork): void
-
-(* ****** ****** *)
-
-fun phil_dine (ph: phil): void
-fun phil_think (ph: phil): void
-
-(* ****** ****** *)
-
-fun phil_loop (ph: phil): void
-
 (* ****** ****** *)
 
 fun cleaner_loop ((*void*)): void
 
 (* ****** ****** *)
-//
-// shfork: shared fork
-//
-abstype shfork_type = ptr
-typedef shfork = shfork_type
-//
-(* ****** ****** *)
 
-fun shfork_acquire_fork (shfork): fork
-fun shfork_release_fork (shfork, fork): void
+absvtype fork_vtype = ptr
+vtypedef fork = fork_vtype
 
 (* ****** ****** *)
 
-fun phil_get_lshfork (ph: phil): shfork
-fun phil_get_rshfork (ph: phil): shfork
+fun fork_get_num (!fork): nphil
+
+(* ****** ****** *)
+
+fun phil_dine
+  (n: nphil, lf: !fork, rf: !fork): void
+// end of [phil_dine]
+
+fun phil_think (n: nphil): void
+
+(* ****** ****** *)
+
+fun cleaner_wash (f: !fork): void
+fun cleaner_return (f: fork): void
 
 (* ****** ****** *)
 //
-// shforkbuf: shared fork buffer
+fun fork_changet (n: nphil): channel(fork)
 //
-abstype forkbuf_type = ptr
-typedef forkbuf = forkbuf_type
+fun forktray_changet ((*void*)): channel(fork)
 //
-(* ****** ****** *)
-
-fun the_forkbuf_get (): forkbuf
-
-fun the_forkbuf_insert (fork): void
-fun the_forkbuf_takeout ((*void*)): fork
-
 (* ****** ****** *)
 
 (* end of [DiningPhil2.sats] *)

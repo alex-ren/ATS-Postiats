@@ -168,12 +168,13 @@ case+ d2c0.d2ecl_node of
     knd, pos, code
   ) => d3ecl_extcode (loc0, knd, pos, code)
 //
+| D2Cexndecs (d2cs) =>
+    d3ecl_exndecs (loc0, d2cs) // HX: exn decls
 | D2Cdatdecs
     (knd, s2cs) => d3ecl_datdecs (loc0, knd, s2cs)
-| D2Cexndecs (d2cs) =>
-    d3ecl_exndecs (loc0, d2cs) // HX: exception decls
+//
 | D2Cdcstdecs
-    (knd, d2cs) => d3ecl_dcstdecs (loc0, knd, d2cs)
+    (knd, dck, d2cs) => d3ecl_dcstdecs (loc0, knd, dck, d2cs)
 //
 | D2Cimpdec (knd, d2c) => let
   //
@@ -622,8 +623,10 @@ end // end of [v2aldeclst_rec_tr]
 
 local
 
-fun auxInitCK (
-  loc0: location
+fun
+auxInitCK
+(
+  loc0: loc_t
 , d2v: d2var, s2e1: s2exp, s2e2: s2exp
 ) : void = let
   val tszeq = s2exp_tszeq (s2e1, s2e2)

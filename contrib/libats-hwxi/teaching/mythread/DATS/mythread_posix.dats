@@ -1,6 +1,6 @@
 (***********************************************************************)
 (*                                                                     *)
-(*                         ATS/contrib/atshwxi                         *)
+(*                       ATS/contrib/libats-hwxi                       *)
 (*                                                                     *)
 (***********************************************************************)
 
@@ -29,7 +29,8 @@
 (* ****** ****** *)
 //
 // HX-2013-10:
-// A simple thread interface implmented via pthreads
+// A simple thread interface
+// implemented on top of pthreads
 //
 (* ****** ****** *)
 
@@ -39,11 +40,12 @@
 
 (* ****** ****** *)
 
-staload "./../SATS/mythread.sats"
+staload
+UN = "prelude/SATS/unsafe.sats"
 
 (* ****** ****** *)
 
-staload UN = "prelude/SATS/unsafe.sats"
+staload "./../SATS/mythread.sats"
 
 (* ****** ****** *)
 //
@@ -133,7 +135,7 @@ end // end of [condvar_create]
   
 implement
 condvar_signal
-  (pf | cvr) = let
+  (cvr) = let
 //
 val err = (
   $extfcall (int, "pthread_cond_signal", $UN.cast{ptr}(cvr))
@@ -151,7 +153,7 @@ end // end of [condvar_signal]
 
 implement
 condvar_broadcast
-  (pf | cvr) = let
+  (cvr) = let
 //
 val err = (
   $extfcall (int, "pthread_cond_broadcast", $UN.cast{ptr}(cvr))
@@ -182,6 +184,44 @@ in
   // nothing
 end // end of [condvar_wait]
     
+(* ****** ****** *)
+
+abst@ype pthread_t = $extype"pthread_t"
+abst@ype pthread_attr_t = $extype"pthread_attr_t"
+
+(* ****** ****** *)
+
+implement
+mythread_create_funenv
+  (fwork, env) = let
+//
+var tid: pthread_t
+var attr: pthread_attr_t
+val err = $extfcall
+  (int, "pthread_attr_init", addr@attr)
+//
+val err = $extfcall
+(
+  int
+, "pthread_attr_setdetachstate"
+, addr@attr, $extval(int, "PTHREAD_CREATE_DETACHED")
+)
+//
+val err = $extfcall
+(
+  int
+, "pthread_create"
+, addr@tid, addr@attr, fwork, $UN.castvwtp0{ptr}(env)
+)
+//
+val ((*void*)) = assertloc (err = 0)
+//
+val err = $extfcall (int, "pthread_attr_destroy", addr@attr)
+//
+in
+  // nothing
+end // end of [mythread_create_funenv]
+
 (* ****** ****** *)
 
 (* end of [mythread_posix.dats] *)
