@@ -1,0 +1,50 @@
+HIDfundecs(
+foo$45(-1) = 
+  HDElam(
+    HIPvar(x$46(-1)), HIPvar(y$47(-1)); 
+    HDEapp(
+      HDEtmpcst(g0int_add<S2Eextkind(atstype_int)>)
+      (HSEfun(HSEapp(HSEcst(atstkind_t0ype); HSEs2exp(S2Eextkind(atstype_int))), 
+              HSEapp(HSEcst(atstkind_t0ype); HSEs2exp(S2Eextkind(atstype_int))); 
+              HSEapp(HSEcst(atstkind_t0ype); HSEs2exp(S2Eextkind(atstype_int)))
+             ); 
+      HDEvar(x$46(-1)); HDEvar(y$47(-1))
+      )
+)
+)
+)
+
+HIDfundecs(
+foo2$48(-1) = HDElam(
+  HIPvar(x$49(-1)); 
+  HDEif(
+    HDEapp(HDEtmpcst(gt_g0int_int<S2Eextkind(atstype_int)>)(HSEfun(HSEapp(HSEcst(atstkind_t0ype); HSEs2exp(S2Eextkind(atstype_int))), HSEapp(HSEcst(atstkind_t0ype); HSEs2exp(S2Eextkind(atstype_int))); HSEapp(HSEcst(atstkind_t0ype); HSEs2exp(S2Eextkind(atstype_bool)))); HDEvar(x$49(-1)); HDEi0nt(0))); 
+    HDEi0nt(1); 
+    HDEapp(
+      HDEvar(foo2$48(-1))
+      (HSEfun(HSEapp(HSEcst(atstkind_t0ype); HSEs2exp(S2Eextkind(atstype_int))); HSEapp(HSEcst(atstkind_t0ype); HSEs2exp(S2Eextkind(atstype_int)))); 
+
+HDEapp(HDEtmpcst(g0int_sub<S2Eextkind(atstype_int)>)(HSEfun(HSEapp(HSEcst(atstkind_t0ype); HSEs2exp(S2Eextkind(atstype_int))), HSEapp(HSEcst(atstkind_t0ype); HSEs2exp(S2Eextkind(atstype_int))); HSEapp(HSEcst(atstkind_t0ype); HSEs2exp(S2Eextkind(atstype_int)))); HDEvar(x$49(-1)); HDEi0nt(1))
+)
+      )
+    )
+  )
+)
+)
+
+
+HIDimpdec(
+main_void_0 = HDElam(; HDElet(
+HIDvaldecs(
+HIPvar(a$50(-1)) = HDEi0nt(3)
+)
+HIDvaldecs(
+HIPvar(b$51(-1)) = HDEi0nt(4)
+)
+HIDvaldecs(
+HIPvar(ret$52(-1)) = HDEapp(HDEvar(foo$45(-1))(HSEfun(HSEapp(HSEcst(atstkind_t0ype); HSEs2exp(S2Eextkind(atstype_int))), HSEapp(HSEcst(atstkind_t0ype); HSEs2exp(S2Eextkind(atstype_int))); HSEapp(HSEcst(atstkind_t0ype); HSEs2exp(S2Eextkind(atstype_int)))); HDEvar(a$50(-1)); HDEvar(b$51(-1))))
+)
+**in**
+HDEempty()
+))
+)

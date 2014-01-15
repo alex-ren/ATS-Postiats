@@ -1,0 +1,177 @@
+
+digraph G {
+
+hipat_node -> d2var;
+d2var -> d2var_type [style=dotted]
+d2var_type [shape=box];
+
+hipat_node -> pckind;
+pckind [shape=box];
+hipat_node -> d2con;
+d2con -> d2con_type [style=dotted];
+d2con_type [shape=box];
+hipat_node -> hisexp;
+hipat_node -> labhipatlst;
+hipat_node -> hipatlst;
+hipatlst -> hipat;
+labhipatlst -> labhipat;
+labhipat -> label;
+labhipat -> hipat;
+hipat -> location;
+location -> location_type [style=dotted];
+location_type [shape=box];
+hipat -> hisexp;
+hisexp -> dynexp2_hisexp_type [style=dotted];
+dynexp2_hisexp_type [shape=box];
+hipat -> hipat_node;
+hipat -> d2varopt;
+d2varopt -> d2var_type;
+
+hidecl_node -> hideclist
+hideclist -> hidecl
+hidecl -> location
+hidecl -> hidecl_node
+
+
+hidecl_node -> s2aspdec
+s2aspdec -> location
+s2aspdec -> s2cst
+s2aspdec -> s2exp
+
+s2cst -> s2cst_type [style=dotted]
+s2cst_type [shape=box]
+
+hidecl_node -> s2cstlst
+s2cstlst -> s2cst
+hidecl_node -> dcstkind
+dcstkind [shape=box]
+
+
+hidecl_node -> d2cstlst
+d2cstlst -> d2cst
+d2cst -> d2cst_type [style=dotted]
+d2cst_type [shape=box]
+
+hidecl_node -> hiimpdec
+hiimpdec -> location
+hiimpdec -> d2cst
+hiimpdec -> s2varlst
+s2varlst -> s2var
+s2var -> s2var_type [style=dotted]
+s2var_type [shape=box]
+hiimpdec -> s2explstlst
+s2explstlst -> s2explst
+s2explst -> s2exp
+s2exp -> stophere [style=dotted]
+stophere [shape=box]
+
+hiimpdec -> hidexp
+hidexp -> location
+hidexp -> hisexp
+hidexp -> hidexp_node
+
+hidexp_node -> d2cst
+hidexp_node -> d2var
+hidexp_node -> i0nt
+hidexp_node -> f0loat
+hidexp_node -> cstsp
+cstsp [shape=box]
+hidexp_node -> hidexp
+hidexp_node -> hidexplst
+hidexplst -> hidexp
+
+hidexp_node -> d2con
+hidexp_node -> hisexp
+hidexp_node -> s2exp
+hidexp_node -> caskind
+caskind [shape=box]
+hidexp_node -> hiclaulst
+hiclaulst -> hiclau
+hiclau -> location
+hiclau -> hipatlst
+hiclau -> higmatlst
+higmatlst -> higmat
+higmat -> location
+higmat -> hidexp
+higmat -> hipatopt
+hipatopt -> hipat
+hipat -> d2varopt
+hiclau -> hidexp
+
+
+hidexp_node -> labhidexplst
+labhidexplst -> labhidexp
+labhidexp -> label
+label -> label_type [style=dotted]
+label_type [shape=box]
+
+labhidexp -> hidexp
+
+hidexp_node -> hilablst
+hilablst -> hilab
+hilab -> location
+hilab -> hilab_node
+hilab_node -> label
+hilab_node -> hidexplst
+
+hidexp_node -> hipatlst
+hidexp_node -> hidexpopt
+hidexpopt -> hidexp
+
+
+
+
+
+
+
+
+
+
+
+hiimpdec -> hidynexp_funlab_type
+hiimpdec -> hidynexp_instrlst_type
+
+hidecl_node -> funkind
+funkind [shape=box]
+
+hidecl_node -> s2qualst
+s2qualst -> s2qua
+s2qua -> s2varlst
+s2qua -> s2explst
+
+hidecl_node -> hifundeclst
+hifundeclst -> hifundec
+hifundec -> location
+hifundec -> d2var
+hifundec -> s2varlst
+hifundec -> hidexp
+hifundec -> hidynexp_hidecl_type
+hifundec -> hidynexp_funlab_type
+hidynexp_funlab_type [shape=box]
+hidynexp_hidecl_type [shape=box]
+
+
+
+hidecl_node -> valkind
+valkind [shape=box]
+
+hidecl_node -> hivaldeclst
+hivaldeclst -> hivaldec
+hivaldec -> location
+hivaldec -> hipat
+hivaldec -> hidexp
+
+hidecl_node -> filename
+filename -> filename_type [style=dotted]
+filename_type [shape=box]
+hidecl_node -> filenv
+filenv -> filenv_type [style=dotted]
+filenv_type [shape=box]
+
+
+
+
+
+
+}
+

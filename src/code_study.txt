@@ -1,0 +1,6 @@
+
+1. about graphviz
+dot -Tjpg design_01.gv -o design_01.jpg
+eog design_01.jpg
+
+2.

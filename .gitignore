@@ -338,4 +338,16 @@ doc/BOOK/ATS2TUTORIAL/CODE/chap_*.dats
 MYTAGS_*
 tags
 
+# JATS DEVELOPMENT
+#
+doc/EXAMPLE/INTRO/*.exe
+/.cproject
+/.project
+bin
+/doc/EXAMPLE/ATSLIB/libats_sllist.exe
+prelude/DATS/dlist_vt.dats
+prelude/SATS/dlist_vt.sats
+
+
 ###### end of [.gitignore] ######
+

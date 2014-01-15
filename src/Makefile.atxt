@@ -343,6 +343,11 @@ val SOURCES =
 //
 , "pats_hidynexp.sats"
 , "pats_hidynexp.dats"
+//
+// for jats
+, "jats_hidynexp.sats"
+, "jats_hidynexp_print.dats"
+//
 , "pats_hidynexp_print.dats"
 , "pats_hidynexp_util.dats"
 //

@@ -1422,3 +1422,4 @@ val () = process_cmdline (state, arglst)
 (* ****** ****** *)
 
 (* end of [pats_main.dats] *)
+
