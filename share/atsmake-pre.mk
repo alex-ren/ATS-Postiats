@@ -3,17 +3,36 @@
 #
 
 ######
+#
+# Author: Hongwei Xi
+# Author: Ian Denhardt
+#
+######
+#
+CC=gcc
+#
+######
 
-ifeq ("$(PATSHOME)","")
+ifdef PATSHOME
+  PATSHOMEQ="$(PATSHOME)"
+else
+ifdef ATSHOME
   PATSHOMEQ="$(ATSHOME)"
 else
-  PATSHOMEQ="$(PATSHOME)"
+  PATSHOMEQ="/usr/local/lib/ats2-postiats"
+endif
 endif
 
-ifeq ("$(PATSHOMERELOC)","")
+######
+
+ifdef PATSHOMERELOC
+  PATSHOMERELOCQ="$(PATSHOMERELOC)"
+else
+ifdef ATSHOMERELOC
   PATSHOMERELOCQ="$(ATSHOMERELOC)"
 else
-  PATSHOMERELOCQ="$(PATSHOMERELOC)"
+  PATSHOMERELOCQ="/usr/local/lib/ats2-postiats"
+endif
 endif
 
 ######
@@ -21,17 +40,49 @@ endif
 PATSCC=$(PATSHOMEQ)/bin/patscc
 PATSOPT=$(PATSHOMEQ)/bin/patsopt
 PATSLIB=$(PATSHOMEQ)/ccomp/atslib/lib
+PATSLIB64=$(PATSHOMEQ)/ccomp/atslib/lib64
+
+######
+#
+export \
+PATSCCOMP = $(CC) -std=c99 -D_XOPEN_SOURCE
+#
+######
+
+INCLUDE += -I$(PATSHOMEQ)
+INCLUDE += -I$(PATSHOMEQ)/ccomp/runtime
+
+######
+
+CFLAGS += -D_GNU_SOURCE
+
+######
+
+LDFLAGS += -L$(PATSLIB)
+LDFLAGS += -L$(PATSLIB64)
+LDFLAGS += -latslib
+
+######
+
+MALLOCFLAG := -DATS_MEMALLOC_LIBC
+
+######
+
+ifdef PATSHOMERELOCQ
+INCLUDE += -I$(PATSHOMERELOCQ)/contrib
+INCLUDE_ATS += -IATS $(PATSHOMERELOCQ)/contrib
+endif
+
+######
+
+SOURCES_SATS=
+SOURCES_DATS=
 
 ######
 
 all::
 cleanats::
 cleanall::
-
-######
-
-SOURCES_SATS=
-SOURCES_DATS=
 
 ######
 

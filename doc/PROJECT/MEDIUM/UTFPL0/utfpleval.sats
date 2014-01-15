@@ -44,12 +44,8 @@ overload fprint with fprint_cloenv of 10
 datatype value =
 //
   | VALint of int
-  | VALbool of bool
-  | VALchar of char
   | VALfloat of double
   | VALstring of string
-//
-  | VALvoid of ((*void*))
 //
   | VALcst of d2cst
   | VALvar of d2var
@@ -62,7 +58,7 @@ datatype value =
   | VALfix of (d2exp, cloenv)
 //
   | VALfun of
-      (valuelst -> value) // meta-function
+      (valuelst -> value) // for meta-functions
     // end of [VALfun]
 //
   | {a:type} VALboxed of (a) // for untyped programming
@@ -76,6 +72,13 @@ where
 valuelst = List (value)
 and
 labvaluelst = List (labvalue)
+
+(* ****** ****** *)
+
+val VALtrue: value
+and VALfalse: value
+
+val VALvoid: value
 
 (* ****** ****** *)
 //

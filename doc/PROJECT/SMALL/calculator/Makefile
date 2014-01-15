@@ -5,7 +5,15 @@
 ######
 
 include \
-$(PATSHOME)/share/atsmake2-pre.mk
+$(PATSHOME)/share/atsmake-pre.mk
+
+######
+
+CFLAGS += -O2
+
+######
+
+LDFLAGS :=
 
 ######
 
@@ -20,14 +28,25 @@ SOURCES_DATS += \
   calculator_tstream.dats \
   calculator_parsing.dats \
   calculator_print.dats \
+  calculator_mylib.dats \
 
 ######
 
 MYTARGET=calc
 
 ######
+#
+MYPORTDIR=MYPORTDIR
+#
+#MYPORTCPP=MYPORTCPP
+#
+######
 
-include $(PATSHOME)/share/atsmake2-post.mk
+include $(PATSHOME)/share/atsmake-post.mk
+
+######
+
+cleanall:: ; $(RMF) MYPORTDIR/*
 
 ######
 

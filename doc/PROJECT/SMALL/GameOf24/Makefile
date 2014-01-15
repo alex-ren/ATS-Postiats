@@ -5,16 +5,20 @@
 ######
 
 include \
-$(PATSHOME)/share/atsmake2-pre.mk
+$(PATSHOME)/share/atsmake-pre.mk
 
 ######
 
 CFLAGS += -O2
+
+######
+
+LDFLAGS :=
 LDFLAGS += -lgc
 
 ######
 
-MEMALLOC_ATS := -DATS_MEMALLOC_GCBDW
+MALLOCFLAG := -DATS_MEMALLOC_GCBDW
 
 ######
 
@@ -26,14 +30,27 @@ SOURCES_DATS += \
   GameOf24_card.dats \
   GameOf24_cardset.dats \
   GameOf24_solve.dats \
+  GameOf24_mylib.dats \
 
 ######
 
 MYTARGET=GameOf24
 
 ######
+#
+MYPORTDIR=MYPORTDIR
+#
+#MYPORTCPP=MYPORTCPP
+#
+######
 
-include $(PATSHOME)/share/atsmake2-post.mk
+include $(PATSHOME)/share/atsmake-post.mk
+
+######
+
+cleanall:: ; $(RMF) $(MYPORTDIR)/*
+cleanats:: ; $(RMF) $(MYPORTDIR)/*_?ats.o
+cleanats:: ; $(RMF) $(MYPORTDIR)/*_?ats.c
 
 ######
 

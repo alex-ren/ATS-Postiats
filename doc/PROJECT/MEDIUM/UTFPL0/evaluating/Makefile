@@ -44,13 +44,18 @@ SOURCES_DATS += \
 
 ######
 
+MYTARGET=MYTARGET
+MYCCRULE=MYCCRULE
+
+######
+
 include $(PATSHOME)/share/atsmake-post.mk
 
 ######
 
 OBJECTS :=
-OBJECTS += $(TARGETS_SATS_O)
-OBJECTS += $(TARGETS_DATS_O)
+OBJECTS += $(MYTARGET_SATS_O)
+OBJECTS += $(MYTARGET_DATS_O)
 
 ######
 
@@ -61,10 +66,6 @@ evaluating.o: \
 
 %_sats.o: %.sats ; $(PATSCC2) $(CFLAGS) -c $<
 %_dats.o: %.dats ; $(PATSCC2) $(CFLAGS) -c $<
-
-######
-
-clean:: cleanats
 
 ######
 

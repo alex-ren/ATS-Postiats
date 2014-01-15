@@ -12,6 +12,11 @@ PATSCC2=$(PATSCC) -O2 -DATS_MEMALLOC_LIBC
 
 ######
 
+MYTARGET=MYTARGET
+MYCCRULE=MYCCRULE
+
+######
+
 include $(PATSHOME)/share/atsmake-post.mk
 
 ######
@@ -55,9 +60,8 @@ upload_main: \
 
 ######
 
-clean:: cleanats
-clean:: ; $(RMF) main_atxt.txt
-clean:: ; $(RMF) main_atxt.dats
+cleanats:: ; $(RMF) main_atxt.txt
+cleanats:: ; $(RMF) main_atxt.dats
 
 ######
 

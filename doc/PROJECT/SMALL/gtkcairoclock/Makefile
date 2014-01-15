@@ -8,15 +8,16 @@ include $(PATSHOME)/share/atsmake-pre.mk
 
 ######
 
-PATSHOMERELOCQ=\"$(PATSHOMERELOC)\"
-
-######
-
-PATSCC2=$(PATSCC) -I$(PATSHOMERELOCQ)/contrib
+MYTARGET=MYTARGET
+MYCCRULE=MYCCRULE
 
 ######
 
 include $(PATSHOME)/share/atsmake-post.mk
+
+######
+
+PATSCC2=$(PATSCC) $(INCLUDE) $(INCLUDE_ATS)
 
 ######
 
@@ -63,10 +64,6 @@ cleanall:: ; $(RMF) mytriangle
 all:: mypascal
 mypascal: mypascal.dats; $(PATSCC2) -DATS_MEMALLOC_LIBC -o $@ $< $(GTKFLAGS)
 cleanall:: ; $(RMF) mypascal
-
-######
-
-clean:: cleanats
 
 ######
 

@@ -86,7 +86,6 @@ in
 //
 case+ v1 of
 | VALint (i1) => VALint (~i1)
-| VALbool (b1) => VALbool (~b1)
 | VALfloat (f1) => VALfloat (~f1)
 | _(*rest*) => VALerror ("type-error: neg(~)")
 //
@@ -105,8 +104,10 @@ val-list_cons (v2, vs) = vs
 in
 //
 case+ (v1, v2) of
-| (VALint (i1), VALint (i2)) => VALint (i1+i2)
-| (VALfloat (d1), VALfloat (d2)) => VALfloat (d1+d2)
+| (VALint (i1),
+   VALint (i2)) => VALint (i1+i2)
+| (VALfloat (d1),
+   VALfloat (d2)) => VALfloat (d1+d2)
 | (VALstring (s1),
    VALstring (s2)) => VALstring (strptr2string(string_append(s1,s2)))
 | (_, _) => VALerror ("type-error: add(+)")
@@ -202,9 +203,12 @@ val-list_cons (v2, vs) = vs
 in
 //
 case+ (v1, v2) of
-| (VALint (i1), VALint (i2)) => VALbool (i1 < i2)
-| (VALfloat (d1), VALfloat (d2)) => VALbool (d1 < d2)
-| (VALstring (s1), VALstring (s2)) => VALbool (s1 < s2)
+| (VALint (i1), VALint (i2)) =>
+    if i1 < i2 then VALtrue else VALfalse
+| (VALfloat (d1), VALfloat (d2)) =>
+    if d1 < d2 then VALtrue else VALfalse
+| (VALstring (s1), VALstring (s2)) =>
+    if s1 < s2 then VALtrue else VALfalse
 | (_, _) => VALerror ("type-error: lt(<)")
 //
 end // end of [mfn_lt]
@@ -222,9 +226,12 @@ val-list_cons (v2, vs) = vs
 in
 //
 case+ (v1, v2) of
-| (VALint (i1), VALint (i2)) => VALbool (i1 <= i2)
-| (VALfloat (d1), VALfloat (d2)) => VALbool (d1 <= d2)
-| (VALstring (s1), VALstring (s2)) => VALbool (s1 <= s2)
+| (VALint (i1), VALint (i2)) =>
+    if i1 <= i2 then VALtrue else VALfalse
+| (VALfloat (d1), VALfloat (d2)) =>
+    if d1 <= d2 then VALtrue else VALfalse
+| (VALstring (s1), VALstring (s2)) =>
+    if s1 <= s2 then VALtrue else VALfalse
 | (_, _) => VALerror ("type-error: lte(<=)")
 //
 end // end of [mfn_lte]
@@ -242,9 +249,12 @@ val-list_cons (v2, vs) = vs
 in
 //
 case+ (v1, v2) of
-| (VALint (i1), VALint (i2)) => VALbool (i1 > i2)
-| (VALfloat (d1), VALfloat (d2)) => VALbool (d1 > d2)
-| (VALstring (s1), VALstring (s2)) => VALbool (s1 > s2)
+| (VALint (i1), VALint (i2)) =>
+    if i1 > i2 then VALtrue else VALfalse
+| (VALfloat (d1), VALfloat (d2)) =>
+    if d1 > d2 then VALtrue else VALfalse
+| (VALstring (s1), VALstring (s2)) =>
+    if s1 > s2 then VALtrue else VALfalse
 | (_, _) => VALerror ("type-error: gt(>)")
 //
 end // end of [mfn_gt]
@@ -262,9 +272,12 @@ val-list_cons (v2, vs) = vs
 in
 //
 case+ (v1, v2) of
-| (VALint (i1), VALint (i2)) => VALbool (i1 >= i2)
-| (VALfloat (d1), VALfloat (d2)) => VALbool (d1 >= d2)
-| (VALstring (s1), VALstring (s2)) => VALbool (s1 >= s2)
+| (VALint (i1), VALint (i2)) => 
+    if i1 >= i2 then VALtrue else VALfalse
+| (VALfloat (d1), VALfloat (d2)) =>
+    if d1 >= d2 then VALtrue else VALfalse
+| (VALstring (s1), VALstring (s2)) =>
+    if s1 >= s2 then VALtrue else VALfalse
 | (_, _) => VALerror ("type-error: gte(>=)")
 //
 end // end of [mfn_gte]
@@ -282,10 +295,12 @@ val-list_cons (v2, vs) = vs
 in
 //
 case+ (v1, v2) of
-| (VALint (i1), VALint (i2)) => VALbool (i1 = i2)
-| (VALbool (b1), VALbool (b2)) => VALbool (b1 = b2)
-| (VALfloat (d1), VALfloat (d2)) => VALbool (d1 = d2)
-| (VALstring (s1), VALstring (s2)) => VALbool (s1 = s2)
+| (VALint (i1), VALint (i2)) =>
+    if i1 = i2 then VALtrue else VALfalse
+| (VALfloat (d1), VALfloat (d2)) =>
+    if d1 = d2 then VALtrue else VALfalse
+| (VALstring (s1), VALstring (s2)) =>
+    if s1 = s2 then VALtrue else VALfalse
 | (_, _) => VALerror ("type-error: eq(=)")
 //
 end // end of [mfn_eq]
@@ -303,13 +318,35 @@ val-list_cons (v2, vs) = vs
 in
 //
 case+ (v1, v2) of
-| (VALint (i1), VALint (i2)) => VALbool (i1 != i2)
-| (VALbool (b1), VALbool (b2)) => VALbool (b1 != b2)
-| (VALfloat (d1), VALfloat (d2)) => VALbool (d1 != d2)
-| (VALstring (s1), VALstring (s2)) => VALbool (s1 != s2)
+| (VALint (i1), VALint (i2)) =>
+    if i1 != i2 then VALtrue else VALfalse
+| (VALfloat (d1), VALfloat (d2)) =>
+    if d1 != d2 then VALtrue else VALfalse
+| (VALstring (s1), VALstring (s2)) =>
+    if s1 != s2 then VALtrue else VALfalse
 | (_, _) => VALerror ("type-error: neq(!=)")
 //
 end // end of [mfn_neq]
+
+(* ****** ****** *)
+
+fun mfn_compare
+(
+  vs: valuelst
+) : value = let
+//
+val-list_cons (v1, vs) = vs
+val-list_cons (v2, vs) = vs
+//
+in
+//
+case+ (v1, v2) of
+| (VALint (i1), VALint (i2)) => VALint (compare (i1, i2))
+| (VALfloat (d1), VALfloat (d2)) => VALint (compare (d1, d2))
+| (VALstring (s1), VALstring (s2)) => VALint (compare (s1, s2))
+| (_, _) => VALerror ("type-error: compare")
+//
+end // end of [mfn_compare]
 
 (* ****** ****** *)
 
@@ -338,7 +375,7 @@ end // end of [loop]
 val ((*void*)) = loop (vs, 0)
 //
 in
-  VALvoid ((*void*))
+  VALvoid(*void*)
 end // end of [mfn_print]
 
 fun mfn_println
@@ -388,7 +425,7 @@ case+ vs of
         val out = $UN.cast{FILEref}(out)
         val ((*void*)) = loop (out, vs, 0)
       in
-        VALvoid ((*void*))
+        VALvoid(*void*)
       end // end of [VALboxed]
     | _ => VALerror ("type-error: fprint")
   )
@@ -412,7 +449,7 @@ case+ vs of
         val ((*void*)) = loop (out, vs, 0)
         val ((*void*)) = fprint_newline (out)
       in
-        VALvoid ((*void*))
+        VALvoid(*void*)
       end // end of [VALboxed]
     | _ => VALerror ("type-error: fprintln")
   )
@@ -461,15 +498,10 @@ case+ out0 of
     val out = $UN.cast{FILEref}(out)
   in
     case+ c0 of
-    | VALchar (c) => let
-        val err = $STDIO.fputc (c, out)
-      in
-        VALvoid ((*void*))
-      end // end of [VALint]
     | VALint (i) => let
         val err = $STDIO.fputc (i, out)
       in
-        VALvoid ((*void*))
+        VALvoid(*void*)
       end // end of [VALint]
     | _ => VALerror ("type-error: fputc")
   end // end of [VALboxed]
@@ -483,8 +515,8 @@ implement
 the_d2symmap_init () =
 {
 //
-val () = the_d2symmap_add_name ("true", VALbool(true))
-val () = the_d2symmap_add_name ("false", VALbool(false))
+val () = the_d2symmap_add_name ("true", VALtrue)
+val () = the_d2symmap_add_name ("false", VALfalse)
 //
 val () = the_d2symmap_add_name ("~", VALfun(mfn_neg))
 //
@@ -501,6 +533,8 @@ val () = the_d2symmap_add_name (">=", VALfun(mfn_gte))
 //
 val () = the_d2symmap_add_name ("=", VALfun(mfn_eq))
 val () = the_d2symmap_add_name ("!=", VALfun(mfn_neq))
+//
+val () = the_d2symmap_add_name ("compare", VALfun(mfn_compare))
 //
 val () =
 the_d2symmap_add_name ("stdin", VALboxed{FILEref}(stdin_ref))

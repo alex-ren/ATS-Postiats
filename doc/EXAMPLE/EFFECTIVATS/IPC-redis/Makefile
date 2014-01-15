@@ -24,11 +24,16 @@ SOURCES_DATS += \
 
 ######
 
+MYTARGET=MYTARGET
+
+######
+
+MYCCRULE=MYCCRULE
 include $(PATSHOME)/share/atsmake-post.mk
 
 ######
 
-OBJECTS := $(TARGETS_DATS_O)
+OBJECTS := $(MYTARGET_DATS_O)
 
 ######
 
@@ -70,10 +75,6 @@ upload_main: \
   main.html ; \
   scp main.html \
   ats-hwxi,ats-lang@web.sourceforge.net:htdocs/EXAMPLE/EFFECTIVATS/IPC-redis/
-
-######
-
-clean:: cleanats
 
 ######
 
