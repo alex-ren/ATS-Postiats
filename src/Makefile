@@ -235,8 +235,6 @@ SOURCES := \
   pats_histaexp_funlab.dats \
   pats_hidynexp.sats \
   pats_hidynexp.dats \
-  jats_hidynexp.sats \
-  jats_hidynexp_print.dats \
   pats_hidynexp_print.dats \
   pats_hidynexp_util.dats \
   pats_typerase.sats \
@@ -476,8 +474,6 @@ OBJECTS := \
   pats_histaexp_funlab_dats.o \
   pats_hidynexp_sats.o \
   pats_hidynexp_dats.o \
-  jats_hidynexp_sats.o \
-  jats_hidynexp_print_dats.o \
   pats_hidynexp_print_dats.o \
   pats_hidynexp_util_dats.o \
   pats_typerase_sats.o \
@@ -1140,12 +1136,6 @@ pats_hidynexp_sats.o: pats_hidynexp_sats.c; $(ATSCC) $(ATSCCFLAGS) -c $<
 
 pats_hidynexp_dats.c: pats_hidynexp.dats; $(ATSCC) -cc $<
 pats_hidynexp_dats.o: pats_hidynexp_dats.c; $(ATSCC) $(ATSCCFLAGS) -c $<
-
-jats_hidynexp_sats.c: jats_hidynexp.sats; $(ATSCC) -cc $<
-jats_hidynexp_sats.o: jats_hidynexp_sats.c; $(ATSCC) $(ATSCCFLAGS) -c $<
-
-jats_hidynexp_print_dats.c: jats_hidynexp_print.dats; $(ATSCC) -cc $<
-jats_hidynexp_print_dats.o: jats_hidynexp_print_dats.c; $(ATSCC) $(ATSCCFLAGS) -c $<
 
 pats_hidynexp_print_dats.c: pats_hidynexp_print.dats; $(ATSCC) -cc $<
 pats_hidynexp_print_dats.o: pats_hidynexp_print_dats.c; $(ATSCC) $(ATSCCFLAGS) -c $<
