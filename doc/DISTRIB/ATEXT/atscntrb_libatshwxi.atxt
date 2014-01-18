@@ -101,7 +101,7 @@ ATSCNTRB/libats-hwxi\
 
 (* ****** ****** *)
 
-#packfilename("testingSATS/randgen.sats")
+#packfilename("testing/SATS/randgen.sats")
 #packfilename("testing/SATS/foldleft.sats")
 #packfilename("testing/DATS/randgen.dats")
 #packfilename("testing/DATS/foldleft.dats")
