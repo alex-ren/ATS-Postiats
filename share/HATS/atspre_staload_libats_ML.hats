@@ -1,5 +1,6 @@
 (*
-** For staloading ATSLIB/libats/ML
+** This is mostly for
+** staloading ATSLIB/libats/ML
 *)
 
 (* ****** ****** *)
@@ -19,6 +20,8 @@ staload "libats/ML/SATS/option0.sats"
 //
 staload "libats/ML/SATS/array0.sats"
 //
+staload "libats/ML/SATS/matrix0.sats"
+//
 staload "libats/ML/SATS/string.sats"
 staload "libats/ML/SATS/strarr.sats"
 //
@@ -31,6 +34,7 @@ staload "libats/ML/SATS/stdlib.sats"
 staload _(*anon*) = "libats/ML/DATS/list0.dats"
 staload _(*anon*) = "libats/ML/DATS/option0.dats"
 staload _(*anon*) = "libats/ML/DATS/array0.dats"
+staload _(*anon*) = "libats/ML/DATS/matrix0.dats"
 staload _(*anon*) = "libats/ML/DATS/string.dats"
 staload _(*anon*) = "libats/ML/DATS/strarr.dats"
 staload _(*anon*) = "libats/ML/DATS/filebas.dats"

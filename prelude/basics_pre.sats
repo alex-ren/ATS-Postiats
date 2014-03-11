@@ -6,12 +6,12 @@
 
 (*
 ** ATS/Postiats - Unleashing the Potential of Types!
-** Copyright (C) 2011-2013 Hongwei Xi, ATS Trustful Software, Inc.
+** Copyright (C) 2010-2013 Hongwei Xi, ATS Trustful Software, Inc.
 ** All rights reserved
 **
 ** ATS is free software;  you can  redistribute it and/or modify it under
-** the terms of the GNU LESSER GENERAL PUBLIC LICENSE as published by the
-** Free Software Foundation; either version 2.1, or (at your option)  any
+** the terms of  the GNU GENERAL PUBLIC LICENSE (GPL) as published by the
+** Free Software Foundation; either version 3, or (at  your  option)  any
 ** later version.
 **
 ** ATS is distributed in the hope that it will be useful, but WITHOUT ANY
@@ -27,7 +27,8 @@
 
 (* ****** ****** *)
 //
-// Author of the file: Hongwei Xi (hwxi AT cs DOT bu DOT edu)
+// Author of the file:
+// Hongwei Xi (gmhwxiATgmailDOTcom)
 // Start Time: September, 2011
 //
 (* ****** ****** *)
@@ -328,7 +329,7 @@ symintr ~ not
 symintr && || << >>
 symintr lor lxor land
 symintr + - * / mod ndiv nmod
-symintr < <= > >= = != <> compare
+symintr < <= > >= = == != <> compare
 symintr isltz isltez isgtz isgtez iseqz isneqz
 symintr neg abs max min
 symintr succ pred half double
@@ -351,17 +352,26 @@ symintr encode decode
 symintr g0ofg1 g1ofg0 // casting: dpt <-> ndpt
 symintr ptrcast (* for functions taking the address of a boxed val *)
 //
-symintr copylin
-symintr freelin (* strptr_free, strnptr_free, list_vt_freelin, ... *)
+symintr copy free length
 //
-symintr fprint print prerr
-symintr length (* array_length, list_length, string_length, etc. *)
+symintr print prerr fprint
+//
 (*
 symintr foreach iforeach rforeach
 *)
 //
 symintr ofstring ofstrptr
 symintr tostring tostrptr
+//
+(* ****** ****** *)
+//
+// HX-2014-02:
+// for dot-notation overloading
+//
+symintr .size
+symintr .nrow .ncol
+symintr .head .tail
+symintr .next .prev
 //
 (* ****** ****** *)
 //

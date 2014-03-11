@@ -97,6 +97,11 @@ end // end of [local]
 
 (* ****** ****** *)
 
+fun ignore (x: string): atext = atext_nil ()
+fun ignoretxt (x: atext): atext = atext_nil ()
+
+(* ****** ****** *)
+
 macdef
 title (x) = xmltagging ("title", ,(x))
 
@@ -106,6 +111,8 @@ macdef
 dyncode (x) = xmltagging ("code", ,(x))
 macdef
 stacode (x) = xmltagging ("code", ,(x))
+macdef
+keycode (x) = xmltagging ("code", ,(x))
 macdef
 command (x) = xmltagging ("command", ,(x))
 macdef

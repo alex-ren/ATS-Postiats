@@ -29,19 +29,13 @@ val () = theAtextMap_insert_str ("thisfilename", _thisfilename)
 staload UN = "prelude/SATS/unsafe.sats"
 
 #atscode_separator()
-
-implement{}
-list_vt_unnil (xs) = let
-  val+~list_vt_nil () = xs in (*nothing*)
-end // end of [list_vt_unnil]
-
-#atscode_separator()
-
+//
 implement{a}
-list_vt_uncons (xs) = let
-  val+~list_vt_cons (x, xs1) = xs in xs := xs1; x
-end // end of [list_vt_uncons]
-
+list_vt_make_sing (x) = list_vt_cons{a}(x, list_vt_nil)
+implement{a}
+list_vt_make_pair (x1, x2) =
+  list_vt_cons{a}(x1, list_vt_cons{a}(x2, list_vt_nil))
+//
 #atscode_separator()
 
 implement{a}
@@ -106,6 +100,20 @@ implement{x}
 list_vt_is_pair (xs) =
   case+ xs of list_vt_pair (x1, x2) => true | _ =>> false
 // end of [list_vt_is_pair]
+
+#atscode_separator()
+
+implement{}
+list_vt_unnil (xs) = let
+  val+~list_vt_nil () = xs in (*nothing*)
+end // end of [list_vt_unnil]
+
+#atscode_separator()
+
+implement{a}
+list_vt_uncons (xs) = let
+  val+~list_vt_cons (x, xs1) = xs in xs := xs1; x
+end // end of [list_vt_uncons]
 
 #atscode_separator()
 
@@ -329,14 +337,21 @@ val+~list_vt_cons (x1, xs1_i) = xs_i
 val () =
   $UN.ptr1_set<List0_vt(a)> (cptr2ptr(pi), xs1_i)
 //
-prval () = __assert (xs) where
+prval () =
+__assert (xs) where
 {
   extern
   praxi __assert (xs: &list_vt (a, n) >> list_vt (a, n-1)): void
-} // end of [prval]
+} (* end of [prval] *)
 //
 } // end of [list_vt_takeout_at]
 
+#atscode_separator()
+//
+implement{a}
+list_vt_copy (xs) =
+  list_copy<a> ($UN.list_vt2t(xs))
+//
 #atscode_separator()
 
 implement{a}
@@ -570,9 +585,12 @@ list_vt_concat
 viewtypedef VT = List_vt (a)
 viewtypedef VT0 = List0_vt (a)
 //
-fun loop {n:nat} .<n>. (
+fun loop
+  {n:nat} .<n>.
+(
   res: VT, xss: list_vt (VT, n)
-) :<!wrt> VT0 =
+) :<!wrt> VT0 = let
+in
   case+ xss of
   | ~list_vt_cons
       (xs, xss) => let
@@ -583,7 +601,8 @@ fun loop {n:nat} .<n>. (
   | ~list_vt_nil () => let
       prval () = lemma_list_vt_param (res) in res
     end // end of [list_vt_nil]
-// end of [loop]
+end (* end of [loop] *)
+//
 val xss = list_vt_reverse (xss)
 //
 prval () = lemma_list_vt_param (xss)
@@ -782,6 +801,57 @@ val () = loop (xs, res)
 in
   res
 end // end of [list_vt_map]
+
+#atscode_separator()
+
+implement
+{x}{y}(*tmp*)
+list_vt_map_fun
+  (xs, f) = let
+//
+implement
+{x2}{y2}
+list_vt_map$fopr (x2) = let
+  val f = $UN.cast{(&x2)->y}(f) in $UN.castvwtp0{y2}(f(x2))
+end // end of [list_vt_map$fopr]
+//
+in
+  list_vt_map<x><y> (xs)
+end // end of [list_vt_map_fun]
+
+implement
+{x}{y}(*tmp*)
+list_vt_map_cloref
+  (xs, f) = let
+//
+implement
+{x2}{y2}
+list_vt_map$fopr (x2) = let
+  val f = $UN.cast{(&x2)-<cloref1>y}(f) in $UN.castvwtp0{y2}(f(x2))
+end // end of [list_vt_map$fopr]
+//
+in
+  list_vt_map<x><y> (xs)
+end // end of [list_vt_map_cloref]
+
+implement
+{x}{y}(*tmp*)
+list_vt_map_clo
+  (xs, f) = let
+//
+val f = $UN.cast{(&x) -<cloref1> y}(addr@f)
+//
+implement
+{x2}{y2}
+list_vt_map$fopr (x2) = let
+  val f = $UN.cast{(&x2)-<cloref1>y}(f) in $UN.castvwtp0{y2}(f(x2))
+end // end of [list_vt_map$fopr]
+//
+in
+  list_vt_map<x><y> (xs)
+end // end of [list_vt_map_clo]
+
+#atscode_separator()
 
 implement
 {a}{b}

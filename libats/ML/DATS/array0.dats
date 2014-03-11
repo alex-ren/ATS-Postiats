@@ -6,12 +6,12 @@
 
 (*
 ** ATS/Postiats - Unleashing the Potential of Types!
-** Copyright (C) 2011-2012 Hongwei Xi, ATS Trustful Software, Inc.
+** Copyright (C) 2010-2013 Hongwei Xi, ATS Trustful Software, Inc.
 ** All rights reserved
 **
 ** ATS is free software;  you can  redistribute it and/or modify it under
-** the terms of the GNU LESSER GENERAL PUBLIC LICENSE as published by the
-** Free Software Foundation; either version 2.1, or (at your option)  any
+** the terms of  the GNU GENERAL PUBLIC LICENSE (GPL) as published by the
+** Free Software Foundation; either version 3, or (at  your  option)  any
 ** later version.
 **
 ** ATS is distributed in the hope that it will be useful, but WITHOUT ANY
@@ -28,7 +28,7 @@
 (* ****** ****** *)
 
 (* Author: Hongwei Xi *)
-(* Authoremail: hwxi AT cs DOT bu DOT edu *)
+(* Authoremail: gmhwxiATgmailDOTcom *)
 (* Start time: July, 2012 *)
 
 (* ****** ****** *)
@@ -52,10 +52,10 @@ fun memcpy
 (* ****** ****** *)
 //
 implement{}
-array0_of_arrszref {a} (A) = $UN.cast{array0(a)}(A)
+array0_of_arrszref{a}(A) = $UN.cast{array0(a)}(A)
 //
 implement{}
-arrszref_of_array0 {a} (A) = $UN.cast{arrszref(a)}(A)
+arrszref_of_array0{a}(A) = $UN.cast{arrszref(a)}(A)
 //
 (* ****** ****** *)
 
@@ -250,7 +250,8 @@ end // end of [array0_exch_at_size]
 
 (* ****** ****** *)
 
-implement{a}
+implement
+{a}(*tmp*)
 array0_copy
   (A0) = let
 //
@@ -337,21 +338,11 @@ implement{a}
 array0_tabulate
   (asz, f) = let
 //
-val asz = g1ofg0_uint(asz)
+implement{a2}
+array_tabulate$fopr
+  (i) = $UN.castvwtp0{a2}(f(i))
 //
-val A =
-arrayptr_make_uninitized<a> (asz)
-//
-val () = let
-//
-implement
-array_initize$init<a> (i, x) = x := f (i)
-//
-in
-  arrayptr_initize<a> (A, asz)
-end // end of [val]
-//
-val ASZ = arrszref_make_arrayref (arrayptr_refize(A), asz)
+val ASZ = arrszref_tabulate<a> (asz)
 //
 in
   array0_of_arrszref (ASZ)  

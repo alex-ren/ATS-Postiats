@@ -69,7 +69,8 @@ arrayopt_v (
 
 #atscode_separator()
 
-exception ArraySubscriptExn of ()
+exception
+ArraySubscriptExn of ()
 (*
 fun ArraySubscriptExn ():<> exn = "mac\#%ArraySubscriptExn_make"
 fun isArraySubscriptExn (x: !exn):<> bool = "mac\#%isArraySubscriptExn"
@@ -236,16 +237,6 @@ array_ptr_free
 ) :<!wrt> void // end of [array_ptr_free]
 
 #atscode_separator()
-
-fun{a:vt0p}
-array_tabulate$fopr (i: size_t): (a)
-fun{a:vt0p}
-array_ptr_tabulate
-  {n:int} (asz: size_t n)
-  : [l:addr] (array_v (a, l, n), mfree_gc_v (l) | ptr l)
-// end of [arrayptr_tabulate]
-
-#atscode_separator()
 //
 fun{}
 fprint_array$sep (out: FILEref): void
@@ -309,7 +300,17 @@ array_copy_to_list_vt{n:int}
   A: &RD(@[INV(a)][n]) >> @[a?!][n], n: size_t n
 ) :<!wrt> list_vt (a, n) // endfun
 
-macdef array2lst = array_copy_to_list_vt
+macdef array2list = array_copy_to_list_vt
+
+#atscode_separator()
+
+fun{a:vt0p}
+array_tabulate$fopr (i: size_t): (a)
+fun{a:vt0p}
+array_ptr_tabulate
+  {n:int} (asz: size_t n)
+  : [l:addr] (array_v (a, l, n), mfree_gc_v (l) | ptr l)
+// end of [arrayptr_tabulate]
 
 #atscode_separator()
 
@@ -596,44 +597,42 @@ array_quicksort_stdlib{n:int}
 ) :<!wrt> void // end of [array_quicksort_stdlib]
 
 #atscode_separator()
-
-fun
-{a:vt0p}
-{b:vt0p}
-array_mapto$fwork
+//
+fun{
+a:vt0p}{b:vt0p
+} array_mapto$fwork
 (
   x: &a, y: &b? >> b
 ) : void // [array_mapto$fwork]
-fun
-{a:vt0p}
-{b:vt0p}
-array_mapto{n:int}
+//
+fun{
+a:vt0p}{b:vt0p
+} array_mapto{n:int}
 (
   A: &array(INV(a), n)
 , B: &array(b?, n) >> array (b, n)
 , n: size_t (n)
 ) : void // end of [array_mapto]
-
+//
 #atscode_separator()
-
-fun
-{a,b:vt0p}
-{c:vt0p}
-array_map2to$fwork
+//
+fun{
+a,b:vt0p}{c:vt0p
+} array_map2to$fwork
 (
   x: &a, y: &b, z: &c? >> c
 ) : void // [array_map2to$fwork]
-fun
-{a,b:vt0p}
-{c:vt0p}
-array_map2to{n:int}
+//
+fun{
+a,b:vt0p}{c:vt0p
+} array_map2to{n:int}
 (
   A: &array(INV(a), n)
 , B: &array(INV(b), n)
 , C: &array(c?, n) >> array (c, n)
 , n: size_t (n)
 ) : void // end of [array_map2to]
-
+//
 #atscode_separator()
 
 fun{}

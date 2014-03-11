@@ -154,13 +154,24 @@ typedef void* atstype_cloptr ;
 #define atstkind_t0ype(tk) tk
 
 /* ****** ****** */
+//
+// HX: making it not usable!!!
+//
+typedef
+struct{char _[0XFFFF];} atstype_var[0] ;
+//
+/* ****** ****** */
 
-typedef struct{} atstype_var ;
 #define atstyvar_type(a) atstype_var
 
 /* ****** ****** */
 
 #define atstybox_type(hit) atstype_boxed
+
+/* ****** ****** */
+
+#define atstyclo_top struct{ void *cfun; }
+#define atstyclo_type(flab) flab##$closure_t0ype
 
 /* ****** ****** */
 

@@ -82,9 +82,11 @@ datatype trans3err =
   | T3E_p2at_trdn_con_arity of (p2at, int(*serr*))
   | T3E_p2at_free_update of (p3at) // linear constructor freeing
 //
-  | T3E_d2var_trup_llamlocal of (d2var) // non-local linear variable
-//
   | T3E_d2exp_trup_item of (loc_t, d2itm)
+//
+  | T3E_d2exp_trup_tmpid of (d2exp) // non-template treated as template
+//
+  | T3E_d2var_trup_llamlocal of (d2var) // non-local linear variable
 //
   | T3E_d2exp_trup_con_npf of (d2exp, int(*npf*))
   | T3E_d2exp_trup_laminit_funclo of (d2exp, funclo)
@@ -160,7 +162,8 @@ datatype trans3err =
   | T3E_s2exp_set_viewat_addreq of (loc_t, s2exp(*root*), d3lablst, s2exp(*new*))
 *)
 //
-  | T3E_d3lval_funarg of (d3exp) // non-left-val provided for call-by-ref
+  | T3E_d3lval_fun of (d3exp) // non-left-val fun for call-by-ref
+  | T3E_d3lval_funarg of (d3exp) // non-left-val funarg for call-by-ref
   | T3E_d3lval_refval of (loc_t, d2var) // non-mutable dvar used for call-by-ref
   | T3E_d3lval_linpatcon of (d3exp, s2exp) // non-left-val is matched against linpatcon
 //

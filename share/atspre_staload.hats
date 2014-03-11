@@ -1,5 +1,5 @@
 (*
-** For staloading
+** This is mostly for staloading
 ** template code in ATSLIB/prelude
 *)
 
@@ -14,17 +14,31 @@ staload _ = "prelude/DATS/basics.dats"
 
 (* ****** ****** *)
 
+staload _ = "prelude/DATS/pointer.dats"
+
+(* ****** ****** *)
+
+staload _ = "prelude/DATS/integer.dats"
+staload _ = "prelude/DATS/integer_fixed.dats"
+
+(* ****** ****** *)
+
 staload _ = "prelude/DATS/char.dats"
 staload _ = "prelude/DATS/bool.dats"
-staload _ = "prelude/DATS/integer.dats"
 staload _ = "prelude/DATS/float.dats"
-staload _ = "prelude/DATS/string.dats"
-staload _ = "prelude/DATS/strptr.dats"
+
+(* ****** ****** *)
+
+staload _ = "prelude/DATS/tuple.dats"
 
 (* ****** ****** *)
 
 staload _ = "prelude/DATS/memory.dats"
-staload _ = "prelude/DATS/pointer.dats"
+
+(* ****** ****** *)
+
+staload _ = "prelude/DATS/string.dats"
+staload _ = "prelude/DATS/strptr.dats"
 
 (* ****** ****** *)
 
@@ -77,8 +91,13 @@ staload _ = "prelude/DATS/stream_vt.dats"
 staload _ = "prelude/DATS/gprint.dats"
 
 (* ****** ****** *)
-
+//
+staload UNSAFE = "prelude/SATS/unsafe.sats"
+//
 staload _(*UNSAFE*) = "prelude/DATS/unsafe.dats"
+//
+(* ****** ****** *)
+
 staload _(*CHECKAST*) = "prelude/DATS/checkast.dats"
 
 (* ****** ****** *)

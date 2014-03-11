@@ -4,6 +4,27 @@
 //
 (* ****** ****** *)
 
+(*
+** ATS/Postiats - Unleashing the Potential of Types!
+** Copyright (C) 2011-2013 Hongwei Xi, ATS Trustful Software, Inc.
+** All rights reserved
+**
+** Permission to use, copy, modify, and distribute this software for any
+** purpose with or without fee is hereby granted, provided that the above
+** copyright notice and this permission notice appear in all copies.
+** 
+** THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+** WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+** MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+** ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+** WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+** ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+** OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+*)
+
+(* ****** ****** *)
+
+
 staload
 UN = "prelude/SATS/unsafe.sats"
 
@@ -131,6 +152,47 @@ val A = arrayptr_make_uninitized<a> (i2sz(n))
 in
   LAgvec_make_arrayptr (A, n)
 end // end of [LAgvec_make_uninitized]
+
+(* ****** ****** *)
+
+implement{a}
+LAgvec_get_at
+  (V, i) = x where
+{
+//
+val cp = LAgvec_getref_at (V, i)
+val (pf, fpf | p) = $UN.cptr_vtake (cp)
+val x = !p
+prval () = fpf (pf)
+//
+} // end of [LAgvec_get_at]
+
+implement{a}
+LAgvec_set_at
+  (V, i, x) = () where
+{
+//
+val cp = LAgvec_getref_at (V, i)
+val (pf, fpf | p) = $UN.cptr_vtake (cp)
+val () = !p := x
+prval () = fpf (pf)
+//
+} // end of [LAgvec_get_at]
+
+(* ****** ****** *)
+
+implement{a}
+LAgvec_getref_at
+  (V, i) = let
+//
+var d: int
+val (pf, fpf | p) = LAgvec_vtakeout_vector (V, d)
+val p_i = ptr_add<a>(p, i*d)
+prval () = fpf (pf)
+//
+in
+  $UN.cast{cPtr1(a)}(p_i)
+end // end of [LAgvec_getref_at]
 
 (* ****** ****** *)
 

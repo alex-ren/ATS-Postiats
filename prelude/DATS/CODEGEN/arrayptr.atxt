@@ -192,7 +192,8 @@ prval () = arrayptr_addback (pf | A)
 #atscode_separator()
 
 (*
-implement arrayptr_free = ATS_MFREE
+implement
+arrayptr_free = ATS_MFREE // HX: in arrayptr.cats
 *)
 
 #atscode_separator()
@@ -387,6 +388,19 @@ implement{a}
 arrayptr_tabulate
   (asz) = arrayptr_encode2(array_ptr_tabulate<a> (asz))
 // end of [arrayptr_tabulate]
+
+#atscode_separator()
+
+implement{a}
+arrayptr_tabulate_cloref
+  {n} (asz, f) = let
+//
+implement(a2)
+array_tabulate$fopr<a2> (i) = $UN.castvwtp0{a2}(f($UN.cast{sizeLt(n)}(i)))
+//
+in
+  arrayptr_tabulate<a> (asz)
+end // end of [arrayptr_tabulate_cloref]
 
 #atscode_separator()
 

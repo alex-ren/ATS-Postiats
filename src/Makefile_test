@@ -137,6 +137,9 @@ libats:: ; $(PATSOPT) -tc -d $(PATSHOME)/libats/DATS/stkarray.dats
 libats:: ; $(PATSOPT) -tc -s $(PATSHOME)/libats/SATS/deqarray.sats
 libats:: ; $(PATSOPT) -tc -d $(PATSHOME)/libats/DATS/deqarray.dats
 
+libats:: ; $(PATSOPT) -tc -s $(PATSHOME)/libats/SATS/dynarray.sats
+libats:: ; $(PATSOPT) -tc -d $(PATSHOME)/libats/DATS/dynarray.dats
+
 libats:: ; $(PATSOPT) -tc -s $(PATSHOME)/libats/SATS/ilist_prf.sats
 libats:: ; $(PATSOPT) -tc -d $(PATSHOME)/libats/DATS/ilist_prf.dats
 
@@ -208,6 +211,8 @@ libats_ML:: ; $(PATSOPT) -tc -s $(PATSHOME)/libats/ML/SATS/option0.sats
 libats_ML:: ; $(PATSOPT) -tc -d $(PATSHOME)/libats/ML/DATS/option0.dats
 libats_ML:: ; $(PATSOPT) -tc -s $(PATSHOME)/libats/ML/SATS/array0.sats
 libats_ML:: ; $(PATSOPT) -tc -d $(PATSHOME)/libats/ML/DATS/array0.dats
+libats_ML:: ; $(PATSOPT) -tc -s $(PATSHOME)/libats/ML/SATS/matrix0.sats
+libats_ML:: ; $(PATSOPT) -tc -d $(PATSHOME)/libats/ML/DATS/matrix0.dats
 libats_ML:: ; $(PATSOPT) -tc -s $(PATSHOME)/libats/ML/SATS/string.sats
 libats_ML:: ; $(PATSOPT) -tc -d $(PATSHOME)/libats/ML/DATS/string.dats
 libats_ML:: ; $(PATSOPT) -tc -s $(PATSHOME)/libats/ML/SATS/strarr.sats

@@ -35,6 +35,7 @@ src/TAGATS
 
 bin/patscc
 bin/patsopt
+bin/pats2xhtml
 
 #
 # boostrapping
@@ -216,6 +217,9 @@ contrib/*/*/CATS/CODEGEN/*_atxt.txt
 contrib/*/*/CATS/CODEGEN/*_atxt.dats
 contrib/*/*/TEST/test??
 
+contrib/SDL2/SDL2-2.0.1
+contrib/SDL2/SDL2_image-2.0.0
+
 contrib/zlog/zlog-latest-stable/
 
 #
@@ -274,6 +278,7 @@ doc/DISTRIB/ATS2-Postiats-0.0.1
 doc/DISTRIB/ATS2-Postiats-0.0.2
 doc/DISTRIB/ATS2-Postiats-0.0.3
 doc/DISTRIB/ATS2-Postiats-0.0.4
+doc/DISTRIB/ATS2-Postiats-0.0.5
 #
 # ATSHOME/doc/DISTRIB/ATS-Postiats-contrib
 #
@@ -283,6 +288,7 @@ doc/DISTRIB/ATS-Postiats-contrib/project/*
 doc/DISTRIB/ATS2-Postiats-contrib-0.0.1
 doc/DISTRIB/ATS2-Postiats-contrib-0.0.2
 doc/DISTRIB/ATS2-Postiats-contrib-0.0.3
+doc/DISTRIB/ATS2-Postiats-contrib-0.0.4
 #
 # ATSHOME/doc/DISTRIB/ATS-Postiats-include
 #
@@ -311,7 +317,7 @@ doc/BOOK/INT2PROGINATS/preface
 doc/BOOK/INT2PROGINATS/preface.db
 doc/BOOK/INT2PROGINATS/*_atxt.txt
 doc/BOOK/INT2PROGINATS/*_atxt.dats
-doc/BOOK/INT2PROGINATS/*/main.db
+doc/BOOK/INT2PROGINATS/CHAP_*/main.db
 
 #
 # ATS2TUTORIAL
@@ -319,12 +325,10 @@ doc/BOOK/INT2PROGINATS/*/main.db
 
 doc/BOOK/ATS2TUTORIAL/preface
 doc/BOOK/ATS2TUTORIAL/preface.db
-doc/BOOK/ATS2TUTORIAL/*_atxt.txt
-doc/BOOK/ATS2TUTORIAL/*_atxt.dats
-doc/BOOK/ATS2TUTORIAL/*/main.db
+doc/BOOK/ATS2TUTORIAL/CHAP_*/*_atxt.txt
+doc/BOOK/ATS2TUTORIAL/CHAP_*/*_atxt.dats
+doc/BOOK/ATS2TUTORIAL/CHAP_*/main.db
 doc/BOOK/ATS2TUTORIAL/HTML
-doc/BOOK/ATS2TUTORIAL/CODE/*.html
-doc/BOOK/ATS2TUTORIAL/CODE/chap_*.dats
 
 #
 # Vim

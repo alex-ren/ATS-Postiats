@@ -27,17 +27,17 @@
 *)
 
 (* ****** ****** *)
-//
-staload _(*anon*) =
-"prelude/DATS/integer.dats"
-//
-(* ****** ****** *)
 
 extern fun get (): int
 extern fun set (x: int): void
 extern fun inc (): void
 extern fun dec (): void
 extern fun reset (): void
+
+(* ****** ****** *)
+
+extern fun incby (int): void
+extern fun decby (int): void
 
 (* ****** ****** *)
 
@@ -61,6 +61,8 @@ in (* in of [local] *)
 implement get () = !r_val
 implement set (x) = !r_val := x
 
+(* ****** ****** *)
+
 implement inc () =
   let val n = !r_val in !r_val := n + 1 end
 // end of [inc]
@@ -69,7 +71,21 @@ implement dec () =
   let val n = !r_val in !r_val := n - 1 end
 // end of [dec]
 
+(* ****** ****** *)
+
 implement reset () = !r_val := 0
+
+(* ****** ****** *)
+
+implement incby (x) =
+  let val n = !r_val in !r_val := n + x end
+// end of [incby]
+
+implement decby (x) =
+  let val n = !r_val in !r_val := n - x end
+// end of [decby]
+
+(* ****** ****** *)
 
 implement getinc () =
   let val n = !r_val in !r_val := n + 1; (n) end
