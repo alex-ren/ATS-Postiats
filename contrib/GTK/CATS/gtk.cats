@@ -67,15 +67,24 @@
 
 /* ****** ****** */
 
-#include "./gtk/gtkbox.cats"
+#include "./gtk/gtkdialog.cats"
+#include "./gtk/gtkmessagedialog.cats"
 
 /* ****** ****** */
 
+#include "./gtk/gtkbox.cats"
 #include "./gtk/gtkhbox.cats"
+#include "./gtk/gtkvbox.cats"
 
 /* ****** ****** */
 
 #include "./gtk/gtktable.cats"
+
+/* ****** ****** */
+
+#include "./gtk/gtkseparator.cats"
+#include "./gtk/gtkhseparator.cats"
+#include "./gtk/gtkvseparator.cats"
 
 /* ****** ****** */
 

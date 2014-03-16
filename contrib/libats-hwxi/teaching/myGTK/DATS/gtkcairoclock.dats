@@ -88,6 +88,24 @@ end (* end of [if] *)
 end // end of [draw_drawingarea]
 
 (* ****** ****** *)
+//
+extern
+fun{
+} on_destroy
+  (widget: !GtkWidget1, event: &GdkEvent, _: gpointer): void
+extern
+fun{
+} on_delete_event
+  (widget: !GtkWidget1, event: &GdkEvent, _: gpointer): gboolean
+//
+(* ****** ****** *)
+//
+implement{
+} on_destroy (widget, event, _) = ((*void*))
+implement{
+} on_delete_event (widget, event, _) = (gtk_main_quit (); GTRUE)
+//
+(* ****** ****** *)
 
 extern
 fun{} fexpose (!GtkDrawingArea1): gboolean
@@ -142,13 +160,14 @@ gtkcairoclock_main
 //
 val win0 =
   gtk_window_new (GTK_WINDOW_TOPLEVEL)
-val win0 = win0
+//
+val win0 = win0 // HX: fix the master type
+//
 val () = assertloc (ptrcast(win0) > 0)
 val () = gtk_window_set_default_size (win0, (gint)400, (gint)400)
 //
 val opt = gtkcairoclock_title ()
 val issome = stropt_is_some(opt)
-//
 val () =
 if issome then let
   val title = stropt_unsome (opt)
@@ -170,11 +189,11 @@ val () = g_object_unref (darea)
 //
 val _sid = g_signal_connect
 (
-  win0, (gsignal)"delete-event", G_CALLBACK(gtk_main_quit), (gpointer)nullp
+  win0, (gsignal)"destroy", G_CALLBACK(on_destroy), (gpointer)nullp
 )
 val _sid = g_signal_connect
 (
-  win0, (gsignal)"destroy-event", G_CALLBACK(gtk_widget_destroy), (gpointer)nullp
+  win0, (gsignal)"delete-event", G_CALLBACK(on_delete_event), (gpointer)nullp
 )
 //
 val int =

@@ -961,7 +961,7 @@ val () = {
   val () = print "do_trans123: the_s3itmlst =\n"
   val () = $TRENV3.fprint_the_s3itmlst (stdout_ref)
   val () = print_newline ()
-} // end of [val]
+} (* end of [val] *)
 *)
 //
 val () = 
@@ -1003,7 +1003,7 @@ do_trans1234
 val d3cs =
   do_trans123 (state, given, d0cs)
 // end of [d3cs]
-val hids = $TYER.d3eclist_tyer (d3cs)
+val hids = $TYER.d3eclist_tyer_errck (d3cs)
 //
 (*
 val () = fprint_hideclist (stdout_ref, hids)

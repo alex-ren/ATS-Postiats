@@ -293,7 +293,7 @@ var argv: charptrptr = $UN.castvwtp1{charptrptr}(argv)
 val () = $extfcall (void, "gtk_init", addr@(argc), addr@(argv))
 //
 implement
-gtkcairoclock_title<> () = stropt_some"Permutation"
+gtkcairoclock_title<> () = stropt_some"InsertionSort"
 implement
 gtkcairoclock_timeout_interval<> () = 500U // millisecs
 implement

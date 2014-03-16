@@ -44,7 +44,6 @@ staload "{$CAIRO}/SATS/cairo.sats"
 (* ****** ****** *)
 
 stadef dbl = double
-stadef cr (l:addr) = cairo_ref (l)
 
 (* ****** ****** *)
 
@@ -77,11 +76,6 @@ end // end of [mytime_get]
 
 fn draw_clock
   (cr: !cairo_ref1): void = () where {
-//
-  var t: time_t
-  val yn = time_getset (t)
-  val () = assert_errmsg (yn, $mylocation)
-  prval () = opt_unsome{time_t}(t)
 //
 (*
   var tm: tm_struct // unintialized

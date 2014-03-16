@@ -40,6 +40,15 @@ vtypedef GtkHBox1 = [c:cls;l:addr | c <= GtkHBox; l > null] gobjref (c, l)
 //
 (* ****** ****** *)
 //
+stadef GtkVBox = GtkVBox_cls
+//
+vtypedef
+GtkVBox (l:addr) = [c:cls | c <= GtkVBox] gobjref (c, l)
+vtypedef GtkVBox0 = [c:cls;l:agez | c <= GtkVBox] gobjref (c, l) 
+vtypedef GtkVBox1 = [c:cls;l:addr | c <= GtkVBox; l > null] gobjref (c, l) 
+//
+(* ****** ****** *)
+//
 stadef GtkTable = GtkTable_cls
 //
 vtypedef
@@ -58,12 +67,66 @@ vtypedef GtkButton1 = [c:cls;l:addr | c <= GtkButton; l > null] gobjref (c, l)
 //
 (* ****** ****** *)
 //
+stadef GtkSeparator = GtkSeparator_cls
+//
+vtypedef
+GtkSeparator (l:addr) = [c:cls | c <= GtkSeparator] gobjref (c, l)
+vtypedef GtkSeparator0 = [c:cls;l:agez | c <= GtkSeparator] gobjref (c, l) 
+vtypedef GtkSeparator1 = [c:cls;l:addr | c <= GtkSeparator; l > null] gobjref (c, l) 
+//
+(* ****** ****** *)
+//
+stadef GtkHSeparator = GtkHSeparator_cls
+//
+vtypedef
+GtkHSeparator (l:addr) = [c:cls | c <= GtkHSeparator] gobjref (c, l)
+vtypedef GtkHSeparator0 = [c:cls;l:agez | c <= GtkHSeparator] gobjref (c, l) 
+vtypedef GtkHSeparator1 = [c:cls;l:addr | c <= GtkHSeparator; l > null] gobjref (c, l) 
+//
+(* ****** ****** *)
+//
+stadef GtkVSeparator = GtkVSeparator_cls
+//
+vtypedef
+GtkVSeparator (l:addr) = [c:cls | c <= GtkVSeparator] gobjref (c, l)
+vtypedef GtkVSeparator0 = [c:cls;l:agez | c <= GtkVSeparator] gobjref (c, l) 
+vtypedef GtkVSeparator1 = [c:cls;l:addr | c <= GtkVSeparator; l > null] gobjref (c, l) 
+//
+(* ****** ****** *)
+//
 stadef GtkWindow = GtkWindow_cls
 //
 vtypedef
 GtkWindow (l:addr) = [c:cls | c <= GtkWindow] gobjref (c, l)
 vtypedef GtkWindow0 = [c:cls;l:agez | c <= GtkWindow] gobjref (c, l) 
 vtypedef GtkWindow1 = [c:cls;l:addr | c <= GtkWindow; l > null] gobjref (c, l) 
+//
+(* ****** ****** *)
+//
+stadef GtkDialog = GtkDialog_cls
+//
+vtypedef
+GtkDialog (l:addr) = [c:cls | c <= GtkDialog] gobjref (c, l)
+vtypedef GtkDialog0 = [c:cls;l:agez | c <= GtkDialog] gobjref (c, l) 
+vtypedef GtkDialog1 = [c:cls;l:addr | c <= GtkDialog; l > null] gobjref (c, l) 
+//
+(* ****** ****** *)
+//
+stadef GtkInputDialog = GtkInputDialog_cls
+//
+vtypedef
+GtkInputDialog (l:addr) = [c:cls | c <= GtkInputDialog] gobjref (c, l)
+vtypedef GtkInputDialog0 = [c:cls;l:agez | c <= GtkInputDialog] gobjref (c, l) 
+vtypedef GtkInputDialog1 = [c:cls;l:addr | c <= GtkInputDialog; l > null] gobjref (c, l) 
+//
+(* ****** ****** *)
+//
+stadef GtkMessageDialog = GtkMessageDialog_cls
+//
+vtypedef
+GtkMessageDialog (l:addr) = [c:cls | c <= GtkMessageDialog] gobjref (c, l)
+vtypedef GtkMessageDialog0 = [c:cls;l:agez | c <= GtkMessageDialog] gobjref (c, l) 
+vtypedef GtkMessageDialog1 = [c:cls;l:addr | c <= GtkMessageDialog; l > null] gobjref (c, l) 
 //
 (* ****** ****** *)
 //

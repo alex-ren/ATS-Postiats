@@ -98,14 +98,18 @@ classdec GtkObject : GInitiallyUnowned
     classdec GtkContainer_cls : GtkWidget_cls
       classdec GtkBin_cls : GtkContainer_cls
         classdec GtkButton_cls : GtkBin_cls
-          classdec GtkToggleButton : GtkButton_cls
-            classdec GtkCheckButton : GtkToggleButton
-              classdec GtkRadioButton : GtkCheckButton
+          classdec GtkToggleButton_cls : GtkButton_cls
+            classdec GtkCheckButton_cls : GtkToggleButton_cls
+              classdec GtkRadioButton_cls : GtkCheckButton_cls
             // end of [GtkCheckButton]
           // end of [GtkToggleButton]
-          classdec GtkOptionMenu : GtkButton_cls
+          classdec GtkOptionMenu_cls : GtkButton_cls
         // end of [GtkButton]
         classdec GtkWindow_cls : GtkBin_cls
+          classdec GtkDialog_cls : GtkWindow_cls
+            classdec GtkInputDialog_cls : GtkDialog_cls
+            classdec GtkMessageDialog_cls : GtkDialog_cls
+          // end of [GtkDialog]
         // end of [GtkWindow]
       // end of [GTKBin]
       classdec GtkBox_cls : GtkContainer_cls
@@ -125,11 +129,15 @@ classdec GtkObject : GInitiallyUnowned
       // end of [GtkBox]
       classdec GtkTable_cls : GtkContainer_cls
     // end of [GTKContainer]
+    classdec GtkSeparator_cls : GtkWidget_cls
+      classdec GtkHSeparator_cls : GtkSeparator_cls
+      classdec GtkVSeparator_cls : GtkSeparator_cls
+    // end of [GtkSeparator]
     classdec GtkCalendar_cls : GtkWidget_cls
     classdec GtkDrawingArea_cls : GtkWidget_cls
       classdec GtkCurve_cls : GtkDrawingArea_cls
     // end of [GtkDrawingArea]
-  // end of [GTKWidget]
+  // end of [GtkWidget]
 // end of [GtkObject]
 
 (* ****** ****** *)
@@ -163,15 +171,24 @@ classdec GtkObject : GInitiallyUnowned
 
 (* ****** ****** *)
 
-#include "./gtk/gtkbox.sats"
+#include "./gtk/gtkdialog.sats"
+#include "./gtk/gtkmessagedialog.sats"
 
 (* ****** ****** *)
 
+#include "./gtk/gtkbox.sats"
 #include "./gtk/gtkhbox.sats"
+#include "./gtk/gtkvbox.sats"
 
 (* ****** ****** *)
 
 #include "./gtk/gtktable.sats"
+
+(* ****** ****** *)
+
+#include "./gtk/gtkseparator.sats"
+#include "./gtk/gtkhseparator.sats"
+#include "./gtk/gtkvseparator.sats"
 
 (* ****** ****** *)
 

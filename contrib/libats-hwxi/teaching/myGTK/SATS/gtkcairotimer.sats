@@ -29,12 +29,17 @@
 (* ****** ****** *)
 //
 // HX-2014-03:
-// A simple GTK/cairo-package for implementing timer-like objects
+// A simple GTK/cairo-package
+// for implementing timer-like objects
 //
 (* ****** ****** *)
 //
-#include
-"share/atspre_define.hats"
+#define ATS_PACKNAME
+"ATSCNTRB.libats-hwxi.teaching"
+//
+(* ****** ****** *)
+//
+#include"share/atspre_define.hats"
 //
 (* ****** ****** *)
 
