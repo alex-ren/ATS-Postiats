@@ -1,11 +1,12 @@
 (* ****** ****** *)
 //
-// HX: lib-support for insert_anim2
+// HX: lib-support for gtkcairotimer
 //
 (* ****** ****** *)
 //
 #define ATS_PACKNAME
-"ATSCNTRB.libats-hwxi.teaching.gtkcairotimer_the_nclick"
+"ATSCNTRB.libats-hwxi\
+.teaching.gtkcairotimer_toplevel"
 //
 (* ****** ****** *)
 
@@ -16,9 +17,9 @@
 
 local
 #include
-"{$LIBATSHWXI}/teaching/myGTK/DATS/gtkcairotimer/the_nclick.dats"
+"{$LIBATSHWXI}/teaching/myGTK/DATS/gtkcairotimer/gtkcairotimer_toplevel.dats"
 in (*nothing*) end
 
 (* ****** ****** *)
 
-(* end of [insertsort_anim2_nclick.dats] *)
+(* end of [gtkcairotimer_toplevel.dats] *)

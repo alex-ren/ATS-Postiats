@@ -45,7 +45,7 @@ stadef cr (l:addr) = cairo_ref l
 
 fn draw_hand{l:agz}
 (
-  cr: !cr l
+  cr: !cr(l)
 , bot: dbl, top: dbl, len: dbl
 ) : void = let
   val () = cairo_move_to (cr, 0.0, bot/2)

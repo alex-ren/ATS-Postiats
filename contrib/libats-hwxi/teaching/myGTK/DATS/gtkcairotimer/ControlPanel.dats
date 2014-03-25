@@ -38,8 +38,7 @@ staload UN =
 //
 (* ****** ****** *)
 
-staload
-TOPWIN = "./the_topwin.dats"
+#define NULL the_null_ptr
 
 (* ****** ****** *)
 
@@ -49,13 +48,9 @@ staload "{$GLIB}/SATS/glib.sats"
 staload "{$GLIB}/SATS/glib-object.sats"
 
 (* ****** ****** *)
-
-staload "./the_timer.dats"
-
-(* ****** ****** *)
-
-#define NULL the_null_ptr
-
+//
+staload "./gtkcairotimer_toplevel.dats"
+//
 (* ****** ****** *)
 
 extern
@@ -180,9 +175,6 @@ end (* end of [on_quit_clicked_dialog] *)
 (* ****** ****** *)
 
 local
-//
-staload
-NCLICK = "./the_nclick.dats"
 //
 extern
 fun{}

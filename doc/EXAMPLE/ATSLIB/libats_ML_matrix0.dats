@@ -60,6 +60,33 @@ for (j := 0; j < 4; j := j+1) M_elt[0,j] := 0
 //
 val () = fprintln! (out, "M_elt = ", M_elt)
 //
+val () = matrix0_iforeach (M_elt, lam (i, j, x) => x := 0)
+//
+val () = fprintln! (out, "M_elt = ", M_elt)
+//
+} (* end of [val] *)
+
+(* ****** ****** *)
+
+val () =
+{
+//
+val out = stdout_ref
+//
+val nrow = i2sz(4)
+val ncol = i2sz(4)
+val M_elt =
+matrix0_tabulate<int>
+  (nrow, ncol, lam (i, j) => sz2i(i-j))
+//
+val res = matrix0_foldleft<int><int> (M_elt, 0, lam (res, x) => res + x)
+//
+val ((*void*)) = assertloc (res = 0)
+//
+val res = matrix0_ifoldleft<int><int> (M_elt, 0, lam (res, i, j, x) => res + sz2i(j-i))
+//
+val ((*void*)) = assertloc (res = 0)
+//
 } (* end of [val] *)
 
 (* ****** ****** *)
