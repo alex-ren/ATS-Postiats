@@ -38,11 +38,23 @@ fun gtk_window_set_title
 
 (* ****** ****** *)
 
+fun gtk_window_set_position
+  (!GtkWindow1, pos: GtkWindowPosition): void = "mac#%"
+// end of [gtk_window_set_position]
+
+(* ****** ****** *)
+
 fun gtk_window_get_size
 (
   win: !GtkWindow1
 , width: &gint? >> gint, height: &gint? >> gint
 ) : void = "mac#%" // endfun
+
+(* ****** ****** *)
+
+fun gtk_window_resize
+  (!GtkWindow1, width: gint, height: gint): void = "mac#%"
+// end of [gtk_window_resize]
 
 (* ****** ****** *)
 //
@@ -54,6 +66,17 @@ fun gtk_window_set_default_size
   (!GtkWindow1, width: gint, height: gint): void = "mac#%"
 // end of [gtk_window_set_default_size]
 
+fun gtk_window_get_default_size
+  (!GtkWindow1, width: &gint? >> _, height: &gint? >> _): void = "mac#%"
+// end of [gtk_window_get_default_size]
+
+(* ****** ****** *)
+//
+fun gtk_window_get_resizable
+  (!GtkWindow1): gboolean = "mac#%"
+fun gtk_window_set_resizable
+  (!GtkWindow1, resizable: gboolean): void = "mac#%"
+//
 (* ****** ****** *)
 
 fun gtk_window_set_transient_for

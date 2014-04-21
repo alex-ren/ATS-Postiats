@@ -43,8 +43,8 @@ val () = fprint_string (out, "\
 # This script is automatically generated.\n\
 #\n\
 \n\
-SOURCE=../../doc/EXAMPLE/INTRO/\n\
-TARGET=ATS-Postiats/doc/EXAMPLE/INTRO/\n\
+SOURCE=../../doc/EXAMPLE/INTRO\n\
+TARGET=ATS-Postiats/doc/EXAMPLE/INTRO\n\
 \n\
 srcget ()\n\
 {\n\
@@ -108,6 +108,7 @@ The ATSHOME/doc/EXAMPLE/INTRO\
 #packfilename("acker1.dats")
 #packfilename("acker2.dats")
 #packfilename("acker3.dats")
+#packfilename("acker4.dats")
 
 (* ****** ****** *)
 
@@ -147,6 +148,10 @@ The ATSHOME/doc/EXAMPLE/INTRO\
 
 #packfilename("fib_lazy.dats")
 #packfilename("fib_llazy.dats")
+
+(* ****** ****** *)
+
+#packfilename("fprtuple.dats")
 
 (* ****** ****** *)
 

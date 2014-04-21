@@ -50,14 +50,7 @@ fcallback
   println! ("Hello again: ", data, " was pressed")
 ) // end of [fcallback]
 
-fun fdelete_event
-(
-  widget: !GtkWidget1, event: &GdkEvent, _: gpointer
-) : gboolean = let
-  val () = println! ("This is from [fdelete_event]!")
-in
-  GFALSE // deletion to be performed
-end // end of [fdelete_event]
+(* ****** ****** *)
 
 fun fdestroy
 (
@@ -71,6 +64,18 @@ val () = gtk_widget_destroy0 (widget)
 in
   gtk_main_quit ()
 end (* end of [fdestroy] *)
+
+(* ****** ****** *)
+
+fun fdelete_event
+(
+  widget: !GtkWidget1
+, event: &GdkEvent, udata: gpointer
+) : gboolean = let
+  val () = println! ("This is from [fdelete_event]!")
+in
+  GFALSE // deletion to be performed
+end // end of [fdelete_event]
 
 (* ****** ****** *)
 
@@ -147,4 +152,4 @@ val () = gtk_main ()
 
 (* ****** ****** *)
 
-(* end of [test03.dats] *)
+(* end of [test04.dats] *)
