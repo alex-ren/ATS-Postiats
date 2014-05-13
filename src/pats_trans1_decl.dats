@@ -37,6 +37,11 @@ staload
 ATSPRE = "./pats_atspre.dats"
 //
 (* ****** ****** *)
+//
+staload
+UN = "prelude/SATS/unsafe.sats"
+//
+(* ****** ****** *)
 
 staload UT = "./pats_utils.sats"
 
@@ -540,6 +545,23 @@ in
 end // end of [i0mpdec_tr]
 
 (* ****** ****** *)
+//
+fun
+the_PKGRELOC_set_decl
+  (d0c0: d0ecl): void =
+  $GLOB.the_PKGRELOC_set_decl ($UN.cast{ptr}(d0c0))
+//
+fun
+the_PKGRELOC_set_decl_if
+  (d0c0: d0ecl): void = () where
+{
+//
+val srcloc = $GLOB.the_PKGRELOC_get ()
+val () = if srcloc > 0 then the_PKGRELOC_set_decl (d0c0)
+//
+} (* end of [the_PKGRELOC_set_decl_if] *)
+//
+(* ****** ****** *)
 
 extern
 fun i0nclude_tr
@@ -553,26 +575,30 @@ i0nclude_tr
 {
 //
 val loc0 = d0c0.d0ecl_loc
-val filopt = $FIL.filenameopt_make_relative (given)
+//
+val () = the_PKGRELOC_set_decl_if (d0c0)
+val opt = $FIL.filenameopt_make_relative (given)
 //
 val fil =
 (
-case+ filopt of
+case+ opt of
 | ~Some_vt (fil) => fil
 | ~None_vt ((*void*)) => let
-    val (
-    ) = prerr_error1_loc (loc0)
-    val (
-    ) = prerrln! (": the file [", given, "] is not available for inclusion.")
-    val (
-    ) = the_trans1errlst_add (T1E_i0nclude_tr (d0c0))
-    val () = $ERR.abort ((*void*))
+    val srcloc = 
+      $GLOB.the_PKGRELOC_get ()
+    val () =
+    if srcloc = 0 then {
+      val () = prerr_error1_loc (loc0)
+      val () = prerrln! (": the file [", given, "] is not available for inclusion.")
+      val () = the_trans1errlst_add (T1E_i0nclude_tr (d0c0))
+      val () = $ERR.abort ((*void*))
+    } (* end of [if] *) // end of [val]
   in
     $FIL.filename_dummy
   end // end of [None_vt]
 ) : filename // end of [val]
 //
-val d0cs = $PAR.parse_from_filename_toplevel (stadyn, fil)
+val d0cs = $PAR.parse_from_filename_toplevel2 (stadyn, fil)
 //
 val (
   pfpush | isexi
@@ -688,6 +714,8 @@ fun s0taload_tr
 , filref: &filename? >> filename
 ) : d1eclist // end of [s0taload_tr]
 
+(* ****** ****** *)
+
 local
 
 fun auxload
@@ -700,7 +728,7 @@ val pname =
 val isdats = string_suffix_is_dats (pname)
 //
 val flag = (if isdats then 1(*dyn*) else 0(*sta*)): int
-val d0cs = $PAR.parse_from_filename_toplevel (flag, fil)
+val d0cs = $PAR.parse_from_filename_toplevel2 (flag, fil)
 //
 val (pfsave | ()) = the_trans1_env_save ()
 //
@@ -742,20 +770,23 @@ val loc0 = d0c0.d0ecl_loc
 //
 val () = ldflag := 1 // HX: for ATS_STALOADFLAG
 //
-val filopt = $FIL.filenameopt_make_relative (given)
+val () = the_PKGRELOC_set_decl_if (d0c0)
+val opt = $FIL.filenameopt_make_relative (given)
 //
 val fil =
 (
-case+ filopt of
+case+ opt of
 | ~Some_vt (fil) => fil
 | ~None_vt ((*void*)) => let
-    val (
-    ) = prerr_error1_loc (loc0)
-    val (
-    ) = prerrln! (": the file [", given, "] is not available for static loading.")
-    val (
-    ) = the_trans1errlst_add (T1E_s0taload_tr (d0c0))
-    val () = $ERR.abort ((*void*))
+    val srcloc =
+      $GLOB.the_PKGRELOC_get ()
+    val () =
+    if srcloc = 0 then {
+      val () = prerr_error1_loc (loc0)
+      val () = prerrln! (": the file [", given, "] is not available for staloading.")
+      val () = the_trans1errlst_add (T1E_s0taload_tr (d0c0))
+      val () = $ERR.abort ((*void*))
+    } (* end of [if] *) // end of [val]
   in
     $FIL.filename_dummy
   end // end of [None_vt]
@@ -801,37 +832,80 @@ end // end of [local]
 (* ****** ****** *)
 
 extern
-fun  d0ynload_tr
+fun r0equire_tr
+  (d0c0: d0ecl, given: string): filename
+// end of [r0equire_tr]
+extern
+fun r0equire_tr_if
+  (d0c0: d0ecl, given: string): filename
+// end of [r0equire_tr_if]
+
+implement
+r0equire_tr
+  (d0c0, given) = let
+//
+val srcloc = $GLOB.the_PKGRELOC_get ()
+//
+in
+//
+if srcloc > 0
+  then r0equire_tr_if (d0c0, given) else $FIL.filename_dummy
+//
+end // end of [r0equire_tr]
+
+implement
+r0equire_tr_if
+  (d0c0, given) = let
+//
+val loc0 = d0c0.d0ecl_loc
+//
+val () = the_PKGRELOC_set_decl (d0c0)
+val opt = $FIL.filenameopt_make_relative (given)
+//
+in
+//
+case+ opt of
+| ~Some_vt (fil) => fil | ~None_vt ((*void*)) => $FIL.filename_dummy
+//
+end // end of [r0equire_tr_if]
+
+(* ****** ****** *)
+
+extern
+fun d0ynload_tr
   (d0c0: d0ecl, given: string): filename
 // end of [d0ynload_tr]
 
 implement
 d0ynload_tr
-  (d0c0, given) = fil where
-{
+  (d0c0, given) = let
 //
 val loc0 = d0c0.d0ecl_loc
-val filopt = $FIL.filenameopt_make_relative (given)
-val fil =
-(
-case+ filopt of
+val () = the_PKGRELOC_set_decl_if (d0c0)
+//
+val opt = $FIL.filenameopt_make_relative (given)
+//
+in
+//
+case+ opt of
 | ~Some_vt (fil) => fil
 | ~None_vt ((*void*)) => let
-    val (
-    ) = prerr_error1_loc (loc0)
-    val (
-    ) = prerrln! (": the file [", given, "] is not available for dynamic loading")
-    val (
-    ) = the_trans1errlst_add (T1E_d0ynload_tr (d0c0))
+    val srcloc =
+      $GLOB.the_PKGRELOC_get ()
+    val () =
+    if srcloc = 0 then {
+      val () = prerr_error1_loc (loc0)
+      val () = prerrln! (": the file [", given, "] is not available for dynloading")
+      val () = the_trans1errlst_add (T1E_d0ynload_tr (d0c0))
+    } (* end of [if] *) // end of [val]
 (*
     val () = $ERR.abort ((*void*)) // HX: it is still meaningful to continue
 *)
   in
     $FIL.filename_dummy
   end // end of [None_vt]
-) : filename // end of [val]
 //
-} // end of [d0ynload_tr]
+end // end of [d0ynload_tr]
 
 (* ****** ****** *)
 
@@ -1100,6 +1174,13 @@ case+ d0c0.d0ecl_node of
   in
     d1ecl_staloadloc (loc0, pfil, nspace, d1cs)
   end // end of [D0Cstaloadloc]
+//
+| D0Crequire
+    (pfil, given) => let
+    val cfil =
+      r0equire_tr (d0c0, given) in d1ecl_none (loc0)
+    // end of [val]
+  end // end of [D0Crequire]
 //
 | D0Cdynload
     (pfil, given) => let

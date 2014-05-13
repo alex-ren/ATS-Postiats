@@ -15,12 +15,12 @@
 // an implementation of the Enigma machine
 //
 (* ****** ****** *)
-
+//
 #include
 "share/atspre_define.hats"
 #include
 "share/atspre_staload.hats"
-
+//
 (* ****** ****** *)
 
 staload UN = $UNSAFE
@@ -141,10 +141,26 @@ prval () = $UN.cast2void (tb)
 //
 val tb2 = $TEXTBUF2.get ()
 val tb2 = $UN.castvwtp0{GtkTextBuffer1}(tb2)
+//
+val hadj = $VADJUST.get ()
+val hadj = $UN.castvwtp0{GtkAdjustment1}(hadj)
+val vadj = $VADJUST.get ()
+val vadj = $UN.castvwtp0{GtkAdjustment1}(vadj)
+//
+val hadj_value = gtk_adjustment_get_value (hadj)
+val vadj_value = gtk_adjustment_get_value (vadj)
+//
 val () = gtk_text_buffer_setall_text (tb2, $UN.castvwtp1{gstring}(content2))
-val () = $KEYPRESSED.reset ()
+//
+val () = gtk_adjustment_set_value (hadj, hadj_value)
+val () = gtk_adjustment_set_value (vadj, vadj_value)
+val () = gtk_adjustment_value_changed (vadj)
+//
+val ((*void*)) = $KEYPRESSED.reset ()
 //
 prval () = $UN.cast2void (tb2)
+prval () = $UN.cast2void (hadj)
+prval () = $UN.cast2void (vadj)
 //
 val () = strptr_free (content2)
 //
@@ -208,20 +224,29 @@ val () = gtk_container_add (window, hbox)
 val swin =
 gtk_scrolled_window_new_null ((*void*))
 val () = assertloc (ptrcast(swin) > 0)
-val () = gtk_widget_set_size_request (swin, (gint)320, (gint)400)
+val () = gtk_widget_set_size_request (swin, (gint)320, (gint)200)
 val () = gtk_box_pack_start (hbox, swin, GTRUE, GTRUE, (guint)4)
 //
+val (fpf_hadj | hadj) = gtk_scrolled_window_get_hadjustment (swin)
+val (fpf_vadj | vadj) = gtk_scrolled_window_get_vadjustment (swin)
+//
+val () = $HADJUST.set (ptrcast(hadj)) and () = $VADJUST.set (ptrcast(vadj))
+//
 val swin2 =
-gtk_scrolled_window_new_null ((*void*))
+gtk_scrolled_window_new (hadj, vadj)
 val () = assertloc (ptrcast(swin2) > 0)
-val () = gtk_widget_set_size_request (swin2, (gint)320, (gint)400)
+val () = gtk_widget_set_size_request (swin2, (gint)320, (gint)200)
 val () = gtk_box_pack_start (hbox, swin2, GTRUE, GTRUE, (guint)4)
+//
+prval () = minus_addback (fpf_hadj, hadj | swin)
+prval () = minus_addback (fpf_vadj, vadj | swin)
 //
 val tv = gtk_text_view_new ()
 val p_tv = ptrcast(tv)
 val () = assertloc (p_tv > 0)
 //
-val (fpf | tb) = gtk_text_view_get_buffer (tv)
+val (fpf | tb) =
+  gtk_text_view_get_buffer (tv)
 val () = $TEXTBUF.set (ptrcast(tb))
 prval () = minus_addback (fpf, tb | tv)
 //
@@ -234,7 +259,8 @@ val tv2 = gtk_text_view_new ()
 val p_tv2 = ptrcast(tv2)
 val () = assertloc (p_tv2 > 0)
 //
-val (fpf | tb2) = gtk_text_view_get_buffer (tv2)
+val (fpf | tb2) =
+  gtk_text_view_get_buffer (tv2)
 val () = $TEXTBUF2.set (ptrcast(tb2))
 prval () = minus_addback (fpf, tb2 | tv2)
 //
