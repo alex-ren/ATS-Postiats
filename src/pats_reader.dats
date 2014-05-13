@@ -182,6 +182,7 @@ fun reader0_initialize_charlst_vt
         int_of_uchar (uchar_of_char (c))
       end // end of [list_vt_cons]
     | list_vt_nil () => let
+        (* ZQ: 05/11/2014 fold is necessary *)
         prval () = fold@ (!p); prval () = pf.1 := pf1
       in
         ~1 (*EOF*)

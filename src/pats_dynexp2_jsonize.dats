@@ -498,6 +498,11 @@ d2e0.d2exp_node of
   end // end of [D2Eselab]
 //
 | D2Elam_dyn
+
+(* Zhiqiang Ren 05/12/2014
+//  | D2Elam_dyn of (* boxed dynamic abstraction *)
+//      (int(*lin*), int(*npf*), p2atlst(*arg*), d2exp(*body*))
+*)
   (
     lin, npf, p2ts_arg, d2e_body
   ) => let
