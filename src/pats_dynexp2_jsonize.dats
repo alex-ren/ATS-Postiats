@@ -542,6 +542,9 @@ d2e0.d2exp_node of
     jsonval_conarg2 ("D2Eann_type", jsv1, jsv2)
   end // end of [D2Eann_type]
 | D2Eann_seff
+(* Zhiqiang Ren 05/13/2014
+* One usage: The return type and return value of a function definition.
+*)
     (d2e, s2fe) => let
     val jsv1 = jsonize_d2exp (d2e)
     val jsv2 = jsonize_s2eff (s2fe)
