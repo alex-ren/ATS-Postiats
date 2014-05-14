@@ -328,7 +328,7 @@ p2t0.p2at_node of
 | P2Tvbox (d2v) => jsonval_conarg1 ("P2Tvbox", jsonize_d2var (d2v))
 //
 | P2Tann (p2t, ann) => (
-    jsonval_conarg2 ("P2Tann", jsonize_p2at (p2t), jsonize_ignored (ann))
+    jsonval_conarg2 ("P2Tann", jsonize_p2at (p2t), jsonize0_s2exp (ann))
   ) (* end of [P2Tann] *)
 //
 | P2Terrpat ((*void*)) => jsonval_conarg0 ("P2Terrpat")
@@ -710,6 +710,21 @@ d2c0.d2ecl_node of
 | D2Clist (d2cs) =>
     jsonval_conarg1 ("D2Clist", jsonize_d2eclist (d2cs))
   // end of [D2Clist]
+//
+| D2Cstacsts (s2cs) => let
+    val s2cs =
+      jsonize_list_fun (s2cs, jsonize_s2cst)
+    // end of [val]
+  in
+    jsonval_conarg1 ("D2Cstacsts", s2cs)
+  end // end of [D2Cstacsts]
+| D2Cstacons
+    (knd, s2cs) => let
+    val knd = jsonval_int (knd)
+    val s2cs = jsonize_list_fun (s2cs, jsonize_s2cst)
+  in
+    jsonval_conarg1 ("D2Cstacsts", s2cs)
+  end // end of [D2Cstacons]
 //
 | D2Cextype
     (name, s2e_def) => let
