@@ -34,7 +34,6 @@
 (* ****** ****** *)
 
 #define ATS_PACKNAME "ATSLIB.libats.ML"
-#define ATS_STALOADFLAG 0 // no need for staloading at run-time
 #define ATS_EXTERN_PREFIX "atslib_ML_" // prefix for external names
 
 (* ****** ****** *)
@@ -123,6 +122,12 @@ fun{a:t0p}
 array0_make_list (xs: list0 (INV(a))):<!wrt> array0 (a)
 fun{a:t0p}
 array0_make_rlist (xs: list0 (INV(a))):<!wrt> array0 (a)
+//
+(* ****** ****** *)
+//
+fun{}
+array0_make_argv{n:int}
+  (argv: !argv(n), argc: int(n)):<!wrt> array0 (string)
 //
 (* ****** ****** *)
 
