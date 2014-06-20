@@ -138,28 +138,6 @@ end // end of [array0_make_rlist]
 (* ****** ****** *)
 
 implement
-{}(*tmp*)
-array0_make_argv
-  {n}(argv, argc) = let
-//
-prval () =
-  lemma_argv_param (argv)
-//
-val n = g1int2uint_int_size(argc)
-//
-val A =
-$effmask_all (
-arrayref_copy<string>
-  ($UN.castvwtp1{arrayref(string,n)}(argv), n)
-) (* end of [val] *)
-//
-in
-  array0_make_arrayref (arrayptr_refize (A), n)
-end // end of [array0_make_argv]
-
-(* ****** ****** *)
-
-implement
 {a}(*tmp*)
 array0_make_subarray
   (A0, st, ln) = let
@@ -290,6 +268,28 @@ array0_exch_at_size
     arrszref_of_array0 (A0) in arrszref_exch_at_size (ASZ, i, x)
   // end of [val]
 end // end of [array0_exch_at_size]
+
+(* ****** ****** *)
+
+implement
+{a}(*tmp*)
+array0_interchange
+  (A0, i, j) = let
+  val ASZ =
+    arrszref_of_array0 (A0) in arrszref_interchange (ASZ, i, j)
+  // end of [val]
+end // end of [array0_interchange]
+
+(* ****** ****** *)
+
+implement
+{a}(*tmp*)
+array0_subcirculate
+  (A0, i, j) = let
+  val ASZ =
+    arrszref_of_array0 (A0) in arrszref_subcirculate (ASZ, i, j)
+  // end of [val]
+end // end of [array0_subcirculate]
 
 (* ****** ****** *)
 
