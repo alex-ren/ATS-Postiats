@@ -335,6 +335,11 @@ bin
 prelude/DATS/dlist_vt.dats
 prelude/SATS/dlist_vt.sats
 
+# ATS-for-APUE3
+#
+
+doc/BOOK/ATS-for-APUE3/apue.3e
+doc/BOOK/ATS-for-APUE3/CHAP_*/main.db
 
 ###### end of [.gitignore] ######
 
