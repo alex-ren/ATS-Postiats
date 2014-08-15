@@ -387,10 +387,6 @@ overload != with eq_tyreckind_tyreckind
 
 (* ****** ****** *)
 
-fun jsonize_tyreckind : tyreckind -> jsonval
-
-(* ****** ****** *)
-
 (*
 ** HX: s2hnf for s2exp in head normal form (HNF)
 *)
@@ -425,7 +421,7 @@ s2exp_node =
   | S2Eextype of (string(*name*), s2explstlst) // external type
   | S2Eextkind of (string(*name*), s2explstlst) // external tkind
 //
-  | S2Evar of s2var // variable
+  | S2Evar of s2var // universal variable
   | S2EVar of s2Var // existential variable
   | S2Ehole of s2hole // it used to form contexts
 //
@@ -1206,12 +1202,16 @@ fun s2eff_var (s2v: s2var): s2eff
 fun s2eff_exp (s2e: s2exp): s2eff
 fun s2eff_add (s2fe1: s2eff, s2fe2: s2eff): s2eff
 
+(* ****** ****** *)
+//
 fun print_s2eff (s2fe: s2eff): void
-overload print with print_s2eff
 fun prerr_s2eff (s2fe: s2eff): void
-overload prerr with prerr_s2eff
 fun fprint_s2eff : fprint_type (s2eff)
-
+//
+overload print with print_s2eff
+overload prerr with prerr_s2eff
+overload fprint with fprint_s2eff
+//
 (* ****** ****** *)
 
 fun fprint_s2rtext : fprint_type (s2rtext)
@@ -1427,6 +1427,7 @@ fun s2aspdec_make (
 (* ****** ****** *)
 //
 fun jsonize_s2rt (s2t: s2rt): jsonval
+fun jsonize_s2rtlst (s2ts: s2rtlst): jsonval
 //
 fun jsonize_s2cst (s2c: s2cst): jsonval
 fun jsonize_s2var (s2v: s2var): jsonval
@@ -1437,6 +1438,8 @@ fun jsonize_s2varlst (s2vs: s2varlst): jsonval
 fun jsonize_d2con (d2c: d2con): jsonval
 fun jsonize_d2con_long (d2c: d2con): jsonval
 //
+fun jsonize_tyreckind : tyreckind -> jsonval
+//
 fun jsonize_s2exp (flag: int, s2e: s2exp): jsonval
 fun jsonize_s2explst (flag: int, s2es: s2explst): jsonval
 fun jsonize_s2expopt (flag: int, s2eopt: s2expopt): jsonval
@@ -1444,6 +1447,8 @@ fun jsonize_s2expopt (flag: int, s2eopt: s2expopt): jsonval
 fun jsonize_labs2explst (flag: int, ls2es: labs2explst): jsonval  
 //
 fun jsonize_s2eff (s2fe: s2eff): jsonval
+//
+fun jsonize_s2zexp (s2e: s2zexp): jsonval
 //
 (* ****** ****** *)
 //

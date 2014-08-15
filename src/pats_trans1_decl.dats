@@ -384,20 +384,28 @@ case+
   tok.token_node of
 | T_FUN (fk) => (
   case+ fk of
+//
   | FK_fn () => DCKfun ()
-  | FK_fnx () => DCKfun ()
   | FK_fun () => DCKfun ()
+  | FK_fnx () => DCKfun ()
+//
   | FK_prfn () => DCKprfun ()
   | FK_prfun () => DCKprfun ()
   | FK_praxi () => DCKpraxi ()
+//
   | FK_castfn () => DCKcastfn ()
+//
   ) // end of [T_FUN]
 | T_VAL (vk) => (
   case+ vk of
+//
   | VK_val () => DCKval ()
+//
+  | VK_prval () => DCKprval ()
+//
   | VK_val_pos () => DCKval ()
   | VK_val_neg () => DCKval ()
-  | VK_prval () => DCKprval ()
+//
   ) // end of [T_VAL]
 | _ => let
     val () = assertloc (false) in DCKfun ()
@@ -1230,9 +1238,7 @@ case+ d0c0.d0ecl_node of
     d0cs_head, d0cs_body
   ) => let
     val (pfenv1 | ()) = the_trans1_env_push ()
-    val (pflvl0 | ()) = the_trans1_level_inc ()
     val d1cs_head = d0eclist_tr (d0cs_head)
-    val () = the_trans1_level_dec (pflvl0 | (*none*))
     val (pfenv2 | ()) = the_trans1_env_push ((*none*))
     val d1cs_body = d0eclist_tr (d0cs_body)
     val () = the_trans1_env_localjoin (pfenv1, pfenv2 | (*none*))
