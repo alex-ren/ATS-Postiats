@@ -116,6 +116,11 @@ ATSloop_close(init, fini, cont) \
 //
 /* ****** ****** */
 
+#define ATSextcode_beg()
+#define ATSextcode_end()
+
+/* ****** ****** */
+
 #define ATSfunbody_beg()
 #define ATSfunbody_end()
 
@@ -176,11 +181,10 @@ ATSloop_close(init, fini, cont) \
 #define ATSPMVcastfn(d2c, hit, arg) ((hit)arg)
 //
 /* ****** ****** */
-
-#define ATSfcall(fun, args) (fun)args
+//
 #define ATSfunclo_fun(pmv, targs, tres) ((tres(*)targs)(pmv))
 #define ATSfunclo_clo(pmv, targs, tres) ((tres(*)targs)(((ATStyclo()*)pmv)->cfun))
-
+//
 /* ****** ****** */
 //
 #define ATStmpdec(tmp, hit) hit tmp
@@ -266,6 +270,9 @@ ATSloop_close(init, fini, cont) \
 /* ****** ****** */
 //
 #define \
+ATSINSmove_nil(tmp) (tmp = ((void*)0))
+//
+#define \
 ATSINSmove_con0(tmp, tag) (tmp = ((void*)tag))
 //
 #define ATSINSmove_con1_beg()
@@ -329,6 +336,10 @@ ATSINSmove_con0(tmp, tag) (tmp = ((void*)tag))
 #define ATSINSupdate_ptrinc(tmp, tyelt) (tmp = (tyelt*)(tmp) + 1)
 #define ATSINSupdate_ptrdec(tmp, tyelt) (tmp = (tyelt*)(tmp) - 1)
 //
+/* ****** ****** */
+/*
+#define ATSINSfcall(fun, args) (fun)args
+*/
 /* ****** ****** */
 
 #define ATSINSclosure_initize(flab, tmpenv) (flab##__closureinit)tmpenv
