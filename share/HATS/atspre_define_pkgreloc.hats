@@ -108,14 +108,6 @@ JNI_targetloc "$PATSHOMERELOC/contrib/JNI"
 //
 (* ****** ****** *)
 //
-#define
-HTML_targetloc "$PATSHOMERELOC/contrib/HTML"
-//
-#define
-HTML5canvas2d_targetloc "$PATSHOMERELOC/contrib/HTML/canvas-2d"
-//
-(* ****** ****** *)
-//
 // HX-2014-05-12:
 // This is for backward compatibility
 //
@@ -146,6 +138,9 @@ LIBATSCC2PY_targetloc "$PATSHOMERELOC/contrib/libatscc2py"
 //
 #define
 LIBATSCC2JS_targetloc "$PATSHOMERELOC/contrib/libatscc2js"
+//
+#define
+LIBATSCC2PHP_targetloc "$PATSHOMERELOC/contrib/libatscc2php"
 //
 (* ****** ****** *)
 
